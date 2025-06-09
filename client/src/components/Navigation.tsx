@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Home, Wrench, Calculator, Route, Book, Folder, Mail, FileText, TrendingUp, Handshake } from "lucide-react";
+import { Home, Wrench, Calculator, Route, Book, Folder, Mail, FileText, TrendingUp, Handshake, GraduationCap, Calendar, Euro, BarChart3, MapPin } from "lucide-react";
 
 interface NavigationProps {
   navigate: (page: string) => void;
@@ -30,11 +30,16 @@ export default function Navigation({ navigate }: NavigationProps) {
 
   const menuItems = [
     { id: "accueil", label: "Accueil", icon: Home },
+    { id: "tableau-bord", label: "Tableau de Bord", icon: BarChart3 },
     { id: "outils", label: "Outils", icon: Wrench },
     { id: "calculateurs", label: "Calculateurs", icon: Calculator },
     { id: "business-plan", label: "Business Plan", icon: FileText },
     { id: "rentabilite", label: "Rentabilité", icon: TrendingUp },
     { id: "partenariats", label: "Partenariats", icon: Handshake },
+    { id: "couts-pedagogiques", label: "Coûts Pédagogiques", icon: GraduationCap },
+    { id: "planification", label: "Planification", icon: Calendar },
+    { id: "subventions", label: "Subventions", icon: Euro },
+    { id: "implantation", label: "Implantation", icon: MapPin },
     { id: "methodo", label: "Méthodologie", icon: Route },
     { id: "guides", label: "Guides", icon: Book },
     { id: "annexes", label: "Annexes", icon: Folder },
