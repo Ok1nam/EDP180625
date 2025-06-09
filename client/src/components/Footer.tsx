@@ -1,4 +1,4 @@
-import { Home, Wrench, Calculator, Route, Book, Folder, Mail } from "lucide-react";
+import { Home, Wrench, Calculator, Route, Book, Folder, Mail, FileText, TrendingUp, Handshake } from "lucide-react";
 
 interface FooterProps {
   navigate: (page: string) => void;

@@ -74,11 +74,11 @@ export default function Calculators() {
         <Card className="card-hover cursor-pointer">
           <CardContent className="p-6">
             <h3 className="flex items-center gap-2 text-lg font-semibold mb-3 text-primary">
-              <DollarSign className="w-6 h-6" />
-              Flux de trésorerie
+              <FileText className="w-6 h-6" />
+              Business Plan
             </h3>
             <p className="text-gray-600 leading-relaxed">
-              Prévisions de trésorerie sur 3 ans avec différents scenarii.
+              Générateur de business plan structuré avec projections financières.
             </p>
           </CardContent>
         </Card>

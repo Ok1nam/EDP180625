@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Home, Wrench, Calculator, Route, Book, Folder, Mail } from "lucide-react";
+import { Home, Wrench, Calculator, Route, Book, Folder, Mail, FileText, TrendingUp, Handshake } from "lucide-react";
 
 interface NavigationProps {
   navigate: (page: string) => void;
@@ -32,6 +32,9 @@ export default function Navigation({ navigate }: NavigationProps) {
     { id: "accueil", label: "Accueil", icon: Home },
     { id: "outils", label: "Outils", icon: Wrench },
     { id: "calculateurs", label: "Calculateurs", icon: Calculator },
+    { id: "business-plan", label: "Business Plan", icon: FileText },
+    { id: "rentabilite", label: "Rentabilité", icon: TrendingUp },
+    { id: "partenariats", label: "Partenariats", icon: Handshake },
     { id: "methodo", label: "Méthodologie", icon: Route },
     { id: "guides", label: "Guides", icon: Book },
     { id: "annexes", label: "Annexes", icon: Folder },
