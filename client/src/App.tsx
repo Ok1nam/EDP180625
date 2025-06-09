@@ -16,7 +16,8 @@ import Rentability from "./pages/Rentability";
 import PartnershipTracker from "./pages/PartnershipTracker";
 import PedagogicalCosts from "./pages/PedagogicalCosts";
 import TrainingPlanner from "./pages/TrainingPlanner";
-import SubsidyGenerator from "./pages/SubsidyGenerator";
+import SubsidyGenerator from "@/pages/SubsidyGenerator";
+import StatutsGenerator from "@/pages/StatutsGenerator";
 import Dashboard from "./pages/Dashboard";
 import LocationAnalysis from "./pages/LocationAnalysis";
 import Guides from "./pages/Guides";
@@ -44,7 +45,10 @@ function Router() {
       case "partenariats": return <PartnershipTracker />;
       case "couts-pedagogiques": return <PedagogicalCosts />;
       case "planification": return <TrainingPlanner />;
-      case "subventions": return <SubsidyGenerator />;
+      case 'subventions':
+          return <SubsidyGenerator />;
+        case 'statuts':
+          return <StatutsGenerator />;
       case "tableau-bord": return <Dashboard />;
       case "implantation": return <LocationAnalysis />;
       case "guides": return <Guides />;

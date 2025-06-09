@@ -1,4 +1,4 @@
-import { Wrench, TreePine, Map, ClipboardCheck, Stethoscope } from "lucide-react";
+import { Wrench, TreePine, Map, ClipboardCheck, Stethoscope, FileText } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 
 interface ToolsProps {
@@ -13,7 +13,7 @@ export default function Tools({ navigate }: ToolsProps) {
         Outils d'évaluation
       </h1>
       
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         <Card 
           className="card-hover cursor-pointer"
           onClick={() => navigate('arbre')}
@@ -29,6 +29,25 @@ export default function Tools({ navigate }: ToolsProps) {
             <div className="flex items-center gap-2 text-sm">
               <span className="status-indicator status-pending"></span>
               <span className="text-gray-500">Non commencé</span>
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card 
+          className="card-hover cursor-pointer"
+          onClick={() => navigate('statuts')}
+        >
+          <CardContent className="p-6">
+            <h3 className="flex items-center gap-2 text-lg font-semibold mb-3 text-primary">
+              <FileText className="w-6 h-6" />
+              Création de statuts
+            </h3>
+            <p className="text-gray-600 mb-4 leading-relaxed">
+              Générez automatiquement les statuts de votre association avec un formulaire simple.
+            </p>
+            <div className="flex items-center gap-2 text-sm">
+              <span className="status-indicator status-pending"></span>
+              <span className="text-gray-500">Outil disponible</span>
             </div>
           </CardContent>
         </Card>
