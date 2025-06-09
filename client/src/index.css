@@ -25,12 +25,6 @@
   --radius: 0.5rem;
   
   /* Custom color scheme for École de Production */
-  --primary-dark: hsl(207, 44%, 29%);
-  --primary-light: hsl(207, 55%, 70%);
-  --header-gradient-from: hsl(207, 44%, 29%);
-  --header-gradient-to: hsl(207, 40%, 54%);
-  --hero-gradient-from: hsl(207, 50%, 35%);
-  --hero-gradient-to: hsl(207, 55%, 70%);
   --success: hsl(120, 60%, 50%);
   --warning: hsl(45, 100%, 51%);
   --danger: hsl(0, 84%, 60%);
@@ -71,7 +65,7 @@
 
 @layer components {
   .btn-primary {
-    @apply bg-primary hover:bg-primary-dark text-primary-foreground;
+    @apply bg-blue-600 hover:bg-blue-700 text-white;
   }
   
   .btn-secondary {
@@ -91,19 +85,19 @@
   }
   
   .card-hover {
-    @apply transition-all duration-300 hover:transform hover:scale-[1.02] hover:shadow-lg hover:border-primary;
+    @apply transition-all duration-300 hover:transform hover:scale-105 hover:shadow-lg;
   }
   
   .header-gradient {
-    background: linear-gradient(135deg, var(--header-gradient-from), var(--header-gradient-to));
+    background: linear-gradient(135deg, #2a3b4c, #4b6a88);
   }
   
   .hero-gradient {
-    background: linear-gradient(90deg, var(--hero-gradient-from), var(--hero-gradient-to));
+    background: linear-gradient(90deg, #314866, #789fd9);
   }
   
   .progress-bar {
-    background: linear-gradient(90deg, var(--primary), var(--primary-light));
+    background: linear-gradient(90deg, #4b6a88, #789fd9);
   }
   
   .status-indicator {
@@ -123,11 +117,11 @@
   }
   
   .floating-save {
-    @apply fixed bottom-8 right-8 bg-primary hover:bg-primary-dark text-white border-none rounded-full w-15 h-15 shadow-lg cursor-pointer transition-all duration-300 z-50 hover:scale-110;
+    @apply fixed bottom-8 right-8 bg-blue-600 hover:bg-blue-700 text-white border-none rounded-full w-16 h-16 shadow-lg cursor-pointer transition-all duration-300 z-50 hover:scale-110;
   }
   
   .methodology-step {
-    @apply bg-white p-6 my-4 rounded-xl border-l-4 border-primary shadow-sm;
+    @apply bg-white p-6 my-4 rounded-xl border-l-4 border-blue-500 shadow-sm;
   }
 }
 
