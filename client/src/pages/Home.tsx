@@ -1,4 +1,4 @@
-import { GraduationCap, Wrench, Calculator, Book } from "lucide-react";
+import { GraduationCap, Wrench, Calculator, Book, FileText, TrendingUp, Handshake } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 
 interface HomeProps {
@@ -70,6 +70,51 @@ export default function Home({ navigate }: HomeProps) {
             </h3>
             <p className="text-gray-600 leading-relaxed">
               Outils de calcul pour le business plan et la gestion financière.
+            </p>
+          </CardContent>
+        </Card>
+        
+        <Card 
+          className="card-hover cursor-pointer"
+          onClick={() => navigate('business-plan')}
+        >
+          <CardContent className="p-6">
+            <h3 className="flex items-center gap-2 text-lg font-semibold mb-3 text-primary">
+              <FileText className="w-6 h-6" />
+              Business Plan
+            </h3>
+            <p className="text-gray-600 leading-relaxed">
+              Générateur de business plan structuré avec projections financières automatisées.
+            </p>
+          </CardContent>
+        </Card>
+        
+        <Card 
+          className="card-hover cursor-pointer"
+          onClick={() => navigate('rentabilite')}
+        >
+          <CardContent className="p-6">
+            <h3 className="flex items-center gap-2 text-lg font-semibold mb-3 text-primary">
+              <TrendingUp className="w-6 h-6" />
+              Simulateur de rentabilité
+            </h3>
+            <p className="text-gray-600 leading-relaxed">
+              Analysez la viabilité économique avec différents scénarios de projection.
+            </p>
+          </CardContent>
+        </Card>
+        
+        <Card 
+          className="card-hover cursor-pointer"
+          onClick={() => navigate('partenariats')}
+        >
+          <CardContent className="p-6">
+            <h3 className="flex items-center gap-2 text-lg font-semibold mb-3 text-primary">
+              <Handshake className="w-6 h-6" />
+              Suivi des partenariats
+            </h3>
+            <p className="text-gray-600 leading-relaxed">
+              Gérez vos relations avec les entreprises partenaires et opportunités de stages.
             </p>
           </CardContent>
         </Card>
