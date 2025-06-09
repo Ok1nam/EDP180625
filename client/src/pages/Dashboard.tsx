@@ -59,7 +59,8 @@ export default function Dashboard() {
     // Calculate students
     const studentsFromTraining = trainingData?.modules?.reduce((sum: number, module: any) => sum + (module.students || 0), 0) || 0;
     const studentsFromPedagogical = pedagogicalData?.sectors?.reduce((sum: number, sector: any) => sum + (sector.students || 0), 0) || 0;
-    const totalStudents = Math.max(studentsFromTraining, studentsFromPedagogical, rentabilityData?.students || 0);
+    const rentabilityStudents = (rentabilityData as any)?.students || 0;
+    const totalStudents = Math.max(studentsFromTraining, studentsFromPedagogical, rentabilityStudents);
 
     // Calculate modules
     const modules = trainingData?.modules || [];
@@ -67,8 +68,10 @@ export default function Dashboard() {
     const completedModules = modules.filter((m: any) => m.status === 'completed').length;
 
     // Calculate budget and revenue
-    const totalBudget = businessPlanData?.initialInvestment || 0;
-    const projectedRevenue = businessPlanData?.financialProjections?.year1?.revenue || rentabilityData?.students * rentabilityData?.tuitionFee + rentabilityData?.subsidies + rentabilityData?.otherRevenue || 0;
+    const totalBudget = (businessPlanData as any)?.initialInvestment || 0;
+    const businessRevenue = (businessPlanData as any)?.financialProjections?.year1?.revenue || 0;
+    const rentabilityRevenue = ((rentabilityData as any)?.students || 0) * ((rentabilityData as any)?.tuitionFee || 0) + ((rentabilityData as any)?.subsidies || 0) + ((rentabilityData as any)?.otherRevenue || 0);
+    const projectedRevenue = businessRevenue || rentabilityRevenue;
 
     // Calculate partnerships
     const partnerships = partnershipsData || [];
