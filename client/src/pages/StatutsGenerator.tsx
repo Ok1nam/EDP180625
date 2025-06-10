@@ -42,11 +42,13 @@ export default function StatutsGenerator() {
   const generateStatuts = () => {
     const statutsTemplate = `
 STATUTS DE L'ASSOCIATION
-"${formData.associationName || '[NOM DE L'ASSOCIATION]'}"
+${formData.associationName || "[NOM DE L'ASSOCIATION]"}
+
 
 ARTICLE 1 - DÉNOMINATION
 Il est fondé entre les adhérents aux présents statuts une association régie par la loi du 1er juillet 1901 et le décret du 16 août 1901, ayant pour titre :
-"${formData.associationName || '[NOM DE L'ASSOCIATION]'}"
+${formData.associationName || "[NOM DE L'ASSOCIATION]"}
+
 
 ARTICLE 2 - OBJET
 Cette association a pour objet :
