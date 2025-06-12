@@ -18,6 +18,7 @@ import PedagogicalCosts from "./pages/PedagogicalCosts";
 import TrainingPlanner from "./pages/TrainingPlanner";
 import SubsidyGenerator from "@/pages/SubsidyGenerator";
 import StatutsGenerator from "@/pages/StatutsGenerator";
+import UnderDevelopment from "@/pages/UnderDevelopment";
 import Dashboard from "./pages/Dashboard";
 import LocationAnalysis from "./pages/LocationAnalysis";
 import Guides from "./pages/Guides";
@@ -48,20 +49,37 @@ function Router() {
       case "arbre": return <Questionnaire navigate={navigate} />;
       case "calculateurs": return <Calculators />;
       case "business-plan": return <BusinessPlan />;
-      case "rentabilite": return <Rentability />;
       case "partenariats": return <PartnershipTracker />;
       case "couts-pedagogiques": return <PedagogicalCosts />;
       case "planification": return <TrainingPlanner />;
-      case 'subventions':
-          return <SubsidyGenerator />;
-        case 'statuts':
-          return <StatutsGenerator />;
+      case 'subventions': return <SubsidyGenerator />;
+      case 'statuts': return <StatutsGenerator />;
       case "tableau-bord": return <Dashboard />;
       case "implantation": return <LocationAnalysis />;
       case "guides": return <Guides />;
       case "methodo": return <Methodology />;
       case "annexes": return <Annexes />;
-      case "apropos": return <Contact />;
+      case "expert-comptable": 
+      case "edp": return <Contact />;
+      
+      // Pages en cours de développement
+      case "plan-comptable": return <UnderDevelopment title="Plan comptable adapté" />;
+      case "tva-coefficient": return <UnderDevelopment title="Calcul coefficient de déduction TVA" />;
+      case "resultat-fiscal": return <UnderDevelopment title="Calcul du résultat fiscal" />;
+      case "criteres-label": return <UnderDevelopment title="Critères pour obtenir le label" />;
+      case "budget-creation": return <UnderDevelopment title="Budget à la création" />;
+      case "pret-subordonne": return <UnderDevelopment title="Contrat de prêt subordonné" />;
+      case "habilitation-taxe": return <UnderDevelopment title="Habilitation taxe apprentissage" />;
+      case "prix-vente": return <UnderDevelopment title="Prix de vente des produits" />;
+      case "rapport-adapte": return <UnderDevelopment title="Modèle de rapport adapté" />;
+      case "suivi-subventions": return <UnderDevelopment title="Suivi des subventions" />;
+      case "suivi-prets": return <UnderDevelopment title="Suivi des prêts" />;
+      case "cartographie": return <UnderDevelopment title="Cartographie des écoles" />;
+      case "organigramme": return <UnderDevelopment title="Exemple d'organigramme" />;
+      case "entretiens": return <UnderDevelopment title="Entretiens porteurs de projet" />;
+      case "guide-tva": return <UnderDevelopment title="Guide d'application de la TVA" />;
+      case "etude-marche": return <UnderDevelopment title="Étude de marché" />;
+      
       default: return <Home navigate={navigate} />;
     }
   };
