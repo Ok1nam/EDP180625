@@ -12,7 +12,6 @@ import Tools from "./pages/Tools";
 import Questionnaire from "./pages/Questionnaire";
 import Calculators from "./pages/Calculators";
 import BusinessPlan from "./pages/BusinessPlan";
-import Rentability from "./pages/Rentability";
 import PartnershipTracker from "./pages/PartnershipTracker";
 import PedagogicalCosts from "./pages/PedagogicalCosts";
 import TrainingPlanner from "./pages/TrainingPlanner";
