@@ -7,6 +7,7 @@ import Header from "./components/Header";
 import Navigation from "./components/Navigation";
 import Footer from "./components/Footer";
 import FloatingSave from "./components/FloatingSave";
+import LoginForm from "./components/LoginForm";
 import Home from "./pages/Home";
 import Tools from "./pages/Tools";
 import Questionnaire from "./pages/Questionnaire";
@@ -24,14 +25,21 @@ import Methodology from "./pages/Methodology";
 import Annexes from "./pages/Annexes";
 import Contact from "./pages/Contact";
 import { useState } from "react";
+import { useAuth } from "./hooks/useAuth";
 
 function Router() {
   const [currentPage, setCurrentPage] = useState("accueil");
+  const { isAuthenticated, login } = useAuth();
 
   const navigate = (page: string) => {
     setCurrentPage(page);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
+
+  // Si l'utilisateur n'est pas connecté, afficher le formulaire de connexion
+  if (!isAuthenticated) {
+    return <LoginForm onLogin={login} />;
+  }
 
   const renderCurrentPage = () => {
     switch (currentPage) {

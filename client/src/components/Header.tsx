@@ -16,7 +16,7 @@ export default function Header() {
       <div className="logo max-w-[70%] text-sm md:text-base leading-relaxed">
         Proposition d'une démarche méthodologique d'accompagnement par l'expert-comptable dans la création et le pilotage d'une école de production
       </div>
-      
+
       <button
         className="burger w-8 h-6 flex flex-col justify-between cursor-pointer z-50 transition-all duration-300"
         onClick={toggleMenu}
