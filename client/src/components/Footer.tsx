@@ -34,9 +34,18 @@ export default function Footer({ navigate }: FooterProps) {
           ))}
         </ul>
       </nav>
-      <div className="text-sm text-blue-300">
-        © 2024 Laura Gombaud – Soutenance DEC | Version 2.0 avec outils étendus
-      </div>
+      <div className="border-t border-gray-600 mt-8 pt-6 text-center">
+          <div className="flex items-center justify-center gap-3 mb-3">
+            <img 
+              src="/logo-edp.png" 
+              alt="Logo EDP" 
+              className="w-8 h-8 object-contain"
+            />
+            <div className="text-sm text-blue-300">
+              © 2024 Laura Gombaud – Soutenance DEC | Version 2.0 avec outils étendus
+            </div>
+          </div>
+        </div>
     </footer>
   );
 }

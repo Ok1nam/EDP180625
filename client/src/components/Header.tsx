@@ -13,8 +13,15 @@ export default function Header() {
 
   return (
     <header className="header-gradient text-white p-4 md:p-8 min-h-[120px] flex items-center justify-between relative">
-      <div className="logo max-w-[70%] text-sm md:text-base leading-relaxed">
-        Proposition d'une démarche méthodologique d'accompagnement par l'expert-comptable dans la création et le pilotage d'une école de production
+      <div className="flex items-center gap-4 max-w-[70%]">
+        <img 
+          src="/logo-edp.png" 
+          alt="Logo EDP" 
+          className="w-12 h-12 md:w-16 md:h-16 object-contain flex-shrink-0"
+        />
+        <div className="text-sm md:text-base leading-relaxed">
+          Proposition d'une démarche méthodologique d'accompagnement par l'expert-comptable dans la création et le pilotage d'une école de production
+        </div>
       </div>
 
       <button
