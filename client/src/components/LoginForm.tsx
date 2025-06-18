@@ -100,12 +100,6 @@ export default function LoginForm({ onLogin }: LoginFormProps) {
               {isLoading ? "Connexion en cours..." : "Se connecter"}
             </Button>
           </form>
-          
-          <div className="mt-6 text-center text-sm text-gray-600">
-            <p>Compte de démonstration :</p>
-            <p><strong>Utilisateur :</strong> admin</p>
-            <p><strong>Mot de passe :</strong> password</p>
-          </div>
         </CardContent>
       </Card>
     </div>

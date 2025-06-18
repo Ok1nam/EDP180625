@@ -26,7 +26,7 @@ export default function Home({ navigate }: HomeProps) {
         <Card className="mb-6">
           <CardContent className="p-6">
             <p className="mb-4 leading-relaxed">
-              Test modification en live ! Bienvenue sur le site de présentation du mémoire relatif à l'accompagnement à la création d'une École de Production par un expert-comptable.
+              Bienvenue sur le site de présentation du mémoire relatif à l'accompagnement à la création d'une École de Production par un expert-comptable.
             </p>
             <p className="mb-4 leading-relaxed">
               Ce site constitue un support à la rédaction du mémoire dans le cadre de l'obtention du Diplôme d'Expertise Comptable (DEC).
