@@ -2,11 +2,37 @@ import express, { type Request, Response, NextFunction } from "express";
 import fs from 'fs';
 import path from 'path';
 import { registerRoutes } from "./routes";
-import { setupVite, serveStatic, log } from "./vite"; // Assurez-vous que './vite' est correct pour votre structure de projet Replit
+// Importez `log` depuis './vite' si vous en avez besoin pour les logs,
+// mais `setupVite` et `serveStatic` ne sont plus nécessaires ici pour le backend déployé.
+// Si log est la seule chose que vous utilisez de vite.ts, vous pouvez isoler son import.
+import { log } from "./vite"; // Gardons log, mais retirons setupVite et serveStatic
+
+// --- AJOUTEZ CES DEUX LIGNES POUR CORS ---
+import cors from 'cors';
+// ----------------------------------------
+
+// Import de __dirname pour la compatibilité ESM si nécessaire pour d'autres usages
+// Bien que pour ce fichier, il ne semble pas y avoir de path.join avec __dirname pour servir des statics.
+// Si vous utilisez __dirname ailleurs dans ce fichier, ajoutez ces imports:
+/*
+import { fileURLToPath } from 'url';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+*/
 
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
+// --- CONFIGURATION CORS AJOUTÉE ICI ---
+// L'URL de votre frontend déployé sur Netlify (remplacez par la vraie URL !)
+const NETLIFY_FRONTEND_URL = process.env.NETLIFY_FRONTEND_URL || 'http://localhost:5173';
+
+app.use(cors({
+  origin: NETLIFY_FRONTEND_URL, // Autorise uniquement votre frontend Netlify et localhost
+  credentials: true, // Important si votre backend utilise des sessions ou cookies
+}));
+// ------------------------------------
 
 app.use((req, res, next) => {
   const start = Date.now();
@@ -49,14 +75,13 @@ app.use((req, res, next) => {
     throw err;
   });
 
-  // importantly only setup vite in development and after
-  // setting up all the other routes so the catch-all route
-  // doesn't interfere with the other routes
-  if (app.get("env") === "development") {
-    await setupVite(app, server);
-  } else {
-    serveStatic(app);
-  }
+  // --- PARTIE MODIFIÉE : Ne plus servir le frontend depuis le backend ---
+  // if (app.get("env") === "development") {
+  //   await setupVite(app, server);
+  // } else {
+  //   serveStatic(app);
+  // }
+  // -------------------------------------------------------------------
 
   // ALWAYS serve the app on port 5000
   // this serves both the API and the client.
