@@ -25,6 +25,9 @@ import Guides from "./pages/Guides";
 import Methodology from "./pages/Methodology";
 import Annexes from "./pages/Annexes";
 import Contact from "./pages/Contact";
+import ResultatFiscal from "./pages/ResultatFiscal";
+import TvaCoefficient from "./pages/TvaCoefficient";
+import PlanComptable from "./pages/PlanComptable";
 import { useState } from "react";
 import { useAuth } from "./hooks/useAuth";
 
@@ -43,7 +46,7 @@ function Router() {
   }
 
   const renderCurrentPage = () => {
-    switch (currentPage) {
+        switch (currentPage) {
       case "accueil": return <Home navigate={navigate} />;
       case "outils": return <Tools navigate={navigate} />;
       case "arbre": return <Questionnaire navigate={navigate} />;
@@ -55,26 +58,26 @@ function Router() {
       case 'subventions': return <SubsidyGenerator />;
       case 'statuts': return <StatutsGenerator />;
       case "tableau-bord": return <Dashboard />;
-      case "implantation": return <LocationAnalysis />;
+      case "cartographie": return <LocationAnalysis />;
       case "guides": return <Guides />;
       case "methodo": return <Methodology />;
       case "annexes": return <Annexes />;
       case "expert-comptable": 
+      case "resultat-fiscal": return <ResultatFiscal />;
+      case "plan-comptable": return <PlanComptable />;
+      case "tva-coefficient": return <TvaCoefficient />;
       case "edp": return <Contact />;
+      case "budget-creation": return <Calculators />;
+      
       
       // Pages en cours de développement
-      case "plan-comptable": return <UnderDevelopment title="Plan comptable adapté" />;
-      case "tva-coefficient": return <UnderDevelopment title="Calcul coefficient de déduction TVA" />;
-      case "resultat-fiscal": return <UnderDevelopment title="Calcul du résultat fiscal" />;
       case "criteres-label": return <UnderDevelopment title="Critères pour obtenir le label" />;
-      case "budget-creation": return <UnderDevelopment title="Budget à la création" />;
       case "pret-subordonne": return <UnderDevelopment title="Contrat de prêt subordonné" />;
       case "habilitation-taxe": return <UnderDevelopment title="Habilitation taxe apprentissage" />;
       case "prix-vente": return <UnderDevelopment title="Prix de vente des produits" />;
       case "rapport-adapte": return <UnderDevelopment title="Modèle de rapport adapté" />;
       case "suivi-subventions": return <UnderDevelopment title="Suivi des subventions" />;
       case "suivi-prets": return <UnderDevelopment title="Suivi des prêts" />;
-      case "cartographie": return <UnderDevelopment title="Cartographie des écoles" />;
       case "organigramme": return <UnderDevelopment title="Exemple d'organigramme" />;
       case "entretiens": return <UnderDevelopment title="Entretiens porteurs de projet" />;
       case "guide-tva": return <UnderDevelopment title="Guide d'application de la TVA" />;

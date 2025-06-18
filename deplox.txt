@@ -1,0 +1,41 @@
+#!/bin/bash
+
+echo "🚀 Préparation des modifications pour le déploiement..."
+
+# Demander le message de commit à l'utilisateur
+read -p "Entrez votre message de commit (ex: 'feat: Ajout nouvelle fonctionnalité'): " COMMIT_MESSAGE
+
+# Ajouter tous les fichiers modifiés et nouveaux
+git add .
+
+# Committer les modifications
+git commit -m "$COMMIT_MESSAGE"
+
+# Pousser les modifications vers GitHub
+echo "📤 Envoi des modifications vers GitHub..."
+git push origin main
+
+echo "✅ Modifications envoyées à GitHub !"
+echo ""
+echo "⏳ Netlify et Render devraient détecter les changements et redéployer automatiquement."
+echo "Vérifiez vos tableaux de bord Netlify et Render pour le statut du déploiement."
+echo ""
+echo "-------------------------------------------------------------------"
+echo "Rappels importants (à faire seulement si les URLs changent) :"
+echo "- Sur Netlify (pour le Frontend) : Allez dans 'Site settings' -> 'Build & deploy' -> 'Environment'"
+echo "  et assurez-vous que la variable 'VITE_API_URL' est définie avec l'URL de votre backend Render : "
+echo "  https://edp-linda-backend.onrender.com"
+echo ""
+echo "- Sur Render (pour le Backend) : Allez dans les paramètres de votre service backend -> 'Environment'"
+echo "  et assurez-vous que la variable 'NETLIFY_FRONTEND_URL' est définie avec l'URL de votre frontend Netlify : "
+echo "  https://votre-site-netlify.app (remplacez par votre vraie URL Netlify !)"
+echo "  Si vous modifiez cette variable sur Render, n'oubliez pas de déclencher un redéploiement manuel sur Render."
+echo "-------------------------------------------------------------------"
+
+
+
+A copier dans terminal (vérifier la racine) : 
+
+git add .
+git commit -m "test: Modification texte pour vérifier le déploiement automatique"
+git push origin main
