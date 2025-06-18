@@ -8,14 +8,10 @@ export default function Footer({ navigate }: FooterProps) {
   const footerLinks = [
     { id: "accueil", label: "Accueil", icon: Home },
     { id: "outils", label: "Outils", icon: Wrench },
-    { id: "calculateurs", label: "Calculateurs", icon: Calculator },
-    { id: "business-plan", label: "Business Plan", icon: FileText },
-    { id: "rentabilite", label: "Rentabilité", icon: TrendingUp },
-    { id: "partenariats", label: "Partenariats", icon: Handshake },
-    { id: "methodo", label: "Méthodologie", icon: Route },
-    { id: "guides", label: "Guides", icon: Book },
-    { id: "annexes", label: "Annexes", icon: Folder },
-    { id: "apropos", label: "Contact", icon: Mail },
+    { id: "suivis", label: "Calculateurs", icon: Calculator },
+    { id: "documentation", label: "Documentation & Guides", icon: FileText },
+    { id: "contact", label: "Contact & Aide", icon: TrendingUp },
+
   ];
 
   return (
@@ -42,7 +38,7 @@ export default function Footer({ navigate }: FooterProps) {
               className="w-8 h-8 object-contain"
             />
             <div className="text-sm text-blue-300">
-              © 2024 Laura Gombaud – Soutenance DEC | Version 2.0 avec outils étendus
+              © 2025 Laura Gombaud – Soutenance DEC 
             </div>
           </div>
         </div>

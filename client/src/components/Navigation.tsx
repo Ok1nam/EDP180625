@@ -58,7 +58,7 @@ export default function Navigation({ navigate }: NavigationProps) {
   const menuStructure = [
     {
       id: "accueil",
-      label: "🏠 Accueil",
+      label: "Accueil",
       icon: Home,
       items: [
         { id: "accueil", label: "Accueil", icon: Home }
@@ -66,7 +66,7 @@ export default function Navigation({ navigate }: NavigationProps) {
     },
     {
       id: "outils",
-      label: "🧰 Outils",
+      label: "Outils",
       icon: Wrench,
       items: [
         { id: "plan-comptable", label: "Plan comptable adapté", icon: FileText },
@@ -86,7 +86,7 @@ export default function Navigation({ navigate }: NavigationProps) {
     },
     {
       id: "suivis",
-      label: "📊 Suivis",
+      label: "Suivis",
       icon: BarChart3,
       items: [
         { id: "suivi-subventions", label: "Suivi des subventions", icon: Euro },
@@ -97,7 +97,7 @@ export default function Navigation({ navigate }: NavigationProps) {
     },
     {
       id: "documentation",
-      label: "📚 Documentation & Guides",
+      label: "Documentation & Guides",
       icon: BookOpen,
       items: [
         { id: "methodo", label: "Méthodologie", icon: BookOpen },
@@ -110,7 +110,7 @@ export default function Navigation({ navigate }: NavigationProps) {
     },
     {
       id: "contact",
-      label: "📞 Contact & Aide",
+      label: "Contact & Aide",
       icon: Phone,
       items: [
         { id: "expert-comptable", label: "Expert-comptable", icon: Calculator },
