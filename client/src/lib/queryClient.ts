@@ -1,4 +1,12 @@
+// Assurez-vous que ce fichier est situé dans client/src/lib/ (ou un dossier similaire)
+
 import { QueryClient, QueryFunction } from "@tanstack/react-query";
+
+// --- NOUVELLE LIGNE : Définition de l'URL de base de l'API ---
+// Ceci prendra la variable d'environnement VITE_API_URL si elle est définie (sur Netlify)
+// Ou utilisera 'http://localhost:5001' pour le développement local.
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5001';
+// -------------------------------------------------------------
 
 async function throwIfResNotOk(res: Response) {
   if (!res.ok) {
@@ -9,10 +17,13 @@ async function throwIfResNotOk(res: Response) {
 
 export async function apiRequest(
   method: string,
-  url: string,
+  url: string, // Cette 'url' sera maintenant un chemin relatif (par exemple '/api/users')
   data?: unknown | undefined,
 ): Promise<Response> {
-  const res = await fetch(url, {
+  // --- MODIFICATION ICI : Préfixe l'URL avec API_BASE_URL ---
+  const fullUrl = `${API_BASE_URL}${url}`;
+  // ----------------------------------------------------------
+  const res = await fetch(fullUrl, { // Utilise fullUrl
     method,
     headers: data ? { "Content-Type": "application/json" } : {},
     body: data ? JSON.stringify(data) : undefined,
@@ -29,7 +40,13 @@ export const getQueryFn: <T>(options: {
 }) => QueryFunction<T> =
   ({ on401: unauthorizedBehavior }) =>
   async ({ queryKey }) => {
-    const res = await fetch(queryKey[0] as string, {
+    // queryKey[0] est l'URL. On s'attend à ce que ce soit un chemin relatif (ex: '/api/items')
+    const relativeUrl = queryKey[0] as string;
+    // --- MODIFICATION ICI : Préfixe l'URL avec API_BASE_URL ---
+    const fullUrl = `${API_BASE_URL}${relativeUrl}`;
+    // ----------------------------------------------------------
+
+    const res = await fetch(fullUrl, { // Utilise fullUrl
       credentials: "include",
     });
 
