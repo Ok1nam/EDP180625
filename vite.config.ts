@@ -1,37 +1,37 @@
-import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
-import path from "path";
-import runtimeErrorOverlay from "@replit/vite-plugin-runtime-error-modal";
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
+import path from 'path';
 
+// --- AJOUTEZ CES DEUX LIGNES EN HAUT ---
+import { fileURLToPath } from 'url';
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+// ------------------------------------
+
+// https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [
-    react(),
-    runtimeErrorOverlay(),
-    ...(process.env.NODE_ENV !== "production" &&
-    process.env.REPL_ID !== undefined
-      ? [
-          await import("@replit/vite-plugin-cartographer").then((m) =>
-            m.cartographer(),
-          ),
-        ]
-      : []),
-  ],
-  resolve: {
-    alias: {
-      "@": path.resolve(import.meta.dirname, "client", "src"),
-      "@shared": path.resolve(import.meta.dirname, "shared"),
-      "@assets": path.resolve(import.meta.dirname, "attached_assets"),
+  plugins: [react({ jsxRuntime: "automatic" })],
+  // Définir la racine de l'application Vite comme étant le dossier 'client'
+  root: path.resolve(__dirname, 'client'),
+
+  build: {
+    // Le dossier de sortie 'dist' sera à la racine du projet EDP180625
+    outDir: path.resolve(__dirname, 'dist'),
+    emptyOutDir: true, // Vider 'dist' avant chaque build
+    rollupOptions: {
+      // Chemin d'entrée vers votre fichier HTML principal du frontend
+      input: path.resolve(__dirname, 'client/index.html'),
     },
   },
-  root: path.resolve(import.meta.dirname, "client"),
-  build: {
-    outDir: path.resolve(import.meta.dirname, "dist/public"),
-    emptyOutDir: true,
-  },
-  server: {
-    fs: {
-      strict: true,
-      deny: ["**/.*"],
+  // Spécifier le dossier public (pour les assets statiques comme vite.svg, logo.webp, etc.)
+  publicDir: path.resolve(__dirname, 'client/public'),
+
+  resolve: {
+    alias: {
+      // Configurer les alias pour vos dossiers
+      "@": path.resolve(__dirname, "client/src"),
+      "@shared": path.resolve(__dirname, "shared"),
+      "@assets": path.resolve(__dirname, "attached_assets"),
     },
   },
 });

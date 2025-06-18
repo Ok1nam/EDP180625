@@ -2,7 +2,7 @@ import express, { type Request, Response, NextFunction } from "express";
 import fs from 'fs';
 import path from 'path';
 import { registerRoutes } from "./routes";
-import { setupVite, serveStatic, log } from "./vite";
+import { setupVite, serveStatic, log } from "./vite"; // Assurez-vous que './vite' est correct pour votre structure de projet Replit
 
 const app = express();
 app.use(express.json());
@@ -61,11 +61,12 @@ app.use((req, res, next) => {
   // ALWAYS serve the app on port 5000
   // this serves both the API and the client.
   // It is the only port that is not firewalled.
-  const port = 5000;
+  // MODIFIED: Changed port to 5001 and removed reusePort
+  const port = 5001; // Changé le port à 5001
   server.listen({
     port,
     host: "0.0.0.0",
-    reusePort: true,
+    // reusePort: true, // Supprimé cette ligne, car elle est souvent incompatible hors de Replit ou d'un environnement de cluster.
   }, () => {
     log(`serving on port ${port}`);
   });
