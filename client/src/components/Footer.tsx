@@ -1,4 +1,4 @@
-import { Home, Wrench, Calculator, Route, Book, Folder, Mail, FileText, TrendingUp, Handshake } from "lucide-react";
+import { Home, Wrench, Calculator, Route, Book, Folder, Mail, FileText, TrendingUp, Handshake, BarChart3 } from "lucide-react"; // Ajout de BarChart3 pour l'icône de Suivis si vous voulez
 
 interface FooterProps {
   navigate: (page: string) => void;
@@ -8,10 +8,12 @@ export default function Footer({ navigate }: FooterProps) {
   const footerLinks = [
     { id: "accueil", label: "Accueil", icon: Home },
     { id: "outils", label: "Outils", icon: Wrench },
-    { id: "suivis", label: "Suivis", icon: Calculator },
+    // Mettez à jour le label pour 'Suivis' si vous le souhaitez, et utilisez une icône plus pertinente si 'Calculator' n'est pas le bon choix
+    // J'ai mis BarChart3 car c'est l'icône principale de la section "Suivis" dans votre menu burger.
+    { id: "suivis", label: "Suivis", icon: BarChart3 }, // J'ai remplacé 'Calculators' par 'Suivis' pour le label et 'BarChart3' pour l'icône
+    // Assurez-vous que l'ID 'documentation' correspond bien à la nouvelle page DocumentationPage que nous avons créée
     { id: "documentation", label: "Documentation & Guides", icon: FileText },
     { id: "contact", label: "Contact & Aide", icon: TrendingUp },
-
   ];
 
   return (
@@ -32,13 +34,13 @@ export default function Footer({ navigate }: FooterProps) {
       </nav>
       <div className="border-t border-gray-600 mt-8 pt-6 text-center">
           <div className="flex items-center justify-center gap-3 mb-3">
-            <img 
-              src="/logo-edp.png" 
-              alt="Logo EDP" 
+            <img
+              src="/logo-edp.png"
+              alt="Logo EDP"
               className="w-8 h-8 object-contain"
             />
             <div className="text-sm text-blue-300">
-              © 2025 Laura Gombaud – Soutenance DEC 
+              © 2025 Laura Gombaud – Soutenance DEC
             </div>
           </div>
         </div>

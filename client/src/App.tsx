@@ -25,6 +25,7 @@ import UnderDevelopment from "@/pages/UnderDevelopment";
 import Dashboard from "./pages/Dashboard";
 import LocationAnalysis from "./pages/LocationAnalysis";
 import Guides from "./pages/Guides";
+import DocumentationPage from "./pages/DocumentationPage";
 import Methodology from "./pages/Methodology";
 import Annexes from "./pages/Annexes";
 import Contact from "./pages/Contact";
@@ -62,6 +63,7 @@ function MainApplicationContent() { // Renommé de Router à MainApplicationCont
       case "outils": return <Tools navigate={navigate} />;
       case "suivis": return <Suivis navigate={navigate} />;
       case "arbre": return <Questionnaire navigate={navigate} />;
+      case "documentation": return <DocumentationPage navigate={navigate} />;
       case "calculateurs": return <Calculators />;
       case "business-plan": return <BusinessPlan />;
       case "partenariats": return <PartnershipTracker />;
