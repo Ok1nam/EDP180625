@@ -95,7 +95,6 @@ function Router() {
         {renderCurrentPage()}
       </main>
       <Footer navigate={navigate} />
-      <FloatingSave />
     </div>
   );
 }
