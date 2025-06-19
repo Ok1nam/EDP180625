@@ -1,7 +1,7 @@
 // client/src/pages/Home.tsx
 
 import React from 'react';
-import { BookOpen, Wrench, BarChart3, Rocket, Lightbulb, CheckSquare, Scale } from "lucide-react"; // Importez les icônes nécessaires pour les valeurs
+import { BookOpen, Wrench, BarChart3, Rocket, Lightbulb, Scale } from "lucide-react"; // Importez les icônes nécessaires pour les valeurs
 import { Card, CardContent } from "@/components/ui/card"; // Pour un style cohérent
 
 interface HomeProps {
@@ -10,31 +10,30 @@ interface HomeProps {
 
 export default function Home({ navigate }: HomeProps) {
   return (
-    <section id="accueil-page" className="flex flex-col items-center justify-center text-center">
-      {/* Section Hero/Bannière */}
-      <div className="relative w-full bg-gradient-to-r from-blue-700 to-blue-500 text-white py-16 px-4 sm:py-24">
-        {/* Vous pouvez ajouter une image de fond ici si vous en avez une */}
-        {/* <img src="/path/to/your-hero-image.jpg" alt="École de Production" className="absolute inset-0 w-full h-full object-cover opacity-30" /> */}
-        <div className="relative z-10 max-w-4xl mx-auto">
-          <h1 className="text-4xl sm:text-5xl font-extrabold mb-4 leading-tight">
+    <section id="accueil-page" className="flex flex-col items-center justify-center"> {/* Suppression du text-center global */}
+      {/* Section Hero/Bannière - Ajustements de taille et largeur */}
+      <div className="relative w-full bg-gradient-to-r from-blue-700 to-blue-500 text-white py-12 px-4 sm:py-16"> {/* Hauteur réduite */}
+        {/* Contenu de la bannière centré mais avec une largeur max */}
+        <div className="relative z-10 max-w-screen-xl mx-auto text-center"> {/* max-w et mx-auto pour la largeur */}
+          <h1 className="text-3xl sm:text-4xl font-extrabold mb-3 leading-tight"> {/* Taille de texte ajustée */}
             Votre guide pour la création et le pilotage d'une École de Production
           </h1>
-          <p className="text-xl sm:text-2xl opacity-90 mb-8">
+          <p className="text-lg sm:text-xl opacity-90 mb-6"> {/* Taille de texte ajustée */}
             Découvrez les outils et les méthodologies développés dans le cadre du Diplôme d'Expertise Comptable.
           </p>
           <a
-            href="https://www.ecolesdeproduction.com/" // Remplacez par l'URL exacte si différente
+            href="https://www.ecoles-de-production.com/" // URL mise à jour ici
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-blue-700 bg-white hover:bg-gray-100 transition-colors duration-200 shadow-lg"
+            className="inline-flex items-center justify-center px-6 py-2.5 border border-transparent text-base font-medium rounded-md text-blue-700 bg-white hover:bg-gray-100 transition-colors duration-200 shadow-lg"
           >
             Visiter le site officiel des Écoles de Production
           </a>
         </div>
       </div>
 
-      {/* Section Contexte et Problématique (inchangée, elle est importante pour votre mémoire) */}
-      <div className="max-w-4xl mx-auto my-12 px-4">
+      {/* Section Contexte et Problématique - Contenu plus large */}
+      <div className="max-w-screen-xl mx-auto my-12 px-4 text-left"> {/* max-w, mx-auto, et text-left */}
         <h2 className="text-3xl font-bold text-gray-800 mb-6 flex items-center justify-center gap-2">
             <BookOpen className="w-7 h-7 text-primary" />
             Contexte et Problématique
@@ -52,8 +51,8 @@ export default function Home({ navigate }: HomeProps) {
         </div>
       </div>
 
-      {/* Nouvelle Section "Pourquoi ce site ?" / "Nos Valeurs" */}
-      <div className="max-w-6xl mx-auto my-16 px-4">
+      {/* Nouvelle Section "Ce que nous offrons : Un accompagnement sur mesure" - Contenu plus large */}
+      <div className="max-w-screen-xl mx-auto my-16 px-4"> {/* max-w, mx-auto */}
         <h2 className="text-3xl font-bold text-gray-800 mb-8 flex items-center justify-center gap-2">
             <Lightbulb className="w-7 h-7 text-primary" />
             Ce que nous offrons : Un accompagnement sur mesure
@@ -70,7 +69,7 @@ export default function Home({ navigate }: HomeProps) {
             </CardContent>
           </Card>
 
-          {/* Valeur 2: Simplicité & Efficacité */}
+          {/* Valeur 2: Outils Pratiques */}
           <Card className="p-6 text-left shadow-md hover:shadow-lg transition-shadow duration-300">
             <CardContent className="flex flex-col items-center text-center">
               <Wrench className="w-12 h-12 text-green-600 mb-4" />
@@ -81,7 +80,7 @@ export default function Home({ navigate }: HomeProps) {
             </CardContent>
           </Card>
 
-          {/* Valeur 3: Suivi et Pilotage */}
+          {/* Valeur 3: Pilotage Stratégique */}
           <Card className="p-6 text-left shadow-md hover:shadow-lg transition-shadow duration-300">
             <CardContent className="flex flex-col items-center text-center">
               <BarChart3 className="w-12 h-12 text-orange-600 mb-4" />
@@ -92,7 +91,7 @@ export default function Home({ navigate }: HomeProps) {
             </CardContent>
           </Card>
 
-          {/* Valeur 4: Réussite du Projet */}
+          {/* Valeur 4: Accompagnement Complet */}
           <Card className="p-6 text-left shadow-md hover:shadow-lg transition-shadow duration-300">
             <CardContent className="flex flex-col items-center text-center">
               <Rocket className="w-12 h-12 text-purple-600 mb-4" />
@@ -105,9 +104,9 @@ export default function Home({ navigate }: HomeProps) {
         </div>
       </div>
 
-      {/* Vous pouvez ajouter une section "Explorer nos Catégories" si vous voulez un CTA direct vers les pages listes */}
-      <div className="max-w-4xl mx-auto my-16 px-4">
-        <h2 className="text-3xl font-bold text-gray-800 mb-8">Commencez votre exploration</h2>
+      {/* Section "Commencez votre exploration" - Contenu plus large */}
+      <div className="max-w-screen-xl mx-auto my-16 px-4"> {/* max-w, mx-auto */}
+        <h2 className="text-3xl font-bold text-gray-800 mb-8 text-center">Commencez votre exploration</h2>
         <div className="flex flex-col sm:flex-row justify-center gap-6">
           <a
             onClick={() => navigate('outils')}
