@@ -29,7 +29,7 @@ import Methodology from "./pages/Methodology";
 import Annexes from "./pages/Annexes";
 import Contact from "./pages/Contact";
 import ResultatFiscal from "./pages/ResultatFiscal";
-import TvaCoefficient from "./pages/TvaCoefficient";
+import TvaCoefficient from "./pages/TvaCoefficient"; // Import de TvaCoefficient
 import PlanComptable from "./pages/PlanComptable";
 import CriteresLabel from "./pages/CriteresLabel";
 import PretSubordonne from "./pages/PretSubordonne";
@@ -61,33 +61,33 @@ function MainApplicationContent() {
       case "suivis": return <Suivis navigate={navigate} />;
       case "arbre": return <Questionnaire navigate={navigate} />;
       case "documentation": return <DocumentationPage navigate={navigate} />;
-      case "calculateurs": return <Calculators navigate={navigate} />; // Passer navigate
-      case "business-plan": return <BusinessPlan navigate={navigate} />; // Passer navigate
-      case "partenariats": return <PartnershipTracker navigate={navigate} />; // Passer navigate
-      case "couts-pedagogiques": return <PedagogicalCosts navigate={navigate} />; // Passer navigate
-      case "planification": return <TrainingPlanner navigate={navigate} />; // Passer navigate
-      case 'subventions': return <SubsidyGenerator navigate={navigate} />; // Passer navigate
-      case 'statuts': return <StatutsGenerator navigate={navigate} />; // Passer navigate
-      case "tableau-bord": return <Dashboard navigate={navigate} />; // Passer navigate
-      case "cartographie": return <LocationAnalysis navigate={navigate} />; // Passer navigate
-      case "guides": return <Guides navigate={navigate} />; // Passer navigate
-      case "methodo": return <Methodology navigate={navigate} />; // Passer navigate
-      case "annexes": return <Annexes navigate={navigate} />; // Passer navigate
-      case "expert-comptable": return <Contact navigate={navigate} />; // Si Contact est ici, passer navigate
-      case "resultat-fiscal": return <ResultatFiscal navigate={navigate} />; // Passer navigate
-      case "plan-comptable": return <PlanComptable navigate={navigate} />; // Passer navigate
-      case "tva-coefficient": return <TvaCoefficient navigate={navigate} />; // Passer navigate
-      case "edp": return <Contact navigate={navigate} />; // Passer navigate
-      case "budget-creation": return <Calculators navigate={navigate} />; // Passer navigate
-      case "criteres-label": return <CriteresLabel navigate={navigate} />; // Passer navigate
-      case "pret-subordonne": return <PretSubordonne navigate={navigate} />; // Passer navigate
-      case "habilitation-taxe": return <HabilitationTaxe navigate={navigate} />; // Passer navigate
-      case "entretiens": return <Entretiens navigate={navigate} />; // Passer navigate
-      case "organigramme": return <Organigramme navigate={navigate} />; // Passer navigate
+      case "calculateurs": return <Calculators navigate={navigate} />;
+      case "business-plan": return <BusinessPlan navigate={navigate} />;
+      case "partenariats": return <PartnershipTracker navigate={navigate} />;
+      case "couts-pedagogiques": return <PedagogicalCosts navigate={navigate} />;
+      case "planification": return <TrainingPlanner navigate={navigate} />;
+      case 'subventions': return <SubsidyGenerator navigate={navigate} />;
+      case 'statuts': return <StatutsGenerator navigate={navigate} />;
+      case "tableau-bord": return <Dashboard navigate={navigate} />;
+      case "cartographie": return <LocationAnalysis navigate={navigate} />;
+      case "guides": return <Guides navigate={navigate} />;
+      case "methodo": return <Methodology navigate={navigate} />;
+      case "annexes": return <Annexes navigate={navigate} />;
+      case "expert-comptable": return <Contact navigate={navigate} />; 
+      case "resultat-fiscal": return <ResultatFiscal navigate={navigate} />;
+      case "plan-comptable": return <PlanComptable navigate={navigate} />;
+      case "tva-coefficient": return <TvaCoefficient navigate={navigate} />; // Passer navigate à TvaCoefficient
+      case "edp": return <Contact navigate={navigate} />;
+      case "budget-creation": return <Calculators navigate={navigate} />;
+      case "criteres-label": return <CriteresLabel navigate={navigate} />;
+      case "pret-subordonne": return <PretSubordonne navigate={navigate} />;
+      case "habilitation-taxe": return <HabilitationTaxe navigate={navigate} />;
+      case "entretiens": return <Entretiens navigate={navigate} />;
+      case "organigramme": return <Organigramme navigate={navigate} />;
 
-      // Pages en cours de développement (Vérifier si elles ont des props navigate si elles deviennent de vraies pages)
-      case "prix-vente": return <UnderDevelopment title="Prix de vente des produits" navigate={navigate} />; // Passer navigate si vous utilisez la prop dans UnderDevelopment
-      case "rapport-adapte": return <UnderDevelopment title="Modèle de rapport adapté" navigate={navigate} />; // Passer navigate
+      // Pages en cours de développement (Ajout de navigate={navigate} pour la cohérence)
+      case "prix-vente": return <UnderDevelopment title="Prix de vente des produits" navigate={navigate} />;
+      case "rapport-adapte": return <UnderDevelopment title="Modèle de rapport adapté" navigate={navigate} />;
       case "suivi-subventions": return <UnderDevelopment title="Suivi des subventions" navigate={navigate} />;
       case "suivi-prets": return <UnderDevelopment title="Suivi des prêts" navigate={navigate} />;
       case "guide-tva": return <UnderDevelopment title="Guide d'application de la TVA" navigate={navigate} />;
