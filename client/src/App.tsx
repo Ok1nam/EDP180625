@@ -12,6 +12,7 @@ import Footer from "./components/Footer";
 import LoginForm from "./components/LoginForm";
 import Home from "./pages/Home";
 import Tools from "./pages/Tools";
+import Suivis from "./pages/Suivis";
 import Questionnaire from "./pages/Questionnaire";
 import Calculators from "./pages/Calculators";
 import BusinessPlan from "./pages/BusinessPlan";
