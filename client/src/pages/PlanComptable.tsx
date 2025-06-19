@@ -8,11 +8,11 @@ export default function PlanComptable() {
     <section id="plan-comptable">
       <h1 className="flex items-center gap-2 mb-6 text-2xl font-bold text-gray-800">
         <FileText className="w-6 h-6" />
-        Trame de calcul du résultat fiscal
+        Plan Comptable
       </h1>
 
       <p className="mb-6 text-gray-600 leading-relaxed">
-Tu me casses les couilles plan comptable      </p>
+Plan comptable     </p>
 
       <Card className="mb-6">
         <CardHeader>
@@ -20,7 +20,7 @@ Tu me casses les couilles plan comptable      </p>
         </CardHeader>
         <CardContent>
           <p className="text-sm text-gray-700">
-Tu me casses les couilles plan comptable           </p>
+Plan comptable           </p>
         </CardContent>
       </Card>
 
