@@ -6,6 +6,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox"; // Assurez-vous d'avoir ce composant de checkbox
 import { Progress } from "@/components/ui/progress"; // Assurez-vous d'avoir ce composant de barre de progression
 import { Button } from "@/components/ui/button";
+import { Label } from "@/components/ui/label";
 
 // Si la page a besoin de la fonction navigate, ajoutez-la aux props
 interface CriteresLabelProps {
