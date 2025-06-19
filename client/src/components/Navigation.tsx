@@ -1,54 +1,43 @@
+// client/src/components/Navigation/Navigation.tsx
 
 import { useState, useEffect } from "react";
-import { 
-  Home, 
-  Wrench, 
-  BarChart3, 
-  BookOpen, 
-  Phone,
-  FileText,
-  Calculator,
-  TrendingUp,
-  Building,
-  CheckSquare,
-  DollarSign,
-  Folder,
-  Euro,
-  PieChart,
-  MapPin,
-  Users,
-  MessageCircle,
-  Scale,
-  Target
-} from "lucide-react";
+// ... autres imports lucide-react ...
 
 interface NavigationProps {
   navigate: (page: string) => void;
+  // --- NOUVELLES PROPS POUR LE MENU BURGER ---
+  isMenuOpen: boolean; // Reçu du parent
+  setIsMenuOpen: (isOpen: boolean) => void; // Reçu du parent
+  // ------------------------------------------
 }
 
-export default function Navigation({ navigate }: NavigationProps) {
-  const [isOpen, setIsOpen] = useState(false);
+export default function Navigation({ navigate, isMenuOpen, setIsMenuOpen }: NavigationProps) {
+  // --- L'ÉTAT LOCAL 'isOpen' NE CONTRÔLE PLUS isMenuOpen du Header ---
+  // Il contrôle toujours l'ouverture de la nav elle-même.
+  const [isOpen, setIsOpen] = useState(false); // Gardez ceci pour la navigation latérale
   const [openSubmenu, setOpenSubmenu] = useState<string | null>(null);
 
-  useEffect(() => {
-    const handleToggle = (event: CustomEvent) => {
-      setIsOpen(event.detail);
-    };
-
-    window.addEventListener('toggleNavigation', handleToggle as EventListener);
-    
-    return () => {
-      window.removeEventListener('toggleNavigation', handleToggle as EventListener);
-    };
-  }, []);
+  // --- RETIREZ TOUT LE useEffect QUI GÈRE LE CustomEvent 'toggleNavigation' ---
+  // useEffect(() => {
+  //   const handleToggle = (event: CustomEvent) => {
+  //     setIsOpen(event.detail);
+  //   };
+  //   window.addEventListener('toggleNavigation', handleToggle as EventListener);
+  //   return () => {
+  //     window.removeEventListener('toggleNavigation', handleToggle as EventListener);
+  //   };
+  // }, []);
+  // ----------------------------------------------------------------------
 
   const handleNavClick = (page: string) => {
     navigate(page);
-    setIsOpen(false);
+    setIsOpen(false); // Ferme le panneau de navigation latéral
     setOpenSubmenu(null);
-    // Reset burger menu state
-    const event = new CustomEvent('toggleNavigation', { detail: false });
-    window.dispatchEvent(event);
+    // --- UTILISEZ LA PROP POUR FERMER LE MENU BURGER DU HEADER ---
+    setIsMenuOpen(false); // Ceci mettra à jour l'état du Header à "fermé"
+    // --- RETIREZ LE CustomEvent ICI ---
+    // const event = new CustomEvent('toggleNavigation', { detail: false });
+    // window.dispatchEvent(event);
   };
 
   const toggleSubmenu = (submenu: string) => {
@@ -56,67 +45,7 @@ export default function Navigation({ navigate }: NavigationProps) {
   };
 
   const menuStructure = [
-    {
-      id: "accueil",
-      label: "Accueil",
-      icon: Home,
-      items: [
-        { id: "accueil", label: "Accueil", icon: Home }
-      ]
-    },
-    {
-      id: "outils",
-      label: "Outils",
-      icon: Wrench,
-      items: [
-        { id: "plan-comptable", label: "Plan comptable adapté", icon: FileText },
-        { id: "tva-coefficient", label: "Trame de calcul du coefficient de déduction de TVA", icon: Calculator },
-        { id: "resultat-fiscal", label: "Trame de calcul du résultat fiscal", icon: TrendingUp },
-        { id: "arbre", label: "Arbre à la décision", icon: Target },
-        { id: "statuts", label: "Générateur de statuts", icon: Building },
-        { id: "criteres-label", label: "Liste de vérification des critères à remplir pour obtenir le label", icon: CheckSquare },
-        { id: "budget-creation", label: "Trame de budget à la création", icon: DollarSign },
-        { id: "subventions", label: "Dossier type demande subvention", icon: Folder },
-        { id: "pret-subordonne", label: "Exemple de contrat de prêt subordonné", icon: FileText },
-        { id: "habilitation-taxe", label: "Exemple de formulaire de demande d'habilitation taxe apprentissage", icon: Euro },
-        { id: "calculateurs", label: "Tableau calcul de coût", icon: Calculator },
-        { id: "prix-vente", label: "Tableau de détermination du prix de vente des produits", icon: PieChart },
-        { id: "rapport-adapte", label: "Modèle de rapport adapté", icon: FileText }
-      ]
-    },
-    {
-      id: "suivis",
-      label: "Suivis",
-      icon: BarChart3,
-      items: [
-        { id: "suivi-subventions", label: "Suivi des subventions", icon: Euro },
-        { id: "suivi-prets", label: "Suivi des prêts", icon: DollarSign },
-        { id: "partenariats", label: "Suivi des partenariats", icon: Users },
-        { id: "tableau-bord", label: "Tableau de bord financier & extra-financier", icon: BarChart3 }
-      ]
-    },
-    {
-      id: "documentation",
-      label: "Documentation & Guides",
-      icon: BookOpen,
-      items: [
-        { id: "methodo", label: "Méthodologie", icon: BookOpen },
-        { id: "cartographie", label: "Cartographie des écoles de production en France", icon: MapPin },
-        { id: "organigramme", label: "Exemple d'organigramme", icon: Building },
-        { id: "entretiens", label: "Entretiens effectués auprès des porteurs de projet", icon: MessageCircle },
-        { id: "guide-tva", label: "Guide d'application de la TVA", icon: Scale },
-        { id: "etude-marche", label: "Étude du marché du secteur sélectionné", icon: Target }
-      ]
-    },
-    {
-      id: "contact",
-      label: "Contact & Aide",
-      icon: Phone,
-      items: [
-        { id: "expert-comptable", label: "Expert-comptable", icon: Calculator },
-        { id: "edp", label: "EDP", icon: Building }
-      ]
-    }
+    // ... votre structure de menu ...
   ];
 
   return (

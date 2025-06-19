@@ -1,14 +1,23 @@
-import { useState } from "react";
-import { Menu, X } from "lucide-react";
+// client/src/components/Header/Header.tsx
 
-export default function Header() {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
+import { Menu, X } from "lucide-react";
+// --- RETIREZ L'IMPORT DE useState, et le CustomEvent ---
+// import { useState } from "react"; // REMOVE THIS LINE IF IT'S THE ONLY USE OF useState
+
+interface HeaderProps {
+  isMenuOpen: boolean;
+  setIsMenuOpen: (isOpen: boolean) => void;
+}
+
+export default function Header({ isMenuOpen, setIsMenuOpen }: HeaderProps) {
+  // --- RETIREZ LA DÉFINITION DE L'ÉTAT LOCAL isMenuOpen ---
+  // const [isMenuOpen, setIsMenuOpen] = useState(false); // REMOVE THIS LINE
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
-    // Trigger navigation toggle in parent
-    const event = new CustomEvent('toggleNavigation', { detail: !isMenuOpen });
-    window.dispatchEvent(event);
+    // --- RETIREZ LE CustomEvent ICI ---
+    // const event = new CustomEvent('toggleNavigation', { detail: !isMenuOpen });
+    // window.dispatchEvent(event);
   };
 
   return (
