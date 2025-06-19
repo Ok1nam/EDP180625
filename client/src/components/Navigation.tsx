@@ -35,6 +35,7 @@ export default function Navigation({ navigate, isMenuOpen, setIsMenuOpen }: Navi
   const menuStructure = [
     // ... votre structure de menu ...
   ];
+console.log("menuStructure content:", menuStructure); 
 
   return (
     <nav 
