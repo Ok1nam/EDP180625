@@ -1,96 +1,48 @@
-import { Wrench, TreePine, Map, ClipboardCheck, Stethoscope, FileText } from "lucide-react";
-import { Card, CardContent } from "@/components/ui/card";
+// client/src/pages/Tools.tsx
 
-interface ToolsProps {
-  navigate: (page: string) => void;
+import React from 'react';
+import { FileText, Calculator, TrendingUp, Target, Building, CheckSquare, DollarSign, Folder, Euro, PieChart } from "lucide-react";
+
+const outils = [
+    { id: "plan-comptable", label: "Plan comptable adapté", icon: FileText },
+    { id: "tva-coefficient", label: "Trame de calcul du coefficient de déduction de TVA", icon: Calculator },
+    { id: "resultat-fiscal", label: "Trame de calcul du résultat fiscal", icon: TrendingUp },
+    { id: "arbre", label: "Arbre à la décision", icon: Target },
+    { id: "statuts", label: "Générateur de statuts", icon: Building },
+    { id: "criteres-label", label: "Liste de vérification des critères à remplir pour obtenir le label", icon: CheckSquare },
+    { id: "budget-creation", label: "Trame de budget à la création", icon: DollarSign },
+    { id: "subventions", label: "Dossier type demande subvention", icon: Folder },
+    { id: "pret-subordonne", label: "Exemple de contrat de prêt subordonné", icon: FileText },
+    { id: "habilitation-taxe", label: "Exemple de formulaire de demande d'habilitation taxe apprentissage", icon: Euro },
+    { id: "calculateurs", label: "Tableau calcul de coût", icon: Calculator },
+    { id: "prix-vente", label: "Tableau de détermination du prix de vente des produits", icon: PieChart },
+    { id: "rapport-adapte", label: "Modèle de rapport adapté", icon: FileText }
+];
+
+interface OutilsPageProps {
+    navigate: (page: string) => void;
 }
 
-export default function Tools({ navigate }: ToolsProps) {
-  return (
-    <section id="outils">
-      <h1 className="flex items-center gap-2 mb-6 text-2xl font-bold text-gray-800">
-        <Wrench className="w-6 h-6" />
-        Outils d'évaluation
-      </h1>
-      
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        <Card 
-          className="card-hover cursor-pointer"
-          onClick={() => navigate('arbre')}
-        >
-          <CardContent className="p-6">
-            <h3 className="flex items-center gap-2 text-lg font-semibold mb-3 text-primary">
-              <TreePine className="w-6 h-6" />
-              Arbre de décision
-            </h3>
-            <p className="text-gray-600 mb-4 leading-relaxed">
-              Évaluez votre préparation en 20 questions ciblées pour identifier les points d'amélioration.
-            </p>
-            <div className="flex items-center gap-2 text-sm">
-              <span className="status-indicator status-pending"></span>
-              <span className="text-gray-500">Non commencé</span>
+const OutilsPage: React.FC<OutilsPageProps> = ({ navigate }) => {
+    return (
+        <div className="p-6 bg-white rounded-lg shadow-md">
+            <h1 className="text-3xl font-bold text-gray-800 mb-4">Outils d'évaluation</h1>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                {outils.map((outil) => (
+                    <div
+                        key={outil.id}
+                        onClick={() => navigate(outil.id)}
+                        className="p-4 rounded-md border border-gray-200 hover:shadow-md transition-shadow duration-300 cursor-pointer"
+                    >
+                        <div className="flex items-center gap-2">
+                            <outil.icon className="w-5 h-5 text-blue-500" />
+                            <h2 className="text-lg font-semibold text-gray-700">{outil.label}</h2>
+                        </div>
+                    </div>
+                ))}
             </div>
-          </CardContent>
-        </Card>
+        </div>
+    );
+};
 
-        <Card 
-          className="card-hover cursor-pointer"
-          onClick={() => navigate('statuts')}
-        >
-          <CardContent className="p-6">
-            <h3 className="flex items-center gap-2 text-lg font-semibold mb-3 text-primary">
-              <FileText className="w-6 h-6" />
-              Création de statuts
-            </h3>
-            <p className="text-gray-600 mb-4 leading-relaxed">
-              Générez automatiquement les statuts de votre association avec un formulaire simple.
-            </p>
-            <div className="flex items-center gap-2 text-sm">
-              <span className="status-indicator status-pending"></span>
-              <span className="text-gray-500">Outil disponible</span>
-            </div>
-          </CardContent>
-        </Card>
-        
-        <Card 
-          className="card-hover cursor-pointer"
-          onClick={() => window.open('https://www.ecoles-de-production.com/le-reseau-des-ecoles/','_blank')}
-        >
-          <CardContent className="p-6">
-            <h3 className="flex items-center gap-2 text-lg font-semibold mb-3 text-primary">
-              <Map className="w-6 h-6" />
-              Cartographie du réseau
-            </h3>
-            <p className="text-gray-600 leading-relaxed">
-              Visualisez la répartition géographique des écoles de production existantes.
-            </p>
-          </CardContent>
-        </Card>
-        
-        <Card className="card-hover cursor-pointer">
-          <CardContent className="p-6">
-            <h3 className="flex items-center gap-2 text-lg font-semibold mb-3 text-primary">
-              <ClipboardCheck className="w-6 h-6" />
-              Check-list projet
-            </h3>
-            <p className="text-gray-600 leading-relaxed">
-              Liste complète des étapes et documents nécessaires pour votre projet.
-            </p>
-          </CardContent>
-        </Card>
-        
-        <Card className="card-hover cursor-pointer">
-          <CardContent className="p-6">
-            <h3 className="flex items-center gap-2 text-lg font-semibold mb-3 text-primary">
-              <Stethoscope className="w-6 h-6" />
-              Diagnostic rapide
-            </h3>
-            <p className="text-gray-600 leading-relaxed">
-              Évaluation express de la viabilité de votre projet en 5 minutes.
-            </p>
-          </CardContent>
-        </Card>
-      </div>
-    </section>
-  );
-}
+export default OutilsPage;
