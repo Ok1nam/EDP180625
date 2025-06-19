@@ -33,6 +33,8 @@ import PlanComptable from "./pages/PlanComptable";
 import CriteresLabel from "./pages/CriteresLabel";
 import PretSubordonne from "./pages/PretSubordonne";
 import HabilitationTaxe from "./pages/HabilitationTaxe";
+import Entretiens from "./pages/Entretiens";
+import Organigramme from "./pages/Organigramme";
 import { useState } from "react"; // Gardez cet import
 import { useAuth } from "./hooks/useAuth";
 
@@ -79,6 +81,8 @@ function MainApplicationContent() { // Renommé de Router à MainApplicationCont
       case "criteres-label": return <CriteresLabel />;
       case "pret-subordonne": return <PretSubordonne />;
      case "habilitation-taxe": return <HabilitationTaxe />;
+     case "entretiens": return <Entretiens />;
+     case "organigramme": return <Organigramme />;
 
       // Pages en cours de développement
     
@@ -86,8 +90,7 @@ function MainApplicationContent() { // Renommé de Router à MainApplicationCont
       case "rapport-adapte": return <UnderDevelopment title="Modèle de rapport adapté" />;
       case "suivi-subventions": return <UnderDevelopment title="Suivi des subventions" />;
       case "suivi-prets": return <UnderDevelopment title="Suivi des prêts" />;
-      case "organigramme": return <UnderDevelopment title="Exemple d'organigramme" />;
-      case "entretiens": return <UnderDevelopment title="Entretiens porteurs de projet" />;
+  
       case "guide-tva": return <UnderDevelopment title="Guide d'application de la TVA" />;
       case "etude-marche": return <UnderDevelopment title="Étude de marché" />;
       
