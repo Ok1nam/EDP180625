@@ -1,13 +1,16 @@
 // client/src/pages/PlanComptable.tsx
 
+import React from 'react';
 import { Download, FileText } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
-export default function PlanComptable() {
-  // Le chemin du fichier doit être relatif au dossier 'public' à la racine de votre projet.
-  // Assurez-vous que votre fichier 'ECOLE_DE_PRODUCTION_MODELE.xlsx' est bien placé dans 'public/fichiers/'
-  const excelFilePath = "/fichiers/ECOLE_DE_PRODUCTION_MODELE.xlsx"; 
+interface PlanComptableProps { // Interface ajoutée pour la prop navigate
+    navigate: (page: string) => void;
+}
+
+const PlanComptable: React.FC<PlanComptableProps> = ({ navigate }) => { // Composant accepte la prop navigate
+  const excelFilePath = "/fichiers/ECOLE_DE_PRODUCTION_MODELE.xlsx";
 
   return (
     <section id="plan-comptable" className="max-w-4xl mx-auto px-4 py-8">
@@ -20,7 +23,6 @@ export default function PlanComptable() {
         Ce plan comptable est spécifiquement conçu pour les Écoles de Production. Il vous offre une structure comptable optimisée pour les activités pédagogiques et de production, facilitant ainsi la gestion et le suivi financier de votre établissement.
       </p>
 
-      {/* Section Importance et Méthodologie */}
       <Card className="mb-8 shadow-md">
         <CardHeader>
           <CardTitle className="text-xl font-semibold flex items-center gap-2">
@@ -38,7 +40,6 @@ export default function PlanComptable() {
         </CardContent>
       </Card>
 
-      {/* Section Téléchargement du fichier */}
       <Card className="mb-8 shadow-lg border-2 border-blue-500">
         <CardHeader>
           <CardTitle className="text-2xl font-bold text-blue-700 flex items-center gap-3">
@@ -51,12 +52,27 @@ export default function PlanComptable() {
               Cliquez ci-dessous pour télécharger le fichier Excel du plan comptable.
             </p>
             <p className="text-sm text-gray-600">
-              **Note importante :** Ce fichier Excel est un support commun utilisé par plusieurs de nos outils (plan comptable, coefficient de déduction TVA, résultat fiscal). Il est essentiel de le remplir avec les données spécifiques à votre école avant d'utiliser les calculateurs.
+              **Note importante :** Ce fichier Excel est un support commun utilisé par plusieurs de nos outils (<span
+                className="text-blue-600 hover:underline cursor-pointer"
+                onClick={() => navigate('plan-comptable')} // Lien vers cette page (optionnel)
+              >
+                plan comptable
+              </span>, <span
+                className="text-blue-600 hover:underline cursor-pointer"
+                onClick={() => navigate('tva-coefficient')} // Lien vers Coefficient TVA
+              >
+                coefficient de déduction TVA
+              </span>, et <span
+                className="text-blue-600 hover:underline cursor-pointer"
+                onClick={() => navigate('resultat-fiscal')} // Lien vers Résultat Fiscal
+              >
+                résultat fiscal
+              </span>). Il est essentiel de le remplir avec les données spécifiques à votre école avant d'utiliser les calculateurs.
             </p>
           </div>
           <a
-            href={excelFilePath} // Utilisation de la variable définie en haut
-            download="PLAN_COMPTABLE_ECOLE_PRODUCTION.xlsx" // Nom du fichier suggéré au téléchargement
+            href={excelFilePath}
+            download="PLAN_COMPTABLE_ECOLE_PRODUCTION.xlsx"
             className="flex-shrink-0"
           >
             <Button className="btn-primary flex items-center gap-2 py-3 px-6 text-lg">
@@ -66,7 +82,6 @@ export default function PlanComptable() {
         </CardContent>
       </Card>
 
-      {/* Section Conseils d'utilisation (Optionnel mais utile) */}
       <Card className="shadow-md">
         <CardHeader>
           <CardTitle className="text-xl font-semibold flex items-center gap-2">
@@ -88,4 +103,6 @@ export default function PlanComptable() {
       </Card>
     </section>
   );
-}
+};
+
+export default PlanComptable;

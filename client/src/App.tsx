@@ -1,14 +1,13 @@
 // client/src/App.tsx
 
 import { Switch, Route } from "wouter";
-import { QueryClientProvider } from "@tanstack/react-query"; // Gardez cet import
-import { queryClient } from "./lib/queryClient"; // Gardez cet import
-import { Toaster } from "@/components/ui/toaster"; // Gardez cet import
-import { TooltipProvider } from "@/components/ui/tooltip"; // Gardez cet import
+import { QueryClientProvider } from "@tanstack/react-query";
+import { queryClient } from "./lib/queryClient";
+import { Toaster } from "@/components/ui/toaster";
+import { TooltipProvider } from "@/components/ui/tooltip";
 import Header from "./components/Header";
 import Navigation from "./components/Navigation";
 import Footer from "./components/Footer";
-// import FloatingSave from "./components/FloatingSave"; // Cette ligne est maintenant supprimée
 import LoginForm from "./components/LoginForm";
 import Home from "./pages/Home";
 import Tools from "./pages/Tools";
@@ -37,20 +36,18 @@ import PretSubordonne from "./pages/PretSubordonne";
 import HabilitationTaxe from "./pages/HabilitationTaxe";
 import Entretiens from "./pages/Entretiens";
 import Organigramme from "./pages/Organigramme";
-import { useState } from "react"; // Gardez cet import
+import { useState } from "react";
 import { useAuth } from "./hooks/useAuth";
 
-// Renommez la fonction Router en Root ou MainApp pour plus de clarté
-// C'est le composant qui contiendra toute votre application
-function MainApplicationContent() { // Renommé de Router à MainApplicationContent
+function MainApplicationContent() {
   const [currentPage, setCurrentPage] = useState("accueil");
   const { isAuthenticated, login } = useAuth();
-  const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false); // État du menu burger
+  const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false);
 
   const navigate = (page: string) => {
     setCurrentPage(page);
     window.scrollTo({ top: 0, behavior: 'smooth' });
-    setIsBurgerMenuOpen(false); // Ferme le menu burger lors de la navigation
+    setIsBurgerMenuOpen(false);
   };
 
   if (!isAuthenticated) {
@@ -64,39 +61,37 @@ function MainApplicationContent() { // Renommé de Router à MainApplicationCont
       case "suivis": return <Suivis navigate={navigate} />;
       case "arbre": return <Questionnaire navigate={navigate} />;
       case "documentation": return <DocumentationPage navigate={navigate} />;
-      case "calculateurs": return <Calculators />;
-      case "business-plan": return <BusinessPlan />;
-      case "partenariats": return <PartnershipTracker />;
-      case "couts-pedagogiques": return <PedagogicalCosts />;
-      case "planification": return <TrainingPlanner />;
-      case 'subventions': return <SubsidyGenerator />;
-      case 'statuts': return <StatutsGenerator />;
-      case "tableau-bord": return <Dashboard />;
-      case "cartographie": return <LocationAnalysis />;
-      case "guides": return <Guides />;
-      case "methodo": return <Methodology />;
-      case "annexes": return <Annexes />;
-      case "expert-comptable": 
-      case "resultat-fiscal": return <ResultatFiscal />;
-      case "plan-comptable": return <PlanComptable />;
-      case "tva-coefficient": return <TvaCoefficient />;
-      case "edp": return <Contact />;
-      case "budget-creation": return <Calculators />;
-      case "criteres-label": return <CriteresLabel />;
-      case "pret-subordonne": return <PretSubordonne />;
-     case "habilitation-taxe": return <HabilitationTaxe />;
-     case "entretiens": return <Entretiens />;
-     case "organigramme": return <Organigramme />;
+      case "calculateurs": return <Calculators navigate={navigate} />; // Passer navigate
+      case "business-plan": return <BusinessPlan navigate={navigate} />; // Passer navigate
+      case "partenariats": return <PartnershipTracker navigate={navigate} />; // Passer navigate
+      case "couts-pedagogiques": return <PedagogicalCosts navigate={navigate} />; // Passer navigate
+      case "planification": return <TrainingPlanner navigate={navigate} />; // Passer navigate
+      case 'subventions': return <SubsidyGenerator navigate={navigate} />; // Passer navigate
+      case 'statuts': return <StatutsGenerator navigate={navigate} />; // Passer navigate
+      case "tableau-bord": return <Dashboard navigate={navigate} />; // Passer navigate
+      case "cartographie": return <LocationAnalysis navigate={navigate} />; // Passer navigate
+      case "guides": return <Guides navigate={navigate} />; // Passer navigate
+      case "methodo": return <Methodology navigate={navigate} />; // Passer navigate
+      case "annexes": return <Annexes navigate={navigate} />; // Passer navigate
+      case "expert-comptable": return <Contact navigate={navigate} />; // Si Contact est ici, passer navigate
+      case "resultat-fiscal": return <ResultatFiscal navigate={navigate} />; // Passer navigate
+      case "plan-comptable": return <PlanComptable navigate={navigate} />; // Passer navigate
+      case "tva-coefficient": return <TvaCoefficient navigate={navigate} />; // Passer navigate
+      case "edp": return <Contact navigate={navigate} />; // Passer navigate
+      case "budget-creation": return <Calculators navigate={navigate} />; // Passer navigate
+      case "criteres-label": return <CriteresLabel navigate={navigate} />; // Passer navigate
+      case "pret-subordonne": return <PretSubordonne navigate={navigate} />; // Passer navigate
+      case "habilitation-taxe": return <HabilitationTaxe navigate={navigate} />; // Passer navigate
+      case "entretiens": return <Entretiens navigate={navigate} />; // Passer navigate
+      case "organigramme": return <Organigramme navigate={navigate} />; // Passer navigate
 
-      // Pages en cours de développement
-    
-      case "prix-vente": return <UnderDevelopment title="Prix de vente des produits" />;
-      case "rapport-adapte": return <UnderDevelopment title="Modèle de rapport adapté" />;
-      case "suivi-subventions": return <UnderDevelopment title="Suivi des subventions" />;
-      case "suivi-prets": return <UnderDevelopment title="Suivi des prêts" />;
-  
-      case "guide-tva": return <UnderDevelopment title="Guide d'application de la TVA" />;
-      case "etude-marche": return <UnderDevelopment title="Étude de marché" />;
+      // Pages en cours de développement (Vérifier si elles ont des props navigate si elles deviennent de vraies pages)
+      case "prix-vente": return <UnderDevelopment title="Prix de vente des produits" navigate={navigate} />; // Passer navigate si vous utilisez la prop dans UnderDevelopment
+      case "rapport-adapte": return <UnderDevelopment title="Modèle de rapport adapté" navigate={navigate} />; // Passer navigate
+      case "suivi-subventions": return <UnderDevelopment title="Suivi des subventions" navigate={navigate} />;
+      case "suivi-prets": return <UnderDevelopment title="Suivi des prêts" navigate={navigate} />;
+      case "guide-tva": return <UnderDevelopment title="Guide d'application de la TVA" navigate={navigate} />;
+      case "etude-marche": return <UnderDevelopment title="Étude de marché" navigate={navigate} />;
       
       default: return <Home navigate={navigate} />;
     }
@@ -114,13 +109,12 @@ function MainApplicationContent() { // Renommé de Router à MainApplicationCont
   );
 }
 
-// Le composant App englobe maintenant MainApplicationContent avec tous les Providers
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <Toaster />
-        <MainApplicationContent /> {/* ICI : On rend le composant qui contient le Header, Navigation, etc. */}
+        <MainApplicationContent />
       </TooltipProvider>
     </QueryClientProvider>
   );
