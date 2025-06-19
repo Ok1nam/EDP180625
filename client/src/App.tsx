@@ -31,6 +31,8 @@ import ResultatFiscal from "./pages/ResultatFiscal";
 import TvaCoefficient from "./pages/TvaCoefficient";
 import PlanComptable from "./pages/PlanComptable";
 import CriteresLabel from "./pages/CriteresLabel";
+import PretSubordonne from "./pages/PretSubordonne";
+import HabilitationTaxe from "./pages/HabilitationTaxe";
 import { useState } from "react"; // Gardez cet import
 import { useAuth } from "./hooks/useAuth";
 
@@ -75,11 +77,11 @@ function MainApplicationContent() { // Renommé de Router à MainApplicationCont
       case "edp": return <Contact />;
       case "budget-creation": return <Calculators />;
       case "criteres-label": return <CriteresLabel />;
-      
+      case "pret-subordonne": return <PretSubordonne />;
+     case "habilitation-taxe": return <HabilitationTaxe />;
+
       // Pages en cours de développement
     
-      case "pret-subordonne": return <UnderDevelopment title="Contrat de prêt subordonné" />;
-      case "habilitation-taxe": return <UnderDevelopment title="Habilitation taxe apprentissage" />;
       case "prix-vente": return <UnderDevelopment title="Prix de vente des produits" />;
       case "rapport-adapte": return <UnderDevelopment title="Modèle de rapport adapté" />;
       case "suivi-subventions": return <UnderDevelopment title="Suivi des subventions" />;
