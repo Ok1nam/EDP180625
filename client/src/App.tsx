@@ -30,6 +30,7 @@ import Contact from "./pages/Contact";
 import ResultatFiscal from "./pages/ResultatFiscal";
 import TvaCoefficient from "./pages/TvaCoefficient";
 import PlanComptable from "./pages/PlanComptable";
+import CriteresLabel from "./pages/CriteresLabel";
 import { useState } from "react"; // Gardez cet import
 import { useAuth } from "./hooks/useAuth";
 
@@ -73,9 +74,10 @@ function MainApplicationContent() { // Renommé de Router à MainApplicationCont
       case "tva-coefficient": return <TvaCoefficient />;
       case "edp": return <Contact />;
       case "budget-creation": return <Calculators />;
+      case "criteres-label": return <CriteresLabel />;
       
       // Pages en cours de développement
-      case "criteres-label": return <UnderDevelopment title="Critères pour obtenir le label" />;
+    
       case "pret-subordonne": return <UnderDevelopment title="Contrat de prêt subordonné" />;
       case "habilitation-taxe": return <UnderDevelopment title="Habilitation taxe apprentissage" />;
       case "prix-vente": return <UnderDevelopment title="Prix de vente des produits" />;
