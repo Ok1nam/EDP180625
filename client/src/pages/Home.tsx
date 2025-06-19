@@ -10,22 +10,23 @@ interface HomeProps {
 
 export default function Home({ navigate }: HomeProps) {
   return (
-    <section id="accueil-page" className="flex flex-col items-center justify-center"> {/* Suppression du text-center global */}
+    <section id="accueil-page" className="flex flex-col items-center justify-center">
       {/* Section Hero/Bannière - Ajustements de taille et largeur */}
-      <div className="relative w-full bg-gradient-to-r from-blue-700 to-blue-500 text-white py-12 px-4 sm:py-16"> {/* Hauteur réduite */}
+      {/* CHANGEMENT ICI : from-indigo-800 to-indigo-600 pour un bleu moins vif */}
+      <div className="relative w-full bg-gradient-to-r from-indigo-800 to-indigo-600 text-white py-12 px-4 sm:py-16">
         {/* Contenu de la bannière centré mais avec une largeur max */}
-        <div className="relative z-10 max-w-screen-xl mx-auto text-center"> {/* max-w et mx-auto pour la largeur */}
-          <h1 className="text-3xl sm:text-4xl font-extrabold mb-3 leading-tight"> {/* Taille de texte ajustée */}
+        <div className="relative z-10 max-w-screen-xl mx-auto text-center">
+          <h1 className="text-3xl sm:text-4xl font-extrabold mb-3 leading-tight">
             Votre guide pour la création et le pilotage d'une École de Production
           </h1>
-          <p className="text-lg sm:text-xl opacity-90 mb-6"> {/* Taille de texte ajustée */}
+          <p className="text-lg sm:text-xl opacity-90 mb-6">
             Découvrez les outils et les méthodologies développés dans le cadre du Diplôme d'Expertise Comptable.
           </p>
           <a
-            href="https://www.ecoles-de-production.com/" // URL mise à jour ici
+            href="https://www.ecoles-de-production.com/"
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center justify-center px-6 py-2.5 border border-transparent text-base font-medium rounded-md text-blue-700 bg-white hover:bg-gray-100 transition-colors duration-200 shadow-lg"
+            className="inline-flex items-center justify-center px-6 py-2.5 border border-transparent text-base font-medium rounded-md text-indigo-700 bg-white hover:bg-gray-100 transition-colors duration-200 shadow-lg" // CHANGEMENT ICI pour le texte-indigo-700 pour le bouton
           >
             Visiter le site officiel des Écoles de Production
           </a>
@@ -33,7 +34,7 @@ export default function Home({ navigate }: HomeProps) {
       </div>
 
       {/* Section Contexte et Problématique - Contenu plus large */}
-      <div className="max-w-screen-xl mx-auto my-12 px-4 text-left"> {/* max-w, mx-auto, et text-left */}
+      <div className="max-w-screen-xl mx-auto my-12 px-4 text-left">
         <h2 className="text-3xl font-bold text-gray-800 mb-6 flex items-center justify-center gap-2">
             <BookOpen className="w-7 h-7 text-primary" />
             Contexte et Problématique
@@ -52,7 +53,7 @@ export default function Home({ navigate }: HomeProps) {
       </div>
 
       {/* Nouvelle Section "Ce que nous offrons : Un accompagnement sur mesure" - Contenu plus large */}
-      <div className="max-w-screen-xl mx-auto my-16 px-4"> {/* max-w, mx-auto */}
+      <div className="max-w-screen-xl mx-auto my-16 px-4">
         <h2 className="text-3xl font-bold text-gray-800 mb-8 flex items-center justify-center gap-2">
             <Lightbulb className="w-7 h-7 text-primary" />
             Ce que nous offrons : Un accompagnement sur mesure
@@ -105,7 +106,7 @@ export default function Home({ navigate }: HomeProps) {
       </div>
 
       {/* Section "Commencez votre exploration" - Contenu plus large */}
-      <div className="max-w-screen-xl mx-auto my-16 px-4"> {/* max-w, mx-auto */}
+      <div className="max-w-screen-xl mx-auto my-16 px-4">
         <h2 className="text-3xl font-bold text-gray-800 mb-8 text-center">Commencez votre exploration</h2>
         <div className="flex flex-col sm:flex-row justify-center gap-6">
           <a
