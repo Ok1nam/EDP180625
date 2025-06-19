@@ -19,7 +19,7 @@ import PartnershipTracker from "./pages/PartnershipTracker";
 import PedagogicalCosts from "./pages/PedagogicalCosts";
 import TrainingPlanner from "./pages/TrainingPlanner";
 import SubsidyGenerator from "@/pages/SubsidyGenerator";
-import StatutsGenerator from "@/pages/StatutsGenerator";
+import StatutsGenerator from "@/pages/StatutsGenerator"; // Import de StatutsGenerator
 import UnderDevelopment from "@/pages/UnderDevelopment";
 import Dashboard from "./pages/Dashboard";
 import LocationAnalysis from "./pages/LocationAnalysis";
@@ -84,8 +84,34 @@ function MainApplicationContent() {
       case "habilitation-taxe": return <HabilitationTaxe navigate={navigate} />;
       case "entretiens": return <Entretiens navigate={navigate} />;
       case "organigramme": return <Organigramme navigate={navigate} />;
+      case "calculateurs": return <Calculators navigate={navigate} />;
+      case "business-plan": return <BusinessPlan navigate={navigate} />;
+      case "partenariats": return <PartnershipTracker navigate={navigate} />;
+      case "couts-pedagogiques": return <PedagogicalCosts navigate={navigate} />;
+      case "planification": return <TrainingPlanner navigate={navigate} />;
+      case 'subventions': return <SubsidyGenerator navigate={navigate} />;
+      case 'statuts': return <StatutsGenerator navigate={navigate} />; // Passer navigate à StatutsGenerator
+      case "tableau-bord": return <Dashboard navigate={navigate} />;
+      case "cartographie": return <LocationAnalysis navigate={navigate} />;
+      case "guides": return <Guides navigate={navigate} />;
+      case "methodo": return <Methodology navigate={navigate} />;
+      case "annexes": return <Annexes navigate={navigate} />;
+      case "expert-comptable": return <Contact navigate={navigate} />; 
+      case "resultat-fiscal": return <ResultatFiscal navigate={navigate} />;
+      case "plan-comptable": return <PlanComptable navigate={navigate} />;
+      case "tva-coefficient": return <TvaCoefficient navigate={navigate} />;
+      case "edp": return <Contact navigate={navigate} />;
+      case "budget-creation": return <Calculators navigate={navigate} />;
+      case "criteres-label": return <CriteresLabel navigate={navigate} />;
+      case "pret-subordonne": return <PretSubordonne navigate={navigate} />;
+      case "habilitation-taxe": return <HabilitationTaxe navigate={navigate} />;
+      case "entretiens": return <Entretiens navigate={navigate} />;
+      case "organigramme": return <Organigramme navigate={navigate} />;
 
       // Pages en cours de développement (Ajout de navigate={navigate} pour la cohérence)
+      case "prix-vente": return <UnderDevelopment title="Prix de vente des produits" navigate={navigate} />;
+      case "rapport-adapte": return <UnderDevelopment title="Modèle de rapport adapté" navigate={navigate} />;
+      // Pages en cours de développement
       case "prix-vente": return <UnderDevelopment title="Prix de vente des produits" navigate={navigate} />;
       case "rapport-adapte": return <UnderDevelopment title="Modèle de rapport adapté" navigate={navigate} />;
       case "suivi-subventions": return <UnderDevelopment title="Suivi des subventions" navigate={navigate} />;
