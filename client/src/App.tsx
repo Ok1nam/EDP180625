@@ -59,6 +59,7 @@ function MainApplicationContent() { // Renommé de Router à MainApplicationCont
     switch (currentPage) {
       case "accueil": return <Home navigate={navigate} />;
       case "outils": return <Tools navigate={navigate} />;
+      case "suivis": return <Suivis navigate={navigate} />;
       case "arbre": return <Questionnaire navigate={navigate} />;
       case "calculateurs": return <Calculators />;
       case "business-plan": return <BusinessPlan />;
