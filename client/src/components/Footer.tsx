@@ -8,7 +8,7 @@ export default function Footer({ navigate }: FooterProps) {
   const footerLinks = [
     { id: "accueil", label: "Accueil", icon: Home },
     { id: "outils", label: "Outils", icon: Wrench },
-    { id: "suivis", label: "Calculateurs", icon: Calculator },
+    { id: "suivis", label: "Suivis", icon: Calculator },
     { id: "documentation", label: "Documentation & Guides", icon: FileText },
     { id: "contact", label: "Contact & Aide", icon: TrendingUp },
 
