@@ -4,7 +4,7 @@ import React from 'react';
 import {
   HelpCircle, // Icône principale pour la page Contact & Aide
   Mail, // Pour contacter
-  School // NOUVEAU : Icône pour Écoles de Production
+  School // Icône pour Écoles de Production
 } from "lucide-react";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -22,7 +22,7 @@ const optionsAide = [
     description: "Posez vos questions ou envoyez-nous un message direct à Laura Gombaud." 
   },
   { 
-    id: "EcoleDeProduction", 
+    id: "edp", // CORRECTION ICI : L'ID est maintenant "edp" pour correspondre à App.tsx
     label: "Qu'est-ce qu'une École de Production ?", 
     icon: School, 
     description: "Découvrez le modèle unique des Écoles de Production et leur pédagogie." 
@@ -41,7 +41,7 @@ const ContactEtAide: React.FC<ContactEtAideProps> = ({ navigate }) => {
         Vous avez des questions spécifiques sur le projet d'École de Production ou besoin d'informations sur l'accompagnement ?
       </p>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6"> {/* La grille s'adapte à 2 colonnes */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         {optionsAide.map((option) => (
           <Card
             key={option.id}
