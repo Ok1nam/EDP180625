@@ -9,8 +9,7 @@ interface RapportAdapteProps {
   navigate?: (page: string) => void;
 }
 
-// Le composant est directement défini ici
-const RapportAdapte: React.FC<RapportAdapteProps> = ({ navigate }) => { // CORRECTION: J'ai laissé cette ligne telle quelle mais j'ai enlevé l'export en double plus bas
+const RapportAdapte: React.FC<RapportAdapteProps> = ({ navigate }) => {
   // Le chemin du fichier doit être relatif au dossier 'public' à la racine de votre projet.
   // Assurez-vous que votre fichier de rapport est bien placé dans 'public/fichiers/'
   const rapportFilePath = "/fichiers/MODELE_RAPPORT_PARTENAIRES_EDP.pptx"; // Ou .docx, .pdf
@@ -49,8 +48,7 @@ const RapportAdapte: React.FC<RapportAdapteProps> = ({ navigate }) => { // CORRE
                 className="text-blue-600 hover:underline cursor-pointer font-medium"
                 onClick={() => navigate && navigate('suivi-subventions')}
               >
-                de subventions
-              >
+                de subventions {/* CORRECTION ICI: Le ">" superflu a été retiré */}
               </span>.
             </li>
             <li>**Renforcer les partenariats :** Maintenir un lien fort avec les entreprises et les collectivités.</li>
@@ -133,4 +131,4 @@ const RapportAdapte: React.FC<RapportAdapteProps> = ({ navigate }) => { // CORRE
   );
 };
 
-export default RapportAdapte; // CORRECTION: C'est le seul export par défaut qui doit exister
+export default RapportAdapte;
