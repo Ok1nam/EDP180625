@@ -13,7 +13,7 @@ import Home from "./pages/Home";
 import Tools from "./pages/Tools";
 import Suivis from "./pages/Suivis";
 import Questionnaire from "./pages/Questionnaire";
-import Calculators from "./pages/Calculators";
+import Calculators from "./pages/Calculators"; // Garder l'import au cas où
 import BusinessPlan from "./pages/BusinessPlan";
 import PartnershipTracker from "./pages/PartnershipTracker";
 import PedagogicalCosts from "./pages/PedagogicalCosts";
@@ -41,7 +41,9 @@ import GuideTva from "./pages/GuideTva";
 import SuiviPrets from "./pages/SuiviPrets";
 import SuiviSubventions from "./pages/SuiviSubventions"; 
 import RapportAdapte from "./pages/RapportAdapte";
-import PrixVenteProduits from "./pages/PrixVenteProduits"; // Nouveau : Import de la page PrixVenteProduits
+import PrixVenteProduits from "./pages/PrixVenteProduits";
+import TableauCalculCout from "./pages/TableauCalculCout"; // NOUVEAU : Import de la page TableauCalculCout
+import BudgetCreation from "./pages/BudgetCreation";     // NOUVEAU : Import de la page BudgetCreation
 import { useState } from "react";
 import { useAuth } from "./hooks/useAuth";
 
@@ -67,7 +69,11 @@ function MainApplicationContent() {
       case "suivis": return <Suivis navigate={navigate} />;
       case "arbre": return <Questionnaire navigate={navigate} />;
       case "documentation": return <DocumentationPage navigate={navigate} />;
-      case "calculateurs": return <Calculators navigate={navigate} />;
+      // MODIFIÉ ICI : "calculateurs" pointe maintenant vers TableauCalculCout
+      case "calculateurs": return <TableauCalculCout navigate={navigate} />; 
+      // MODIFIÉ ICI : "budget-creation" pointe maintenant vers BudgetCreation
+      case "budget-creation": return <BudgetCreation navigate={navigate} />; 
+      
       case "business-plan": return <BusinessPlan navigate={navigate} />;
       case "partenariats": return <PartnershipTracker navigate={navigate} />;
       case "couts-pedagogiques": return <PedagogicalCosts navigate={navigate} />;
@@ -84,10 +90,9 @@ function MainApplicationContent() {
       case "plan-comptable": return <PlanComptable navigate={navigate} />;
       case "tva-coefficient": return <TvaCoefficient navigate={navigate} />;
       case "edp": return <Contact navigate={navigate} />;
-      case "budget-creation": return <Calculators navigate={navigate} />;
       case "criteres-label": return <CriteresLabel navigate={navigate} />;
       case "pret-subordonne": return <PretSubordonne navigate={navigate} />;
-      case "habilitation-taxe": return <HabilitationTaxe navigate={navigate} />;
+      case "habilitation-taxe": return <HabilitationTaxe navigate={navigate} />; 
       case "entretiens": return <Entretiens navigate={navigate} />;
       case "organigramme": return <Organigramme navigate={navigate} />;
       case "etude-marche": return <EtudeMarche navigate={navigate} />;
@@ -95,11 +100,10 @@ function MainApplicationContent() {
       case "suivi-prets": return <SuiviPrets navigate={navigate} />;
       case "suivi-subventions": return <SuiviSubventions navigate={navigate} />;
       case "rapport-adapte": return <RapportAdapte navigate={navigate} />;
-      // Mise à jour de la page "prix-vente"
       case "prix-vente": return <PrixVenteProduits navigate={navigate} />;
       
-      // Page en cours de développement (plus aucune normalement !)
-      // case "prix-vente": return <UnderDevelopment title="Prix de vente des produits" navigate={navigate} />; // Cette ligne est commentée/supprimée
+      // Il ne devrait plus y avoir de pages "UnderDevelopment" ici, car toutes les routes
+      // pointent maintenant vers des pages spécifiques.
       
       default: return <Home navigate={navigate} />;
     }
