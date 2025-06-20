@@ -24,7 +24,7 @@ import UnderDevelopment from "@/pages/UnderDevelopment";
 import Dashboard from "./pages/Dashboard";
 import LocationAnalysis from "./pages/LocationAnalysis";
 import Guides from "./pages/Guides";
-import Documentation from "./pages/Documentation"; // Corrected to Documentation
+import DocumentationPage from "./pages/DocumentationPage"; // MODIFIÉ ICI : Import de DocumentationPage
 import Methodology from "./pages/Methodology";
 import Annexes from "./pages/Annexes";
 import Contact from "./pages/Contact";
@@ -38,7 +38,7 @@ import Entretiens from "./pages/Entretiens";
 import Organigramme from "./pages/Organigramme";
 import EtudeMarche from "./pages/EtudeMarche";
 import GuideTva from "./pages/GuideTva";
-import SuiviPrets from "./pages/SuiviPrets"; // Nouveau : Import de la page SuiviPrets
+import SuiviPrets from "./pages/SuiviPrets";
 import { useState } from "react";
 import { useAuth } from "./hooks/useAuth";
 
@@ -63,7 +63,7 @@ function MainApplicationContent() {
       case "outils": return <Tools navigate={navigate} />;
       case "suivis": return <Suivis navigate={navigate} />;
       case "arbre": return <Questionnaire navigate={navigate} />;
-      case "documentation": return <Documentation navigate={navigate} />;
+      case "documentation": return <DocumentationPage navigate={navigate} />; // MODIFIÉ ICI : Utilisation de DocumentationPage
       case "calculateurs": return <Calculators navigate={navigate} />;
       case "business-plan": return <BusinessPlan navigate={navigate} />;
       case "partenariats": return <PartnershipTracker navigate={navigate} />;
@@ -84,44 +84,4 @@ function MainApplicationContent() {
       case "budget-creation": return <Calculators navigate={navigate} />;
       case "criteres-label": return <CriteresLabel navigate={navigate} />;
       case "pret-subordonne": return <PretSubordonne navigate={navigate} />;
-      case "habilitation-taxe": return <HabilitationTaxe navigate={navigate} />;
-      case "entretiens": return <Entretiens navigate={navigate} />;
-      case "organigramme": return <Organigramme navigate={navigate} />;
-      case "etude-marche": return <EtudeMarche navigate={navigate} />;
-      case "guide-tva": return <GuideTva navigate={navigate} />;
-      // Mise à jour de la page "suivi-prets"
-      case "suivi-prets": return <SuiviPrets navigate={navigate} />;
-      
-      // Pages en cours de développement (celles qui restent)
-      case "prix-vente": return <UnderDevelopment title="Prix de vente des produits" navigate={navigate} />;
-      case "rapport-adapte": return <UnderDevelopment title="Modèle de rapport adapté" navigate={navigate} />;
-      case "suivi-subventions": return <UnderDevelopment title="Suivi des subventions" navigate={navigate} />;
-      
-      default: return <Home navigate={navigate} />;
-    }
-  };
-
-  return (
-    <div className="min-h-screen flex flex-col">
-      <Header isMenuOpen={isBurgerMenuOpen} setIsMenuOpen={setIsBurgerMenuOpen} />
-      <Navigation navigate={navigate} isMenuOpen={isBurgerMenuOpen} setIsMenuOpen={setIsBurgerMenuOpen} />
-      <main className="flex-1 px-8 py-8 max-w-6xl mx-auto w-full">
-        {renderCurrentPage()}
-      </main>
-      <Footer navigate={navigate} />
-    </div>
-  );
-}
-
-function App() {
-  return (
-    <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <Toaster />
-        <MainApplicationContent />
-      </TooltipProvider>
-    </QueryClientProvider>
-  );
-}
-
-export default App;
+      case "habilitation-taxe": return <HabilitationTaxe
