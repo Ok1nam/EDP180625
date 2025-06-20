@@ -36,7 +36,8 @@ import PretSubordonne from "./pages/PretSubordonne";
 import HabilitationTaxe from "./pages/HabilitationTaxe";
 import Entretiens from "./pages/Entretiens";
 import Organigramme from "./pages/Organigramme";
-import EtudeMarche from "./pages/EtudeMarche"; // Nouveau : Import de la page EtudeMarche
+import EtudeMarche from "./pages/EtudeMarche";
+import GuideTva from "./pages/GuideTva"; // Nouveau : Import de la page GuideTva
 import { useState } from "react";
 import { useAuth } from "./hooks/useAuth";
 
@@ -85,22 +86,17 @@ function MainApplicationContent() {
       case "habilitation-taxe": return <HabilitationTaxe navigate={navigate} />;
       case "entretiens": return <Entretiens navigate={navigate} />;
       case "organigramme": return <Organigramme navigate={navigate} />;
-      // Les pages dupliquées ci-dessous ont été supprimées pour plus de clarté
-      // case "calculateurs": return <Calculators navigate={navigate} />; // Duplicata
-      // case "business-plan": return <BusinessPlan navigate={navigate} />; // Duplicata
-      // ... (autres duplicatas)
-
-      // Nouvelle page "etude-marche"
       case "etude-marche": return <EtudeMarche navigate={navigate} />;
+      // Nouvelle page "guide-tva"
+      case "guide-tva": return <GuideTva navigate={navigate} />;
       
-      // Pages en cours de développement (maintenant que "etude-marche" est gérée)
+      // Pages en cours de développement (celles qui restent)
       case "prix-vente": return <UnderDevelopment title="Prix de vente des produits" navigate={navigate} />;
       case "rapport-adapte": return <UnderDevelopment title="Modèle de rapport adapté" navigate={navigate} />;
       case "suivi-subventions": return <UnderDevelopment title="Suivi des subventions" navigate={navigate} />;
       case "suivi-prets": return <UnderDevelopment title="Suivi des prêts" navigate={navigate} />;
-      case "guide-tva": return <UnderDevelopment title="Guide d'application de la TVA" navigate={navigate} />;
-      // case "etude-marche": return <UnderDevelopment title="Étude de marché" navigate={navigate} />; // Ancien et supprimé
-
+      // Ancien case "guide-tva" supprimé car maintenant géré
+      
       default: return <Home navigate={navigate} />;
     }
   };
