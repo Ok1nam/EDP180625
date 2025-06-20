@@ -1,0 +1,8 @@
+[build]
+  command = "npm run build"
+  publish = "dist" # <-- CORRECTION ICI : Pointez vers le dossier 'dist' à la racine du dépôt
+
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
