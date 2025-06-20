@@ -1,4 +1,10 @@
-import { Home, Wrench, Calculator, Route, Book, Folder, Mail, FileText, TrendingUp, Handshake, BarChart3 } from "lucide-react"; // Ajout de BarChart3 pour l'icône de Suivis si vous voulez
+import {
+  Home,
+  Wrench,
+  BarChart3, // Icône pour Suivis
+  FileText, // Pour Documentation & Guides
+  HelpCircle // NOUVEAU : Icône pour Contact & Aide
+} from "lucide-react";
 
 interface FooterProps {
   navigate: (page: string) => void;
@@ -8,12 +14,11 @@ export default function Footer({ navigate }: FooterProps) {
   const footerLinks = [
     { id: "accueil", label: "Accueil", icon: Home },
     { id: "outils", label: "Outils", icon: Wrench },
-    // Mettez à jour le label pour 'Suivis' si vous le souhaitez, et utilisez une icône plus pertinente si 'Calculator' n'est pas le bon choix
-    // J'ai mis BarChart3 car c'est l'icône principale de la section "Suivis" dans votre menu burger.
-    { id: "suivis", label: "Suivis", icon: BarChart3 }, // J'ai remplacé 'Calculators' par 'Suivis' pour le label et 'BarChart3' pour l'icône
-    // Assurez-vous que l'ID 'documentation' correspond bien à la nouvelle page DocumentationPage que nous avons créée
+    { id: "suivis", label: "Suivis", icon: BarChart3 },
+    // J'ai renommé le label pour mieux correspondre à la page intermédiaire DocumentationPage
     { id: "documentation", label: "Documentation & Guides", icon: FileText },
-    { id: "contact", label: "Contact & Aide", icon: TrendingUp },
+    // MODIFIÉ ICI : L'ID pointe maintenant vers la nouvelle page intermédiaire
+    { id: "contact-et-aide", label: "Contact & Aide", icon: HelpCircle }, // NOUVEAU ID et NOUVELLE ICÔNE
   ];
 
   return (

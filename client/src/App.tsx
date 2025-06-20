@@ -20,7 +20,7 @@ import PedagogicalCosts from "./pages/PedagogicalCosts";
 import TrainingPlanner from "./pages/TrainingPlanner";
 import SubsidyGenerator from "@/pages/SubsidyGenerator";
 import StatutsGenerator from "@/pages/StatutsGenerator";
-import UnderDevelopment from "@/pages/UnderDevelopment";
+import UnderDevelopment from "@/pages/UnderDevelopment"; // Assurez-vous que ce composant est toujours importé
 import Dashboard from "./pages/Dashboard";
 import LocationAnalysis from "./pages/LocationAnalysis";
 import Guides from "./pages/Guides";
@@ -44,7 +44,8 @@ import RapportAdapte from "./pages/RapportAdapte";
 import PrixVenteProduits from "./pages/PrixVenteProduits";
 import TableauCalculCout from "./pages/TableauCalculCout";
 import BudgetCreation from "./pages/BudgetCreation";
-import EcoleDeProduction from "./pages/EcoleDeProduction"; // NOUVEAU : Import de la page EcoleDeProduction
+import EcoleDeProduction from "./pages/EcoleDeProduction";
+import ContactEtAide from "./pages/ContactEtAide"; // NOUVEAU : Import de la page ContactEtAide
 import { useState } from "react";
 import { useAuth } from "./hooks/useAuth";
 
@@ -87,7 +88,6 @@ function MainApplicationContent() {
       case "resultat-fiscal": return <ResultatFiscal navigate={navigate} />;
       case "plan-comptable": return <PlanComptable navigate={navigate} />;
       case "tva-coefficient": return <TvaCoefficient navigate={navigate} />;
-      // MODIFIÉ ICI : "edp" pointe maintenant vers EcoleDeProduction
       case "edp": return <EcoleDeProduction navigate={navigate} />; 
       case "criteres-label": return <CriteresLabel navigate={navigate} />;
       case "pret-subordonne": return <PretSubordonne navigate={navigate} />;
@@ -101,6 +101,16 @@ function MainApplicationContent() {
       case "rapport-adapte": return <RapportAdapte navigate={navigate} />;
       case "prix-vente": return <PrixVenteProduits navigate={navigate} />;
       
+      // NOUVEAU : Page intermédiaire pour Contact & Aide
+      case "contact-et-aide": return <ContactEtAide navigate={navigate} />;
+      // NOUVEAU : Routes pour FAQ et Support (pointent vers UnderDevelopment pour l'instant)
+      case "faq": return <UnderDevelopment title="Foire Aux Questions (FAQ)" navigate={navigate} />;
+      case "support": return <UnderDevelopment title="Support Technique" navigate={navigate} />;
+      
+      // Le case "contact" d'origine est toujours là pour la page de contact spécifique,
+      // la page ContactEtAide pointera vers celle-ci.
+      case "contact": return <Contact navigate={navigate} />; // Assurez-vous que cette ligne est bien présente et pointe vers votre page de contact réelle
+
       default: return <Home navigate={navigate} />;
     }
   };
