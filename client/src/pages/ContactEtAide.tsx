@@ -22,7 +22,7 @@ const optionsAide = [
     description: "Posez vos questions ou envoyez-nous un message direct à Laura Gombaud." 
   },
   { 
-    id: "edp", 
+    id: "EcoleDeProduction", 
     label: "Qu'est-ce qu'une École de Production ?", 
     icon: School, 
     description: "Découvrez le modèle unique des Écoles de Production et leur pédagogie." 
