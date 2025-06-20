@@ -7,7 +7,7 @@ import {
   BarChart3, 
   BookOpen, 
   Phone,
-  FileText,
+  FileText, // Assurez-vous que FileText est bien importé
   Calculator,
   TrendingUp,
   Building,
@@ -21,7 +21,7 @@ import {
   MessageCircle,
   Scale,
   Target,
-  HelpCircle 
+  HelpCircle // L'import HelpCircle est déjà là
 } from "lucide-react";
 
 const menuStructure = [
@@ -91,25 +91,28 @@ const menuStructure = [
 interface NavigationProps {
   navigate: (page: string) => void;
   isBurgerMenuOpen: boolean; 
-  setIsBurgerMenuOpen: (isOpen: boolean) => void; // Nom de prop correct
+  setIsBurgerMenuOpen: (isOpen: boolean) => void; 
 }
 
-export default function Navigation({ navigate, isBurgerMenuOpen, setIsBurgerMenuOpen }: NavigationProps) { // Utilise le nom de prop correct
+export default function Navigation({ navigate, isBurgerMenuOpen, setIsBurgerMenuOpen }: NavigationProps) { 
   const [isOpen, setIsOpen] = useState(isBurgerMenuOpen);
   const [openSubmenu, setOpenSubmenu] = useState<string | null>(null);
 
   useEffect(() => {
+    console.log("Navigation.tsx: Prop isBurgerMenuOpen received:", isBurgerMenuOpen, "setting local isOpen to:", isBurgerMenuOpen);
     setIsOpen(isBurgerMenuOpen);
   }, [isBurgerMenuOpen]);
 
   const handleItemClick = (itemId: string, isSectionHeader: boolean) => {
+    console.log("Navigation.tsx: Item clicked:", itemId, "isSectionHeader:", isSectionHeader);
     if (isSectionHeader) {
       setOpenSubmenu(openSubmenu === itemId ? null : itemId);
     } else {
       navigate(itemId);
+      console.log("Navigation.tsx: Navigating, setting isOpen and setIsBurgerMenuOpen to false.");
       setIsOpen(false); 
       setOpenSubmenu(null); 
-      setIsBurgerMenuOpen(false); // Utilise la fonction de mise à jour correcte
+      setIsBurgerMenuOpen(false); 
     }
   };
 
@@ -119,6 +122,7 @@ export default function Navigation({ navigate, isBurgerMenuOpen, setIsBurgerMenu
         isOpen ? 'transform translate-x-0' : 'transform translate-x-full'
       }`}
     >
+      {console.log("Navigation.tsx: Current isOpen state for rendering:", isOpen, "Applied classes:", `transform ${isOpen ? 'translate-x-0' : 'translate-x-full'}`)}
       <ul className="list-none">
         {menuStructure.map((section) => (
           <li key={section.id} className="border-b border-gray-600">
@@ -127,7 +131,8 @@ export default function Navigation({ navigate, isBurgerMenuOpen, setIsBurgerMenu
               className="w-full flex items-center justify-between gap-3 p-4 text-white text-lg hover:bg-gray-700 transition-colors duration-200 text-left font-semibold"
             >
               <span className="flex items-center gap-3">
-                <section.icon className="w-5 h-5" /> 
+                {/* Vérifie si l'icône existe avant de la rendre */}
+                {section.icon && <section.icon className="w-5 h-5" />} 
                 {section.label}
               </span>
               {section.items.length > 1 && (
@@ -147,7 +152,8 @@ export default function Navigation({ navigate, isBurgerMenuOpen, setIsBurgerMenu
                       onClick={() => handleItemClick(item.id, false)}
                       className="w-full flex items-center gap-3 pl-12 pr-4 py-3 text-white text-sm hover:bg-gray-600 transition-colors duration-200 text-left"
                     >
-                      <item.icon className="w-4 h-4" />
+                      {/* Vérifie si l'icône existe avant de la rendre */}
+                      {item.icon && <item.icon className="w-4 h-4" />}
                       {item.label}
                     </button>
                   </li>
