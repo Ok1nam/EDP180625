@@ -39,7 +39,8 @@ import Organigramme from "./pages/Organigramme";
 import EtudeMarche from "./pages/EtudeMarche";
 import GuideTva from "./pages/GuideTva";
 import SuiviPrets from "./pages/SuiviPrets";
-import SuiviSubventions from "./pages/SuiviSubventions"; // Nouveau : Import de la page SuiviSubventions
+import SuiviSubventions from "./pages/SuiviSubventions";
+import RapportAdapte from "./pages/RapportAdapte"; // Nouveau : Import de la page RapportAdapte
 import { useState } from "react";
 import { useAuth } from "./hooks/useAuth";
 
@@ -91,12 +92,12 @@ function MainApplicationContent() {
       case "etude-marche": return <EtudeMarche navigate={navigate} />;
       case "guide-tva": return <GuideTva navigate={navigate} />;
       case "suivi-prets": return <SuiviPrets navigate={navigate} />;
-      // Mise à jour de la page "suivi-subventions"
       case "suivi-subventions": return <SuiviSubventions navigate={navigate} />;
+      // Mise à jour de la page "rapport-adapte"
+      case "rapport-adapte": return <RapportAdapte navigate={navigate} />;
       
-      // Pages en cours de développement (celles qui restent)
+      // Page en cours de développement (la dernière qui reste)
       case "prix-vente": return <UnderDevelopment title="Prix de vente des produits" navigate={navigate} />;
-      case "rapport-adapte": return <UnderDevelopment title="Modèle de rapport adapté" navigate={navigate} />;
       
       default: return <Home navigate={navigate} />;
     }
