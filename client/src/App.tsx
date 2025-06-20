@@ -24,7 +24,7 @@ import UnderDevelopment from "@/pages/UnderDevelopment";
 import Dashboard from "./pages/Dashboard";
 import LocationAnalysis from "./pages/LocationAnalysis";
 import Guides from "./pages/Guides";
-import DocumentationPage from "./pages/DocumentationPage";
+import Documentation from "./pages/Documentation"; // Corrected to Documentation
 import Methodology from "./pages/Methodology";
 import Annexes from "./pages/Annexes";
 import Contact from "./pages/Contact";
@@ -37,7 +37,8 @@ import HabilitationTaxe from "./pages/HabilitationTaxe";
 import Entretiens from "./pages/Entretiens";
 import Organigramme from "./pages/Organigramme";
 import EtudeMarche from "./pages/EtudeMarche";
-import GuideTva from "./pages/GuideTva"; // Nouveau : Import de la page GuideTva
+import GuideTva from "./pages/GuideTva";
+import SuiviPrets from "./pages/SuiviPrets"; // Nouveau : Import de la page SuiviPrets
 import { useState } from "react";
 import { useAuth } from "./hooks/useAuth";
 
@@ -62,7 +63,7 @@ function MainApplicationContent() {
       case "outils": return <Tools navigate={navigate} />;
       case "suivis": return <Suivis navigate={navigate} />;
       case "arbre": return <Questionnaire navigate={navigate} />;
-      case "documentation": return <DocumentationPage navigate={navigate} />;
+      case "documentation": return <Documentation navigate={navigate} />;
       case "calculateurs": return <Calculators navigate={navigate} />;
       case "business-plan": return <BusinessPlan navigate={navigate} />;
       case "partenariats": return <PartnershipTracker navigate={navigate} />;
@@ -87,15 +88,14 @@ function MainApplicationContent() {
       case "entretiens": return <Entretiens navigate={navigate} />;
       case "organigramme": return <Organigramme navigate={navigate} />;
       case "etude-marche": return <EtudeMarche navigate={navigate} />;
-      // Nouvelle page "guide-tva"
       case "guide-tva": return <GuideTva navigate={navigate} />;
+      // Mise à jour de la page "suivi-prets"
+      case "suivi-prets": return <SuiviPrets navigate={navigate} />;
       
       // Pages en cours de développement (celles qui restent)
       case "prix-vente": return <UnderDevelopment title="Prix de vente des produits" navigate={navigate} />;
       case "rapport-adapte": return <UnderDevelopment title="Modèle de rapport adapté" navigate={navigate} />;
       case "suivi-subventions": return <UnderDevelopment title="Suivi des subventions" navigate={navigate} />;
-      case "suivi-prets": return <UnderDevelopment title="Suivi des prêts" navigate={navigate} />;
-      // Ancien case "guide-tva" supprimé car maintenant géré
       
       default: return <Home navigate={navigate} />;
     }
