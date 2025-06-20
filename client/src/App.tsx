@@ -88,7 +88,7 @@ function MainApplicationContent() {
       case "resultat-fiscal": return <ResultatFiscal navigate={navigate} />;
       case "plan-comptable": return <PlanComptable navigate={navigate} />;
       case "tva-coefficient": return <TvaCoefficient navigate={navigate} />;
-      case "edp": return <EcoleDeProduction navigate={navigate} />; 
+      case "EcoleDeProduction": return <EcoleDeProduction navigate={navigate} />; 
       case "criteres-label": return <CriteresLabel navigate={navigate} />;
       case "pret-subordonne": return <PretSubordonne navigate={navigate} />;
       case "habilitation-taxe": return <HabilitationTaxe navigate={navigate} />; 
