@@ -46,18 +46,23 @@ import TableauCalculCout from "./pages/TableauCalculCout";
 import BudgetCreation from "./pages/BudgetCreation";
 import EcoleDeProduction from "./pages/EcoleDeProduction";
 import ContactEtAide from "./pages/ContactEtAide"; 
-import { useState } from "react";
+import { useState, useEffect } from "react"; 
 import { useAuth } from "./hooks/useAuth";
 
 function MainApplicationContent() {
   const [currentPage, setCurrentPage] = useState("accueil");
   const { isAuthenticated, login } = useAuth();
-  const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false);
+  const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false); 
+
+  useEffect(() => {
+    console.log("App.tsx: isBurgerMenuOpen changed to", isBurgerMenuOpen);
+  }, [isBurgerMenuOpen]);
 
   const navigate = (page: string) => {
     setCurrentPage(page);
     window.scrollTo({ top: 0, behavior: 'smooth' });
-    setIsBurgerMenuOpen(false);
+    setIsBurgerMenuOpen(false); 
+    console.log("App.tsx: Navigation triggered, closing menu.");
   };
 
   if (!isAuthenticated) {
@@ -88,7 +93,7 @@ function MainApplicationContent() {
       case "resultat-fiscal": return <ResultatFiscal navigate={navigate} />;
       case "plan-comptable": return <PlanComptable navigate={navigate} />;
       case "tva-coefficient": return <TvaCoefficient navigate={navigate} />;
-      case "edp": return <EcoleDeProduction navigate={navigate} />; // CORRIGÉ : L'ID est "edp" en minuscules
+      case "edp": return <EcoleDeProduction navigate={navigate} />; 
       case "criteres-label": return <CriteresLabel navigate={navigate} />;
       case "pret-subordonne": return <PretSubordonne navigate={navigate} />;
       case "habilitation-taxe": return <HabilitationTaxe navigate={navigate} />; 
@@ -112,8 +117,9 @@ function MainApplicationContent() {
 
   return (
     <div className="min-h-screen flex flex-col">
-      <Header isMenuOpen={isBurgerMenuOpen} setIsMenuOpen={setIsBurgerMenuOpen} />
-      <Navigation navigate={navigate} isMenuOpen={isBurgerMenuOpen} setIsMenuOpen={setIsBurgerMenuOpen} />
+      <Header isBurgerMenuOpen={isBurgerMenuOpen} setIsBurgerMenuOpen={setIsBurgerMenuOpen} />
+      {/* CORRECTION ICI : Utilise isBurgerMenuOpen et setIsBurgerMenuOpen */}
+      <Navigation navigate={navigate} isBurgerMenuOpen={isBurgerMenuOpen} setIsBurgerMenuOpen={setIsBurgerMenuOpen} />
       <main className="flex-1 px-8 py-8 max-w-6xl mx-auto w-full">
         {renderCurrentPage()}
       </main>
