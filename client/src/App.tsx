@@ -42,8 +42,9 @@ import SuiviPrets from "./pages/SuiviPrets";
 import SuiviSubventions from "./pages/SuiviSubventions"; 
 import RapportAdapte from "./pages/RapportAdapte";
 import PrixVenteProduits from "./pages/PrixVenteProduits";
-import TableauCalculCout from "./pages/TableauCalculCout"; // NOUVEAU : Import de la page TableauCalculCout
-import BudgetCreation from "./pages/BudgetCreation";     // NOUVEAU : Import de la page BudgetCreation
+import TableauCalculCout from "./pages/TableauCalculCout";
+import BudgetCreation from "./pages/BudgetCreation";
+import EcoleDeProduction from "./pages/EcoleDeProduction"; // NOUVEAU : Import de la page EcoleDeProduction
 import { useState } from "react";
 import { useAuth } from "./hooks/useAuth";
 
@@ -69,11 +70,8 @@ function MainApplicationContent() {
       case "suivis": return <Suivis navigate={navigate} />;
       case "arbre": return <Questionnaire navigate={navigate} />;
       case "documentation": return <DocumentationPage navigate={navigate} />;
-      // MODIFIÉ ICI : "calculateurs" pointe maintenant vers TableauCalculCout
       case "calculateurs": return <TableauCalculCout navigate={navigate} />; 
-      // MODIFIÉ ICI : "budget-creation" pointe maintenant vers BudgetCreation
       case "budget-creation": return <BudgetCreation navigate={navigate} />; 
-      
       case "business-plan": return <BusinessPlan navigate={navigate} />;
       case "partenariats": return <PartnershipTracker navigate={navigate} />;
       case "couts-pedagogiques": return <PedagogicalCosts navigate={navigate} />;
@@ -89,7 +87,8 @@ function MainApplicationContent() {
       case "resultat-fiscal": return <ResultatFiscal navigate={navigate} />;
       case "plan-comptable": return <PlanComptable navigate={navigate} />;
       case "tva-coefficient": return <TvaCoefficient navigate={navigate} />;
-      case "edp": return <Contact navigate={navigate} />;
+      // MODIFIÉ ICI : "edp" pointe maintenant vers EcoleDeProduction
+      case "edp": return <EcoleDeProduction navigate={navigate} />; 
       case "criteres-label": return <CriteresLabel navigate={navigate} />;
       case "pret-subordonne": return <PretSubordonne navigate={navigate} />;
       case "habilitation-taxe": return <HabilitationTaxe navigate={navigate} />; 
@@ -101,9 +100,6 @@ function MainApplicationContent() {
       case "suivi-subventions": return <SuiviSubventions navigate={navigate} />;
       case "rapport-adapte": return <RapportAdapte navigate={navigate} />;
       case "prix-vente": return <PrixVenteProduits navigate={navigate} />;
-      
-      // Il ne devrait plus y avoir de pages "UnderDevelopment" ici, car toutes les routes
-      // pointent maintenant vers des pages spécifiques.
       
       default: return <Home navigate={navigate} />;
     }
