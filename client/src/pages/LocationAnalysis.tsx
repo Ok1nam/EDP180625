@@ -1,5 +1,7 @@
+// client/src/pages/LocationAnalysis.tsx
+
 import { useState } from "react";
-import { MapPin, TrendingUp, Building, Users, Factory, Car, Wifi, Euro } from "lucide-react";
+import { MapPin, TrendingUp, Building, Users, Factory, Car, Wifi, Euro, Globe } from "lucide-react"; // Ajout de Globe
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -225,20 +227,42 @@ export default function LocationAnalysis() {
   };
 
   return (
-    <section id="location-analysis">
-      <h1 className="flex items-center gap-2 mb-6 text-2xl font-bold text-gray-800">
-        <MapPin className="w-6 h-6" />
-        Simulateur d'Implantation Géographique
+    <section id="location-analysis" className="max-w-6xl mx-auto px-4 py-8">
+      <h1 className="flex items-center gap-2 mb-6 text-3xl font-bold text-gray-800">
+        <MapPin className="w-8 h-8 text-blue-600" />
+        Analyse d'Implantation Géographique
       </h1>
       
-      <p className="mb-6 text-gray-600 leading-relaxed">
-        Analysez le potentiel d'implantation de votre école de production selon différents critères territoriaux.
+      {/* Nouveau texte explicatif */}
+      <Card className="mb-8 p-6 bg-blue-50 border border-blue-200 shadow-sm">
+        <CardContent className="p-0">
+          <p className="text-blue-900 leading-relaxed mb-4">
+            Les Écoles de Production sont en plein essor partout en France, répondant à un besoin croissant de formation professionnelle concrète et d'insertion par le travail. Choisir la bonne implantation pour votre future école est une étape stratégique déterminante.
+          </p>
+          <p className="text-blue-900 leading-relaxed flex items-center gap-2">
+            <Globe className="w-5 h-5" />
+            Pour consulter la cartographie à jour du réseau des Écoles de Production et identifier les zones déjà couvertes ou en développement, n'hésitez pas à visiter la page dédiée :
+            <a 
+              href="https://www.ecoles-de-production.com/le-reseau-des-ecoles/" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="ml-2 px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors inline-flex items-center gap-2 text-sm"
+            >
+              Voir la carte du réseau <MapPin className="w-4 h-4" />
+            </a>
+          </p>
+        </CardContent>
+      </Card>
+      {/* Fin du nouveau texte explicatif */}
+
+      <p className="mb-6 text-gray-700 leading-relaxed">
+        Utilisez ce simulateur pour évaluer le potentiel d'attractivité d'un territoire donné pour l'implantation de votre École de Production. En renseignant divers critères, vous obtiendrez un score d'opportunité et des recommandations personnalisées.
       </p>
 
       <div className="flex justify-between items-center mb-6">
-        <h2 className="text-xl font-semibold">Analyses territoriales</h2>
+        <h2 className="text-xl font-semibold">Vos analyses territoriales</h2>
         <Button 
-          onClick={() => setShowForm(true)}
+          onClick={() => { resetForm(); setShowForm(true); }} // Assurer que le formulaire est réinitialisé lors de l'ouverture
           className="btn-primary"
         >
           Nouvelle analyse
@@ -246,14 +270,14 @@ export default function LocationAnalysis() {
       </div>
 
       {showForm && (
-        <Card className="mb-6">
-          <CardHeader>
-            <CardTitle>{editingId ? 'Modifier' : 'Nouvelle'} analyse territoriale</CardTitle>
+        <Card className="mb-6 shadow-lg">
+          <CardHeader className="bg-gray-50 border-b">
+            <CardTitle className="text-xl font-bold text-gray-700">{editingId ? 'Modifier' : 'Nouvelle'} analyse territoriale</CardTitle>
           </CardHeader>
-          <CardContent className="space-y-6">
+          <CardContent className="p-6 space-y-6">
             <div className="grid md:grid-cols-3 gap-4">
               <div>
-                <Label htmlFor="city-name">Ville/Commune *</Label>
+                <Label htmlFor="city-name">Ville/Commune <span className="text-red-500">*</span></Label>
                 <Input
                   id="city-name"
                   value={formData.cityName || ''}
@@ -262,7 +286,7 @@ export default function LocationAnalysis() {
                 />
               </div>
               <div>
-                <Label htmlFor="region">Région *</Label>
+                <Label htmlFor="region">Région <span className="text-red-500">*</span></Label>
                 <Input
                   id="region"
                   value={formData.region || ''}
@@ -306,7 +330,7 @@ export default function LocationAnalysis() {
             </div>
 
             <div>
-              <h3 className="text-lg font-semibold mb-4">Critères d'évaluation (0-100)</h3>
+              <h3 className="text-lg font-semibold mb-4 text-gray-800">Critères d'évaluation (0-100)</h3>
               <div className="grid md:grid-cols-2 gap-4">
                 {Object.entries(criteriaLabels).map(([key, label]) => (
                   <div key={key}>
@@ -318,12 +342,13 @@ export default function LocationAnalysis() {
                         max="100"
                         value={formData.criteria?.[key as keyof LocationCriteria] || 50}
                         onChange={(e) => updateCriteria(key as keyof LocationCriteria, parseInt(e.target.value))}
-                        className="flex-1"
+                        className="flex-1 accent-blue-600"
                       />
-                      <span className="w-12 text-sm font-medium">
+                      <span className="w-12 text-sm font-medium text-gray-700">
                         {formData.criteria?.[key as keyof LocationCriteria] || 50}
                       </span>
                     </div>
+                    <Progress value={formData.criteria?.[key as keyof LocationCriteria] || 0} className="w-full mt-2 h-2" />
                   </div>
                 ))}
               </div>
@@ -331,7 +356,7 @@ export default function LocationAnalysis() {
 
             <div className="grid md:grid-cols-2 gap-6">
               <div>
-                <h4 className="font-medium text-green-700 mb-2">Forces</h4>
+                <h4 className="font-medium text-green-700 mb-2">Forces <span className="text-gray-500 text-sm">(Atouts du territoire)</span></h4>
                 <div className="space-y-2">
                   <div className="flex gap-2">
                     <Input
@@ -349,7 +374,7 @@ export default function LocationAnalysis() {
                       <span className="text-sm">{item}</span>
                       <Button
                         onClick={() => removeListItem('strengths', index)}
-                        className="text-xs px-2 py-1 btn-danger"
+                        className="text-xs px-2 py-1 bg-transparent hover:bg-green-100 text-green-700"
                       >
                         ×
                       </Button>
@@ -359,7 +384,7 @@ export default function LocationAnalysis() {
               </div>
 
               <div>
-                <h4 className="font-medium text-red-700 mb-2">Faiblesses</h4>
+                <h4 className="font-medium text-red-700 mb-2">Faiblesses <span className="text-gray-500 text-sm">(Obstacles à l'implantation)</span></h4>
                 <div className="space-y-2">
                   <div className="flex gap-2">
                     <Input
@@ -377,7 +402,7 @@ export default function LocationAnalysis() {
                       <span className="text-sm">{item}</span>
                       <Button
                         onClick={() => removeListItem('weaknesses', index)}
-                        className="text-xs px-2 py-1 btn-danger"
+                        className="text-xs px-2 py-1 bg-transparent hover:bg-red-100 text-red-700"
                       >
                         ×
                       </Button>
@@ -387,7 +412,7 @@ export default function LocationAnalysis() {
               </div>
 
               <div>
-                <h4 className="font-medium text-blue-700 mb-2">Opportunités</h4>
+                <h4 className="font-medium text-blue-700 mb-2">Opportunités <span className="text-gray-500 text-sm">(Tendances favorables)</span></h4>
                 <div className="space-y-2">
                   <div className="flex gap-2">
                     <Input
@@ -405,7 +430,7 @@ export default function LocationAnalysis() {
                       <span className="text-sm">{item}</span>
                       <Button
                         onClick={() => removeListItem('opportunities', index)}
-                        className="text-xs px-2 py-1 btn-danger"
+                        className="text-xs px-2 py-1 bg-transparent hover:bg-blue-100 text-blue-700"
                       >
                         ×
                       </Button>
@@ -415,7 +440,7 @@ export default function LocationAnalysis() {
               </div>
 
               <div>
-                <h4 className="font-medium text-orange-700 mb-2">Menaces</h4>
+                <h4 className="font-medium text-orange-700 mb-2">Menaces <span className="text-gray-500 text-sm">(Risques à anticiper)</span></h4>
                 <div className="space-y-2">
                   <div className="flex gap-2">
                     <Input
@@ -433,7 +458,7 @@ export default function LocationAnalysis() {
                       <span className="text-sm">{item}</span>
                       <Button
                         onClick={() => removeListItem('threats', index)}
-                        className="text-xs px-2 py-1 btn-danger"
+                        className="text-xs px-2 py-1 bg-transparent hover:bg-orange-100 text-orange-700"
                       >
                         ×
                       </Button>
@@ -469,9 +494,9 @@ export default function LocationAnalysis() {
 
             <div className="flex gap-3">
               <Button onClick={saveAnalysis} className="btn-primary">
-                {editingId ? 'Modifier' : 'Créer'}
+                {editingId ? 'Modifier l\'analyse' : 'Créer l\'analyse'}
               </Button>
-              <Button onClick={resetForm} className="btn-secondary">
+              <Button onClick={resetForm} variant="outline" className="btn-secondary">
                 Annuler
               </Button>
             </div>
@@ -480,95 +505,97 @@ export default function LocationAnalysis() {
       )}
 
       <div className="space-y-4">
-        {analyses.map(analysis => (
-          <Card key={analysis.id} className="card-hover">
-            <CardContent className="p-6">
-              <div className="flex justify-between items-start mb-4">
-                <div className="flex-1">
-                  <div className="flex items-center gap-3 mb-2">
-                    <h3 className="text-lg font-semibold">{analysis.cityName}</h3>
-                    <span className="text-sm text-gray-600">{analysis.region}</span>
-                    {analysis.postalCode && (
-                      <span className="text-sm text-gray-500">({analysis.postalCode})</span>
+        {analyses.length > 0 ? (
+          analyses.map(analysis => (
+            <Card key={analysis.id} className="card-hover transition-shadow duration-200 hover:shadow-lg">
+              <CardContent className="p-6">
+                <div className="flex justify-between items-start mb-4">
+                  <div className="flex-1">
+                    <div className="flex items-center gap-3 mb-2">
+                      <h3 className="text-lg font-semibold text-gray-800">{analysis.cityName}</h3>
+                      <span className="text-sm text-gray-600">{analysis.region}</span>
+                      {analysis.postalCode && (
+                        <span className="text-sm text-gray-500">({analysis.postalCode})</span>
+                      )}
+                    </div>
+                    
+                    {analysis.targetSectors.length > 0 && (
+                      <div className="mb-3">
+                        <div className="text-sm text-gray-600 mb-1">Secteurs ciblés:</div>
+                        <div className="flex flex-wrap gap-1">
+                          {analysis.targetSectors.map(sector => (
+                            <span key={sector} className="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded">
+                              {sector}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
                     )}
                   </div>
                   
-                  {analysis.targetSectors.length > 0 && (
-                    <div className="mb-3">
-                      <div className="text-sm text-gray-600 mb-1">Secteurs ciblés:</div>
-                      <div className="flex flex-wrap gap-1">
-                        {analysis.targetSectors.map(sector => (
-                          <span key={sector} className="px-2 py-1 bg-blue-100 text-blue-800 text-xs rounded">
-                            {sector}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  )}
+                  <div className={`text-center p-4 rounded-lg ${getScoreColor(analysis.overallScore)}`}>
+                    <div className="text-2xl font-bold">{analysis.overallScore}/100</div>
+                    <div className="text-xs">{getScoreLabel(analysis.overallScore)}</div>
+                  </div>
                 </div>
-                
-                <div className={`text-center p-4 rounded-lg ${getScoreColor(analysis.overallScore)}`}>
-                  <div className="text-2xl font-bold">{analysis.overallScore}/100</div>
-                  <div className="text-xs">{getScoreLabel(analysis.overallScore)}</div>
-                </div>
-              </div>
 
-              <div className="grid md:grid-cols-2 gap-4 mb-4">
-                <div className="space-y-2">
-                  <h4 className="font-medium text-green-700">Forces ({analysis.strengths.length})</h4>
-                  {analysis.strengths.slice(0, 3).map((strength, index) => (
-                    <div key={index} className="text-sm text-gray-600">• {strength}</div>
-                  ))}
-                  {analysis.strengths.length > 3 && (
-                    <div className="text-xs text-gray-500">+ {analysis.strengths.length - 3} autres...</div>
-                  )}
+                <div className="grid md:grid-cols-2 gap-4 mb-4">
+                  <div className="space-y-2">
+                    <h4 className="font-medium text-green-700">Forces ({analysis.strengths.length})</h4>
+                    {analysis.strengths.slice(0, 3).map((strength, index) => (
+                      <div key={index} className="text-sm text-gray-600">• {strength}</div>
+                    ))}
+                    {analysis.strengths.length > 3 && (
+                      <div className="text-xs text-gray-500">+ {analysis.strengths.length - 3} autres...</div>
+                    )}
+                  </div>
+                  
+                  <div className="space-y-2">
+                    <h4 className="font-medium text-red-700">Faiblesses ({analysis.weaknesses.length})</h4>
+                    {analysis.weaknesses.slice(0, 3).map((weakness, index) => (
+                      <div key={index} className="text-sm text-gray-600">• {weakness}</div>
+                    ))}
+                    {analysis.weaknesses.length > 3 && (
+                      <div className="text-xs text-gray-500">+ {analysis.weaknesses.length - 3} autres...</div>
+                    )}
+                  </div>
                 </div>
-                
-                <div className="space-y-2">
-                  <h4 className="font-medium text-red-700">Faiblesses ({analysis.weaknesses.length})</h4>
-                  {analysis.weaknesses.slice(0, 3).map((weakness, index) => (
-                    <div key={index} className="text-sm text-gray-600">• {weakness}</div>
-                  ))}
-                  {analysis.weaknesses.length > 3 && (
-                    <div className="text-xs text-gray-500">+ {analysis.weaknesses.length - 3} autres...</div>
-                  )}
-                </div>
-              </div>
 
-              <div className="bg-blue-50 p-3 rounded-lg mb-4">
-                <h4 className="font-medium text-blue-900 mb-1">Recommandation:</h4>
-                <p className="text-sm text-blue-800">{analysis.recommendation}</p>
-              </div>
-
-              <div className="flex justify-between items-center">
-                <div className="text-xs text-gray-500">
-                  Analysé le {new Date(analysis.analyzedDate).toLocaleDateString('fr-FR')}
+                <div className="bg-blue-50 p-3 rounded-lg mb-4">
+                  <h4 className="font-medium text-blue-900 mb-1">Recommandation:</h4>
+                  <p className="text-sm text-blue-800">{analysis.recommendation}</p>
                 </div>
-                <div className="flex gap-2">
-                  <Button 
-                    onClick={() => editAnalysis(analysis)}
-                    className="btn-secondary text-xs px-3 py-1"
-                  >
-                    Modifier
-                  </Button>
-                  <Button 
-                    onClick={() => deleteAnalysis(analysis.id)}
-                    className="btn-danger text-xs px-3 py-1"
-                  >
-                    Supprimer
-                  </Button>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        ))}
 
-        {analyses.length === 0 && (
+                <div className="flex justify-between items-center">
+                  <div className="text-xs text-gray-500">
+                    Analysé le {new Date(analysis.analyzedDate).toLocaleDateString('fr-FR')}
+                  </div>
+                  <div className="flex gap-2">
+                    <Button 
+                      onClick={() => editAnalysis(analysis)}
+                      className="btn-secondary text-xs px-3 py-1"
+                      variant="outline"
+                    >
+                      Modifier
+                    </Button>
+                    <Button 
+                      onClick={() => deleteAnalysis(analysis.id)}
+                      className="btn-danger text-xs px-3 py-1"
+                      variant="destructive"
+                    >
+                      Supprimer
+                    </Button>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          ))
+        ) : (
           <Card>
             <CardContent className="p-8 text-center text-gray-500">
               <MapPin className="w-12 h-12 mx-auto mb-4 text-gray-300" />
-              <p>Aucune analyse territoriale créée.</p>
-              <p className="text-sm">Cliquez sur "Nouvelle analyse" pour commencer.</p>
+              <p>Aucune analyse territoriale créée pour l'instant.</p>
+              <p className="text-sm">Cliquez sur "Nouvelle analyse" pour commencer votre évaluation.</p>
             </CardContent>
           </Card>
         )}
