@@ -3,13 +3,13 @@
 import { Menu, X } from "lucide-react";
 
 interface HeaderProps {
-  isMenuOpen: boolean;
-  setIsMenuOpen: (isOpen: boolean) => void;
+  isBurgerMenuOpen: boolean; // RENOMMÉ pour correspondre à App.tsx
+  setIsBurgerMenuOpen: (isOpen: boolean) => void; // RENOMMÉ pour correspondre à App.tsx
 }
 
-export default function Header({ isMenuOpen, setIsMenuOpen }: HeaderProps) {
+export default function Header({ isBurgerMenuOpen, setIsBurgerMenuOpen }: HeaderProps) { // Utilise les nouveaux noms de props
   const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
+    setIsBurgerMenuOpen(!isBurgerMenuOpen); // Utilise les nouveaux noms de props
   };
 
   return (
@@ -31,7 +31,7 @@ export default function Header({ isMenuOpen, setIsMenuOpen }: HeaderProps) {
         onClick={toggleMenu}
         aria-label="Toggle navigation menu"
       >
-        {isMenuOpen ? (
+        {isBurgerMenuOpen ? ( // Utilise le nouveau nom de prop
           <X className="w-6 h-6 text-white" />
         ) : (
           <Menu className="w-6 h-6 text-white" />

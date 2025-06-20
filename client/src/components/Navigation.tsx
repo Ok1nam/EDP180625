@@ -21,10 +21,9 @@ import {
   MessageCircle,
   Scale,
   Target,
-  HelpCircle // Assurez-vous que HelpCircle est aussi importé si vous l'utilisez dans ce menu
+  HelpCircle 
 } from "lucide-react";
 
-// --- DÉPLACEZ menuStructure ICI, EN DEHORS DE LA FONCTION DU COMPOSANT ---
 const menuStructure = [
   {
     id: "accueil",
@@ -88,38 +87,30 @@ const menuStructure = [
     ]
   }
 ];
-// --------------------------------------------------------------------------
 
 interface NavigationProps {
   navigate: (page: string) => void;
-  isBurgerMenuOpen: boolean; // MAINTENU : Le nom de la prop doit être 'isBurgerMenuOpen'
-  setIsMenuOpen: (isOpen: boolean) => void; // MAINTENU : Nom de la fonction de mise à jour
+  isBurgerMenuOpen: boolean; 
+  setIsBurgerMenuOpen: (isOpen: boolean) => void; // Nom de prop correct
 }
 
-export default function Navigation({ navigate, isBurgerMenuOpen, setIsMenuOpen }: NavigationProps) {
-  // L'état 'isOpen' de Navigation doit refléter la prop 'isBurgerMenuOpen'
+export default function Navigation({ navigate, isBurgerMenuOpen, setIsBurgerMenuOpen }: NavigationProps) { // Utilise le nom de prop correct
   const [isOpen, setIsOpen] = useState(isBurgerMenuOpen);
-
   const [openSubmenu, setOpenSubmenu] = useState<string | null>(null);
 
-  // Synchronisation de l'état interne avec la prop externe
   useEffect(() => {
     setIsOpen(isBurgerMenuOpen);
   }, [isBurgerMenuOpen]);
 
-  const handleNavClick = (page: string, isParentSection: boolean = false) => {
-    if (isParentSection) {
-      toggleSubmenu(page);
+  const handleItemClick = (itemId: string, isSectionHeader: boolean) => {
+    if (isSectionHeader) {
+      setOpenSubmenu(openSubmenu === itemId ? null : itemId);
     } else {
-      navigate(page);
-      setIsOpen(false); // Ferme le panneau de navigation latéral
-      setOpenSubmenu(null); // Ferme tout sous-menu ouvert
-      setIsMenuOpen(false); // Cela fermera aussi l'icône burger dans le Header
+      navigate(itemId);
+      setIsOpen(false); 
+      setOpenSubmenu(null); 
+      setIsBurgerMenuOpen(false); // Utilise la fonction de mise à jour correcte
     }
-  };
-
-  const toggleSubmenu = (submenu: string) => {
-    setOpenSubmenu(openSubmenu === submenu ? null : submenu);
   };
 
   return (
@@ -132,12 +123,7 @@ export default function Navigation({ navigate, isBurgerMenuOpen, setIsMenuOpen }
         {menuStructure.map((section) => (
           <li key={section.id} className="border-b border-gray-600">
             <button
-              // Condition pour gérer si c'est un lien direct ou une section avec sous-menu
-              // Si la section a des sous-items, on appelle handleNavClick en tant que parent
-              // Sinon, on appelle handleNavClick pour le premier (unique) item de la section
-              onClick={() => section.items.length > 1 
-                               ? handleNavClick(section.id, true) // Indique que c'est une section parente
-                               : handleNavClick(section.items[0].id)}
+              onClick={() => handleItemClick(section.id, section.items.length > 1)}
               className="w-full flex items-center justify-between gap-3 p-4 text-white text-lg hover:bg-gray-700 transition-colors duration-200 text-left font-semibold"
             >
               <span className="flex items-center gap-3">
@@ -158,7 +144,7 @@ export default function Navigation({ navigate, isBurgerMenuOpen, setIsMenuOpen }
                 {section.items.map((item) => (
                   <li key={item.id}>
                     <button
-                      onClick={() => handleNavClick(item.id)} // Les sous-items naviguent directement
+                      onClick={() => handleItemClick(item.id, false)}
                       className="w-full flex items-center gap-3 pl-12 pr-4 py-3 text-white text-sm hover:bg-gray-600 transition-colors duration-200 text-left"
                     >
                       <item.icon className="w-4 h-4" />
