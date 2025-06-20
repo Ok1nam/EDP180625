@@ -432,3 +432,5 @@ const SuiviSubventions: React.FC<SuiviSubventionsProps> = ({ navigate }) => {
     </section>
   );
 }
+
+export default SuiviSubventions; // Correction ici : ajout de l'export default
