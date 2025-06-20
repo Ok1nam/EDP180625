@@ -4,10 +4,7 @@ import React from 'react';
 import {
   HelpCircle, // Icône principale pour la page Contact & Aide
   Mail, // Pour contacter
-  MessageSquare, // Pour FAQ
-  Bug, // Pour signaler un problème
-  FileText, // Pour documentation
-  BookOpen // Pour méthodologie
+  School // NOUVEAU : Icône pour Écoles de Production
 } from "lucide-react";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -16,28 +13,35 @@ interface ContactEtAideProps {
   navigate: (page: string) => void;
 }
 
-// Définition des options de contact et d'aide
+// Définition des options de contact et d'aide simplifiées
 const optionsAide = [
-  { id: "contact", label: "Contactez-nous", icon: Mail, description: "Posez vos questions ou envoyez-nous un message direct." },
-  { id: "faq", label: "Foire Aux Questions (FAQ)", icon: MessageSquare, description: "Trouvez des réponses aux questions les plus fréquentes." },
-  { id: "support", label: "Signaler un problème / Support", icon: Bug, description: "Obtenez de l'aide technique ou signalez un bug." },
-  { id: "documentation", label: "Documentation Générale", icon: FileText, description: "Consultez l'ensemble de la documentation de l'application." },
-  { id: "methodo", label: "Notre Méthodologie", icon: BookOpen, description: "Découvrez la démarche et les principes de l'accompagnement." },
+  { 
+    id: "contact", 
+    label: "Contacter l'Expert-Comptable", 
+    icon: Mail, 
+    description: "Posez vos questions ou envoyez-nous un message direct à Laura Gombaud." 
+  },
+  { 
+    id: "edp", 
+    label: "Qu'est-ce qu'une École de Production ?", 
+    icon: School, 
+    description: "Découvrez le modèle unique des Écoles de Production et leur pédagogie." 
+  },
 ];
 
 const ContactEtAide: React.FC<ContactEtAideProps> = ({ navigate }) => {
   return (
-    <section id="contact-et-aide-page">
+    <section id="contact-et-aide-page" className="max-w-4xl mx-auto px-4 py-8">
       <h1 className="flex items-center gap-2 mb-6 text-3xl font-bold text-gray-800">
         <HelpCircle className="w-8 h-8 text-purple-600" />
         Contact & Aide
       </h1>
       
       <p className="mb-8 text-lg text-gray-700 leading-relaxed">
-        Besoin d'aide ou d'informations ? Explorez les options ci-dessous pour trouver la ressource ou le contact adapté à votre besoin.
+        Vous avez des questions spécifiques sur le projet d'École de Production ou besoin d'informations sur l'accompagnement ?
       </p>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6"> {/* La grille s'adapte à 2 colonnes */}
         {optionsAide.map((option) => (
           <Card
             key={option.id}
