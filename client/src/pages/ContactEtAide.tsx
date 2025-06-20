@@ -2,9 +2,9 @@
 
 import React from 'react';
 import {
-  HelpCircle, // Icône principale pour la page Contact & Aide
-  Mail, // Pour contacter
-  School // Icône pour Écoles de Production
+  HelpCircle, 
+  Mail, 
+  School 
 } from "lucide-react";
 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -13,7 +13,6 @@ interface ContactEtAideProps {
   navigate: (page: string) => void;
 }
 
-// Définition des options de contact et d'aide simplifiées
 const optionsAide = [
   { 
     id: "contact", 
@@ -22,7 +21,7 @@ const optionsAide = [
     description: "Posez vos questions ou envoyez-nous un message direct à Laura Gombaud." 
   },
   { 
-    id: "edp", // CORRECTION ICI : L'ID est maintenant "edp" pour correspondre à App.tsx
+    id: "edp", 
     label: "Qu'est-ce qu'une École de Production ?", 
     icon: School, 
     description: "Découvrez le modèle unique des Écoles de Production et leur pédagogie." 
@@ -46,7 +45,7 @@ const ContactEtAide: React.FC<ContactEtAideProps> = ({ navigate }) => {
           <Card
             key={option.id}
             className="card-hover cursor-pointer"
-            onClick={() => navigate(option.id)} // Navigue vers la page correspondante
+            onClick={() => navigate(option.id)} 
           >
             <CardContent className="p-6">
               <h3 className="flex items-center gap-2 text-lg font-semibold mb-3 text-primary">

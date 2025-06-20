@@ -20,10 +20,10 @@ import {
   Users,
   MessageCircle,
   Scale,
-  Target
+  Target,
+  HelpCircle 
 } from "lucide-react";
 
-// --- DÉPLACEZ menuStructure ICI, EN DEHORS DE LA FONCTION DU COMPOSANT ---
 const menuStructure = [
   {
     id: "accueil",
@@ -78,47 +78,46 @@ const menuStructure = [
     ]
   },
   {
-    id: "contact",
+    id: "contact-et-aide", 
     label: "Contact & Aide",
-    icon: Phone,
+    icon: HelpCircle, 
     items: [
-      { id: "expert-comptable", label: "Expert-comptable", icon: Calculator },
-      { id: "edp", label: "EDP", icon: Building }
+      { id: "expert-comptable", label: "Contact Expert-Comptable", icon: Calculator }, 
+      { id: "edp", label: "L'École de Production", icon: Building } 
     ]
   }
 ];
-// --------------------------------------------------------------------------
 
 interface NavigationProps {
   navigate: (page: string) => void;
-  isMenuOpen: boolean;
-  setIsMenuOpen: (isOpen: boolean) => void;
+  isBurgerMenuOpen: boolean; 
+  setIsMenuOpen: (isOpen: boolean) => void; 
 }
 
-export default function Navigation({ navigate, isMenuOpen, setIsMenuOpen }: NavigationProps) {
-  // L'état 'isOpen' de Navigation doit refléter la prop 'isMenuOpen'
-  const [isOpen, setIsOpen] = useState(isMenuOpen); // Initialisation avec la prop
+export default function Navigation({ navigate, isBurgerMenuOpen, setIsMenuOpen }: NavigationProps) {
+  const [isOpen, setIsOpen] = useState(isBurgerMenuOpen);
 
   const [openSubmenu, setOpenSubmenu] = useState<string | null>(null);
 
-  // --- NOUVEAU useEffect pour synchroniser isOpen avec isMenuOpen ---
   useEffect(() => {
-    setIsOpen(isMenuOpen);
-  }, [isMenuOpen]); // Déclenche ce useEffect chaque fois que isMenuOpen change
-  // ------------------------------------------------------------------
+    setIsOpen(isBurgerMenuOpen);
+  }, [isBurgerMenuOpen]);
 
   const handleNavClick = (page: string) => {
-    navigate(page);
-    setIsOpen(false); // Ferme le panneau de navigation latéral
-    setOpenSubmenu(null);
-    setIsMenuOpen(false); // Ceci mettra à jour l'état du Header à "fermé"
+    const section = menuStructure.find(s => s.id === page);
+    if (section && section.items.length > 1) { // Si c'est une section qui contient plusieurs items (un sous-menu)
+        toggleSubmenu(page);
+    } else { // Sinon, c'est un item de navigation direct
+        navigate(page);
+        setIsOpen(false); 
+        setOpenSubmenu(null);
+        setIsMenuOpen(false); 
+    }
   };
-
+  
   const toggleSubmenu = (submenu: string) => {
     setOpenSubmenu(openSubmenu === submenu ? null : submenu);
   };
-
-  // console.log("menuStructure content:", menuStructure); // Le console.log peut rester pour le débug si besoin
 
   return (
     <nav 
@@ -134,7 +133,6 @@ export default function Navigation({ navigate, isMenuOpen, setIsMenuOpen }: Navi
               className="w-full flex items-center justify-between gap-3 p-4 text-white text-lg hover:bg-gray-700 transition-colors duration-200 text-left font-semibold"
             >
               <span className="flex items-center gap-3">
-                {/* L'icône doit être rendue comme un composant, pas directement comme section.icon */}
                 <section.icon className="w-5 h-5" /> 
                 {section.label}
               </span>
@@ -155,7 +153,6 @@ export default function Navigation({ navigate, isMenuOpen, setIsMenuOpen }: Navi
                       onClick={() => handleNavClick(item.id)}
                       className="w-full flex items-center gap-3 pl-12 pr-4 py-3 text-white text-sm hover:bg-gray-600 transition-colors duration-200 text-left"
                     >
-                      {/* L'icône doit être rendue comme un composant */}
                       <item.icon className="w-4 h-4" />
                       {item.label}
                     </button>

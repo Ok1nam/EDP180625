@@ -1,7 +1,7 @@
 // client/src/pages/EcoleDeProduction.tsx
 
 import React from 'react';
-import { School, Building2, Users, Lightbulb, Handshake, DollarSign, ArrowLeft, FileText } from "lucide-react"; // AJOUT DE FileText
+import { School, Building2, Users, Lightbulb, Handshake, DollarSign, ArrowLeft, FileText } from "lucide-react"; 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
@@ -94,7 +94,7 @@ const EcoleDeProduction: React.FC<EcoleDeProductionProps> = ({ navigate }) => {
               className="btn-secondary flex items-center gap-2 px-6 py-3 text-lg"
               variant="outline"
             >
-              <FileText className="w-5 h-5" /> {/* Ici l'icône FileText est utilisée */}
+              <FileText className="w-5 h-5" /> 
               Voir la Méthodologie
             </Button>
             <Button
