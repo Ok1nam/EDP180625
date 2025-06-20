@@ -39,8 +39,9 @@ import Organigramme from "./pages/Organigramme";
 import EtudeMarche from "./pages/EtudeMarche";
 import GuideTva from "./pages/GuideTva";
 import SuiviPrets from "./pages/SuiviPrets";
-import SuiviSubventions from "./pages/SuiviSubventions";
-import RapportAdapte from "./pages/RapportAdapte"; // Nouveau : Import de la page RapportAdapte
+import SuiviSubventions from "./pages/SuiviSubventions"; 
+import RapportAdapte from "./pages/RapportAdapte";
+import PrixVenteProduits from "./pages/PrixVenteProduits"; // Nouveau : Import de la page PrixVenteProduits
 import { useState } from "react";
 import { useAuth } from "./hooks/useAuth";
 
@@ -93,11 +94,12 @@ function MainApplicationContent() {
       case "guide-tva": return <GuideTva navigate={navigate} />;
       case "suivi-prets": return <SuiviPrets navigate={navigate} />;
       case "suivi-subventions": return <SuiviSubventions navigate={navigate} />;
-      // Mise à jour de la page "rapport-adapte"
       case "rapport-adapte": return <RapportAdapte navigate={navigate} />;
+      // Mise à jour de la page "prix-vente"
+      case "prix-vente": return <PrixVenteProduits navigate={navigate} />;
       
-      // Page en cours de développement (la dernière qui reste)
-      case "prix-vente": return <UnderDevelopment title="Prix de vente des produits" navigate={navigate} />;
+      // Page en cours de développement (plus aucune normalement !)
+      // case "prix-vente": return <UnderDevelopment title="Prix de vente des produits" navigate={navigate} />; // Cette ligne est commentée/supprimée
       
       default: return <Home navigate={navigate} />;
     }
