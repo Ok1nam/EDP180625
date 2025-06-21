@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FileText, Download, Euro, Building, Users, Target, CalendarDays, Percent, ClipboardList, Clock, UserRound } from "lucide-react"; // Nouvelles icônes
+import { FileText, Download, Euro, Building, Users, Target, CalendarDays, Percent, ClipboardList, Clock, UserRound, FileDown, FileExcel } from "lucide-react"; // Ajout de FileExcel pour le modèle
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -10,19 +10,17 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 import { useToast } from "@/hooks/use-toast";
 
-// Mise à jour de l'interface SubsidyApplication pour inclure les nouveaux champs
+// Mise à jour de l'interface SubsidyApplication pour retirer les champs
 interface SubsidyApplication {
   id: string;
-  // Champs existants (certains renommés pour la clarté)
   programName: string; // Nom de la Subvention / Appel à Projets
-  organizationName: string; // Nom de l'organisme demandeur
+  organizationName: string; // Nom de l'organisme demandeur (gardé pour l'export, mais pas dans le formulaire)
 
-  // Nouveaux champs tirés de la capture d'écran
   financeurType: 'Public' | 'Privé' | ''; // Type de financeur
   objectGrant: string; // Objet de la Subvention
   submissionDeadline: string; // Date Limite de Dépôt
   submissionDateActual: string; // Date Dépôt Dossier
-  amountSolicited: number; // Montant Sollicité (€) - Ancien 'amount', renommé pour la clarté
+  amountSolicited: number; // Montant Sollicité (€)
   amountObtained: number; // Montant Obtenu (€)
   notificationDate: string; // Date Notification (Accord/Refus)
   advanceReceivedDate: string; // Date Réception Avance (€)
@@ -34,40 +32,44 @@ interface SubsidyApplication {
   justificatifs: string; // Justificatifs à Fournir
   justificatifsDeadline: string; // Date Limite Justificatifs
   currentStatus: 
-    'À identifier' | 'En veille' | 'À préparer' | 'À déposer' | 
+    'À préparer' | 'À déposer' | 
     'Dossier déposé' | 'En instruction' | 'Accordé / Avance reçue' | 
-    'Refusé' | 'Clôturée / Reçue' | 'En attente de solde' | ''; // Statut Actuel
+    'Refusé' | 'Clôturée / Reçue' | 'En attente de solde' | ''; // Statuts mis à jour
   nextSteps: string; // Prochaines Étapes / Notes CA
   internalResponsible: string; // Responsable Interne
 
-  // Autres champs existants (potentiellement à adapter ou renommer pour cohérence)
   fundingBody: string; // Organisme Financeur
-  projectTitle: string; // ID / Nom unique pour identifier la subvention. On garde 'projectTitle' car 'ID' est déjà pour l'identifiant unique.
-  projectDescription: string;
-  siretNumber: string;
-  contactPerson: string;
-  email: string;
-  phone: string;
-  address: string; // Addresse de l'organisation
-  targetAudience: string;
-  expectedStudents: number;
-  sectors: string[];
-  projectDuration: number;
-  startDate: string;
-  objectives: string;
-  methodology: string;
-  partnerOrganizations: string;
-  budget: {
-    personnel: number;
-    equipment: number;
-    operations: number;
-    other: number;
-  };
-  expectedOutcomes: string;
-  evaluationCriteria: string;
-  sustainability: string;
-  innovation: string;
-  socialImpact: string;
+  projectTitle: string; // ID / Nom unique pour identifier la subvention.
+  projectDescription: string; // Gardé pour l'export, mais pas dans le formulaire
+
+  // Les champs suivants sont retirés du formulaire, mais peuvent être gardés dans l'interface si vous comptez les exporter
+  // (même s'ils sont vides dans le formulaire du site) ou s'ils sont peuplés par d'autres moyens.
+  // Pour la clarté, je les retire aussi de l'interface SubsidyApplication pour vraiment les supprimer.
+  // Si vous voulez les garder pour l'export avec des valeurs vides, remettez-les ici.
+  // siretNumber: string;
+  // contactPerson: string;
+  // email: string;
+  // phone: string;
+  // address: string;
+  // targetAudience: string;
+  // expectedStudents: number;
+  // sectors: string[];
+  // projectDuration: number;
+  // startDate: string;
+  // objectives: string;
+  // methodology: string;
+  // partnerOrganizations: string;
+  // budget: {
+  //   personnel: number;
+  //   equipment: number;
+  //   operations: number;
+  //   other: number;
+  // };
+  // expectedOutcomes: string;
+  // evaluationCriteria: string;
+  // sustainability: string;
+  // innovation: string;
+  // socialImpact: string;
 }
 
 const fundingBodies = [
@@ -79,12 +81,10 @@ const fundingBodies = [
   { name: "Fondations", programs: ["Fondation de France", "Fondation Total", "Autres fondations"] }
 ];
 
-const financeurTypes = ['Public', 'Privé']; // Type de financeur
+const financeurTypes = ['Public', 'Privé'];
 
-// Nouveaux statuts basés sur la capture d'écran
+// Statuts mis à jour (sans "À identifier" et "En veille")
 const statusOptions = [
-  'À identifier',
-  'En veille',
   'À préparer',
   'À déposer',
   'Dossier déposé',
@@ -95,7 +95,7 @@ const statusOptions = [
   'En attente de solde'
 ];
 
-export default function SubsidyGenerator() {
+export default function SuiviSubvention() {
   const { toast } = useToast();
   const [savedData, setSavedData] = useLocalStorage<SubsidyApplication[]>('subsidy_applications', []);
   const [applications, setApplications] = useState<SubsidyApplication[]>(savedData);
@@ -104,18 +104,15 @@ export default function SubsidyGenerator() {
   const [formData, setFormData] = useState<Partial<SubsidyApplication>>({});
   const [selectedFundingBody, setSelectedFundingBody] = useState<string>('');
 
-  // Effect pour calculer automatiquement Montant Total Reçu et Taux de Réalisation
-  // Je l'ai mis ici pour une mise à jour dynamique lors de l'édition du formulaire
   useState(() => {
     const totalReceived = (formData.advanceReceivedAmount || 0) + (formData.balanceReceivedAmount || 0);
     const completion = formData.amountObtained > 0 ? (totalReceived / formData.amountObtained) * 100 : 0;
     
-    // Mettre à jour le formData sans déclencher de boucle infinie si les valeurs sont déjà les mêmes
     if (formData.totalReceivedAmount !== totalReceived || formData.completionRate !== completion) {
       setFormData(prev => ({
         ...prev,
-        totalReceivedAmount: totalReceived,
-        completionRate: parseFloat(completion.toFixed(2)) // Arrondir à 2 décimales
+        totalReceivedAmount: parseFloat(totalReceived.toFixed(2)),
+        completionRate: parseFloat(completion.toFixed(2))
       }));
     }
   }, [formData.advanceReceivedAmount, formData.balanceReceivedAmount, formData.amountObtained]);
@@ -123,15 +120,27 @@ export default function SubsidyGenerator() {
 
   const resetForm = () => {
     setFormData({
-      budget: { personnel: 0, equipment: 0, operations: 0, other: 0 },
-      sectors: [],
-      amountSolicited: 0, // Initialiser à 0
-      amountObtained: 0, // Initialiser à 0
-      advanceReceivedAmount: 0, // Initialiser à 0
-      balanceReceivedAmount: 0, // Initialiser à 0
-      totalReceivedAmount: 0, // Initialiser à 0
-      completionRate: 0, // Initialiser à 0
-      currentStatus: 'À identifier' // Nouveau statut par défaut
+      // Pas de budget, secteurs etc. car retirés de l'interface
+      amountSolicited: 0,
+      amountObtained: 0,
+      advanceReceivedAmount: 0,
+      balanceReceivedAmount: 0,
+      totalReceivedAmount: 0,
+      completionRate: 0,
+      currentStatus: 'À préparer', // Nouveau statut par défaut le plus précoce
+      financeurType: '',
+      objectGrant: '',
+      submissionDeadline: '',
+      submissionDateActual: '',
+      notificationDate: '',
+      advanceReceivedDate: '',
+      balanceReceivedDate: '',
+      justificatifs: '',
+      justificatifsDeadline: '',
+      nextSteps: '',
+      internalResponsible: '',
+      organizationName: '', // Gardé pour la sauvegarde/export
+      projectDescription: '' // Gardé pour la sauvegarde/export
     });
     setEditingId(null);
     setShowForm(false);
@@ -139,10 +148,10 @@ export default function SubsidyGenerator() {
   };
 
   const saveApplication = () => {
-    if (!formData.projectTitle || !formData.fundingBody || !formData.amountSolicited || !formData.currentStatus) { // Vérifier les nouveaux champs obligatoires
+    if (!formData.projectTitle || !formData.fundingBody || !formData.amountSolicited || !formData.currentStatus) {
       toast({
         title: "Erreur",
-        description: "Veuillez remplir les champs obligatoires (Titre du projet, Organisme financeur, Montant Sollicité, Statut Actuel).",
+        description: "Veuillez remplir les champs obligatoires (Nom de la Subvention, Organisme financeur, Montant Sollicité, Statut Actuel).",
       });
       return;
     }
@@ -150,9 +159,8 @@ export default function SubsidyGenerator() {
     const application: SubsidyApplication = {
       id: editingId || Date.now().toString(),
       programName: formData.programName || '',
-      organizationName: formData.organizationName || '',
+      organizationName: formData.organizationName || '', // Toujours inclus même si non dans le form
 
-      // Nouveaux champs
       financeurType: formData.financeurType || '',
       objectGrant: formData.objectGrant || '',
       submissionDeadline: formData.submissionDeadline || '',
@@ -168,33 +176,21 @@ export default function SubsidyGenerator() {
       completionRate: formData.completionRate || 0,
       justificatifs: formData.justificatifs || '',
       justificatifsDeadline: formData.justificatifsDeadline || '',
-      currentStatus: formData.currentStatus || 'À identifier', // Assurez-vous d'avoir une valeur par défaut valide
+      currentStatus: formData.currentStatus || 'À préparer',
       nextSteps: formData.nextSteps || '',
       internalResponsible: formData.internalResponsible || '',
 
-      // Anciens champs (renommés si besoin)
-      fundingBody: formData.fundingBody || '', // 'Organisme Financeur'
-      projectTitle: formData.projectTitle || '', // 'Nom de la Subvention / Appel à Projets'
-      projectDescription: formData.projectDescription || '',
-      siretNumber: formData.siretNumber || '',
-      contactPerson: formData.contactPerson || '',
-      email: formData.email || '',
-      phone: formData.phone || '',
-      address: formData.address || '',
-      targetAudience: formData.targetAudience || '',
-      expectedStudents: formData.expectedStudents || 0,
-      sectors: formData.sectors || [],
-      projectDuration: formData.projectDuration || 12,
-      startDate: formData.startDate || '',
-      objectives: formData.objectives || '',
-      methodology: formData.methodology || '',
-      partnerOrganizations: formData.partnerOrganizations || '',
-      budget: formData.budget || { personnel: 0, equipment: 0, operations: 0, other: 0 },
-      expectedOutcomes: formData.expectedOutcomes || '',
-      evaluationCriteria: formData.evaluationCriteria || '',
-      sustainability: formData.sustainability || '',
-      innovation: formData.innovation || '',
-      socialImpact: formData.socialImpact || '',
+      fundingBody: formData.fundingBody || '',
+      projectTitle: formData.projectTitle || '',
+      projectDescription: formData.projectDescription || '', // Toujours inclus même si non dans le form
+
+      // Les champs suivants sont explicitement exclus de la sauvegarde si retirés de l'interface
+      // Vous devrez ajuster si vous les voulez dans l'export avec des valeurs vides par défaut
+      // siretNumber: '', contactPerson: '', email: '', phone: '', address: '',
+      // targetAudience: '', expectedStudents: 0, sectors: [], projectDuration: 0,
+      // startDate: '', objectives: '', methodology: '', partnerOrganizations: '',
+      // budget: { personnel: 0, equipment: 0, operations: 0, other: 0 },
+      // expectedOutcomes: '', evaluationCriteria: '', sustainability: '', innovation: '', socialImpact: ''
     };
 
     let updatedApplications;
@@ -237,28 +233,234 @@ export default function SubsidyGenerator() {
       title: "Génération en cours",
       description: "Génération du dossier PDF en cours...",
     });
+    // FUTURE: Implémenter ici la logique de génération PDF détaillée (librairie, etc.)
   };
+
+  // --- NOUVELLE FONCTION POUR L'EXPORT CSV ---
+  const exportToCSV = () => {
+    if (applications.length === 0) {
+      toast({
+        title: "Export impossible",
+        description: "Aucun dossier de subvention à exporter.",
+        variant: "destructive"
+      });
+      return;
+    }
+
+    // Définir les en-têtes (colonnes) du fichier CSV, correspondant à votre modèle Excel
+    // L'ordre est important ici pour correspondre à votre tableau
+    // J'ai inclus TOUS les champs de l'interface SubsidyApplication pour l'export, même ceux non visibles dans le formulaire simplifié,
+    // car ils sont potentiellement des colonnes de votre modèle Excel complet.
+    const headers = [
+      "ID Subvention", // projectTitle est utilisé comme ID unique pour l'export
+      "Organisme Financeur",
+      "Type de Financeur",
+      "Nom du Programme",
+      "Objet de la Subvention",
+      "Date Limite de Dépôt",
+      "Date Dépôt Dossier",
+      "Montant Sollicité (€)",
+      "Montant Obtenu (€)",
+      "Date Notification (Accord/Refus)",
+      "Date Réception Avance (€)",
+      "Montant Avance (€)",
+      "Date Réception Solde (€)",
+      "Montant Solde (€)",
+      "Montant Total Reçu (€)",
+      "Taux de Réalisation (%)",
+      "Justificatifs à Fournir",
+      "Date Limite Justificatifs",
+      "Statut Actuel",
+      "Prochaines Étapes / Notes CA",
+      "Responsable Interne (École)",
+      // Rubriques retirées de l'input form, mais gardées dans l'export si elles existent dans l'interface
+      "Nom de l'Organisation", // Gardé pour l'export
+      "Description du Projet", // Gardé pour l'export
+      "Numéro SIRET",
+      "Personne de Contact",
+      "Email de Contact",
+      "Téléphone de Contact",
+      "Adresse de l'Organisation",
+      "Public Cible",
+      "Étudiants Visés",
+      "Secteurs",
+      "Durée Projet (mois)",
+      "Date Début Projet",
+      "Objectifs du Projet",
+      "Méthodologie",
+      "Organisations Partenaires",
+      "Budget Personnel (€)",
+      "Budget Équipements (€)",
+      "Budget Fonctionnement (€)",
+      "Budget Autres (€)",
+      "Résultats Attendus",
+      "Critères d'Évaluation",
+      "Pérennité",
+      "Innovation",
+      "Impact Social"
+    ];
+
+    // Mapper les données des applications à l'ordre des en-têtes
+    const rows = applications.map(app => [
+      `"${app.projectTitle.replace(/"/g, '""')}"`,
+      `"${app.fundingBody.replace(/"/g, '""')}"`,
+      `"${app.financeurType.replace(/"/g, '""')}"`,
+      `"${app.programName.replace(/"/g, '""')}"`,
+      `"${app.objectGrant.replace(/"/g, '""')}"`,
+      app.submissionDeadline,
+      app.submissionDateActual,
+      app.amountSolicited,
+      app.amountObtained,
+      app.notificationDate,
+      app.advanceReceivedDate,
+      app.advanceReceivedAmount,
+      app.balanceReceivedDate,
+      app.balanceReceivedAmount,
+      app.totalReceivedAmount,
+      app.completionRate,
+      `"${app.justificatifs.replace(/"/g, '""')}"`,
+      app.justificatifsDeadline,
+      `"${app.currentStatus.replace(/"/g, '""')}"`,
+      `"${app.nextSteps.replace(/"/g, '""')}"`,
+      `"${app.internalResponsible.replace(/"/g, '""')}"`,
+      
+      // Valeurs pour les champs retirés du formulaire mais potentiellement présents dans l'export
+      `"${(app as any).organizationName ? (app as any).organizationName.replace(/"/g, '""') : ''}"`,
+      `"${(app as any).projectDescription ? (app as any).projectDescription.replace(/"/g, '""') : ''}"`,
+      `"${(app as any).siretNumber ? (app as any).siretNumber.replace(/"/g, '""') : ''}"`,
+      `"${(app as any).contactPerson ? (app as any).contactPerson.replace(/"/g, '""') : ''}"`,
+      `"${(app as any).email ? (app as any).email.replace(/"/g, '""') : ''}"`,
+      `"${(app as any).phone ? (app as any).phone.replace(/"/g, '""') : ''}"`,
+      `"${(app as any).address ? (app as any).address.replace(/"/g, '""') : ''}"`,
+      `"${(app as any).targetAudience ? (app as any).targetAudience.replace(/"/g, '""') : ''}"`,
+      (app as any).expectedStudents || 0,
+      `"${(app as any).sectors && (app as any).sectors.length > 0 ? (app as any).sectors.join(', ').replace(/"/g, '""') : ''}"`,
+      (app as any).projectDuration || 0,
+      (app as any).startDate || '',
+      `"${(app as any).objectives ? (app as any).objectives.replace(/"/g, '""') : ''}"`,
+      `"${(app as any).methodology ? (app as any).methodology.replace(/"/g, '""') : ''}"`,
+      `"${(app as any).partnerOrganizations ? (app as any).partnerOrganizations.replace(/"/g, '""') : ''}"`,
+      (app as any).budget?.personnel || 0,
+      (app as any).budget?.equipment || 0,
+      (app as any).budget?.operations || 0,
+      (app as any).budget?.other || 0,
+      `"${(app as any).expectedOutcomes ? (app as any).expectedOutcomes.replace(/"/g, '""') : ''}"`,
+      `"${(app as any).evaluationCriteria ? (app as any).evaluationCriteria.replace(/"/g, '""') : ''}"`,
+      `"${(app as any).sustainability ? (app as any).sustainability.replace(/"/g, '""') : ''}"`,
+      `"${(app as any).innovation ? (app as any).innovation.replace(/"/g, '""') : ''}"`,
+      `"${(app as any).socialImpact ? (app as any).socialImpact.replace(/"/g, '""') : ''}"`
+    ]);
+
+    const csvContent = [
+      headers.join(';'),
+      ...rows.map(row => row.join(';'))
+    ].join('\n');
+
+    const blob = new Blob([new Uint8Array([0xEF, 0xBB, 0xBF]), csvContent], { type: 'text/csv;charset=utf-8-bom;' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `suivi_subventions_${new Date().toISOString().split('T')[0]}.csv`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+
+    toast({
+      title: "Export CSV",
+      description: "Le fichier CSV a été généré et téléchargé.",
+    });
+  };
+  // --- FIN DE LA NOUVELLE FONCTION POUR L'EXPORT CSV ---
+
+  // --- NOUVELLE FONCTION POUR TÉLÉCHARGER LE MODÈLE EXCEL VIERGE ---
+  const downloadExcelTemplate = () => {
+    // Les en-têtes du fichier Excel modèle doivent correspondre exactement aux colonnes que vous voulez
+    // dans votre modèle vierge. Ce sont les mêmes que les headers CSV.
+    const headers = [
+      "ID Subvention",
+      "Organisme Financeur",
+      "Type de Financeur",
+      "Nom du Programme",
+      "Objet de la Subvention",
+      "Date Limite de Dépôt",
+      "Date Dépôt Dossier",
+      "Montant Sollicité (€)",
+      "Montant Obtenu (€)",
+      "Date Notification (Accord/Refus)",
+      "Date Réception Avance (€)",
+      "Montant Avance (€)",
+      "Date Réception Solde (€)",
+      "Montant Solde (€)",
+      "Montant Total Reçu (€)",
+      "Taux de Réalisation (%)",
+      "Justificatifs à Fournir",
+      "Date Limite Justificatifs",
+      "Statut Actuel",
+      "Prochaines Étapes / Notes CA",
+      "Responsable Interne (École)",
+      "Nom de l'Organisation",
+      "Description du Projet",
+      "Numéro SIRET",
+      "Personne de Contact",
+      "Email de Contact",
+      "Téléphone de Contact",
+      "Adresse de l'Organisation",
+      "Public Cible",
+      "Étudiants Visés",
+      "Secteurs",
+      "Durée Projet (mois)",
+      "Date Début Projet",
+      "Objectifs du Projet",
+      "Méthodologie",
+      "Organisations Partenaires",
+      "Budget Personnel (€)",
+      "Budget Équipements (€)",
+      "Budget Fonctionnement (€)",
+      "Budget Autres (€)",
+      "Résultats Attendus",
+      "Critères d'Évaluation",
+      "Pérennité",
+      "Innovation",
+      "Impact Social"
+    ];
+
+    const csvContent = new Uint8Array([0xEF, 0xBB, 0xBF]) + headers.join(';'); // Juste les headers, avec BOM
+
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8-bom;' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `modele_suivi_subventions.csv`; // Nom du fichier modèle
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+
+    toast({
+      title: "Téléchargement Modèle",
+      description: "Le modèle Excel a été téléchargé.",
+    });
+  };
+  // --- FIN DE LA NOUVELLE FONCTION POUR TÉLÉCHARGER LE MODÈLE EXCEL VIERGE ---
 
   const calculateTotalBudget = () => {
-    if (!formData.budget) return 0;
-    return Object.values(formData.budget).reduce((sum, value) => sum + (value || 0), 0);
+    // Ce calcul n'est plus pertinent si le budget est retiré du formulaire
+    return 0; // Ou vous pouvez laisser le champ budget si c'est seulement la visualisation qui est retirée
   };
 
-  // Adapter les couleurs et labels pour les nouveaux statuts
   const getStatusColor = (status: SubsidyApplication['currentStatus']) => {
     const colors = {
-      'À identifier': 'bg-gray-100 text-gray-800',
-      'En veille': 'bg-blue-100 text-blue-800',
       'À préparer': 'bg-yellow-100 text-yellow-800',
       'À déposer': 'bg-orange-100 text-orange-800',
       'Dossier déposé': 'bg-purple-100 text-purple-800',
       'En instruction': 'bg-indigo-100 text-indigo-800',
       'Accordé / Avance reçue': 'bg-green-100 text-green-800',
       'Refusé': 'bg-red-100 text-red-800',
-      'Clôturée / Reçue': 'bg-emerald-100 text-emerald-800', // Vert foncé pour clôturé/reçu
-      'En attente de solde': 'bg-cyan-100 text-cyan-800', // Bleu clair pour attente
+      'Clôturée / Reçue': 'bg-emerald-100 text-emerald-800',
+      'En attente de solde': 'bg-cyan-100 text-cyan-800',
     };
-    return colors[status] || 'bg-gray-100 text-gray-800';
+    return colors[status] || 'bg-gray-100 text-gray-800'; // Fallback au cas où
   };
 
   const calculateStats = () => {
@@ -277,12 +479,33 @@ export default function SubsidyGenerator() {
     <section id="subsidy-generator">
       <h1 className="flex items-center gap-2 mb-6 text-2xl font-bold text-gray-800">
         <FileText className="w-6 h-6" />
-        Suivi et Génération des Dossiers de Subventions
+        Suivi des Dossiers de Subventions
       </h1>
       
-      <p className="mb-6 text-gray-600 leading-relaxed">
-        Gérez et suivez l'ensemble des dossiers de demande de subventions pour les Écoles de Production de vos clients, du montage au versement final.
-      </p>
+      {/* Texte d'explication */}
+      <div className="bg-blue-50 border-l-4 border-blue-200 text-blue-800 p-4 mb-6" role="alert">
+        <h3 className="font-semibold text-lg mb-2">Bienvenue sur votre outil de suivi des subventions !</h3>
+        <p className="text-sm leading-relaxed">
+          En tant qu'expert-comptable, vous avez deux options pour gérer les subventions de vos clients :
+        </p>
+        <ul className="list-disc list-inside text-sm mt-2 space-y-1">
+          <li>
+            **Option 1 : Suivi sur le site.** Remplissez et mettez à jour les informations des subventions directement via le formulaire ci-dessous. Vous pourrez exporter toutes les données au format CSV à tout moment pour les analyser ou les intégrer à vos outils.
+          </li>
+          <li>
+            **Option 2 : Travailler sur Excel.** Téléchargez le modèle Excel vierge que nous mettons à votre disposition. Remplissez-le à votre convenance, puis copiez/collez les données dans le site si vous souhaitez les visualiser ici plus tard (cette fonctionnalité d'import n'est pas encore développée, mais elle peut l'être si besoin).
+          </li>
+        </ul>
+        <div className="flex mt-4">
+            <Button 
+                onClick={downloadExcelTemplate}
+                className="btn-secondary text-sm"
+            >
+                <FileExcel className="w-4 h-4 mr-2" />
+                Télécharger le modèle Excel
+            </Button>
+        </div>
+      </div>
 
       {/* Statistiques adaptées */}
       <div className="grid md:grid-cols-5 gap-4 mb-6">
@@ -320,12 +543,22 @@ export default function SubsidyGenerator() {
 
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-xl font-semibold">Liste des subventions</h2>
-        <Button 
-          onClick={() => { resetForm(); setShowForm(true); }}
-          className="btn-primary"
-        >
-          Nouvelle subvention
-        </Button>
+        <div className="flex gap-3">
+            <Button 
+                onClick={exportToCSV}
+                className="btn-secondary"
+                disabled={applications.length === 0}
+            >
+                <FileDown className="w-4 h-4 mr-2" />
+                Exporter CSV
+            </Button>
+            <Button 
+                onClick={() => { resetForm(); setShowForm(true); }}
+                className="btn-primary"
+            >
+                Nouvelle subvention
+            </Button>
+        </div>
       </div>
 
       {showForm && (
@@ -526,7 +759,7 @@ export default function SubsidyGenerator() {
                   id="total-received"
                   type="number"
                   value={formData.totalReceivedAmount || 0}
-                  readOnly // Ceci est calculé
+                  readOnly
                   className="bg-gray-100"
                 />
               </div>
@@ -536,7 +769,7 @@ export default function SubsidyGenerator() {
                   id="completion-rate"
                   type="number"
                   value={formData.completionRate || 0}
-                  readOnly // Ceci est calculé
+                  readOnly
                   className="bg-gray-100"
                 />
               </div>
@@ -605,8 +838,19 @@ export default function SubsidyGenerator() {
                 rows={3}
               />
             </div>
-
-            {/* Anciens champs non impactés directement par la capture Excel mais toujours utiles */}
+            
+            {/* Champs gardés pour la sauvegarde/export mais retirés du formulaire d'entrée */}
+            {/* Nom de l'Organisation (client) - Input gardé pour le formulaire */}
+            <div>
+              <Label htmlFor="organization-name">Nom de l'organisation (client)</Label>
+              <Input
+                id="organization-name"
+                value={formData.organizationName || ''}
+                onChange={(e) => setFormData({...formData, organizationName: e.target.value})}
+                placeholder="Association XYZ"
+              />
+            </div>
+            {/* Description du projet - Textarea gardé pour le formulaire */}
             <div>
               <Label htmlFor="project-description">Description générale du projet</Label>
               <Textarea
@@ -616,119 +860,6 @@ export default function SubsidyGenerator() {
                 placeholder="Présentation générale du projet d'école de production..."
                 rows={4}
               />
-            </div>
-
-            <div className="grid md:grid-cols-2 gap-4">
-              <div>
-                <Label htmlFor="organization-name">Nom de l'organisation (client)</Label>
-                <Input
-                  id="organization-name"
-                  value={formData.organizationName || ''}
-                  onChange={(e) => setFormData({...formData, organizationName: e.target.value})}
-                  placeholder="Association XYZ"
-                />
-              </div>
-              <div>
-                <Label htmlFor="siret">Numéro SIRET</Label>
-                <Input
-                  id="siret"
-                  value={formData.siretNumber || ''}
-                  onChange={(e) => setFormData({...formData, siretNumber: e.target.value})}
-                  placeholder="12345678901234"
-                />
-              </div>
-            </div>
-
-            <div className="grid md:grid-cols-3 gap-4">
-              <div>
-                <Label htmlFor="contact-person">Personne de contact (financeur ou école)</Label>
-                <Input
-                  id="contact-person"
-                  value={formData.contactPerson || ''}
-                  onChange={(e) => setFormData({...formData, contactPerson: e.target.value})}
-                  placeholder="Nom Prénom"
-                />
-              </div>
-              <div>
-                <Label htmlFor="email">Email</Label>
-                <Input
-                  id="email"
-                  type="email"
-                  value={formData.email || ''}
-                  onChange={(e) => setFormData({...formData, email: e.target.value})}
-                  placeholder="contact@ecole.fr"
-                />
-              </div>
-              <div>
-                <Label htmlFor="phone">Téléphone</Label>
-                <Input
-                  id="phone"
-                  value={formData.phone || ''}
-                  onChange={(e) => setFormData({...formData, phone: e.target.value})}
-                  placeholder="01 23 45 67 89"
-                />
-              </div>
-            </div>
-            
-            {/* ... Autres champs comme address, targetAudience, expectedStudents, projectDuration, startDate, objectives, methodology, partnerOrganizations, budget, expectedOutcomes, evaluationCriteria, sustainability, innovation, socialImpact */}
-            {/* Je n'ai pas inclus tous les anciens champs ici pour ne pas surcharger, mais assurez-vous de les conserver si vous en avez besoin.
-               Les principaux de la capture ont été ajoutés. */}
-
-            <div>
-              <Label>Budget prévisionnel (détaillé)</Label>
-              <div className="grid md:grid-cols-4 gap-4 mt-2">
-                <div>
-                  <Label htmlFor="budget-personnel">Personnel (€)</Label>
-                  <Input
-                    id="budget-personnel"
-                    type="number"
-                    value={formData.budget?.personnel || 0}
-                    onChange={(e) => setFormData({
-                      ...formData, 
-                      budget: { ...formData.budget, personnel: parseFloat(e.target.value) || 0 }
-                    })}
-                  />
-                </div>
-                <div>
-                  <Label htmlFor="budget-equipment">Équipements (€)</Label>
-                  <Input
-                    id="budget-equipment"
-                    type="number"
-                    value={formData.budget?.equipment || 0}
-                    onChange={(e) => setFormData({
-                      ...formData, 
-                      budget: { ...formData.budget, equipment: parseFloat(e.target.value) || 0 }
-                    })}
-                  />
-                </div>
-                <div>
-                  <Label htmlFor="budget-operations">Fonctionnement (€)</Label>
-                  <Input
-                    id="budget-operations"
-                    type="number"
-                    value={formData.budget?.operations || 0}
-                    onChange={(e) => setFormData({
-                      ...formData, 
-                      budget: { ...formData.budget, operations: parseFloat(e.target.value) || 0 }
-                    })}
-                  />
-                </div>
-                <div>
-                  <Label htmlFor="budget-other">Autres (€)</Label>
-                  <Input
-                    id="budget-other"
-                    type="number"
-                    value={formData.budget?.other || 0}
-                    onChange={(e) => setFormData({
-                      ...formData, 
-                      budget: { ...formData.budget, other: parseFloat(e.target.value) || 0 }
-                    })}
-                  />
-                </div>
-              </div>
-              <div className="mt-2 text-right">
-                <span className="font-semibold">Total budget prévisionnel: {calculateTotalBudget().toLocaleString()} €</span>
-              </div>
             </div>
 
 
@@ -750,7 +881,7 @@ export default function SubsidyGenerator() {
             <CardContent className="p-8 text-center text-gray-500">
               <FileText className="w-12 h-12 mx-auto mb-4 text-gray-300" />
               <p>Aucun dossier de subvention créé.</p>
-              <p className="text-sm">Cliquez sur "Nouvelle subvention" pour commencer.</p>
+              <p className="text-sm">Cliquez sur "Nouvelle subvention" pour commencer ou téléchargez le modèle Excel.</p>
             </CardContent>
           </Card>
         )}
@@ -762,9 +893,9 @@ export default function SubsidyGenerator() {
               <div className="flex justify-between items-start mb-4">
                 <div className="flex-1">
                   <div className="flex items-center gap-3 mb-2">
-                    <h3 className="text-lg font-semibold">{app.projectTitle}</h3> {/* Nom de la subvention */}
+                    <h3 className="text-lg font-semibold">{app.projectTitle}</h3>
                     <span className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(app.currentStatus)}`}>
-                      {app.currentStatus} {/* Statut Actuel */}
+                      {app.currentStatus}
                     </span>
                   </div>
                   <div className="grid md:grid-cols-4 gap-4 text-sm text-gray-600 mb-3">
