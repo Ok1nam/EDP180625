@@ -315,69 +315,19 @@ export default function SuiviSubvention() {
   };
 
   const downloadExcelTemplate = () => {
-    const headers = [
-      "ID Subvention",
-      "Organisme Financeur",
-      "Type de Financeur",
-      "Nom du Programme",
-      "Objet de la Subvention",
-      "Date Limite de Dépôt",
-      "Date Dépôt Dossier",
-      "Montant Sollicité (€)",
-      "Montant Obtenu (€)",
-      "Date Notification (Accord/Refus)",
-      "Date Réception Avance (€)",
-      "Montant Avance (€)",
-      "Date Réception Solde (€)",
-      "Montant Solde (€)",
-      "Montant Total Reçu (€)",
-      "Taux de Réalisation (%)",
-      "Justificatifs à Fournir",
-      "Date Limite Justificatifs",
-      "Statut Actuel",
-      "Prochaines Étapes / Notes CA",
-      "Responsable Interne (École)",
-      "Nom de l'Organisation",
-      "Description du Projet",
-      "Numéro SIRET",
-      "Personne de Contact",
-      "Email de Contact",
-      "Téléphone de Contact",
-      "Adresse de l'Organisation",
-      "Public Cible",
-      "Étudiants Visés",
-      "Secteurs",
-      "Durée Projet (mois)",
-      "Date Début Projet",
-      "Objectifs du Projet",
-      "Méthodologie",
-      "Organisations Partenaires",
-      "Budget Personnel (€)",
-      "Budget Équipements (€)",
-      "Budget Fonctionnement (€)",
-      "Budget Autres (€)",
-      "Résultats Attendus",
-      "Critères d'Évaluation",
-      "Pérennité",
-      "Innovation",
-      "Impact Social"
-    ];
-
-    const csvContent = new Uint8Array([0xEF, 0xBB, 0xBF]) + headers.join(';');
-
-    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8-bom;' });
-    const url = URL.createObjectURL(blob);
+    // Le chemin relatif vers votre fichier Excel dans le dossier `public/fichiers`
+    const filePath = '/fichiers/TABLEAU DE SUIVI DES SUBVENTIONS.xlsx'; 
     const a = document.createElement('a');
-    a.href = url;
-    a.download = `modele_suivi_subventions.csv`;
+    a.href = filePath;
+    // Le nom sous lequel le fichier sera téléchargé par l'utilisateur
+    a.download = `TABLEAU DE SUIVI DES SUBVENTIONS.xlsx`; 
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
-    URL.revokeObjectURL(url);
 
     toast({
       title: "Téléchargement Modèle",
-      description: "Le modèle Excel a été téléchargé.",
+      description: "Votre modèle Excel a été téléchargé.",
     });
   };
 
@@ -798,83 +748,45 @@ export default function SuiviSubvention() {
           const appCompletionRate = app.amountObtained > 0 ? (appTotalReceivedAmount / app.amountObtained) * 100 : 0;
 
           return (
-            <Card key={app.id} className="card-hover">
+            <Card key={app.id} className="card-hover transition-shadow duration-200 hover:shadow-lg">
               <CardContent className="p-6">
                 <div className="flex justify-between items-start mb-4">
                   <div className="flex-1">
                     <div className="flex items-center gap-3 mb-2">
                       <h3 className="text-lg font-semibold">{app.projectTitle}</h3>
-                      <span className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(app.currentStatus)}`}>
+                      <span className={`px-2.5 py-0.5 rounded-full text-xs font-medium ${getStatusColor(app.currentStatus)}`}>
                         {app.currentStatus}
                       </span>
                     </div>
-                    <div className="grid md:grid-cols-4 gap-4 text-sm text-gray-600 mb-3">
-                      <div className="flex items-center gap-2">
-                        <Building className="w-4 h-4" />
-                        {app.fundingBody} ({app.financeurType}) {app.programName && `- ${app.programName}`}
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <Euro className="w-4 h-4" />
-                        Demandé: {app.amountSolicited.toLocaleString()} €
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <Euro className="w-4 h-4" />
-                        Obtenu: {app.amountObtained.toLocaleString()} €
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <Percent className="w-4 h-4" />
-                        Réalisé: {parseFloat(appCompletionRate.toFixed(2))}%
-                      </div>
-                    </div>
-                    <div className="grid md:grid-cols-3 gap-4 text-sm text-gray-600 mb-3">
-                      <div className="flex items-center gap-2">
-                        <CalendarDays className="w-4 h-4" />
-                        Dépôt effectif: {app.submissionDateActual ? new Date(app.submissionDateActual).toLocaleDateString('fr-FR') : 'N/A'}
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <CalendarDays className="w-4 h-4" />
-                        Limite justificatifs: {app.justificatifsDeadline ? new Date(app.justificatifsDeadline).toLocaleDateString('fr-FR') : 'N/A'}
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <UserRound className="w-4 h-4" />
-                        Resp. interne: {app.internalResponsible || 'N/A'}
-                      </div>
-                    </div>
-
-                    {app.nextSteps && (
-                      <p className="text-sm text-gray-700 mb-3">
-                        <span className="font-semibold">Prochaines étapes / Notes CA:</span> {app.nextSteps}
+                    <p className="text-gray-600 mb-1">Organisme : {app.fundingBody} ({app.financeurType})</p>
+                    {app.programName && <p className="text-gray-600 mb-1">Programme : {app.programName}</p>}
+                    <p className="text-gray-600 mb-1">Montant Sollicité : {app.amountSolicited.toLocaleString('fr-FR')} €</p>
+                    <p className="text-gray-600 mb-1">Montant Obtenu : {app.amountObtained.toLocaleString('fr-FR')} €</p>
+                    <p className="text-gray-600 mb-1">Montant Total Reçu : {appTotalReceivedAmount.toLocaleString('fr-FR')} €</p>
+                    <p className="text-gray-600 mb-1">Taux de Réalisation : {parseFloat(appCompletionRate.toFixed(2))}%</p>
+                    {app.submissionDeadline && (
+                      <p className="text-gray-600 flex items-center gap-1">
+                        <CalendarDays className="w-4 h-4 text-gray-500" /> Date limite de dépôt : {new Date(app.submissionDeadline).toLocaleDateString('fr-FR')}
                       </p>
                     )}
-                    {app.justificatifs && (
-                      <p className="text-sm text-gray-700 mb-3">
-                        <span className="font-semibold">Justificatifs:</span> {app.justificatifs}
+                    {app.justificatifsDeadline && (
+                      <p className="text-gray-600 flex items-center gap-1">
+                        <Clock className="w-4 h-4 text-gray-500" /> Date limite justificatifs : {new Date(app.justificatifsDeadline).toLocaleDateString('fr-FR')}
                       </p>
                     )}
                   </div>
-                </div>
-
-                <div className="flex justify-between items-center">
-                  <div className="text-xs text-gray-500">
-                    {app.notificationDate && `Notifié le ${new Date(app.notificationDate).toLocaleDateString('fr-FR')}`}
-                    {appTotalReceivedAmount > 0 && ` • Reçu: ${appTotalReceivedAmount.toLocaleString()} €`}
-                  </div>
-                  <div className="flex gap-2">
-                    {/* Bouton "Générer PDF" supprimé ici */}
-                    <Button
-                      onClick={() => editApplication(app)}
-                      className="btn-secondary text-xs px-3 py-1"
-                    >
+                  <div className="flex space-x-2">
+                    <Button variant="outline" size="sm" onClick={() => editApplication(app)}>
                       Modifier
                     </Button>
-                    <Button
-                      onClick={() => deleteApplication(app.id)}
-                      className="btn-danger text-xs px-3 py-1"
-                    >
+                    <Button variant="destructive" size="sm" onClick={() => deleteApplication(app.id)}>
                       Supprimer
                     </Button>
                   </div>
                 </div>
+                {app.objectGrant && <p className="text-sm text-gray-500 mb-2">Objet : {app.objectGrant}</p>}
+                {app.nextSteps && <p className="text-sm text-gray-500 italic">Prochaines étapes : {app.nextSteps}</p>}
+                {app.internalResponsible && <p className="text-xs text-gray-400 mt-2">Responsable Interne : {app.internalResponsible}</p>}
               </CardContent>
             </Card>
           );
