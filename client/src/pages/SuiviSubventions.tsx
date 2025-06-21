@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FileText, Download, Euro, Building, Users, Target, CalendarDays, Percent, ClipboardList, Clock, UserRound, FileDown, FileExcel } from "lucide-react"; // Ajout de FileExcel pour le modèle
+import { FileText, Download, Euro, Building, Users, Target, CalendarDays, Percent, ClipboardList, Clock, UserRound, FileDown, File } from "lucide-react"; // FileExcel remplacé par File
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -31,9 +31,9 @@ interface SubsidyApplication {
   completionRate: number; // Taux de Réalisation (%)
   justificatifs: string; // Justificatifs à Fournir
   justificatifsDeadline: string; // Date Limite Justificatifs
-  currentStatus: 
-    'À préparer' | 'À déposer' | 
-    'Dossier déposé' | 'En instruction' | 'Accordé / Avance reçue' | 
+  currentStatus:
+    'À préparer' | 'À déposer' |
+    'Dossier déposé' | 'En instruction' | 'Accordé / Avance reçue' |
     'Refusé' | 'Clôturée / Reçue' | 'En attente de solde' | ''; // Statuts mis à jour
   nextSteps: string; // Prochaines Étapes / Notes CA
   internalResponsible: string; // Responsable Interne
@@ -107,7 +107,7 @@ export default function SuiviSubvention() {
   useState(() => {
     const totalReceived = (formData.advanceReceivedAmount || 0) + (formData.balanceReceivedAmount || 0);
     const completion = formData.amountObtained > 0 ? (totalReceived / formData.amountObtained) * 100 : 0;
-    
+
     if (formData.totalReceivedAmount !== totalReceived || formData.completionRate !== completion) {
       setFormData(prev => ({
         ...prev,
@@ -134,7 +134,9 @@ export default function SuiviSubvention() {
       submissionDateActual: '',
       notificationDate: '',
       advanceReceivedDate: '',
+      advanceReceivedAmount: 0,
       balanceReceivedDate: '',
+      balanceReceivedAmount: 0,
       justificatifs: '',
       justificatifsDeadline: '',
       nextSteps: '',
@@ -221,7 +223,7 @@ export default function SuiviSubvention() {
     const updatedApplications = applications.filter(a => a.id !== id);
     setApplications(updatedApplications);
     setSavedData(updatedApplications);
-    
+
     toast({
       title: "Dossier supprimé",
       description: "Le dossier de subvention a été supprimé.",
@@ -323,7 +325,7 @@ export default function SuiviSubvention() {
       `"${app.currentStatus.replace(/"/g, '""')}"`,
       `"${app.nextSteps.replace(/"/g, '""')}"`,
       `"${app.internalResponsible.replace(/"/g, '""')}"`,
-      
+
       // Valeurs pour les champs retirés du formulaire mais potentiellement présents dans l'export
       `"${(app as any).organizationName ? (app as any).organizationName.replace(/"/g, '""') : ''}"`,
       `"${(app as any).projectDescription ? (app as any).projectDescription.replace(/"/g, '""') : ''}"`,
@@ -481,7 +483,7 @@ export default function SuiviSubvention() {
         <FileText className="w-6 h-6" />
         Suivi des Dossiers de Subventions
       </h1>
-      
+
       {/* Texte d'explication */}
       <div className="bg-blue-50 border-l-4 border-blue-200 text-blue-800 p-4 mb-6" role="alert">
         <h3 className="font-semibold text-lg mb-2">Bienvenue sur votre outil de suivi des subventions !</h3>
@@ -497,11 +499,11 @@ export default function SuiviSubvention() {
           </li>
         </ul>
         <div className="flex mt-4">
-            <Button 
+            <Button
                 onClick={downloadExcelTemplate}
                 className="btn-secondary text-sm"
             >
-                <FileExcel className="w-4 h-4 mr-2" />
+                <File className="w-4 h-4 mr-2" /> {/* Icône File utilisée ici */}
                 Télécharger le modèle Excel
             </Button>
         </div>
@@ -544,7 +546,7 @@ export default function SuiviSubvention() {
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-xl font-semibold">Liste des subventions</h2>
         <div className="flex gap-3">
-            <Button 
+            <Button
                 onClick={exportToCSV}
                 className="btn-secondary"
                 disabled={applications.length === 0}
@@ -552,7 +554,7 @@ export default function SuiviSubvention() {
                 <FileDown className="w-4 h-4 mr-2" />
                 Exporter CSV
             </Button>
-            <Button 
+            <Button
                 onClick={() => { resetForm(); setShowForm(true); }}
                 className="btn-primary"
             >
@@ -838,7 +840,7 @@ export default function SuiviSubvention() {
                 rows={3}
               />
             </div>
-            
+
             {/* Champs gardés pour la sauvegarde/export mais retirés du formulaire d'entrée */}
             {/* Nom de l'Organisation (client) - Input gardé pour le formulaire */}
             <div>
@@ -950,20 +952,20 @@ export default function SuiviSubvention() {
                   {app.totalReceivedAmount > 0 && ` • Reçu: ${app.totalReceivedAmount.toLocaleString()} €`}
                 </div>
                 <div className="flex gap-2">
-                  <Button 
+                  <Button
                     onClick={() => generateDocument(app.id)}
                     className="btn-primary text-xs px-3 py-1"
                   >
                     <Download className="w-3 h-3 mr-1" />
                     Générer PDF
                   </Button>
-                  <Button 
+                  <Button
                     onClick={() => editApplication(app)}
                     className="btn-secondary text-xs px-3 py-1"
                   >
                     Modifier
                   </Button>
-                  <Button 
+                  <Button
                     onClick={() => deleteApplication(app.id)}
                     className="btn-danger text-xs px-3 py-1"
                   >
