@@ -25,8 +25,6 @@ interface SubsidyApplication {
   advanceReceivedAmount: number; // Montant de l'avance reçue
   balanceReceivedDate: string; // Date Réception Solde (€)
   balanceReceivedAmount: number; // Montant du solde reçu
-  // totalReceivedAmount: number; // RETIRE : CALCULÉ AUTOMATIQUEMENT
-  // completionRate: number; // RETIRE : CALCULÉ AUTOMATIQUEMENT
   justificatifs: string; // Justificatifs à Fournir
   justificatifsDeadline: string; // Date Limite Justificatifs
   currentStatus:
@@ -70,8 +68,6 @@ export default function SuiviSubvention() {
   const [showForm, setShowForm] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
 
-  // Initialisation du formData avec des valeurs par défaut pour les nouveaux dossiers
-  // et des valeurs vides pour les champs qui pourraient être manquants lors d'un edit.
   const [formData, setFormData] = useState<Partial<SubsidyApplication>>({
     amountSolicited: 0,
     amountObtained: 0,
@@ -97,6 +93,7 @@ export default function SuiviSubvention() {
 
   // CALCULS des valeurs dérivées (Montant Total Reçu, Taux de Réalisation)
   const totalReceivedAmount = (formData.advanceReceivedAmount || 0) + (formData.balanceReceivedAmount || 0);
+  // CORRECTION ICI : Utilisation de amountObtained pour le taux de réalisation
   const completionRate = formData.amountObtained > 0 ? (totalReceivedAmount / formData.amountObtained) * 100 : 0;
 
 
@@ -106,8 +103,6 @@ export default function SuiviSubvention() {
       amountObtained: 0,
       advanceReceivedAmount: 0,
       balanceReceivedAmount: 0,
-      // totalReceivedAmount: 0, // RETIRE
-      // completionRate: 0, // RETIRE
       currentStatus: 'À préparer',
       financeurType: '',
       objectGrant: '',
@@ -153,17 +148,6 @@ export default function SuiviSubvention() {
       advanceReceivedAmount: formData.advanceReceivedAmount || 0,
       balanceReceivedDate: formData.balanceReceivedDate || '',
       balanceReceivedAmount: formData.balanceReceivedAmount || 0,
-      // Ces valeurs sont calculées et ne sont pas directement dans formData,
-      // mais elles doivent être incluses dans l'objet application sauvegardé.
-      // Assurez-vous que l'interface SubsidyApplication est à jour avec elles si vous voulez les stocker.
-      // Cependant, puisque ce sont des valeurs DÉRIVÉES, il est souvent préférable de ne PAS les stocker,
-      // mais de les recalculer à chaque fois qu'on a besoin d'afficher l'application.
-      // Pour l'export CSV, on peut les recalculer au moment de l'export.
-
-      // Pour l'interface SubsidyApplication, je les avais retirées.
-      // Si vous voulez les enregistrer en base ou dans le localStorage,
-      // il faut les remettre dans l'interface et les ajouter ici.
-      // Pour l'instant, je les laisse calculées au moment de l'affichage ou de l'export.
       justificatifs: formData.justificatifs || '',
       justificatifsDeadline: formData.justificatifsDeadline || '',
       currentStatus: formData.currentStatus || 'À préparer',
@@ -192,8 +176,6 @@ export default function SuiviSubvention() {
   };
 
   const editApplication = (app: SubsidyApplication) => {
-    // Lors de l'édition, on s'assure de ne pas mettre des propriétés non existantes
-    // dans le formData si l'interface a changé.
     setFormData({
       id: app.id,
       programName: app.programName,
@@ -215,8 +197,6 @@ export default function SuiviSubvention() {
       internalResponsible: app.internalResponsible,
       fundingBody: app.fundingBody,
       projectTitle: app.projectTitle,
-      // On ne charge pas totalReceivedAmount ou completionRate dans formData,
-      // car ils sont calculés.
     });
     setEditingId(app.id);
     setSelectedFundingBody(app.fundingBody);
@@ -234,13 +214,7 @@ export default function SuiviSubvention() {
     });
   };
 
-  const generateDocument = (appId: string) => {
-    toast({
-      title: "Génération en cours",
-      description: "Génération du dossier PDF en cours...",
-    });
-    // FUTURE: Implémenter ici la logique de génération PDF détaillée (librairie, etc.)
-  };
+  // Fonction generateDocument retirée car le bouton est supprimé
 
   const exportToCSV = () => {
     if (applications.length === 0) {
@@ -252,8 +226,6 @@ export default function SuiviSubvention() {
       return;
     }
 
-    // Définir les en-têtes (colonnes) du fichier CSV, correspondant à votre modèle Excel
-    // L'ordre est important ici pour correspondre à votre tableau
     const headers = [
       "ID Subvention",
       "Organisme Financeur",
@@ -269,16 +241,15 @@ export default function SuiviSubvention() {
       "Montant Avance (€)",
       "Date Réception Solde (€)",
       "Montant Solde (€)",
-      "Montant Total Reçu (€)", // Inclus ici pour l'export, calculé à la volée
-      "Taux de Réalisation (%)", // Inclus ici pour l'export, calculé à la volée
+      "Montant Total Reçu (€)",
+      "Taux de Réalisation (%)",
       "Justificatifs à Fournir",
       "Date Limite Justificatifs",
       "Statut Actuel",
       "Prochaines Étapes / Notes CA",
       "Responsable Interne (École)",
-      // Les colonnes suivantes seront toujours vides si elles sont retirées de l'interface et non gérées ailleurs
-      "Nom de l'Organisation", // Gardé comme colonne pour l'export, sera vide
-      "Description du Projet", // Gardé comme colonne pour l'export, sera vide
+      "Nom de l'Organisation",
+      "Description du Projet",
       "Numéro SIRET", "Personne de Contact", "Email de Contact", "Téléphone de Contact",
       "Adresse de l'Organisation", "Public Cible", "Étudiants Visés", "Secteurs",
       "Durée Projet (mois)", "Date Début Projet", "Objectifs du Projet",
@@ -288,8 +259,8 @@ export default function SuiviSubvention() {
     ];
 
     const rows = applications.map(app => {
-      // Recalculer les valeurs dérivées pour chaque application au moment de l'export
       const appTotalReceivedAmount = (app.advanceReceivedAmount || 0) + (app.balanceReceivedAmount || 0);
+      // CORRECTION ICI : Utilisation de app.amountObtained pour le taux de réalisation à l'export
       const appCompletionRate = app.amountObtained > 0 ? (appTotalReceivedAmount / app.amountObtained) * 100 : 0;
 
       return [
@@ -307,17 +278,16 @@ export default function SuiviSubvention() {
         app.advanceReceivedAmount,
         app.balanceReceivedDate,
         app.balanceReceivedAmount,
-        parseFloat(appTotalReceivedAmount.toFixed(2)), // Formatage pour l'export
-        parseFloat(appCompletionRate.toFixed(2)),       // Formatage pour l'export
+        parseFloat(appTotalReceivedAmount.toFixed(2)),
+        parseFloat(appCompletionRate.toFixed(2)),
         `"${app.justificatifs.replace(/"/g, '""')}"`,
         app.justificatifsDeadline,
         `"${app.currentStatus.replace(/"/g, '""')}"`,
         `"${app.nextSteps.replace(/"/g, '""')}"`,
         `"${app.internalResponsible.replace(/"/g, '""')}"`,
 
-        // Ces champs ne sont plus dans le formulaire, mais sont exportés comme colonnes vides si non définis
-        `""`, // organizationName (Vide car retiré du formulaire)
-        `""`, // projectDescription (Vide car retiré du formulaire)
+        `""`,
+        `""`,
         `""`, `""`, `""`, `""`, `""`, `""`, `0`, `""`, `0`, `""`, `""`, `""`, `""`,
         `0`, `0`, `0`, `0`, `""`, `""`, `""`, `""`, `""`
       ];
@@ -367,8 +337,8 @@ export default function SuiviSubvention() {
       "Statut Actuel",
       "Prochaines Étapes / Notes CA",
       "Responsable Interne (École)",
-      "Nom de l'Organisation", // Colonne incluse dans le modèle vierge
-      "Description du Projet", // Colonne incluse dans le modèle vierge
+      "Nom de l'Organisation",
+      "Description du Projet",
       "Numéro SIRET",
       "Personne de Contact",
       "Email de Contact",
@@ -589,7 +559,7 @@ export default function SuiviSubvention() {
                 <Select
                   value={formData.programName || ''}
                   onValueChange={(value) => setFormData({...formData, programName: value})}
-                  disabled={!selectedFundingBody || selectedFundingBody === 'Autres'} // Désactiver si "Autres" est choisi
+                  disabled={!selectedFundingBody || selectedFundingBody === 'Autres'}
                 >
                   <SelectTrigger>
                     <SelectValue placeholder="Choisir un programme" />
@@ -718,7 +688,7 @@ export default function SuiviSubvention() {
                 <Input
                   id="total-received"
                   type="number"
-                  value={parseFloat(totalReceivedAmount.toFixed(2))} // Calculé ici
+                  value={parseFloat(totalReceivedAmount.toFixed(2))}
                   readOnly
                   className="bg-gray-100"
                 />
@@ -728,7 +698,7 @@ export default function SuiviSubvention() {
                 <Input
                   id="completion-rate"
                   type="number"
-                  value={parseFloat(completionRate.toFixed(2))} // Calculé ici
+                  value={parseFloat(completionRate.toFixed(2))}
                   readOnly
                   className="bg-gray-100"
                 />
@@ -823,8 +793,8 @@ export default function SuiviSubvention() {
         )}
 
         {applications.map(app => {
-          // Calculer ces valeurs pour l'affichage de chaque carte
           const appTotalReceivedAmount = (app.advanceReceivedAmount || 0) + (app.balanceReceivedAmount || 0);
+          // CORRECTION ICI : Utilisation de app.amountObtained pour le taux de réalisation
           const appCompletionRate = app.amountObtained > 0 ? (appTotalReceivedAmount / app.amountObtained) * 100 : 0;
 
           return (
@@ -853,7 +823,7 @@ export default function SuiviSubvention() {
                       </div>
                       <div className="flex items-center gap-2">
                         <Percent className="w-4 h-4" />
-                        Réalisé: {parseFloat(appCompletionRate.toFixed(2))}% {/* Affichage calculé */}
+                        Réalisé: {parseFloat(appCompletionRate.toFixed(2))}%
                       </div>
                     </div>
                     <div className="grid md:grid-cols-3 gap-4 text-sm text-gray-600 mb-3">
@@ -887,16 +857,10 @@ export default function SuiviSubvention() {
                 <div className="flex justify-between items-center">
                   <div className="text-xs text-gray-500">
                     {app.notificationDate && `Notifié le ${new Date(app.notificationDate).toLocaleDateString('fr-FR')}`}
-                    {appTotalReceivedAmount > 0 && ` • Reçu: ${appTotalReceivedAmount.toLocaleString()} €`} {/* Affichage calculé */}
+                    {appTotalReceivedAmount > 0 && ` • Reçu: ${appTotalReceivedAmount.toLocaleString()} €`}
                   </div>
                   <div className="flex gap-2">
-                    <Button
-                      onClick={() => generateDocument(app.id)}
-                      className="btn-primary text-xs px-3 py-1"
-                    >
-                      <Download className="w-3 h-3 mr-1" />
-                      Générer PDF
-                    </Button>
+                    {/* Bouton "Générer PDF" supprimé ici */}
                     <Button
                       onClick={() => editApplication(app)}
                       className="btn-secondary text-xs px-3 py-1"
