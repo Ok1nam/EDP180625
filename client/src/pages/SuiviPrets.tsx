@@ -320,47 +320,19 @@ export default function SuiviPrets() {
   };
 
   const downloadExcelTemplate = () => {
-    const headers = [
-      "ID Prêt",
-      "Nom du Prêt / Ligne de Crédit",
-      "Organisme Prêteur",
-      "Type de Prêt",
-      "Objet du Prêt",
-      "Date Octroi",
-      "Montant Initial du Prêt (€)",
-      "Taux d'intérêt (%)",
-      "Durée (années)",
-      "Périodicité Remboursement",
-      "Date de Déblocage",
-      "Date de Fin Prévue",
-      "Montant Échéance (€)",
-      "Capital Remboursé à Date (€)",
-      "Intérêts Payés à Date (€)",
-      "Capital Restant Dû (€)",
-      "Garanties",
-      "Conditions Particulières",
-      "Notes / Suivi",
-      "Statut",
-      "Prochaine Échéance",
-      "Responsable Interne",
-      "Dernière Mise à Jour"
-    ];
-
-    const csvContent = new Uint8Array([0xEF, 0xBB, 0xBF]) + headers.join(';');
-
-    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8-bom;' });
-    const url = URL.createObjectURL(blob);
+    // Le chemin relatif vers votre fichier Excel dans le dossier `public/fichiers`
+    const filePath = '/fichiers/TABLEAU DE SUIVI DES PRETS.xlsx'; 
     const a = document.createElement('a');
-    a.href = url;
-    a.download = `modele_suivi_prets.csv`;
+    a.href = filePath;
+    // Le nom sous lequel le fichier sera téléchargé par l'utilisateur
+    a.download = `TABLEAU DE SUIVI DES PRETS.xlsx`; 
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
-    URL.revokeObjectURL(url);
 
     toast({
       title: "Téléchargement Modèle",
-      description: "Le modèle Excel a été téléchargé.",
+      description: "Votre modèle Excel a été téléchargé.",
     });
   };
 
@@ -770,109 +742,33 @@ export default function SuiviPrets() {
                           {loan.typeOfLoan}
                         </Badge>
                       </div>
-                      <div className="text-sm text-gray-600 space-y-1">
-                        <div className="flex items-center gap-2">
-                          <Building2 className="w-4 h-4 text-gray-500" />
-                          Organisme: {loan.lenderName} {loan.contactPerson && `(Contact: ${loan.contactPerson})`}
-                        </div>
-                        <div className="flex items-center gap-2">
-                          <CalendarDays className="w-4 h-4 text-gray-500" />
-                          Octroi: {loan.agreementDate ? new Date(loan.agreementDate).toLocaleDateString('fr-FR') : 'N/A'} - Déblocage: {new Date(loan.startDate).toLocaleDateString('fr-FR')}
-                          {loan.endDate && ` (Fin prévue: ${new Date(loan.endDate).toLocaleDateString('fr-FR')})`}
-                        </div>
-                        {loan.interestRatePercentage !== undefined && (
-                          <div className="flex items-center gap-2">
-                            <Percent className="w-4 h-4 text-gray-500" />
-                            Taux: {loan.interestRatePercentage.toLocaleString('fr-FR')}% annuel {loan.durationYears && `(${loan.durationYears} ans)`} {loan.repaymentFrequency && `(${loan.repaymentFrequency})`}
-                          </div>
-                        )}
-                        {loan.objectOfLoan && (
-                          <div className="flex items-center gap-2">
-                            <FileText className="w-4 h-4 text-gray-500" />
-                            Objet: {loan.objectOfLoan}
-                          </div>
-                        )}
-                        {loan.guarantees && (
-                          <div className="flex items-center gap-2">
-                            <HandCoins className="w-4 h-4 text-gray-500" />
-                            Garanties: {loan.guarantees}
-                          </div>
-                        )}
-                      </div>
+                      <p className="text-gray-600 mb-1">Organisme : {loan.lenderName}</p>
+                      <p className="text-gray-600 mb-1">Montant initial : {loan.initialAmount?.toLocaleString('fr-FR')} €</p>
+                      <p className="text-gray-600 mb-1">Capital Restant Dû : {parseFloat(loanRemainingCapital.toFixed(2)).toLocaleString('fr-FR')} €</p>
+                      {loan.nextInstallmentDate && (
+                        <p className="text-gray-600 flex items-center gap-1">
+                          <CalendarDays className="w-4 h-4 text-gray-500" /> Prochaine échéance : {new Date(loan.nextInstallmentDate).toLocaleDateString('fr-FR')}
+                        </p>
+                      )}
                     </div>
-                    <div className="text-right">
-                      <div className="text-2xl font-bold text-blue-600">{loan.initialAmount.toLocaleString('fr-FR')} €</div>
-                      <div className="text-xs text-gray-600">Montant Initial</div>
-                      {loan.installmentAmount !== undefined && (
-                        <div className="text-sm text-gray-600">{loan.installmentAmount.toLocaleString('fr-FR')} €/échéance</div>
-                      )}
-                      {loanRemainingCapital !== undefined && (
-                        <div className="text-md font-semibold text-purple-600">Restant Dû: {parseFloat(loanRemainingCapital.toFixed(2)).toLocaleString('fr-FR')} €</div>
-                      )}
-                      {loan.capitalRepaidToDate !== undefined && (
-                          <div className="text-sm text-gray-600">Capital remboursé: {loan.capitalRepaidToDate.toLocaleString('fr-FR')} €</div>
-                      )}
-                      {loan.interestPaidToDate !== undefined && (
-                          <div className="text-sm text-gray-600">Intérêts payés: {loan.interestPaidToDate.toLocaleString('fr-FR')} €</div>
-                      )}
+                    <div className="flex space-x-2">
+                      <Button variant="outline" size="sm" onClick={() => editLoan(loan)}>
+                        Modifier
+                      </Button>
+                      <Button variant="destructive" size="sm" onClick={() => deleteLoan(loan.id)}>
+                        Supprimer
+                      </Button>
                     </div>
                   </div>
-
-                  {loan.specialConditions && (
-                    <div className="bg-blue-50 p-3 rounded-lg mb-3 border border-blue-200">
-                      <p className="text-sm italic text-blue-800">
-                        <span className="font-semibold">Conditions Particulières:</span> {loan.specialConditions}
-                      </p>
-                    </div>
-                  )}
-
-                  {loan.notesInternal && (
-                    <div className="bg-gray-50 p-3 rounded-lg mb-3">
-                      <p className="text-sm italic text-gray-700">
-                        <span className="font-semibold">Notes / Suivi:</span> {loan.notesInternal}
-                      </p>
-                    </div>
-                  )}
-
-                  {loan.nextInstallmentDate && (loan.status === 'accorde' || loan.status === 'en_cours_remboursement') && (
-                    <div className="flex items-center gap-2 text-sm text-red-600 mb-3 font-medium">
-                      <ArrowRightFromLine className="w-4 h-4" />
-                      Prochaine échéance: {new Date(loan.nextInstallmentDate).toLocaleDateString('fr-FR')}
-                    </div>
-                  )}
-                   <div className="flex justify-between items-center text-xs text-gray-500">
-                      <div>
-                          Dernière mise à jour: {new Date(loan.lastUpdate).toLocaleDateString('fr-FR')}
-                      </div>
-                      <div className="flex gap-2">
-                          <Button
-                              onClick={() => editLoan(loan)}
-                              className="btn-secondary text-xs px-3 py-1"
-                              variant="outline"
-                          >
-                              Modifier
-                          </Button>
-                          <Button
-                              onClick={() => deleteLoan(loan.id)}
-                              className="btn-danger text-xs px-3 py-1"
-                              variant="destructive"
-                          >
-                              Supprimer
-                          </Button>
-                      </div>
-                  </div>
+                  {loan.objectOfLoan && <p className="text-sm text-gray-500 mb-2">Objet : {loan.objectOfLoan}</p>}
+                  {loan.notesInternal && <p className="text-sm text-gray-500 italic">Notes : {loan.notesInternal}</p>}
+                  <p className="text-xs text-gray-400 mt-2">Dernière mise à jour : {new Date(loan.lastUpdate).toLocaleDateString('fr-FR')}</p>
                 </CardContent>
               </Card>
             );
           })
         ) : (
-          <Card>
-            <CardContent className="p-8 text-center text-gray-500">
-              <Banknote className="w-12 h-12 mx-auto mb-4 text-gray-300" />
-              <p>Aucun financement enregistré pour le moment.</p>
-              <p className="text-sm">Cliquez sur "Ajouter un financement" pour commencer à suivre vos prêts.</p>
-            </CardContent>
-          </Card>
+          <p className="text-center text-gray-500">Aucun financement enregistré pour le moment. Cliquez sur "Ajouter un financement" pour commencer.</p>
         )}
       </div>
     </section>
