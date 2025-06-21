@@ -13,7 +13,6 @@ import { useToast } from "@/hooks/use-toast";
 interface SubsidyApplication {
   id: string;
   programName: string; // Nom de la Subvention / Appel à Projets
-  // organizationName: string; // RETIRE DU FORMULAIRE, MAIS PEUT RESTER DANS L'INTERFACE POUR L'EXPORT SI NECESSAIRE
 
   financeurType: 'Public' | 'Privé' | ''; // Type de financeur
   objectGrant: string; // Objet de la Subvention
@@ -26,8 +25,8 @@ interface SubsidyApplication {
   advanceReceivedAmount: number; // Montant de l'avance reçue
   balanceReceivedDate: string; // Date Réception Solde (€)
   balanceReceivedAmount: number; // Montant du solde reçu
-  totalReceivedAmount: number; // Montant Total Reçu (€) - CALCULÉ AUTOMATIQUEMENT
-  completionRate: number; // Taux de Réalisation (%)
+  // totalReceivedAmount: number; // RETIRE : CALCULÉ AUTOMATIQUEMENT
+  // completionRate: number; // RETIRE : CALCULÉ AUTOMATIQUEMENT
   justificatifs: string; // Justificatifs à Fournir
   justificatifsDeadline: string; // Date Limite Justificatifs
   currentStatus:
@@ -39,7 +38,6 @@ interface SubsidyApplication {
 
   fundingBody: string; // Organisme Financeur
   projectTitle: string; // ID / Nom unique pour identifier la subvention.
-  // projectDescription: string; // RETIRE DU FORMULAIRE, MAIS PEUT RESTER DANS L'INTERFACE POUR L'EXPORT SI NECESSAIRE
 }
 
 const fundingBodies = [
@@ -71,24 +69,35 @@ export default function SuiviSubvention() {
   const [applications, setApplications] = useState<SubsidyApplication[]>(savedData);
   const [showForm, setShowForm] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
-  const [formData, setFormData] = useState<Partial<SubsidyApplication>>({});
+
+  // Initialisation du formData avec des valeurs par défaut pour les nouveaux dossiers
+  // et des valeurs vides pour les champs qui pourraient être manquants lors d'un edit.
+  const [formData, setFormData] = useState<Partial<SubsidyApplication>>({
+    amountSolicited: 0,
+    amountObtained: 0,
+    advanceReceivedAmount: 0,
+    balanceReceivedAmount: 0,
+    currentStatus: 'À préparer',
+    financeurType: '',
+    objectGrant: '',
+    submissionDeadline: '',
+    submissionDateActual: '',
+    notificationDate: '',
+    advanceReceivedDate: '',
+    balanceReceivedDate: '',
+    justificatifs: '',
+    justificatifsDeadline: '',
+    nextSteps: '',
+    internalResponsible: '',
+    programName: '',
+    projectTitle: '',
+  });
+
   const [selectedFundingBody, setSelectedFundingBody] = useState<string>('');
 
-  // Effet pour calculer Montant Total Reçu et Taux de Réalisation
-  // Utilise useEffect avec un tableau de dépendances pour se déclencher quand ces valeurs changent
-  useState(() => { // Anciennement useEffect, mais useState avec une fonction d'initialisation peut aussi simuler un comportement à la première exécution et re-calcul manuel
-    const totalReceived = (formData.advanceReceivedAmount || 0) + (formData.balanceReceivedAmount || 0);
-    const completion = formData.amountObtained > 0 ? (totalReceived / formData.amountObtained) * 100 : 0;
-
-    // Mise à jour de formData si les valeurs calculées sont différentes
-    if (formData.totalReceivedAmount !== totalReceived || formData.completionRate !== completion) {
-      setFormData(prev => ({
-        ...prev,
-        totalReceivedAmount: parseFloat(totalReceived.toFixed(2)),
-        completionRate: parseFloat(completion.toFixed(2))
-      }));
-    }
-  }, [formData.advanceReceivedAmount, formData.balanceReceivedAmount, formData.amountObtained]);
+  // CALCULS des valeurs dérivées (Montant Total Reçu, Taux de Réalisation)
+  const totalReceivedAmount = (formData.advanceReceivedAmount || 0) + (formData.balanceReceivedAmount || 0);
+  const completionRate = formData.amountObtained > 0 ? (totalReceivedAmount / formData.amountObtained) * 100 : 0;
 
 
   const resetForm = () => {
@@ -97,8 +106,8 @@ export default function SuiviSubvention() {
       amountObtained: 0,
       advanceReceivedAmount: 0,
       balanceReceivedAmount: 0,
-      totalReceivedAmount: 0, // Calculé automatiquement
-      completionRate: 0, // Calculé automatiquement
+      // totalReceivedAmount: 0, // RETIRE
+      // completionRate: 0, // RETIRE
       currentStatus: 'À préparer',
       financeurType: '',
       objectGrant: '',
@@ -106,17 +115,13 @@ export default function SuiviSubvention() {
       submissionDateActual: '',
       notificationDate: '',
       advanceReceivedDate: '',
-      advanceReceivedAmount: 0,
       balanceReceivedDate: '',
-      balanceReceivedAmount: 0,
       justificatifs: '',
       justificatifsDeadline: '',
       nextSteps: '',
       internalResponsible: '',
       programName: '',
       projectTitle: '',
-      // organizationName: '', // RETIRE DU FORMULAIRE
-      // projectDescription: '' // RETIRE DU FORMULAIRE
     });
     setEditingId(null);
     setShowForm(false);
@@ -148,8 +153,17 @@ export default function SuiviSubvention() {
       advanceReceivedAmount: formData.advanceReceivedAmount || 0,
       balanceReceivedDate: formData.balanceReceivedDate || '',
       balanceReceivedAmount: formData.balanceReceivedAmount || 0,
-      totalReceivedAmount: formData.totalReceivedAmount || 0, // Inclus car calculé
-      completionRate: formData.completionRate || 0, // Inclus car calculé
+      // Ces valeurs sont calculées et ne sont pas directement dans formData,
+      // mais elles doivent être incluses dans l'objet application sauvegardé.
+      // Assurez-vous que l'interface SubsidyApplication est à jour avec elles si vous voulez les stocker.
+      // Cependant, puisque ce sont des valeurs DÉRIVÉES, il est souvent préférable de ne PAS les stocker,
+      // mais de les recalculer à chaque fois qu'on a besoin d'afficher l'application.
+      // Pour l'export CSV, on peut les recalculer au moment de l'export.
+
+      // Pour l'interface SubsidyApplication, je les avais retirées.
+      // Si vous voulez les enregistrer en base ou dans le localStorage,
+      // il faut les remettre dans l'interface et les ajouter ici.
+      // Pour l'instant, je les laisse calculées au moment de l'affichage ou de l'export.
       justificatifs: formData.justificatifs || '',
       justificatifsDeadline: formData.justificatifsDeadline || '',
       currentStatus: formData.currentStatus || 'À préparer',
@@ -158,8 +172,6 @@ export default function SuiviSubvention() {
 
       fundingBody: formData.fundingBody || '',
       projectTitle: formData.projectTitle || '',
-      // organizationName: '', // Non présent dans le formulaire, donc vide ou à gérer si nécessaire pour l'export
-      // projectDescription: '' // Non présent dans le formulaire, donc vide ou à gérer si nécessaire pour l'export
     };
 
     let updatedApplications;
@@ -180,7 +192,32 @@ export default function SuiviSubvention() {
   };
 
   const editApplication = (app: SubsidyApplication) => {
-    setFormData(app);
+    // Lors de l'édition, on s'assure de ne pas mettre des propriétés non existantes
+    // dans le formData si l'interface a changé.
+    setFormData({
+      id: app.id,
+      programName: app.programName,
+      financeurType: app.financeurType,
+      objectGrant: app.objectGrant,
+      submissionDeadline: app.submissionDeadline,
+      submissionDateActual: app.submissionDateActual,
+      amountSolicited: app.amountSolicited,
+      amountObtained: app.amountObtained,
+      notificationDate: app.notificationDate,
+      advanceReceivedDate: app.advanceReceivedDate,
+      advanceReceivedAmount: app.advanceReceivedAmount,
+      balanceReceivedDate: app.balanceReceivedDate,
+      balanceReceivedAmount: app.balanceReceivedAmount,
+      justificatifs: app.justificatifs,
+      justificatifsDeadline: app.justificatifsDeadline,
+      currentStatus: app.currentStatus,
+      nextSteps: app.nextSteps,
+      internalResponsible: app.internalResponsible,
+      fundingBody: app.fundingBody,
+      projectTitle: app.projectTitle,
+      // On ne charge pas totalReceivedAmount ou completionRate dans formData,
+      // car ils sont calculés.
+    });
     setEditingId(app.id);
     setSelectedFundingBody(app.fundingBody);
     setShowForm(true);
@@ -232,8 +269,8 @@ export default function SuiviSubvention() {
       "Montant Avance (€)",
       "Date Réception Solde (€)",
       "Montant Solde (€)",
-      "Montant Total Reçu (€)",
-      "Taux de Réalisation (%)",
+      "Montant Total Reçu (€)", // Inclus ici pour l'export, calculé à la volée
+      "Taux de Réalisation (%)", // Inclus ici pour l'export, calculé à la volée
       "Justificatifs à Fournir",
       "Date Limite Justificatifs",
       "Statut Actuel",
@@ -250,36 +287,41 @@ export default function SuiviSubvention() {
       "Résultats Attendus", "Critères d'Évaluation", "Pérennité", "Innovation", "Impact Social"
     ];
 
-    const rows = applications.map(app => [
-      `"${app.projectTitle.replace(/"/g, '""')}"`,
-      `"${app.fundingBody.replace(/"/g, '""')}"`,
-      `"${app.financeurType.replace(/"/g, '""')}"`,
-      `"${app.programName.replace(/"/g, '""')}"`,
-      `"${app.objectGrant.replace(/"/g, '""')}"`,
-      app.submissionDeadline,
-      app.submissionDateActual,
-      app.amountSolicited,
-      app.amountObtained,
-      app.notificationDate,
-      app.advanceReceivedDate,
-      app.advanceReceivedAmount,
-      app.balanceReceivedDate,
-      app.balanceReceivedAmount,
-      app.totalReceivedAmount,
-      app.completionRate,
-      `"${app.justificatifs.replace(/"/g, '""')}"`,
-      app.justificatifsDeadline,
-      `"${app.currentStatus.replace(/"/g, '""')}"`,
-      `"${app.nextSteps.replace(/"/g, '""')}"`,
-      `"${app.internalResponsible.replace(/"/g, '""')}"`,
+    const rows = applications.map(app => {
+      // Recalculer les valeurs dérivées pour chaque application au moment de l'export
+      const appTotalReceivedAmount = (app.advanceReceivedAmount || 0) + (app.balanceReceivedAmount || 0);
+      const appCompletionRate = app.amountObtained > 0 ? (appTotalReceivedAmount / app.amountObtained) * 100 : 0;
 
-      // Ces champs ne sont plus dans le formulaire, mais sont exportés comme colonnes vides si non définis
-      // Si vous voulez qu'ils soient complètement retirés de l'export, retirez-les des `headers` aussi.
-      `""`, // organizationName (Vide car retiré du formulaire)
-      `""`, // projectDescription (Vide car retiré du formulaire)
-      `""`, `""`, `""`, `""`, `""`, `""`, `0`, `""`, `0`, `""`, `""`, `""`, `""`,
-      `0`, `0`, `0`, `0`, `""`, `""`, `""`, `""`, `""`
-    ]);
+      return [
+        `"${app.projectTitle.replace(/"/g, '""')}"`,
+        `"${app.fundingBody.replace(/"/g, '""')}"`,
+        `"${app.financeurType.replace(/"/g, '""')}"`,
+        `"${app.programName.replace(/"/g, '""')}"`,
+        `"${app.objectGrant.replace(/"/g, '""')}"`,
+        app.submissionDeadline,
+        app.submissionDateActual,
+        app.amountSolicited,
+        app.amountObtained,
+        app.notificationDate,
+        app.advanceReceivedDate,
+        app.advanceReceivedAmount,
+        app.balanceReceivedDate,
+        app.balanceReceivedAmount,
+        parseFloat(appTotalReceivedAmount.toFixed(2)), // Formatage pour l'export
+        parseFloat(appCompletionRate.toFixed(2)),       // Formatage pour l'export
+        `"${app.justificatifs.replace(/"/g, '""')}"`,
+        app.justificatifsDeadline,
+        `"${app.currentStatus.replace(/"/g, '""')}"`,
+        `"${app.nextSteps.replace(/"/g, '""')}"`,
+        `"${app.internalResponsible.replace(/"/g, '""')}"`,
+
+        // Ces champs ne sont plus dans le formulaire, mais sont exportés comme colonnes vides si non définis
+        `""`, // organizationName (Vide car retiré du formulaire)
+        `""`, // projectDescription (Vide car retiré du formulaire)
+        `""`, `""`, `""`, `""`, `""`, `""`, `0`, `""`, `0`, `""`, `""`, `""`, `""`,
+        `0`, `0`, `0`, `0`, `""`, `""`, `""`, `""`, `""`
+      ];
+    });
 
     const csvContent = [
       headers.join(';'),
@@ -676,8 +718,8 @@ export default function SuiviSubvention() {
                 <Input
                   id="total-received"
                   type="number"
-                  value={formData.totalReceivedAmount || 0}
-                  readOnly // Laissez en lecture seule car c'est un champ calculé
+                  value={parseFloat(totalReceivedAmount.toFixed(2))} // Calculé ici
+                  readOnly
                   className="bg-gray-100"
                 />
               </div>
@@ -686,8 +728,8 @@ export default function SuiviSubvention() {
                 <Input
                   id="completion-rate"
                   type="number"
-                  value={formData.completionRate || 0}
-                  readOnly // Laissez en lecture seule car c'est un champ calculé
+                  value={parseFloat(completionRate.toFixed(2))} // Calculé ici
+                  readOnly
                   className="bg-gray-100"
                 />
               </div>
@@ -780,93 +822,99 @@ export default function SuiviSubvention() {
           </Card>
         )}
 
-        {applications.map(app => (
-          <Card key={app.id} className="card-hover">
-            <CardContent className="p-6">
-              <div className="flex justify-between items-start mb-4">
-                <div className="flex-1">
-                  <div className="flex items-center gap-3 mb-2">
-                    <h3 className="text-lg font-semibold">{app.projectTitle}</h3>
-                    <span className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(app.currentStatus)}`}>
-                      {app.currentStatus}
-                    </span>
-                  </div>
-                  <div className="grid md:grid-cols-4 gap-4 text-sm text-gray-600 mb-3">
-                    <div className="flex items-center gap-2">
-                      <Building className="w-4 h-4" />
-                      {app.fundingBody} ({app.financeurType}) {app.programName && `- ${app.programName}`}
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Euro className="w-4 h-4" />
-                      Demandé: {app.amountSolicited.toLocaleString()} €
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Euro className="w-4 h-4" />
-                      Obtenu: {app.amountObtained.toLocaleString()} €
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Percent className="w-4 h-4" />
-                      Réalisé: {app.completionRate}%
-                    </div>
-                  </div>
-                  <div className="grid md:grid-cols-3 gap-4 text-sm text-gray-600 mb-3">
-                    <div className="flex items-center gap-2">
-                      <CalendarDays className="w-4 h-4" />
-                      Dépôt effectif: {app.submissionDateActual ? new Date(app.submissionDateActual).toLocaleDateString('fr-FR') : 'N/A'}
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <CalendarDays className="w-4 h-4" />
-                      Limite justificatifs: {app.justificatifsDeadline ? new Date(app.justificatifsDeadline).toLocaleDateString('fr-FR') : 'N/A'}
-                    </div>
-                     <div className="flex items-center gap-2">
-                      <UserRound className="w-4 h-4" />
-                      Resp. interne: {app.internalResponsible || 'N/A'}
-                    </div>
-                  </div>
+        {applications.map(app => {
+          // Calculer ces valeurs pour l'affichage de chaque carte
+          const appTotalReceivedAmount = (app.advanceReceivedAmount || 0) + (app.balanceReceivedAmount || 0);
+          const appCompletionRate = app.amountObtained > 0 ? (appTotalReceivedAmount / app.amountObtained) * 100 : 0;
 
-                  {app.nextSteps && (
-                    <p className="text-sm text-gray-700 mb-3">
-                      <span className="font-semibold">Prochaines étapes / Notes CA:</span> {app.nextSteps}
-                    </p>
-                  )}
-                  {app.justificatifs && (
-                    <p className="text-sm text-gray-700 mb-3">
-                      <span className="font-semibold">Justificatifs:</span> {app.justificatifs}
-                    </p>
-                  )}
-                </div>
-              </div>
+          return (
+            <Card key={app.id} className="card-hover">
+              <CardContent className="p-6">
+                <div className="flex justify-between items-start mb-4">
+                  <div className="flex-1">
+                    <div className="flex items-center gap-3 mb-2">
+                      <h3 className="text-lg font-semibold">{app.projectTitle}</h3>
+                      <span className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(app.currentStatus)}`}>
+                        {app.currentStatus}
+                      </span>
+                    </div>
+                    <div className="grid md:grid-cols-4 gap-4 text-sm text-gray-600 mb-3">
+                      <div className="flex items-center gap-2">
+                        <Building className="w-4 h-4" />
+                        {app.fundingBody} ({app.financeurType}) {app.programName && `- ${app.programName}`}
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Euro className="w-4 h-4" />
+                        Demandé: {app.amountSolicited.toLocaleString()} €
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Euro className="w-4 h-4" />
+                        Obtenu: {app.amountObtained.toLocaleString()} €
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <Percent className="w-4 h-4" />
+                        Réalisé: {parseFloat(appCompletionRate.toFixed(2))}% {/* Affichage calculé */}
+                      </div>
+                    </div>
+                    <div className="grid md:grid-cols-3 gap-4 text-sm text-gray-600 mb-3">
+                      <div className="flex items-center gap-2">
+                        <CalendarDays className="w-4 h-4" />
+                        Dépôt effectif: {app.submissionDateActual ? new Date(app.submissionDateActual).toLocaleDateString('fr-FR') : 'N/A'}
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <CalendarDays className="w-4 h-4" />
+                        Limite justificatifs: {app.justificatifsDeadline ? new Date(app.justificatifsDeadline).toLocaleDateString('fr-FR') : 'N/A'}
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <UserRound className="w-4 h-4" />
+                        Resp. interne: {app.internalResponsible || 'N/A'}
+                      </div>
+                    </div>
 
-              <div className="flex justify-between items-center">
-                <div className="text-xs text-gray-500">
-                  {app.notificationDate && `Notifié le ${new Date(app.notificationDate).toLocaleDateString('fr-FR')}`}
-                  {app.totalReceivedAmount > 0 && ` • Reçu: ${app.totalReceivedAmount.toLocaleString()} €`}
+                    {app.nextSteps && (
+                      <p className="text-sm text-gray-700 mb-3">
+                        <span className="font-semibold">Prochaines étapes / Notes CA:</span> {app.nextSteps}
+                      </p>
+                    )}
+                    {app.justificatifs && (
+                      <p className="text-sm text-gray-700 mb-3">
+                        <span className="font-semibold">Justificatifs:</span> {app.justificatifs}
+                      </p>
+                    )}
+                  </div>
                 </div>
-                <div className="flex gap-2">
-                  <Button
-                    onClick={() => generateDocument(app.id)}
-                    className="btn-primary text-xs px-3 py-1"
-                  >
-                    <Download className="w-3 h-3 mr-1" />
-                    Générer PDF
-                  </Button>
-                  <Button
-                    onClick={() => editApplication(app)}
-                    className="btn-secondary text-xs px-3 py-1"
-                  >
-                    Modifier
-                  </Button>
-                  <Button
-                    onClick={() => deleteApplication(app.id)}
-                    className="btn-danger text-xs px-3 py-1"
-                  >
-                    Supprimer
-                  </Button>
+
+                <div className="flex justify-between items-center">
+                  <div className="text-xs text-gray-500">
+                    {app.notificationDate && `Notifié le ${new Date(app.notificationDate).toLocaleDateString('fr-FR')}`}
+                    {appTotalReceivedAmount > 0 && ` • Reçu: ${appTotalReceivedAmount.toLocaleString()} €`} {/* Affichage calculé */}
+                  </div>
+                  <div className="flex gap-2">
+                    <Button
+                      onClick={() => generateDocument(app.id)}
+                      className="btn-primary text-xs px-3 py-1"
+                    >
+                      <Download className="w-3 h-3 mr-1" />
+                      Générer PDF
+                    </Button>
+                    <Button
+                      onClick={() => editApplication(app)}
+                      className="btn-secondary text-xs px-3 py-1"
+                    >
+                      Modifier
+                    </Button>
+                    <Button
+                      onClick={() => deleteApplication(app.id)}
+                      className="btn-danger text-xs px-3 py-1"
+                    >
+                      Supprimer
+                    </Button>
+                  </div>
                 </div>
-              </div>
-            </CardContent>
-          </Card>
-        ))}
+              </CardContent>
+            </Card>
+          );
+        })}
       </div>
     </section>
   );
