@@ -10,7 +10,6 @@ interface TvaCoefficientProps {
 }
 
 const TvaCoefficient: React.FC<TvaCoefficientProps> = ({ navigate }) => {
-  // Le chemin du fichier est mis à jour avec le nouveau nom.
   const excelFilePath = "/fichiers/ANNEXE 6 ET 7 - Trame calcul coefficient déduction et résultat fiscal 080825.xlsm"; 
 
   return (
@@ -21,10 +20,9 @@ const TvaCoefficient: React.FC<TvaCoefficientProps> = ({ navigate }) => {
       </h1>
 
       <p className="mb-8 text-lg text-gray-700 leading-relaxed">
-        [cite_start]Ce document est un outil de référence pour vous, expert-comptable, afin de formaliser le calcul du coefficient de déduction de TVA de votre client, une École de Production[cite: 4, 67]. [cite_start]En raison de leur double activité (pédagogique exonérée et productive soumise à TVA), une approche rigoureuse est nécessaire pour déterminer la part de TVA récupérable sur les dépenses mixtes[cite: 3].
+        Ce document est un outil de référence pour vous, expert-comptable, afin de formaliser le calcul du coefficient de déduction de TVA de votre client, une École de Production. En raison de leur double activité (pédagogique exonérée et productive soumise à TVA), une approche rigoureuse est nécessaire pour déterminer la part de TVA récupérable sur les dépenses mixtes.
       </p>
 
-      {/* Section Méthodologie détaillée */}
       <Card className="mb-8 shadow-md">
         <CardHeader>
           <CardTitle className="text-xl font-semibold flex items-center gap-2">
@@ -34,7 +32,7 @@ const TvaCoefficient: React.FC<TvaCoefficientProps> = ({ navigate }) => {
         </CardHeader>
         <CardContent className="text-gray-700 space-y-4">
           <p>
-            [cite_start]Le coefficient de déduction est crucial pour les redevables partiels comme les Écoles de Production[cite: 26, 28]. [cite_start]Il permet de calculer la proportion de TVA récupérable sur les dépenses utilisées conjointement pour des activités exonérées et taxables[cite: 26].
+            Le coefficient de déduction est crucial pour les redevables partiels comme les Écoles de Production[cite: 26, 28]. [cite_start]Il permet de calculer la proportion de TVA récupérable sur les dépenses utilisées conjointement pour des activités exonérées et taxables[cite: 26].
           </p>
           <p>
             [cite_start]Ce coefficient est la résultante de trois composantes[cite: 29]:
@@ -62,7 +60,6 @@ const TvaCoefficient: React.FC<TvaCoefficientProps> = ({ navigate }) => {
         </CardContent>
       </Card>
         
-      {/* Section Téléchargement du fichier */}
       <Card className="mb-8 shadow-lg border-2 border-blue-500">
         <CardHeader>
           <CardTitle className="text-2xl font-bold text-blue-700 flex items-center gap-3">
@@ -75,7 +72,7 @@ const TvaCoefficient: React.FC<TvaCoefficientProps> = ({ navigate }) => {
               Téléchargez la trame de calcul Excel pour vous aider à déterminer le coefficient de déduction de votre client.
             </p>
             <p className="text-sm text-gray-600">
-              **Note importante :** Ce fichier est un support commun à plusieurs de nos outils. Il est essentiel de le remplir avec les données spécifiques de l'école avant d'utiliser les calculateurs. [cite_start]Pour une compréhension complète du contexte fiscal, nous vous invitons à consulter l'annexe[cite: 1]: <span
+              **Note importante :** Ce fichier est **lié** à plusieurs de nos outils. Il est essentiel de le remplir avec les données spécifiques de l'école avant d'utiliser les calculateurs. Pour une compréhension complète du contexte fiscal, nous vous invitons à consulter l'annexe : <span
                 className="text-blue-600 hover:underline cursor-pointer"
                 onClick={() => navigate('guide-tva')}
               >
@@ -85,7 +82,7 @@ const TvaCoefficient: React.FC<TvaCoefficientProps> = ({ navigate }) => {
           </div>
           <a
             href={excelFilePath}
-            download="ANNEXE 6 ET 7 - Trame calcul coefficient déduction et résultat fiscal 080825.xlsm" // Nom du fichier mis à jour
+            download="ANNEXE 6 ET 7 - Trame calcul coefficient déduction et résultat fiscal 080825.xlsm"
             className="flex-shrink-0"
           >
             <Button className="btn-primary flex items-center gap-2 py-3 px-6 text-lg">
@@ -95,7 +92,6 @@ const TvaCoefficient: React.FC<TvaCoefficientProps> = ({ navigate }) => {
         </CardContent>
       </Card>
 
-      {/* Section Conseils d'optimisation */}
       <Card className="shadow-md">
         <CardHeader>
           <CardTitle className="text-xl font-semibold flex items-center gap-2">
@@ -108,10 +104,10 @@ const TvaCoefficient: React.FC<TvaCoefficientProps> = ({ navigate }) => {
             Pour assurer la conformité fiscale et sécuriser les déclarations de TVA de votre client :
           </p>
           <ul className="list-disc pl-5 space-y-2">
-            [cite_start]<li>Veillez à la distinction précise des recettes assujetties et exonérées[cite: 14].</li>
-            [cite_start]<li>Assurez un suivi rigoureux de l'affectation des dépenses et conservez tous les justificatifs[cite: 52, 54].</li>
+            [cite_start]<li>Veillez à la distinction précise des recettes assujetties et exonérées[cite: 52].</li>
+            [cite_start]<li>Assurez un suivi rigoureux de l'affectation des dépenses et conservez tous les justificatifs[cite: 54].</li>
             [cite_start]<li>Le coefficient est déterminé annuellement à la clôture de l'exercice et utilisé à titre provisoire pour l'année suivante[cite: 38].</li>
-            [cite_start]<li>Une régularisation est effectuée en fin d'exercice lorsque le coefficient définitif est connu[cite: 39, 50].</li>
+            [cite_start]<li>Une régularisation est effectuée en fin d'exercice lorsque le coefficient définitif est connu[cite: 50].</li>
             [cite_start]<li>Pour la première année d'exercice, il est prudent de ne pas récupérer la TVA sur les dépenses mutualisées, le droit à déduction ne s'exerçant qu'après la première clôture[cite: 41, 42].</li>
           </ul>
         </CardContent>
