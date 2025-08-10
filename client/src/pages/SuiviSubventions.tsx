@@ -93,8 +93,8 @@ export default function SuiviSubvention() {
 
   // CALCULS des valeurs dérivées (Montant Total Reçu, Taux de Réalisation)
   const totalReceivedAmount = (formData.advanceReceivedAmount || 0) + (formData.balanceReceivedAmount || 0);
-  // CORRECTION ICI : Utilisation de amountObtained pour le taux de réalisation
   const completionRate = formData.amountObtained > 0 ? (totalReceivedAmount / formData.amountObtained) * 100 : 0;
+  const remainingAmountToReceive = (formData.amountObtained || 0) - totalReceivedAmount;
 
 
   const resetForm = () => {
@@ -227,47 +227,40 @@ export default function SuiviSubvention() {
     }
 
     const headers = [
-      "ID Subvention",
-      "Organisme Financeur",
-      "Type de Financeur",
-      "Nom du Programme",
-      "Objet de la Subvention",
-      "Date Limite de Dépôt",
-      "Date Dépôt Dossier",
-      "Montant Sollicité (€)",
-      "Montant Obtenu (€)",
-      "Date Notification (Accord/Refus)",
-      "Date Réception Avance (€)",
-      "Montant Avance (€)",
-      "Date Réception Solde (€)",
-      "Montant Solde (€)",
-      "Montant Total Reçu (€)",
-      "Taux de Réalisation (%)",
-      "Justificatifs à Fournir",
-      "Date Limite Justificatifs",
-      "Statut Actuel",
-      "Prochaines Étapes / Notes CA",
-      "Responsable Interne (École)",
-      "Nom de l'Organisation",
-      "Description du Projet",
-      "Numéro SIRET", "Personne de Contact", "Email de Contact", "Téléphone de Contact",
-      "Adresse de l'Organisation", "Public Cible", "Étudiants Visés", "Secteurs",
-      "Durée Projet (mois)", "Date Début Projet", "Objectifs du Projet",
-      "Méthodologie", "Organisations Partenaires",
-      "Budget Personnel (€)", "Budget Équipements (€)", "Budget Fonctionnement (€)", "Budget Autres (€)",
-      "Résultats Attendus", "Critères d'Évaluation", "Pérennité", "Innovation", "Impact Social"
+      "ID",
+      "Nom de la subvention / Appel à projets",
+      "Organisme financeur",
+      "Type de financeur",
+      "Objet de la subvention",
+      "Date limite de dépôt",
+      "Date dépôt dossier",
+      "Montant sollicité (€)",
+      "Montant obtenu (€)",
+      "Date notification (accord/refus)",
+      "Date réception avance",
+      "Montant perçu avance (€)",
+      "Date réception solde",
+      "Montant perçu solde (€)",
+      "Montant total reçu (€)",
+      "Montant restant à percevoir (€)",
+      "Taux de réalisation (%)",
+      "Justificatifs à fournir",
+      "Date limite justificatifs",
+      "Statut actuel",
+      "Prochaines étapes / Notes CA",
+      "Responsable interne",
     ];
 
     const rows = applications.map(app => {
       const appTotalReceivedAmount = (app.advanceReceivedAmount || 0) + (app.balanceReceivedAmount || 0);
-      // CORRECTION ICI : Utilisation de app.amountObtained pour le taux de réalisation à l'export
       const appCompletionRate = app.amountObtained > 0 ? (appTotalReceivedAmount / app.amountObtained) * 100 : 0;
+      const appRemainingAmount = (app.amountObtained || 0) - appTotalReceivedAmount;
 
       return [
         `"${app.projectTitle.replace(/"/g, '""')}"`,
+        `"${app.projectTitle.replace(/"/g, '""')}"`,
         `"${app.fundingBody.replace(/"/g, '""')}"`,
         `"${app.financeurType.replace(/"/g, '""')}"`,
-        `"${app.programName.replace(/"/g, '""')}"`,
         `"${app.objectGrant.replace(/"/g, '""')}"`,
         app.submissionDeadline,
         app.submissionDateActual,
@@ -279,17 +272,13 @@ export default function SuiviSubvention() {
         app.balanceReceivedDate,
         app.balanceReceivedAmount,
         parseFloat(appTotalReceivedAmount.toFixed(2)),
+        parseFloat(appRemainingAmount.toFixed(2)),
         parseFloat(appCompletionRate.toFixed(2)),
         `"${app.justificatifs.replace(/"/g, '""')}"`,
         app.justificatifsDeadline,
         `"${app.currentStatus.replace(/"/g, '""')}"`,
         `"${app.nextSteps.replace(/"/g, '""')}"`,
         `"${app.internalResponsible.replace(/"/g, '""')}"`,
-
-        `""`,
-        `""`,
-        `""`, `""`, `""`, `""`, `""`, `""`, `0`, `""`, `0`, `""`, `""`, `""`, `""`,
-        `0`, `0`, `0`, `0`, `""`, `""`, `""`, `""`, `""`
       ];
     });
 
@@ -315,12 +304,10 @@ export default function SuiviSubvention() {
   };
 
   const downloadExcelTemplate = () => {
-    // Le chemin relatif vers votre fichier Excel dans le dossier `public/fichiers`
-    const filePath = '/fichiers/TABLEAU DE SUIVI DES SUBVENTIONS.xlsx'; 
+    const filePath = '/fichiers/ANNEXE 14 TABLEAU DE SUIVI DES SUBVENTIONS.xlsx'; 
     const a = document.createElement('a');
     a.href = filePath;
-    // Le nom sous lequel le fichier sera téléchargé par l'utilisateur
-    a.download = `TABLEAU DE SUIVI DES SUBVENTIONS.xlsx`; 
+    a.download = `ANNEXE 14 TABLEAU DE SUIVI DES SUBVENTIONS.xlsx`; 
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
@@ -654,6 +641,18 @@ export default function SuiviSubvention() {
                 />
               </div>
             </div>
+            
+            {/* Montant restant à percevoir */}
+            <div>
+              <Label htmlFor="remaining-amount">Montant restant à percevoir (€)</Label>
+              <Input
+                id="remaining-amount"
+                type="number"
+                value={parseFloat(remainingAmountToReceive.toFixed(2))}
+                readOnly
+                className="bg-gray-100"
+              />
+            </div>
 
             {/* Justificatifs et Date Limite Justificatifs */}
             <div>
@@ -744,8 +743,9 @@ export default function SuiviSubvention() {
 
         {applications.map(app => {
           const appTotalReceivedAmount = (app.advanceReceivedAmount || 0) + (app.balanceReceivedAmount || 0);
-          // CORRECTION ICI : Utilisation de app.amountObtained pour le taux de réalisation
           const appCompletionRate = app.amountObtained > 0 ? (appTotalReceivedAmount / app.amountObtained) * 100 : 0;
+          const appRemainingAmount = (app.amountObtained || 0) - appTotalReceivedAmount;
+
 
           return (
             <Card key={app.id} className="card-hover transition-shadow duration-200 hover:shadow-lg">
@@ -763,6 +763,7 @@ export default function SuiviSubvention() {
                     <p className="text-gray-600 mb-1">Montant Sollicité : {app.amountSolicited.toLocaleString('fr-FR')} €</p>
                     <p className="text-gray-600 mb-1">Montant Obtenu : {app.amountObtained.toLocaleString('fr-FR')} €</p>
                     <p className="text-gray-600 mb-1">Montant Total Reçu : {appTotalReceivedAmount.toLocaleString('fr-FR')} €</p>
+                    <p className="text-gray-600 mb-1">Montant restant à percevoir : {appRemainingAmount.toLocaleString('fr-FR')} €</p>
                     <p className="text-gray-600 mb-1">Taux de Réalisation : {parseFloat(appCompletionRate.toFixed(2))} %</p>
                   </div>
 
