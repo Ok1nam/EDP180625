@@ -11,7 +11,8 @@ import { useLocalStorage } from "@/hooks/useLocalStorage";
 import { useToast } from "@/hooks/use-toast";
 
 interface SubsidyApplication {
-  id: string;
+  id: string; // Internal unique ID
+  projectTitle: string; // ID / Nom unique pour identifier la subvention
   programName: string; // Nom de la Subvention / Appel à Projets
 
   financeurType: 'Public' | 'Privé' | ''; // Type de financeur
@@ -35,7 +36,6 @@ interface SubsidyApplication {
   internalResponsible: string; // Responsable Interne
 
   fundingBody: string; // Organisme Financeur
-  projectTitle: string; // ID / Nom unique pour identifier la subvention.
 }
 
 const fundingBodies = [
@@ -80,7 +80,9 @@ export default function SuiviSubvention() {
     submissionDateActual: '',
     notificationDate: '',
     advanceReceivedDate: '',
+    advanceReceivedAmount: 0,
     balanceReceivedDate: '',
+    balanceReceivedAmount: 0,
     justificatifs: '',
     justificatifsDeadline: '',
     nextSteps: '',
@@ -110,7 +112,9 @@ export default function SuiviSubvention() {
       submissionDateActual: '',
       notificationDate: '',
       advanceReceivedDate: '',
+      advanceReceivedAmount: 0,
       balanceReceivedDate: '',
+      balanceReceivedAmount: 0,
       justificatifs: '',
       justificatifsDeadline: '',
       nextSteps: '',
@@ -214,8 +218,6 @@ export default function SuiviSubvention() {
     });
   };
 
-  // Fonction generateDocument retirée car le bouton est supprimé
-
   const exportToCSV = () => {
     if (applications.length === 0) {
       toast({
@@ -257,8 +259,8 @@ export default function SuiviSubvention() {
       const appRemainingAmount = (app.amountObtained || 0) - appTotalReceivedAmount;
 
       return [
-        `"${app.projectTitle.replace(/"/g, '""')}"`,
-        `"${app.projectTitle.replace(/"/g, '""')}"`,
+        `"${app.projectTitle.replace(/"/g, '""')}"`, // ID
+        `"${app.programName.replace(/"/g, '""')}"`, // Nom de la subvention / Appel à projets
         `"${app.fundingBody.replace(/"/g, '""')}"`,
         `"${app.financeurType.replace(/"/g, '""')}"`,
         `"${app.objectGrant.replace(/"/g, '""')}"`,
@@ -304,10 +306,10 @@ export default function SuiviSubvention() {
   };
 
   const downloadExcelTemplate = () => {
-    const filePath = '/fichiers/ANNEXE 14 TABLEAU DE SUIVI DES SUBVENTIONS.xlsx'; 
+    const filePath = '/fichiers/ANNEXE 14 TABLEAU DE SUIVI DES SUBVENTIONS.xlsx';
     const a = document.createElement('a');
     a.href = filePath;
-    a.download = `ANNEXE 14 TABLEAU DE SUIVI DES SUBVENTIONS.xlsx`; 
+    a.download = `ANNEXE 14 TABLEAU DE SUIVI DES SUBVENTIONS.xlsx`;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);
@@ -641,7 +643,7 @@ export default function SuiviSubvention() {
                 />
               </div>
             </div>
-            
+
             {/* Montant restant à percevoir */}
             <div>
               <Label htmlFor="remaining-amount">Montant restant à percevoir (€)</Label>
