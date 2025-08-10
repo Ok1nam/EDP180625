@@ -259,28 +259,28 @@ export default function SuiviSubvention() {
       const appRemainingAmount = (app.amountObtained || 0) - appTotalReceivedAmount;
 
       return [
-        `"${app.projectTitle.replace(/"/g, '""')}"`, // ID
-        `"${app.programName.replace(/"/g, '""')}"`, // Nom de la subvention / Appel à projets
-        `"${app.fundingBody.replace(/"/g, '""')}"`,
-        `"${app.financeurType.replace(/"/g, '""')}"`,
-        `"${app.objectGrant.replace(/"/g, '""')}"`,
-        app.submissionDeadline,
-        app.submissionDateActual,
-        app.amountSolicited,
-        app.amountObtained,
-        app.notificationDate,
-        app.advanceReceivedDate,
-        app.advanceReceivedAmount,
-        app.balanceReceivedDate,
-        app.balanceReceivedAmount,
-        parseFloat(appTotalReceivedAmount.toFixed(2)),
-        parseFloat(appRemainingAmount.toFixed(2)),
-        parseFloat(appCompletionRate.toFixed(2)),
-        `"${app.justificatifs.replace(/"/g, '""')}"`,
-        app.justificatifsDeadline,
-        `"${app.currentStatus.replace(/"/g, '""')}"`,
-        `"${app.nextSteps.replace(/"/g, '""')}"`,
-        `"${app.internalResponsible.replace(/"/g, '""')}"`,
+        `"${String(app.projectTitle).replace(/"/g, '""')}"`, // ID
+        `"${String(app.programName).replace(/"/g, '""')}"`, // Nom de la subvention / Appel à projets
+        `"${String(app.fundingBody).replace(/"/g, '""')}"`,
+        `"${String(app.financeurType).replace(/"/g, '""')}"`,
+        `"${String(app.objectGrant).replace(/"/g, '""')}"`,
+        String(app.submissionDeadline),
+        String(app.submissionDateActual),
+        String(app.amountSolicited),
+        String(app.amountObtained),
+        String(app.notificationDate),
+        String(app.advanceReceivedDate),
+        String(app.advanceReceivedAmount),
+        String(app.balanceReceivedDate),
+        String(app.balanceReceivedAmount),
+        String(parseFloat(appTotalReceivedAmount.toFixed(2))),
+        String(parseFloat(appRemainingAmount.toFixed(2))),
+        String(parseFloat(appCompletionRate.toFixed(2))),
+        `"${String(app.justificatifs).replace(/"/g, '""')}"`,
+        String(app.justificatifsDeadline),
+        `"${String(app.currentStatus).replace(/"/g, '""')}"`,
+        `"${String(app.nextSteps).replace(/"/g, '""')}"`,
+        `"${String(app.internalResponsible).replace(/"/g, '""')}"`,
       ];
     });
 
