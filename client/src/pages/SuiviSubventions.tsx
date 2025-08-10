@@ -763,30 +763,40 @@ export default function SuiviSubvention() {
                     <p className="text-gray-600 mb-1">Montant Sollicité : {app.amountSolicited.toLocaleString('fr-FR')} €</p>
                     <p className="text-gray-600 mb-1">Montant Obtenu : {app.amountObtained.toLocaleString('fr-FR')} €</p>
                     <p className="text-gray-600 mb-1">Montant Total Reçu : {appTotalReceivedAmount.toLocaleString('fr-FR')} €</p>
-                    <p className="text-gray-600 mb-1">Taux de Réalisation : {parseFloat(appCompletionRate.toFixed(2))}%</p>
-                    {app.submissionDeadline && (
-                      <p className="text-gray-600 flex items-center gap-1">
-                        <CalendarDays className="w-4 h-4 text-gray-500" /> Date limite de dépôt : {new Date(app.submissionDeadline).toLocaleDateString('fr-FR')}
-                      </p>
-                    )}
-                    {app.justificatifsDeadline && (
-                      <p className="text-gray-600 flex items-center gap-1">
-                        <Clock className="w-4 h-4 text-gray-500" /> Date limite justificatifs : {new Date(app.justificatifsDeadline).toLocaleDateString('fr-FR')}
-                      </p>
-                    )}
+                    <p className="text-gray-600 mb-1">Taux de Réalisation : {parseFloat(appCompletionRate.toFixed(2))} %</p>
                   </div>
-                  <div className="flex space-x-2">
-                    <Button variant="outline" size="sm" onClick={() => editApplication(app)}>
+
+                  <div className="flex-shrink-0 flex gap-2">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={() => editApplication(app)}
+                      className="text-blue-600 hover:text-blue-800"
+                    >
                       Modifier
                     </Button>
-                    <Button variant="destructive" size="sm" onClick={() => deleteApplication(app.id)}>
+                    <Button
+                      variant="destructive"
+                      size="sm"
+                      onClick={() => deleteApplication(app.id)}
+                    >
                       Supprimer
                     </Button>
                   </div>
                 </div>
-                {app.objectGrant && <p className="text-sm text-gray-500 mb-2">Objet : {app.objectGrant}</p>}
-                {app.nextSteps && <p className="text-sm text-gray-500 italic">Prochaines étapes : {app.nextSteps}</p>}
-                {app.internalResponsible && <p className="text-xs text-gray-400 mt-2">Responsable Interne : {app.internalResponsible}</p>}
+
+                {app.objectGrant && (
+                  <div className="mt-4 pt-4 border-t border-gray-200">
+                    <p className="text-sm text-gray-500 font-medium">Objet :</p>
+                    <p className="text-sm text-gray-700">{app.objectGrant}</p>
+                  </div>
+                )}
+                {app.nextSteps && (
+                  <div className="mt-2">
+                    <p className="text-sm text-gray-500 font-medium">Prochaines Étapes :</p>
+                    <p className="text-sm text-gray-700">{app.nextSteps}</p>
+                  </div>
+                )}
               </CardContent>
             </Card>
           );
