@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FileText, Download, Euro, Building, Users, Target, CalendarDays, Percent, ClipboardList, Clock, UserRound } from "lucide-react"; // Nouvelles icônes
+import { FileText, Download, Euro, Building, Users, Target, CalendarDays, Percent, ClipboardList, Clock, UserRound } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -10,64 +10,124 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 import { useToast } from "@/hooks/use-toast";
 
-// Mise à jour de l'interface SubsidyApplication pour inclure les nouveaux champs
+// Nouvelle interface mise à jour pour inclure tous les champs du dossier type
 interface SubsidyApplication {
   id: string;
-  // Champs existants (certains renommés pour la clarté)
-  programName: string; // Nom de la Subvention / Appel à Projets
-  organizationName: string; // Nom de l'organisme demandeur
-
-  // Nouveaux champs tirés de la capture d'écran
-  financeurType: 'Public' | 'Privé' | ''; // Type de financeur
-  objectGrant: string; // Objet de la Subvention
-  submissionDeadline: string; // Date Limite de Dépôt
-  submissionDateActual: string; // Date Dépôt Dossier
-  amountSolicited: number; // Montant Sollicité (€) - Ancien 'amount', renommé pour la clarté
-  amountObtained: number; // Montant Obtenu (€)
-  notificationDate: string; // Date Notification (Accord/Refus)
-  advanceReceivedDate: string; // Date Réception Avance (€)
-  advanceReceivedAmount: number; // Montant de l'avance reçue
-  balanceReceivedDate: string; // Date Réception Solde (€)
-  balanceReceivedAmount: number; // Montant du solde reçu
-  totalReceivedAmount: number; // Montant Total Reçu (€)
-  completionRate: number; // Taux de Réalisation (%)
-  justificatifs: string; // Justificatifs à Fournir
-  justificatifsDeadline: string; // Date Limite Justificatifs
-  currentStatus: 
-    'À identifier' | 'En veille' | 'À préparer' | 'À déposer' | 
-    'Dossier déposé' | 'En instruction' | 'Accordé / Avance reçue' | 
-    'Refusé' | 'Clôturée / Reçue' | 'En attente de solde' | ''; // Statut Actuel
-  nextSteps: string; // Prochaines Étapes / Notes CA
-  internalResponsible: string; // Responsable Interne
-
-  // Autres champs existants (potentiellement à adapter ou renommer pour cohérence)
-  fundingBody: string; // Organisme Financeur
-  projectTitle: string; // ID / Nom unique pour identifier la subvention. On garde 'projectTitle' car 'ID' est déjà pour l'identifiant unique.
-  projectDescription: string;
+  // Partie 1: Informations générales sur la structure
+  organizationName: string;
+  acronym?: string;
+  legalStatus: string;
   siretNumber: string;
-  contactPerson: string;
-  email: string;
-  phone: string;
-  address: string; // Addresse de l'organisation
-  targetAudience: string;
-  expectedStudents: number;
-  sectors: string[];
-  projectDuration: number;
-  startDate: string;
-  objectives: string;
-  methodology: string;
-  partnerOrganizations: string;
-  budget: {
-    personnel: number;
-    equipment: number;
-    operations: number;
-    other: number;
-  };
-  expectedOutcomes: string;
-  evaluationCriteria: string;
-  sustainability: string;
-  innovation: string;
-  socialImpact: string;
+  rnaNumber?: string;
+  schoolAddress?: string;
+  legalRepresentativeName?: string;
+  legalRepresentativeFunction?: string;
+  contactPersonName?: string;
+  contactPersonEmail?: string;
+  contactPersonPhone?: string;
+  creationDate?: string;
+  website?: string;
+  isEligibleForMecenat: boolean;
+  totalProductsLastYear?: number;
+  hasPreviousSupport?: boolean;
+  previousSupportDetails?: string;
+  accountingClosingDate?: string;
+  volunteerCount?: number;
+  employeeCount?: number;
+  uaiNumber?: string;
+  // Ces deux champs sont des champs de texte pour simplifier l'intégration du tableau
+  mainFinancialPartnersPublic?: string;
+  mainFinancialPartnersPrivate?: string;
+
+  // Partie 2: Présentation de l'école de production
+  missionStatement?: string;
+  historyAndGenesis?: string;
+  targetAudience?: string;
+  targetAudienceDetails?: string;
+  pedagogicalModel?: string;
+  workshopsAndTrades?: string;
+  diplomaPrepared?: string;
+  currentStudentCount?: number;
+  graduatesPerYear?: number;
+  professionalInsertionRate?: string;
+  territorialAnchorage?: string;
+  localPartnerships?: string;
+  employmentPartnerships?: string;
+
+  // Partie 3: Le projet spécifique
+  projectTitle: string;
+  fundingPurpose: string[];
+  contextAndJustification?: string;
+  thematicAreas: string[];
+  projectDescriptionSummary?: string;
+  concernedDepartments?: string;
+  concernedCities?: string;
+  territoryCharacteristics: string[];
+  beneficiaryAgeRanges: { range: string; proportion: number | null }[];
+  projectDuration: string;
+  projectDescriptionDetailed?: string;
+  socialNeedsAnswered?: string;
+  realizationsAndImpactsLastYear?: string;
+  beneficiaryCountLastYear?: number;
+  hoursOfSupportPerStudentLastYear?: number;
+  supportDurationRequested?: string;
+  concernedYears?: string;
+  targetBeneficiaryCount?: number;
+  targetHoursOfSupportPerStudent?: number;
+  targetImpacts?: string;
+  isCollaborativeProject: boolean;
+  collaboratorsDetails?: string;
+  projectInterlocutorName?: string;
+  projectInterlocutorFunction?: string;
+  projectInterlocutorEmail?: string;
+  projectInterlocutorPhone?: string;
+  projectInterlocutorSecondaryPhone?: string;
+  mobilizedPartners?: string;
+  difficulties?: string;
+  desiredSupport: string[];
+  synergies?: string;
+  vision10Years?: string;
+
+  // Partie 4: Budget prévisionnel
+  projectBudgetYear1?: number;
+  projectBudgetYear2?: number;
+  projectBudgetYear3?: number;
+  totalProjectCost?: number;
+  fundingRequestedYear1?: number;
+  fundingRequestedYear2?: number;
+  fundingRequestedYear3?: number;
+  totalAmountSolicited: number;
+  acquiredFundingSource1?: string;
+  acquiredFundingSource2?: string;
+  acquiredFundingSource3?: string;
+  totalAcquiredFunding?: number;
+
+  // Partie 5: Moyens humains et matériels
+  teamDescription?: string;
+  premisesAndEquipment?: string;
+
+  // Anciens champs conservés pour cohérence si besoin, à adapter
+  programName?: string;
+  financeurType: 'Public' | 'Privé' | 'Autres' | '';
+  objectGrant?: string;
+  submissionDeadline?: string;
+  submissionDateActual?: string;
+  amountObtained?: number;
+  notificationDate?: string;
+  advanceReceivedDate?: string;
+  advanceReceivedAmount?: number;
+  balanceReceivedDate?: string;
+  balanceReceivedAmount?: number;
+  totalReceivedAmount?: number;
+  completionRate?: number;
+  justificatifs?: string;
+  justificatifsDeadline?: string;
+  currentStatus:
+    'À identifier' | 'En veille' | 'À préparer' | 'À déposer' |
+    'Dossier déposé' | 'En instruction' | 'Accordé / Avance reçue' |
+    'Refusé' | 'Clôturée / Reçue' | 'En attente de solde' | '';
+  nextSteps?: string;
+  internalResponsible?: string;
 }
 
 const fundingBodies = [
@@ -79,9 +139,8 @@ const fundingBodies = [
   { name: "Fondations", programs: ["Fondation de France", "Fondation Total", "Autres fondations"] }
 ];
 
-const financeurTypes = ['Public', 'Privé']; // Type de financeur
+const financeurTypes = ['Public', 'Privé', 'Autres'];
 
-// Nouveaux statuts basés sur la capture d'écran
 const statusOptions = [
   'À identifier',
   'En veille',
@@ -95,107 +154,127 @@ const statusOptions = [
   'En attente de solde'
 ];
 
+const territoryCharacteristicsOptions = [
+  "Quartier politique de la ville",
+  "REP/REP+",
+  "Zone rurale",
+  "Zone péri-urbaine",
+  "Zone urbaine",
+  "Cité éducative",
+  "Autres"
+];
+
+const fundingPurposeOptions = [
+  "Fonctionnement général de l'association",
+  "Acquisition d'équipements",
+  "Aménagement des locaux"
+];
+
+const thematicAreasOptions = [
+  "Action en faveur de l'orientation des jeunes",
+  "Formations pour les jeunes (numériques, techniques, liée à l'industrie) ou actions de formation pour les enseignants",
+  "Insertion professionnelle (préparation aux stages et à l'emploi, y compris pour les réfugiés...)"
+];
+
+const projectDurations = [
+  "Projet pilote sur 1 an",
+  "Projet de 1 à 3 ans",
+  "Projet à plus de 3 ans"
+];
+
+const desiredSupportOptions = [
+  "Soutien financier",
+  "Mécénat de compétences",
+  "Réseau/connexions",
+  "Visibilité/communication",
+  "Autres"
+];
+
+const ageRanges = ["12 à 15 ans", "16 à 18 ans", "19 à 25 ans"];
+
 export default function SubsidyGenerator() {
   const { toast } = useToast();
   const [savedData, setSavedData] = useLocalStorage<SubsidyApplication[]>('subsidy_applications', []);
   const [applications, setApplications] = useState<SubsidyApplication[]>(savedData);
   const [showForm, setShowForm] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
-  const [formData, setFormData] = useState<Partial<SubsidyApplication>>({});
+  const [formData, setFormData] = useState<Partial<SubsidyApplication>>({
+    fundingPurpose: [],
+    thematicAreas: [],
+    territoryCharacteristics: [],
+    beneficiaryAgeRanges: ageRanges.map(range => ({ range, proportion: null })),
+    desiredSupport: [],
+    currentStatus: 'À identifier',
+    isEligibleForMecenat: false,
+    hasPreviousSupport: false,
+    isCollaborativeProject: false,
+  });
   const [selectedFundingBody, setSelectedFundingBody] = useState<string>('');
-
-  // Effect pour calculer automatiquement Montant Total Reçu et Taux de Réalisation
-  // Je l'ai mis ici pour une mise à jour dynamique lors de l'édition du formulaire
-  useState(() => {
-    const totalReceived = (formData.advanceReceivedAmount || 0) + (formData.balanceReceivedAmount || 0);
-    const completion = formData.amountObtained > 0 ? (totalReceived / formData.amountObtained) * 100 : 0;
-    
-    // Mettre à jour le formData sans déclencher de boucle infinie si les valeurs sont déjà les mêmes
-    if (formData.totalReceivedAmount !== totalReceived || formData.completionRate !== completion) {
-      setFormData(prev => ({
-        ...prev,
-        totalReceivedAmount: totalReceived,
-        completionRate: parseFloat(completion.toFixed(2)) // Arrondir à 2 décimales
-      }));
-    }
-  }, [formData.advanceReceivedAmount, formData.balanceReceivedAmount, formData.amountObtained]);
-
 
   const resetForm = () => {
     setFormData({
-      budget: { personnel: 0, equipment: 0, operations: 0, other: 0 },
-      sectors: [],
-      amountSolicited: 0, // Initialiser à 0
-      amountObtained: 0, // Initialiser à 0
-      advanceReceivedAmount: 0, // Initialiser à 0
-      balanceReceivedAmount: 0, // Initialiser à 0
-      totalReceivedAmount: 0, // Initialiser à 0
-      completionRate: 0, // Initialiser à 0
-      currentStatus: 'À identifier' // Nouveau statut par défaut
+      fundingPurpose: [],
+      thematicAreas: [],
+      territoryCharacteristics: [],
+      beneficiaryAgeRanges: ageRanges.map(range => ({ range, proportion: null })),
+      desiredSupport: [],
+      currentStatus: 'À identifier',
+      isEligibleForMecenat: false,
+      hasPreviousSupport: false,
+      isCollaborativeProject: false,
     });
     setEditingId(null);
     setShowForm(false);
     setSelectedFundingBody('');
   };
 
+  const handleCheckboxChange = (field: keyof SubsidyApplication, value: string, checked: boolean) => {
+    setFormData(prev => {
+      const currentValues = (prev[field] as string[] | undefined) || [];
+      const updatedValues = checked
+        ? [...currentValues, value]
+        : currentValues.filter(v => v !== value);
+      return { ...prev, [field]: updatedValues };
+    });
+  };
+
+  const handleAgeRangeChange = (range: string, proportion: number | null) => {
+    setFormData(prev => {
+      const updatedRanges = (prev.beneficiaryAgeRanges || ageRanges.map(r => ({ range: r, proportion: null })))
+        .map(item => item.range === range ? { ...item, proportion } : item);
+      return { ...prev, beneficiaryAgeRanges: updatedRanges };
+    });
+  };
+
   const saveApplication = () => {
-    if (!formData.projectTitle || !formData.fundingBody || !formData.amountSolicited || !formData.currentStatus) { // Vérifier les nouveaux champs obligatoires
+    if (!formData.projectTitle || !formData.organizationName || !formData.totalAmountSolicited) {
       toast({
         title: "Erreur",
-        description: "Veuillez remplir les champs obligatoires (Titre du projet, Organisme financeur, Montant Sollicité, Statut Actuel).",
+        description: "Veuillez remplir les champs obligatoires (Nom du projet, Nom de l'organisation, Montant sollicité).",
       });
       return;
     }
 
     const application: SubsidyApplication = {
       id: editingId || Date.now().toString(),
-      programName: formData.programName || '',
+      ...formData,
       organizationName: formData.organizationName || '',
-
-      // Nouveaux champs
-      financeurType: formData.financeurType || '',
-      objectGrant: formData.objectGrant || '',
-      submissionDeadline: formData.submissionDeadline || '',
-      submissionDateActual: formData.submissionDateActual || '',
-      amountSolicited: formData.amountSolicited || 0,
-      amountObtained: formData.amountObtained || 0,
-      notificationDate: formData.notificationDate || '',
-      advanceReceivedDate: formData.advanceReceivedDate || '',
-      advanceReceivedAmount: formData.advanceReceivedAmount || 0,
-      balanceReceivedDate: formData.balanceReceivedDate || '',
-      balanceReceivedAmount: formData.balanceReceivedAmount || 0,
-      totalReceivedAmount: formData.totalReceivedAmount || 0,
-      completionRate: formData.completionRate || 0,
-      justificatifs: formData.justificatifs || '',
-      justificatifsDeadline: formData.justificatifsDeadline || '',
-      currentStatus: formData.currentStatus || 'À identifier', // Assurez-vous d'avoir une valeur par défaut valide
-      nextSteps: formData.nextSteps || '',
-      internalResponsible: formData.internalResponsible || '',
-
-      // Anciens champs (renommés si besoin)
-      fundingBody: formData.fundingBody || '', // 'Organisme Financeur'
-      projectTitle: formData.projectTitle || '', // 'Nom de la Subvention / Appel à Projets'
-      projectDescription: formData.projectDescription || '',
+      projectTitle: formData.projectTitle || '',
+      legalStatus: formData.legalStatus || '',
       siretNumber: formData.siretNumber || '',
-      contactPerson: formData.contactPerson || '',
-      email: formData.email || '',
-      phone: formData.phone || '',
-      address: formData.address || '',
-      targetAudience: formData.targetAudience || '',
-      expectedStudents: formData.expectedStudents || 0,
-      sectors: formData.sectors || [],
-      projectDuration: formData.projectDuration || 12,
-      startDate: formData.startDate || '',
-      objectives: formData.objectives || '',
-      methodology: formData.methodology || '',
-      partnerOrganizations: formData.partnerOrganizations || '',
-      budget: formData.budget || { personnel: 0, equipment: 0, operations: 0, other: 0 },
-      expectedOutcomes: formData.expectedOutcomes || '',
-      evaluationCriteria: formData.evaluationCriteria || '',
-      sustainability: formData.sustainability || '',
-      innovation: formData.innovation || '',
-      socialImpact: formData.socialImpact || '',
-    };
+      totalAmountSolicited: formData.totalAmountSolicited || 0,
+      currentStatus: formData.currentStatus || 'À identifier',
+      fundingPurpose: formData.fundingPurpose || [],
+      thematicAreas: formData.thematicAreas || [],
+      territoryCharacteristics: formData.territoryCharacteristics || [],
+      beneficiaryAgeRanges: formData.beneficiaryAgeRanges || [],
+      projectDuration: formData.projectDuration || '',
+      desiredSupport: formData.desiredSupport || [],
+      isEligibleForMecenat: formData.isEligibleForMecenat ?? false,
+      hasPreviousSupport: formData.hasPreviousSupport ?? false,
+      isCollaborativeProject: formData.isCollaborativeProject ?? false,
+      financeurType: formData.financeurType || '',
+    } as SubsidyApplication;
 
     let updatedApplications;
     if (editingId) {
@@ -217,7 +296,7 @@ export default function SubsidyGenerator() {
   const editApplication = (app: SubsidyApplication) => {
     setFormData(app);
     setEditingId(app.id);
-    setSelectedFundingBody(app.fundingBody);
+    setSelectedFundingBody(app.fundingBody || '');
     setShowForm(true);
   };
 
@@ -225,7 +304,7 @@ export default function SubsidyGenerator() {
     const updatedApplications = applications.filter(a => a.id !== id);
     setApplications(updatedApplications);
     setSavedData(updatedApplications);
-    
+
     toast({
       title: "Dossier supprimé",
       description: "Le dossier de subvention a été supprimé.",
@@ -239,12 +318,6 @@ export default function SubsidyGenerator() {
     });
   };
 
-  const calculateTotalBudget = () => {
-    if (!formData.budget) return 0;
-    return Object.values(formData.budget).reduce((sum, value) => sum + (value || 0), 0);
-  };
-
-  // Adapter les couleurs et labels pour les nouveaux statuts
   const getStatusColor = (status: SubsidyApplication['currentStatus']) => {
     const colors = {
       'À identifier': 'bg-gray-100 text-gray-800',
@@ -255,8 +328,8 @@ export default function SubsidyGenerator() {
       'En instruction': 'bg-indigo-100 text-indigo-800',
       'Accordé / Avance reçue': 'bg-green-100 text-green-800',
       'Refusé': 'bg-red-100 text-red-800',
-      'Clôturée / Reçue': 'bg-emerald-100 text-emerald-800', // Vert foncé pour clôturé/reçu
-      'En attente de solde': 'bg-cyan-100 text-cyan-800', // Bleu clair pour attente
+      'Clôturée / Reçue': 'bg-emerald-100 text-emerald-800',
+      'En attente de solde': 'bg-cyan-100 text-cyan-800',
     };
     return colors[status] || 'bg-gray-100 text-gray-800';
   };
@@ -265,8 +338,8 @@ export default function SubsidyGenerator() {
     const total = applications.length;
     const deposited = applications.filter(a => a.currentStatus === 'Dossier déposé').length;
     const approved = applications.filter(a => a.currentStatus === 'Accordé / Avance reçue' || a.currentStatus === 'Clôturée / Reçue').length;
-    const totalAmountSolicited = applications.reduce((sum, a) => sum + a.amountSolicited, 0);
-    const totalAmountObtained = applications.reduce((sum, a) => sum + a.amountObtained, 0);
+    const totalAmountSolicited = applications.reduce((sum, a) => sum + (a.totalAmountSolicited || 0), 0);
+    const totalAmountObtained = applications.reduce((sum, a) => sum + (a.amountObtained || 0), 0);
 
     return { total, deposited, approved, totalAmountSolicited, totalAmountObtained };
   };
@@ -279,12 +352,11 @@ export default function SubsidyGenerator() {
         <FileText className="w-6 h-6" />
         Suivi et Génération des Dossiers de Subventions
       </h1>
-      
+
       <p className="mb-6 text-gray-600 leading-relaxed">
         Gérez et suivez l'ensemble des dossiers de demande de subventions pour les Écoles de Production de vos clients, du montage au versement final.
       </p>
 
-      {/* Statistiques adaptées */}
       <div className="grid md:grid-cols-5 gap-4 mb-6">
         <Card>
           <CardContent className="p-4 text-center">
@@ -320,7 +392,7 @@ export default function SubsidyGenerator() {
 
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-xl font-semibold">Liste des subventions</h2>
-        <Button 
+        <Button
           onClick={() => { resetForm(); setShowForm(true); }}
           className="btn-primary"
         >
@@ -334,236 +406,233 @@ export default function SubsidyGenerator() {
             <CardTitle>{editingId ? 'Modifier' : 'Nouveau'} dossier de subvention</CardTitle>
           </CardHeader>
           <CardContent className="space-y-6">
-            {/* ID / Nom de la Subvention / Appel à Projets */}
-            <div>
-              <Label htmlFor="project-title">Nom de la Subvention / Appel à Projets *</Label>
-              <Input
-                id="project-title"
-                value={formData.projectTitle || ''}
-                onChange={(e) => setFormData({...formData, projectTitle: e.target.value})}
-                placeholder="Ex: Aide à la création d'entreprise 2025"
-              />
-            </div>
-
-            <div className="grid md:grid-cols-2 gap-4">
-              {/* Organisme Financeur */}
-              <div>
-                <Label>Organisme financeur *</Label>
-                <Select
-                  value={selectedFundingBody}
-                  onValueChange={(value) => {
-                    setSelectedFundingBody(value);
-                    setFormData({...formData, fundingBody: value, programName: ''});
-                  }}
-                >
-                  <SelectTrigger>
-                    <SelectValue placeholder="Choisir un organisme" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {fundingBodies.map(body => (
-                      <SelectItem key={body.name} value={body.name}>
-                        {body.name}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-              {/* Type de financeur */}
-              <div>
-                <Label>Type de financeur *</Label>
-                <Select
-                  value={formData.financeurType || ''}
-                  onValueChange={(value) => setFormData({...formData, financeurType: value as any})}
-                >
-                  <SelectTrigger>
-                    <SelectValue placeholder="Choisir un type" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {financeurTypes.map(type => (
-                      <SelectItem key={type} value={type}>
-                        {type}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-            </div>
-
-            {/* Programme de financement et Objet de la Subvention */}
+            {/* Section 1: Informations générales sur la structure */}
+            <h3 className="text-lg font-semibold mt-4">1. Informations générales sur la structure</h3>
             <div className="grid md:grid-cols-2 gap-4">
               <div>
-                <Label htmlFor="program-name">Nom du programme (si applicable)</Label>
-                <Select
-                  value={formData.programName || ''}
-                  onValueChange={(value) => setFormData({...formData, programName: value})}
-                  disabled={!selectedFundingBody}
-                >
-                  <SelectTrigger>
-                    <SelectValue placeholder="Choisir un programme" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {selectedFundingBody && fundingBodies
-                      .find(body => body.name === selectedFundingBody)
-                      ?.programs.map(program => (
-                        <SelectItem key={program} value={program}>
-                          {program}
-                        </SelectItem>
-                      ))}
-                  </SelectContent>
-                </Select>
+                <Label htmlFor="organization-name">Nom de la structure *</Label>
+                <Input id="organization-name" value={formData.organizationName || ''} onChange={(e) => setFormData({...formData, organizationName: e.target.value})} placeholder="Ex: Association L'École de la Réussite" />
               </div>
               <div>
-                <Label htmlFor="object-grant">Objet de la Subvention</Label>
-                <Input
-                  id="object-grant"
-                  value={formData.objectGrant || ''}
-                  onChange={(e) => setFormData({...formData, objectGrant: e.target.value})}
-                  placeholder="Ex: Financement d'équipements pédagogiques"
-                />
+                <Label htmlFor="acronym">Sigle (si applicable)</Label>
+                <Input id="acronym" value={formData.acronym || ''} onChange={(e) => setFormData({...formData, acronym: e.target.value})} />
               </div>
             </div>
-
-            {/* Montant Sollicité et Montant Obtenu */}
             <div className="grid md:grid-cols-2 gap-4">
               <div>
-                <Label htmlFor="amount-solicited">Montant Sollicité (€) *</Label>
-                <Input
-                  id="amount-solicited"
-                  type="number"
-                  value={formData.amountSolicited || 0}
-                  onChange={(e) => setFormData({...formData, amountSolicited: parseFloat(e.target.value) || 0})}
-                  placeholder="50000"
-                />
+                <Label htmlFor="legal-status">Statut juridique *</Label>
+                <Input id="legal-status" value={formData.legalStatus || ''} onChange={(e) => setFormData({...formData, legalStatus: e.target.value})} placeholder="Ex: Association Loi 1901" />
               </div>
               <div>
-                <Label htmlFor="amount-obtained">Montant Obtenu (€)</Label>
-                <Input
-                  id="amount-obtained"
-                  type="number"
-                  value={formData.amountObtained || 0}
-                  onChange={(e) => setFormData({...formData, amountObtained: parseFloat(e.target.value) || 0})}
-                  placeholder="45000"
-                />
+                <Label htmlFor="creation-date">Date de création de la structure</Label>
+                <Input id="creation-date" type="date" value={formData.creationDate || ''} onChange={(e) => setFormData({...formData, creationDate: e.target.value})} />
               </div>
             </div>
-
-            {/* Dates importantes */}
             <div className="grid md:grid-cols-3 gap-4">
               <div>
-                <Label htmlFor="submission-deadline">Date Limite de Dépôt</Label>
-                <Input
-                  id="submission-deadline"
-                  type="date"
-                  value={formData.submissionDeadline || ''}
-                  onChange={(e) => setFormData({...formData, submissionDeadline: e.target.value})}
-                />
+                <Label htmlFor="siret">Numéro SIRET *</Label>
+                <Input id="siret" value={formData.siretNumber || ''} onChange={(e) => setFormData({...formData, siretNumber: e.target.value})} placeholder="12345678901234" />
               </div>
               <div>
-                <Label htmlFor="submission-date-actual">Date Dépôt Dossier</Label>
-                <Input
-                  id="submission-date-actual"
-                  type="date"
-                  value={formData.submissionDateActual || ''}
-                  onChange={(e) => setFormData({...formData, submissionDateActual: e.target.value})}
-                />
+                <Label htmlFor="rna">Numéro RNA</Label>
+                <Input id="rna" value={formData.rnaNumber || ''} onChange={(e) => setFormData({...formData, rnaNumber: e.target.value})} />
               </div>
               <div>
-                <Label htmlFor="notification-date">Date Notification (Accord/Refus)</Label>
-                <Input
-                  id="notification-date"
-                  type="date"
-                  value={formData.notificationDate || ''}
-                  onChange={(e) => setFormData({...formData, notificationDate: e.target.value})}
-                />
+                <Label htmlFor="uai">Numéro UAI</Label>
+                <Input id="uai" value={formData.uaiNumber || ''} onChange={(e) => setFormData({...formData, uaiNumber: e.target.value})} />
               </div>
             </div>
-
-            {/* Réceptions des fonds */}
-            <div className="grid md:grid-cols-4 gap-4">
-              <div>
-                <Label htmlFor="advance-date">Date Réception Avance</Label>
-                <Input
-                  id="advance-date"
-                  type="date"
-                  value={formData.advanceReceivedDate || ''}
-                  onChange={(e) => setFormData({...formData, advanceReceivedDate: e.target.value})}
-                />
-              </div>
-              <div>
-                <Label htmlFor="advance-amount">Montant Avance (€)</Label>
-                <Input
-                  id="advance-amount"
-                  type="number"
-                  value={formData.advanceReceivedAmount || 0}
-                  onChange={(e) => setFormData({...formData, advanceReceivedAmount: parseFloat(e.target.value) || 0})}
-                />
-              </div>
-              <div>
-                <Label htmlFor="balance-date">Date Réception Solde</Label>
-                <Input
-                  id="balance-date"
-                  type="date"
-                  value={formData.balanceReceivedDate || ''}
-                  onChange={(e) => setFormData({...formData, balanceReceivedDate: e.target.value})}
-                />
-              </div>
-              <div>
-                <Label htmlFor="balance-amount">Montant Solde (€)</Label>
-                <Input
-                  id="balance-amount"
-                  type="number"
-                  value={formData.balanceReceivedAmount || 0}
-                  onChange={(e) => setFormData({...formData, balanceReceivedAmount: parseFloat(e.target.value) || 0})}
-                />
-              </div>
-            </div>
-
-            {/* Montant Total Reçu et Taux de Réalisation (calculés automatiquement) */}
             <div className="grid md:grid-cols-2 gap-4">
               <div>
-                <Label htmlFor="total-received">Montant Total Reçu (€)</Label>
-                <Input
-                  id="total-received"
-                  type="number"
-                  value={formData.totalReceivedAmount || 0}
-                  readOnly // Ceci est calculé
-                  className="bg-gray-100"
-                />
+                <Label htmlFor="address-siege">Adresse du siège social</Label>
+                <Input id="address-siege" value={formData.address || ''} onChange={(e) => setFormData({...formData, address: e.target.value})} />
               </div>
               <div>
-                <Label htmlFor="completion-rate">Taux de Réalisation (%)</Label>
-                <Input
-                  id="completion-rate"
-                  type="number"
-                  value={formData.completionRate || 0}
-                  readOnly // Ceci est calculé
-                  className="bg-gray-100"
-                />
+                <Label htmlFor="address-locaux">Adresse des locaux de l'école</Label>
+                <Input id="address-locaux" value={formData.schoolAddress || ''} onChange={(e) => setFormData({...formData, schoolAddress: e.target.value})} />
               </div>
             </div>
-
-            {/* Justificatifs et Date Limite Justificatifs */}
-            <div>
-              <Label htmlFor="justificatifs">Justificatifs à Fournir</Label>
-              <Textarea
-                id="justificatifs"
-                value={formData.justificatifs || ''}
-                onChange={(e) => setFormData({...formData, justificatifs: e.target.value})}
-                placeholder="Ex: Bilans N-1, N-2; Comptes de résultat; Rapport d'activité 2024..."
-                rows={3}
+            <div className="grid md:grid-cols-2 gap-4">
+              <div>
+                <Label htmlFor="legal-representative-name">Nom et fonction du représentant légal</Label>
+                <Input id="legal-representative-name" value={formData.legalRepresentativeName || ''} onChange={(e) => setFormData({...formData, legalRepresentativeName: e.target.value})} placeholder="Nom Prénom, Fonction" />
+              </div>
+              <div>
+                <Label htmlFor="website">Site internet de la structure</Label>
+                <Input id="website" value={formData.website || ''} onChange={(e) => setFormData({...formData, website: e.target.value})} />
+              </div>
+            </div>
+            <div className="flex items-center space-x-2">
+              <Checkbox
+                id="mecenat"
+                checked={formData.isEligibleForMecenat}
+                onCheckedChange={(checked) => setFormData({...formData, isEligibleForMecenat: checked as boolean})}
               />
+              <Label htmlFor="mecenat">Éligibilité au mécénat au sens de l'article 238 bis du code général des Impôts ?</Label>
+            </div>
+            <div className="grid md:grid-cols-3 gap-4">
+              <div>
+                <Label htmlFor="total-products">Total des produits (dernier exercice clos)</Label>
+                <Input id="total-products" type="number" value={formData.totalProductsLastYear || ''} onChange={(e) => setFormData({...formData, totalProductsLastYear: parseFloat(e.target.value) || 0})} />
+              </div>
+              <div>
+                <Label htmlFor="volunteer-count">Nombre de bénévoles (dernier exercice clos)</Label>
+                <Input id="volunteer-count" type="number" value={formData.volunteerCount || ''} onChange={(e) => setFormData({...formData, volunteerCount: parseInt(e.target.value) || 0})} />
+              </div>
+              <div>
+                <Label htmlFor="employee-count">Nombre de salariés (dernier exercice clos)</Label>
+                <Input id="employee-count" type="number" value={formData.employeeCount || ''} onChange={(e) => setFormData({...formData, employeeCount: parseInt(e.target.value) || 0})} />
+              </div>
             </div>
             <div>
-              <Label htmlFor="justificatifs-deadline">Date Limite Justificatifs</Label>
-              <Input
-                id="justificatifs-deadline"
-                type="date"
-                value={formData.justificatifsDeadline || ''}
-                onChange={(e) => setFormData({...formData, justificatifsDeadline: e.target.value})}
-              />
+              <Label htmlFor="financial-partners-public">Principaux partenaires financiers publics</Label>
+              <Textarea id="financial-partners-public" value={formData.mainFinancialPartnersPublic || ''} onChange={(e) => setFormData({...formData, mainFinancialPartnersPublic: e.target.value})} placeholder="Nom de l'acteur, Type d'acteur, % dans le budget total" rows={3} />
+            </div>
+            <div>
+              <Label htmlFor="financial-partners-private">Principaux partenaires financiers privés</Label>
+              <Textarea id="financial-partners-private" value={formData.mainFinancialPartnersPrivate || ''} onChange={(e) => setFormData({...formData, mainFinancialPartnersPrivate: e.target.value})} placeholder="Nom de l'acteur, Type d'acteur, % dans le budget total" rows={3} />
             </div>
 
-            {/* Statut Actuel et Responsable Interne */}
+            {/* Section 2: Présentation de l'école de production */}
+            <h3 className="text-lg font-semibold mt-4">2. Présentation de l'école de production</h3>
+            <div>
+              <Label htmlFor="mission-statement">Mission(s) de la structure</Label>
+              <Textarea id="mission-statement" value={formData.missionStatement || ''} onChange={(e) => setFormData({...formData, missionStatement: e.target.value})} placeholder="Décrire la mission de l'école" rows={3} />
+            </div>
+            <div>
+              <Label htmlFor="history-genesis">Historique et genèse</Label>
+              <Textarea id="history-genesis" value={formData.historyAndGenesis || ''} onChange={(e) => setFormData({...formData, historyAndGenesis: e.target.value})} placeholder="Quand et comment l'école a-t-elle été créée ?" rows={3} />
+            </div>
+            <div>
+              <Label htmlFor="target-audience">Public cible</Label>
+              <Textarea id="target-audience" value={formData.targetAudienceDetails || ''} onChange={(e) => setFormData({...formData, targetAudienceDetails: e.target.value})} placeholder="Qui sont les jeunes accueillis ? (Âge, niveau scolaire à l'entrée, situation sociale.)" rows={3} />
+            </div>
+
+            {/* Section 3: Le projet spécifique */}
+            <h3 className="text-lg font-semibold mt-4">3. Le projet spécifique objet de la demande</h3>
+            <div>
+              <Label htmlFor="project-title">Titre du projet *</Label>
+              <Input id="project-title" value={formData.projectTitle || ''} onChange={(e) => setFormData({...formData, projectTitle: e.target.value})} placeholder="Ex: Projet d'acquisition de machines numériques" />
+            </div>
+            <div>
+              <Label>Objet du besoin de financement</Label>
+              <div className="flex flex-col space-y-2 mt-2">
+                {fundingPurposeOptions.map(option => (
+                  <div key={option} className="flex items-center space-x-2">
+                    <Checkbox
+                      id={`funding-purpose-${option}`}
+                      checked={formData.fundingPurpose?.includes(option)}
+                      onCheckedChange={(checked) => handleCheckboxChange('fundingPurpose', option, checked as boolean)}
+                    />
+                    <Label htmlFor={`funding-purpose-${option}`}>{option}</Label>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div>
+              <Label htmlFor="project-description-summary">Descriptif synthétique du projet (max 1000 caractères)</Label>
+              <Textarea id="project-description-summary" value={formData.projectDescriptionSummary || ''} onChange={(e) => setFormData({...formData, projectDescriptionSummary: e.target.value})} rows={4} maxLength={1000} />
+            </div>
+            <div>
+              <Label>Thématique principale adressée par le projet</Label>
+              <div className="flex flex-col space-y-2 mt-2">
+                {thematicAreasOptions.map(option => (
+                  <div key={option} className="flex items-center space-x-2">
+                    <Checkbox
+                      id={`thematic-area-${option}`}
+                      checked={formData.thematicAreas?.includes(option)}
+                      onCheckedChange={(checked) => handleCheckboxChange('thematicAreas', option, checked as boolean)}
+                    />
+                    <Label htmlFor={`thematic-area-${option}`}>{option}</Label>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="grid md:grid-cols-2 gap-4">
+              <div>
+                <Label>Durée du projet</Label>
+                <Select
+                  value={formData.projectDuration || ''}
+                  onValueChange={(value) => setFormData({...formData, projectDuration: value})}
+                >
+                  <SelectTrigger>
+                    <SelectValue placeholder="Choisir la durée" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {projectDurations.map(duration => (
+                      <SelectItem key={duration} value={duration}>
+                        {duration}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+              <div>
+                <Label htmlFor="support-duration">Durée du soutien demandé (ex: 24 mois)</Label>
+                <Input id="support-duration" value={formData.supportDurationRequested || ''} onChange={(e) => setFormData({...formData, supportDurationRequested: e.target.value})} />
+              </div>
+            </div>
+            <div>
+              <Label htmlFor="detailed-description">Descriptif détaillé du projet (max 2500 caractères)</Label>
+              <Textarea id="detailed-description" value={formData.projectDescriptionDetailed || ''} onChange={(e) => setFormData({...formData, projectDescriptionDetailed: e.target.value})} rows={6} maxLength={2500} />
+            </div>
+            <div>
+              <Label>Soutien souhaité du partenaire</Label>
+              <div className="flex flex-col space-y-2 mt-2">
+                {desiredSupportOptions.map(option => (
+                  <div key={option} className="flex items-center space-x-2">
+                    <Checkbox
+                      id={`desired-support-${option}`}
+                      checked={formData.desiredSupport?.includes(option)}
+                      onCheckedChange={(checked) => handleCheckboxChange('desiredSupport', option, checked as boolean)}
+                    />
+                    <Label htmlFor={`desired-support-${option}`}>{option}</Label>
+                  </div>
+                ))}
+              </div>
+            </div>
+            
+            {/* Section 4: Budget prévisionnel du projet */}
+            <h3 className="text-lg font-semibold mt-4">4. Budget prévisionnel du projet</h3>
+            <p className="text-sm text-gray-500">
+              Note: Le détail du budget prévisionnel des 3 années est à joindre au dossier.
+            </p>
+            <div className="grid md:grid-cols-3 gap-4">
+              <div>
+                <Label htmlFor="budget-an1">Année 1 (€)</Label>
+                <Input id="budget-an1" type="number" value={formData.projectBudgetYear1 || ''} onChange={(e) => setFormData({...formData, projectBudgetYear1: parseFloat(e.target.value) || 0})} />
+              </div>
+              <div>
+                <Label htmlFor="budget-an2">Année 2 (€)</Label>
+                <Input id="budget-an2" type="number" value={formData.projectBudgetYear2 || ''} onChange={(e) => setFormData({...formData, projectBudgetYear2: parseFloat(e.target.value) || 0})} />
+              </div>
+              <div>
+                <Label htmlFor="budget-an3">Année 3 (€)</Label>
+                <Input id="budget-an3" type="number" value={formData.projectBudgetYear3 || ''} onChange={(e) => setFormData({...formData, projectBudgetYear3: parseFloat(e.target.value) || 0})} />
+              </div>
+            </div>
+            <div>
+              <Label htmlFor="total-cost">Coût total du projet (sur la durée du soutien) *</Label>
+              <Input id="total-cost" type="number" value={formData.totalProjectCost || ''} onChange={(e) => setFormData({...formData, totalProjectCost: parseFloat(e.target.value) || 0})} />
+            </div>
+            <div>
+              <Label htmlFor="total-solicited">Montant total sollicité *</Label>
+              <Input id="total-solicited" type="number" value={formData.totalAmountSolicited || ''} onChange={(e) => setFormData({...formData, totalAmountSolicited: parseFloat(e.target.value) || 0})} />
+            </div>
+
+            {/* Section 5: Moyens humains et matériels de l'école */}
+            <h3 className="text-lg font-semibold mt-4">5. Moyens humains et matériels de l'école</h3>
+            <div>
+              <Label htmlFor="team-description">Équipe pédagogique et administrative</Label>
+              <Textarea id="team-description" value={formData.teamDescription || ''} onChange={(e) => setFormData({...formData, teamDescription: e.target.value})} placeholder="Organigramme simplifié, nombre de formateurs..." rows={3} />
+            </div>
+            <div>
+              <Label htmlFor="premises-equipment">Locaux et équipements généraux</Label>
+              <Textarea id="premises-equipment" value={formData.premisesAndEquipment || ''} onChange={(e) => setFormData({...formData, premisesAndEquipment: e.target.value})} placeholder="Description des ateliers, salles de cours, équipements..." rows={3} />
+            </div>
+
+            {/* Anciens champs de suivi, déplacés ici */}
+            <h3 className="text-lg font-semibold mt-4">Suivi du dossier</h3>
             <div className="grid md:grid-cols-2 gap-4">
               <div>
                 <Label htmlFor="current-status">Statut Actuel *</Label>
@@ -593,145 +662,6 @@ export default function SubsidyGenerator() {
                 />
               </div>
             </div>
-
-            {/* Prochaines Étapes / Notes CA */}
-            <div>
-              <Label htmlFor="next-steps">Prochaines Étapes / Notes (pour le CA)</Label>
-              <Textarea
-                id="next-steps"
-                value={formData.nextSteps || ''}
-                onChange={(e) => setFormData({...formData, nextSteps: e.target.value})}
-                placeholder="Ex: Prévoir RDV avec financeur le JJ/MM; Impact de 5K€ sur budget N+1..."
-                rows={3}
-              />
-            </div>
-
-            {/* Anciens champs non impactés directement par la capture Excel mais toujours utiles */}
-            <div>
-              <Label htmlFor="project-description">Description générale du projet</Label>
-              <Textarea
-                id="project-description"
-                value={formData.projectDescription || ''}
-                onChange={(e) => setFormData({...formData, projectDescription: e.target.value})}
-                placeholder="Présentation générale du projet d'école de production..."
-                rows={4}
-              />
-            </div>
-
-            <div className="grid md:grid-cols-2 gap-4">
-              <div>
-                <Label htmlFor="organization-name">Nom de l'organisation (client)</Label>
-                <Input
-                  id="organization-name"
-                  value={formData.organizationName || ''}
-                  onChange={(e) => setFormData({...formData, organizationName: e.target.value})}
-                  placeholder="Association XYZ"
-                />
-              </div>
-              <div>
-                <Label htmlFor="siret">Numéro SIRET</Label>
-                <Input
-                  id="siret"
-                  value={formData.siretNumber || ''}
-                  onChange={(e) => setFormData({...formData, siretNumber: e.target.value})}
-                  placeholder="12345678901234"
-                />
-              </div>
-            </div>
-
-            <div className="grid md:grid-cols-3 gap-4">
-              <div>
-                <Label htmlFor="contact-person">Personne de contact (financeur ou école)</Label>
-                <Input
-                  id="contact-person"
-                  value={formData.contactPerson || ''}
-                  onChange={(e) => setFormData({...formData, contactPerson: e.target.value})}
-                  placeholder="Nom Prénom"
-                />
-              </div>
-              <div>
-                <Label htmlFor="email">Email</Label>
-                <Input
-                  id="email"
-                  type="email"
-                  value={formData.email || ''}
-                  onChange={(e) => setFormData({...formData, email: e.target.value})}
-                  placeholder="contact@ecole.fr"
-                />
-              </div>
-              <div>
-                <Label htmlFor="phone">Téléphone</Label>
-                <Input
-                  id="phone"
-                  value={formData.phone || ''}
-                  onChange={(e) => setFormData({...formData, phone: e.target.value})}
-                  placeholder="01 23 45 67 89"
-                />
-              </div>
-            </div>
-            
-            {/* ... Autres champs comme address, targetAudience, expectedStudents, projectDuration, startDate, objectives, methodology, partnerOrganizations, budget, expectedOutcomes, evaluationCriteria, sustainability, innovation, socialImpact */}
-            {/* Je n'ai pas inclus tous les anciens champs ici pour ne pas surcharger, mais assurez-vous de les conserver si vous en avez besoin.
-               Les principaux de la capture ont été ajoutés. */}
-
-            <div>
-              <Label>Budget prévisionnel (détaillé)</Label>
-              <div className="grid md:grid-cols-4 gap-4 mt-2">
-                <div>
-                  <Label htmlFor="budget-personnel">Personnel (€)</Label>
-                  <Input
-                    id="budget-personnel"
-                    type="number"
-                    value={formData.budget?.personnel || 0}
-                    onChange={(e) => setFormData({
-                      ...formData, 
-                      budget: { ...formData.budget, personnel: parseFloat(e.target.value) || 0 }
-                    })}
-                  />
-                </div>
-                <div>
-                  <Label htmlFor="budget-equipment">Équipements (€)</Label>
-                  <Input
-                    id="budget-equipment"
-                    type="number"
-                    value={formData.budget?.equipment || 0}
-                    onChange={(e) => setFormData({
-                      ...formData, 
-                      budget: { ...formData.budget, equipment: parseFloat(e.target.value) || 0 }
-                    })}
-                  />
-                </div>
-                <div>
-                  <Label htmlFor="budget-operations">Fonctionnement (€)</Label>
-                  <Input
-                    id="budget-operations"
-                    type="number"
-                    value={formData.budget?.operations || 0}
-                    onChange={(e) => setFormData({
-                      ...formData, 
-                      budget: { ...formData.budget, operations: parseFloat(e.target.value) || 0 }
-                    })}
-                  />
-                </div>
-                <div>
-                  <Label htmlFor="budget-other">Autres (€)</Label>
-                  <Input
-                    id="budget-other"
-                    type="number"
-                    value={formData.budget?.other || 0}
-                    onChange={(e) => setFormData({
-                      ...formData, 
-                      budget: { ...formData.budget, other: parseFloat(e.target.value) || 0 }
-                    })}
-                  />
-                </div>
-              </div>
-              <div className="mt-2 text-right">
-                <span className="font-semibold">Total budget prévisionnel: {calculateTotalBudget().toLocaleString()} €</span>
-              </div>
-            </div>
-
-
             <div className="flex gap-3">
               <Button onClick={saveApplication} className="btn-primary">
                 {editingId ? 'Modifier' : 'Créer'}
@@ -744,106 +674,39 @@ export default function SubsidyGenerator() {
         </Card>
       )}
 
-      <div className="space-y-4">
-        {applications.length === 0 && (
-          <Card>
-            <CardContent className="p-8 text-center text-gray-500">
-              <FileText className="w-12 h-12 mx-auto mb-4 text-gray-300" />
-              <p>Aucun dossier de subvention créé.</p>
-              <p className="text-sm">Cliquez sur "Nouvelle subvention" pour commencer.</p>
-            </CardContent>
-          </Card>
-        )}
-
-        {/* Affichage des applications dans une carte résumée */}
-        {applications.map(app => (
-          <Card key={app.id} className="card-hover">
-            <CardContent className="p-6">
-              <div className="flex justify-between items-start mb-4">
-                <div className="flex-1">
-                  <div className="flex items-center gap-3 mb-2">
-                    <h3 className="text-lg font-semibold">{app.projectTitle}</h3> {/* Nom de la subvention */}
-                    <span className={`px-2 py-1 rounded-full text-xs font-medium ${getStatusColor(app.currentStatus)}`}>
-                      {app.currentStatus} {/* Statut Actuel */}
-                    </span>
-                  </div>
-                  <div className="grid md:grid-cols-4 gap-4 text-sm text-gray-600 mb-3">
-                    <div className="flex items-center gap-2">
-                      <Building className="w-4 h-4" />
-                      {app.fundingBody} ({app.financeurType}) - {app.programName}
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Euro className="w-4 h-4" />
-                      Demandé: {app.amountSolicited.toLocaleString()} €
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Euro className="w-4 h-4" />
-                      Obtenu: {app.amountObtained.toLocaleString()} €
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <Percent className="w-4 h-4" />
-                      Réalisé: {app.completionRate}%
-                    </div>
-                  </div>
-                  <div className="grid md:grid-cols-3 gap-4 text-sm text-gray-600 mb-3">
-                    <div className="flex items-center gap-2">
-                      <CalendarDays className="w-4 h-4" />
-                      Dépôt effectif: {app.submissionDateActual ? new Date(app.submissionDateActual).toLocaleDateString('fr-FR') : 'N/A'}
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <CalendarDays className="w-4 h-4" />
-                      Limite justificatifs: {app.justificatifsDeadline ? new Date(app.justificatifsDeadline).toLocaleDateString('fr-FR') : 'N/A'}
-                    </div>
-                     <div className="flex items-center gap-2">
-                      <UserRound className="w-4 h-4" />
-                      Resp. interne: {app.internalResponsible || 'N/A'}
-                    </div>
-                  </div>
-
-                  {app.nextSteps && (
-                    <p className="text-sm text-gray-700 mb-3">
-                      <span className="font-semibold">Prochaines étapes / Notes CA:</span> {app.nextSteps}
-                    </p>
-                  )}
-                  {app.justificatifs && (
-                    <p className="text-sm text-gray-700 mb-3">
-                      <span className="font-semibold">Justificatifs:</span> {app.justificatifs}
-                    </p>
-                  )}
-                </div>
-              </div>
-
-              <div className="flex justify-between items-center">
-                <div className="text-xs text-gray-500">
-                  {app.notificationDate && `Notifié le ${new Date(app.notificationDate).toLocaleDateString('fr-FR')}`}
-                  {app.totalReceivedAmount > 0 && ` • Reçu: ${app.totalReceivedAmount.toLocaleString()} €`}
-                </div>
-                <div className="flex gap-2">
-                  <Button 
-                    onClick={() => generateDocument(app.id)}
-                    className="btn-primary text-xs px-3 py-1"
-                  >
-                    <Download className="w-3 h-3 mr-1" />
-                    Générer PDF
-                  </Button>
-                  <Button 
-                    onClick={() => editApplication(app)}
-                    className="btn-secondary text-xs px-3 py-1"
-                  >
-                    Modifier
-                  </Button>
-                  <Button 
-                    onClick={() => deleteApplication(app.id)}
-                    className="btn-danger text-xs px-3 py-1"
-                  >
-                    Supprimer
+      {!showForm && applications.length > 0 && (
+        <div className="space-y-4">
+          {applications.map(app => (
+            <Card key={app.id}>
+              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+                <CardTitle className="text-sm font-medium">
+                  {app.projectTitle}
+                </CardTitle>
+                <span className={`px-2 py-1 text-xs font-semibold rounded-full ${getStatusColor(app.currentStatus)}`}>
+                  {app.currentStatus}
+                </span>
+              </CardHeader>
+              <CardContent>
+                <div className="text-2xl font-bold">{app.totalAmountSolicited.toLocaleString()} €</div>
+                <p className="text-xs text-gray-500">{app.organizationName} - {app.legalStatus}</p>
+                <div className="flex space-x-2 mt-4">
+                  <Button size="sm" onClick={() => editApplication(app)}>Modifier</Button>
+                  <Button size="sm" variant="destructive" onClick={() => deleteApplication(app.id)}>Supprimer</Button>
+                  <Button size="sm" variant="outline" onClick={() => generateDocument(app.id)}>
+                    <Download className="w-4 h-4 mr-2" />Générer
                   </Button>
                 </div>
-              </div>
-            </CardContent>
-          </Card>
-        ))}
-      </div>
+              </CardContent>
+            </Card>
+          ))}
+        </div>
+      )}
+
+      {!showForm && applications.length === 0 && (
+        <div className="text-center text-gray-500 p-8 border-2 border-dashed rounded-lg">
+          <p>Aucun dossier de subvention enregistré. <Button variant="link" onClick={() => setShowForm(true)} className="p-0 text-blue-600">Commencez-en un nouveau</Button>.</p>
+        </div>
+      )}
     </section>
   );
 }
