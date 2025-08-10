@@ -10,7 +10,7 @@ interface BudgetCreationProps {
 }
 
 const BudgetCreation: React.FC<BudgetCreationProps> = ({ navigate }) => {
-  const budgetCreationFilePath = "/fichiers/BUDGET_CREATION_MODELE.xlsx"; // Assurez-vous que ce fichier existe dans public/fichiers/
+  const budgetCreationFilePath = "/fichiers/ANNEXE 12 BUDGET ECOLE DE PRODUCTION VT09082025.xlsm";
 
   return (
     <section id="budget-creation" className="max-w-4xl mx-auto px-4 py-8">
@@ -20,7 +20,7 @@ const BudgetCreation: React.FC<BudgetCreationProps> = ({ navigate }) => {
       </h1>
       
       <p className="mb-8 text-lg text-gray-700 leading-relaxed">
-        L'élaboration d'un budget prévisionnel détaillé est une étape incontournable pour la création d'une École de Production. Ce document anticipe l'ensemble des recettes et des dépenses sur les premières années d'activité, et permet de valider la faisabilité financière de votre projet.
+        L'élaboration d'un budget prévisionnel détaillé est une étape incontournable pour la création d'une École de Production. Ce document anticipe l'ensemble des recettes et des dépenses sur plusieurs années d'activité et permet de valider la faisabilité financière de votre projet.
       </p>
 
       {/* Section Pourquoi un budget de création ? */}
@@ -33,14 +33,14 @@ const BudgetCreation: React.FC<BudgetCreationProps> = ({ navigate }) => {
         </CardHeader>
         <CardContent className="p-6 text-gray-700 space-y-4">
           <p>
-            Un budget de création bien construit vous permet de :
+            Ce modèle est un outil financier puissant et complet qui vous permet de :
           </p>
           <ul className="list-disc pl-5 space-y-2">
-            <li>**Estimer les besoins en financement :** Déterminer le capital de départ nécessaire.</li>
-            <li>**Anticiper la rentabilité :** Projeter les flux de trésorerie et le résultat attendu.</li>
+            <li>**Estimer les besoins de financement :** Déterminer le capital de départ nécessaire.</li>
+            <li>**Anticiper la rentabilité :** Projeter les flux de trésorerie et le résultat attendu sur 3 à 5 ans.</li>
             <li>**Convaincre les financeurs :** Présenter une vision claire et chiffrée du modèle économique.</li>
-            <li>**Planifier les dépenses :** Gérer les coûts de démarrage et les charges récurrentes.</li>
-            <li>**Fixer des objectifs réalistes :** Servir de feuille de route financière pour les premières années.</li>
+            <li>**Planifier les dépenses :** Gérer les coûts de démarrage et les charges récurrentes, notamment les salaires et les investissements matériels.</li>
+            <li>**Fixer des objectifs réalistes :** Servir de feuille de route financière pour les premières années de l'école.</li>
           </ul>
         </CardContent>
       </Card>
@@ -50,12 +50,12 @@ const BudgetCreation: React.FC<BudgetCreationProps> = ({ navigate }) => {
         <CardHeader className="bg-gray-50 border-b">
           <CardTitle className="text-xl font-bold text-gray-700 flex items-center gap-2">
             <PieChart className="w-5 h-5 text-blue-600" />
-            Les Éléments du Budget Prévisionnel
+            Les Éléments du Modèle Prévisionnel
           </CardTitle>
         </CardHeader>
         <CardContent className="p-6 text-gray-700 space-y-4">
           <p>
-            Notre modèle inclut généralement les postes suivants :
+            Le modèle inclus les postes suivants :
           </p>
           <ul className="list-disc pl-5 space-y-2">
             <li>**Investissements Initiaux :** Locaux, équipements d'atelier, matériel pédagogique.</li>
@@ -88,7 +88,7 @@ const BudgetCreation: React.FC<BudgetCreationProps> = ({ navigate }) => {
         <CardContent className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
           <div className="text-base text-gray-800 flex-1">
             <p className="mb-2">
-              Obtenez notre modèle de budget prévisionnel de création pour planifier et structurer les aspects financiers de votre future École de Production.
+              Obtenez notre modèle de budget prévisionnel de création pour planifier et structurer les aspects financiers de votre future École de Production. Ce fichier est au format `.xlsm` (Excel avec macros).
             </p>
             <p className="text-sm text-gray-600">
               **Conseil :** Adaptez ce modèle à la spécificité de votre projet et aux exigences des organismes de financement que vous sollicitez.
@@ -96,7 +96,7 @@ const BudgetCreation: React.FC<BudgetCreationProps> = ({ navigate }) => {
           </div>
           <a
             href={budgetCreationFilePath}
-            download="BUDGET_CREATION_ECOLE_PRODUCTION.xlsx"
+            download="BUDGET_ECOLE_DE_PRODUCTION_MODELE.xlsm"
             className="flex-shrink-0"
           >
             <Button className="btn-primary flex items-center gap-2 py-3 px-6 text-lg">
