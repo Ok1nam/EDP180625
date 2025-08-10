@@ -1,7 +1,7 @@
 // client/src/pages/StatutsGenerator.tsx
 
 import React, { useState } from "react";
-import { FileText, Download, Building, User, Gavel } from "lucide-react";
+import { FileText, Download, Building, User, Gavel, FileText as FileWord } from "lucide-react"; // Import de l'icône FileText pour le docx
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -12,7 +12,9 @@ interface StatutsData {
   associationName: string;
   presidentName: string;
   secretaireName: string;
-  siegeSocial: string;
+  adressePostale: string;
+  codePostal: string;
+  ville: string;
 }
 
 interface StatutsGeneratorProps {
@@ -25,7 +27,9 @@ const StatutsGenerator: React.FC<StatutsGeneratorProps> = ({ navigate }) => {
     associationName: '',
     presidentName: '',
     secretaireName: '',
-    siegeSocial: '',
+    adressePostale: '',
+    codePostal: '',
+    ville: '',
   });
 
   const [showPreview, setShowPreview] = useState(false);
@@ -38,8 +42,7 @@ const StatutsGenerator: React.FC<StatutsGeneratorProps> = ({ navigate }) => {
   };
 
   const generateStatuts = () => {
-    // Les valeurs des champs statiques sont maintenant directement intégrées au template
-    const ville = formData.siegeSocial ? formData.siegeSocial.split(',').pop()?.trim() || '[VILLE]' : '[VILLE]';
+    const siegeSocialComplet = `${formData.adressePostale || '[adresse postale]'}, ${formData.codePostal || '[code postal]'} ${formData.ville || '[Ville]'}`;
     const dateDuJour = new Date().toLocaleDateString('fr-FR');
     
     const statutsTemplate = `
@@ -56,7 +59,7 @@ Article 2 - Objet
 L'association a pour objet de:
 - Former des jeunes, à partir de 15 ans, aux métiers techniques en associant enseignement général, enseignement professionnel et mise en situation réelle de production;
 - Faciliter l'insertion professionnelle de ses élèves et stagiaires, notamment en lien avec les entreprises et acteurs économiques du territoire;
-- Promouvoir la pédagogie "faire pour apprendre", propre aux écoles de production, incluant la production réelle de biens et services destinés à des clients (entreprises, collectivités, particuliers, etc.);
+- Promouvoir la pédagogie du "faire pour apprendre", propre aux écoles de production, incluant la production réelle de biens et services destinés à des clients (entreprises, collectivités, particuliers, etc.);
 - Accompagner les jeunes dans leur développement personnel, social et professionnel, en favorisant autonomie, citoyenneté, esprit d'équipe et mobilité;
 - Accueillir, en fonction de ses moyens, des adultes dans le cadre de la formation continue ou de reconversion;
 - Développer toute activité connexe ou complémentaire liée à la formation technique, à l'insertion ou à l'éducation.
@@ -70,7 +73,7 @@ Pour atteindre son objet, l'association met en œuvre notamment :
 - Toute autre activité ou moyen conforme à son objet.
 
 Article 4 - Siège social
-Le siège social est fixé à ${formData.siegeSocial || '[adresse complète]'}.
+Le siège social est fixé à ${siegeSocialComplet}.
 Il peut être transféré sur simple décision du Conseil d'Administration, ratifiée à la prochaine assemblée générale.
 
 Article 5 - Durée
@@ -144,10 +147,10 @@ Un règlement intérieur peut être établi par le CA, soumis à l'approbation d
 Article 19- Dissolution
 En cas de dissolution, prononcée par une AG extraordinaire, un ou plusieurs liquidateurs sont nommés. L'actif net est dévolu à un organisme poursuivant un but non lucratif, désigné par l'AG extraordinaire.
 
-Fait à ${ville}, le ${dateDuJour}
+Fait à ${formData.ville || '[Ville signature statuts]'}, le ${dateDuJour || '[Date signature statuts]'}
 
 Le Président(e):                          Le Secrétaire:
-${formData.presidentName || '[Nom du président]'}                    ${formData.secretaireName || '[Nom du secrétaire]'}
+${formData.presidentName || '[Nom prénom président]'}                    ${formData.secretaireName || '[Nom prénom secrétaire]'}
 
 Signature :                           Signature :
 `;
@@ -155,10 +158,10 @@ Signature :                           Signature :
   };
 
   const downloadStatuts = () => {
-    if (!formData.associationName || !formData.presidentName || !formData.secretaireName || !formData.siegeSocial) {
+    if (!formData.associationName || !formData.presidentName || !formData.secretaireName || !formData.adressePostale || !formData.codePostal || !formData.ville) {
       toast({
         title: "Informations manquantes",
-        description: "Veuillez remplir au minimum le nom de l'association, le président, le secrétaire et le siège social.",
+        description: "Veuillez remplir tous les champs obligatoires (nom de l'association, dirigeants et adresse complète).",
         variant: "destructive"
       });
       return;
@@ -186,12 +189,16 @@ Signature :                           Signature :
       associationName: '',
       presidentName: '',
       secretaireName: '',
-      siegeSocial: '',
+      adressePostale: '',
+      codePostal: '',
+      ville: '',
     });
     setShowPreview(false);
   };
 
-  const isFormValid = formData.associationName && formData.presidentName && formData.secretaireName && formData.siegeSocial;
+  const isFormValid = formData.associationName && formData.presidentName && formData.secretaireName && formData.adressePostale && formData.codePostal && formData.ville;
+
+  const docxFilePath = "/fichiers/ANNEXE 9 EXEMPLE DE STATUTS.docx";
 
   return (
     <section id="statuts-generator" className="max-w-6xl mx-auto px-4 py-8">
@@ -201,7 +208,7 @@ Signature :                           Signature :
       </h1>
       
       <p className="mb-4 text-lg text-gray-700 leading-relaxed">
-        Ce modèle de statuts est conçu pour la création d'une École de Production sous la forme d'une association loi 1901 à but non lucratif[cite: 189]. Il s'appuie sur le guide juridique et les recommandations de la Fédération [cite: 188, 200] pour garantir la compatibilité avec le label et permettre la reconnaissance d'intérêt général pour le mécénat[cite: 190].
+        Ce modèle de statuts est conçu pour la création d'une École de Production sous la forme d'une association loi 1901 à but non lucratif. Il s'appuie sur le guide juridique et les recommandations de la Fédération pour garantir la compatibilité avec le label et permettre la reconnaissance d'intérêt général pour le mécénat.
       </p>
       <p className="mb-8 text-lg text-gray-700 leading-relaxed">
         Remplissez les champs ci-dessous pour pré-remplir les informations clés. Vous pourrez ensuite télécharger le fichier .txt et l'adapter aux spécificités de votre projet avant de le signer et de le déclarer.
@@ -226,14 +233,34 @@ Signature :                           Signature :
                 className="mt-1"
               />
             </div>
-
+            
             <div>
-              <Label htmlFor="siege-social">Siège social *</Label>
+              <Label htmlFor="adresse-postale">Adresse postale *</Label>
               <Input
-                id="siege-social"
-                value={formData.siegeSocial}
-                onChange={(e) => handleInputChange('siegeSocial', e.target.value)}
-                placeholder="Ex: 123 rue de l'Apprentissage, 75000 Paris"
+                id="adresse-postale"
+                value={formData.adressePostale}
+                onChange={(e) => handleInputChange('adressePostale', e.target.value)}
+                placeholder="Ex: 123 rue de l'Apprentissage"
+                className="mt-1"
+              />
+            </div>
+            <div>
+              <Label htmlFor="code-postal">Code postal *</Label>
+              <Input
+                id="code-postal"
+                value={formData.codePostal}
+                onChange={(e) => handleInputChange('codePostal', e.target.value)}
+                placeholder="Ex: 75000"
+                className="mt-1"
+              />
+            </div>
+            <div>
+              <Label htmlFor="ville">Ville *</Label>
+              <Input
+                id="ville"
+                value={formData.ville}
+                onChange={(e) => handleInputChange('ville', e.target.value)}
+                placeholder="Ex: Paris"
                 className="mt-1"
               />
             </div>
@@ -256,7 +283,7 @@ Signature :                           Signature :
           </CardHeader>
           <CardContent className="space-y-4">
             <div>
-              <Label htmlFor="president">Nom du président *</Label>
+              <Label htmlFor="president">Nom et prénom du président *</Label>
               <Input
                 id="president"
                 value={formData.presidentName}
@@ -267,7 +294,7 @@ Signature :                           Signature :
             </div>
 
             <div>
-              <Label htmlFor="secretaire">Nom du secrétaire *</Label>
+              <Label htmlFor="secretaire">Nom et prénom du secrétaire *</Label>
               <Input
                 id="secretaire"
                 value={formData.secretaireName}
@@ -294,6 +321,19 @@ Signature :                           Signature :
                 <Download className="w-4 h-4 mr-2" />
                 Télécharger les statuts (fichier .txt)
               </Button>
+
+              <a
+                href={docxFilePath}
+                download="ANNEXE 9 EXEMPLE DE STATUTS.docx"
+                className="block"
+              >
+                <Button 
+                  className="w-full btn-secondary flex items-center gap-2"
+                >
+                  <FileWord className="w-4 h-4" />
+                  Télécharger le modèle (.docx)
+                </Button>
+              </a>
               
               <Button 
                 onClick={resetForm}
@@ -306,7 +346,7 @@ Signature :                           Signature :
             {!isFormValid && (
               <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-3 mt-4">
                 <p className="text-sm text-yellow-800">
-                  <strong>Champs obligatoires :</strong> Veuillez renseigner le nom de l'association, le nom du président, le nom du secrétaire et l'adresse du siège social.
+                  <strong>Champs obligatoires :</strong> Veuillez renseigner le nom de l'association, les noms des dirigeants et l'adresse complète.
                 </p>
               </div>
             )}
@@ -343,16 +383,16 @@ Signature :                           Signature :
               **Objet social :** L'objet social est le cœur de votre association. La formule pré-remplie est adaptée aux Écoles de Production. Il est essentiel que l'objet statutaire affirme un but éducatif et une gestion désintéressée. Si votre projet a des spécificités uniques, vous devez l'affiner.
             </p>
             <p>
-              **Ressources :** Le modèle intègre les produits des activités économiques des élèves (vente, sous-traitance) comme une ressource de l'association[cite: 285]. Cela est crucial pour le statut d'École de Production.
+              **Ressources :** Le modèle intègre les produits des activités économiques des élèves (vente, sous-traitance) comme une ressource de l'association. Cela est crucial pour le statut d'École de Production.
             </p>
             <p>
               **Déclaration :** Une fois les statuts signés par les membres fondateurs, vous devez déclarer votre association en préfecture ou sous-préfecture, ou en ligne.
             </p>
             <p>
-              **Règlement Intérieur :** Il est fortement recommandé d'établir un règlement intérieur pour préciser les modalités de fonctionnement interne non prévues par les statuts[cite: 294].
+              **Règlement Intérieur :** Il est fortement recommandé d'établir un règlement intérieur pour préciser les modalités de fonctionnement interne non prévues par les statuts.
             </p>
             <p className="text-sm italic text-gray-600 mt-4">
-              Ce générateur fournit une trame adaptable selon le contexte local[cite: 200]. Pour une conformité totale et adaptée à votre situation spécifique, notamment pour les aspects fiscaux et comptables complexes, il est vivement conseillé de consulter un expert.
+              Ce générateur fournit une trame adaptable selon le contexte local. Pour une conformité totale et adaptée à votre situation spécifique, notamment pour les aspects fiscaux et comptables complexes, il est vivement conseillé de consulter un expert.
             </p>
           </div>
         </CardContent>
