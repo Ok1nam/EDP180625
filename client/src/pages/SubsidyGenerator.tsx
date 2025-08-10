@@ -38,7 +38,7 @@ interface SubsidyApplication {
   // Ces deux champs sont des champs de texte pour simplifier l'intégration du tableau
   mainFinancialPartnersPublic?: string;
   mainFinancialPartnersPrivate?: string;
-
+  
   // Partie 2: Présentation de l'école de production
   missionStatement?: string;
   historyAndGenesis?: string;
@@ -53,7 +53,7 @@ interface SubsidyApplication {
   territorialAnchorage?: string;
   localPartnerships?: string;
   employmentPartnerships?: string;
-
+  
   // Partie 3: Le projet spécifique
   projectTitle: string;
   fundingPurpose: string[];
@@ -87,7 +87,7 @@ interface SubsidyApplication {
   desiredSupport: string[];
   synergies?: string;
   vision10Years?: string;
-
+  
   // Partie 4: Budget prévisionnel
   projectBudgetYear1?: number;
   projectBudgetYear2?: number;
@@ -101,12 +101,13 @@ interface SubsidyApplication {
   acquiredFundingSource2?: string;
   acquiredFundingSource3?: string;
   totalAcquiredFunding?: number;
-
+  
   // Partie 5: Moyens humains et matériels
   teamDescription?: string;
   premisesAndEquipment?: string;
-
+  
   // Anciens champs conservés pour cohérence si besoin, à adapter
+  fundingBody: string; // Ajout du fundingBody
   programName?: string;
   financeurType: 'Public' | 'Privé' | 'Autres' | '';
   objectGrant?: string;
@@ -247,10 +248,10 @@ export default function SubsidyGenerator() {
   };
 
   const saveApplication = () => {
-    if (!formData.projectTitle || !formData.organizationName || !formData.totalAmountSolicited) {
+    if (!formData.projectTitle || !formData.organizationName || !formData.totalAmountSolicited || !formData.fundingBody) {
       toast({
         title: "Erreur",
-        description: "Veuillez remplir les champs obligatoires (Nom du projet, Nom de l'organisation, Montant sollicité).",
+        description: "Veuillez remplir les champs obligatoires (Nom du projet, Nom de l'organisation, Organisme financeur de la subvention, Montant sollicité).",
       });
       return;
     }
@@ -274,6 +275,7 @@ export default function SubsidyGenerator() {
       hasPreviousSupport: formData.hasPreviousSupport ?? false,
       isCollaborativeProject: formData.isCollaborativeProject ?? false,
       financeurType: formData.financeurType || '',
+      fundingBody: formData.fundingBody || '', // Assurez-vous que ce champ est bien initialisé
     } as SubsidyApplication;
 
     let updatedApplications;
@@ -308,13 +310,6 @@ export default function SubsidyGenerator() {
     toast({
       title: "Dossier supprimé",
       description: "Le dossier de subvention a été supprimé.",
-    });
-  };
-
-  const generateDocument = (appId: string) => {
-    toast({
-      title: "Génération en cours",
-      description: "Génération du dossier PDF en cours...",
     });
   };
 
@@ -511,6 +506,27 @@ export default function SubsidyGenerator() {
             {/* Section 3: Le projet spécifique */}
             <h3 className="text-lg font-semibold mt-4">3. Le projet spécifique objet de la demande</h3>
             <div>
+              <Label htmlFor="fundingBody">Organisme financeur de la subvention *</Label>
+              <Select
+                value={selectedFundingBody}
+                onValueChange={(value) => {
+                  setSelectedFundingBody(value);
+                  setFormData({...formData, fundingBody: value});
+                }}
+              >
+                <SelectTrigger>
+                  <SelectValue placeholder="Choisir un organisme" />
+                </SelectTrigger>
+                <SelectContent>
+                  {fundingBodies.map(body => (
+                    <SelectItem key={body.name} value={body.name}>
+                      {body.name}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
+            </div>
+            <div>
               <Label htmlFor="project-title">Titre du projet *</Label>
               <Input id="project-title" value={formData.projectTitle || ''} onChange={(e) => setFormData({...formData, projectTitle: e.target.value})} placeholder="Ex: Projet d'acquisition de machines numériques" />
             </div>
@@ -591,7 +607,7 @@ export default function SubsidyGenerator() {
                 ))}
               </div>
             </div>
-            
+
             {/* Section 4: Budget prévisionnel du projet */}
             <h3 className="text-lg font-semibold mt-4">4. Budget prévisionnel du projet</h3>
             <p className="text-sm text-gray-500">
@@ -679,22 +695,20 @@ export default function SubsidyGenerator() {
           {applications.map(app => (
             <Card key={app.id}>
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium">
-                  {app.projectTitle}
+                <CardTitle className="text-lg font-bold">
+                  {app.fundingBody}
                 </CardTitle>
                 <span className={`px-2 py-1 text-xs font-semibold rounded-full ${getStatusColor(app.currentStatus)}`}>
                   {app.currentStatus}
                 </span>
               </CardHeader>
               <CardContent>
-                <div className="text-2xl font-bold">{app.totalAmountSolicited.toLocaleString()} €</div>
-                <p className="text-xs text-gray-500">{app.organizationName} - {app.legalStatus}</p>
+                <p className="text-md font-medium text-gray-700">{app.projectTitle}</p>
+                <p className="text-2xl font-bold text-blue-600 mt-2">{app.totalAmountSolicited.toLocaleString()} €</p>
+                <p className="text-xs text-gray-500 mt-1">{app.organizationName}</p>
                 <div className="flex space-x-2 mt-4">
                   <Button size="sm" onClick={() => editApplication(app)}>Modifier</Button>
                   <Button size="sm" variant="destructive" onClick={() => deleteApplication(app.id)}>Supprimer</Button>
-                  <Button size="sm" variant="outline" onClick={() => generateDocument(app.id)}>
-                    <Download className="w-4 h-4 mr-2" />Générer
-                  </Button>
                 </div>
               </CardContent>
             </Card>
