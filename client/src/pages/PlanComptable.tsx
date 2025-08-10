@@ -5,12 +5,13 @@ import { Download, FileText } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
-interface PlanComptableProps { // Interface ajoutée pour la prop navigate
+interface PlanComptableProps {
     navigate: (page: string) => void;
 }
 
-const PlanComptable: React.FC<PlanComptableProps> = ({ navigate }) => { // Composant accepte la prop navigate
-  const excelFilePath = "/fichiers/ECOLE_DE_PRODUCTION_MODELE.xlsx";
+const PlanComptable: React.FC<PlanComptableProps> = ({ navigate }) => {
+  // Changement du chemin du fichier pour correspondre au nouveau nom
+  const excelFilePath = "/fichiers/ANNEXE 4 - EXEMPLE DE PLAN COMPTABLE ADAPTE.xlsx";
 
   return (
     <section id="plan-comptable" className="max-w-4xl mx-auto px-4 py-8">
@@ -20,7 +21,7 @@ const PlanComptable: React.FC<PlanComptableProps> = ({ navigate }) => { // Compo
       </h1>
 
       <p className="mb-8 text-lg text-gray-700 leading-relaxed">
-        Ce plan comptable est spécifiquement conçu pour les Écoles de Production. Il vous offre une structure comptable optimisée pour les activités pédagogiques et de production, facilitant ainsi la gestion et le suivi financier de votre établissement.
+        Ce plan comptable est spécifiquement conçu pour accompagner la comptabilité d'une **École de Production**. En tant qu'expert-comptable, cet outil vous permet d'avoir une structure comptable optimisée pour les spécificités des activités pédagogiques et de production de ce type de client, facilitant ainsi la gestion et le suivi financier de leur établissement.
       </p>
 
       <Card className="mb-8 shadow-md">
@@ -32,10 +33,10 @@ const PlanComptable: React.FC<PlanComptableProps> = ({ navigate }) => { // Compo
         </CardHeader>
         <CardContent className="text-gray-700 space-y-4">
           <p>
-            L'adaptation d'un plan comptable est cruciale pour refléter fidèlement la réalité économique de votre École de Production. Ce modèle prend en compte les spécificités de votre activité : la production de biens ou services par les élèves, les subventions spécifiques, et les charges liées à la formation.
+            L'adaptation d'un plan comptable est cruciale pour refléter fidèlement la réalité économique d'une École de Production. Ce modèle est conçu pour vous servir de base, en prenant en compte les spécificités de leur activité : la production de biens ou services par les élèves, les subventions spécifiques, et les charges liées à la formation.
           </p>
           <p>
-            Il vous servira de base pour organiser vos comptes, enregistrer vos opérations et préparer vos états financiers. Nous vous encourageons à l'adapter précisément à votre contexte unique, notamment en ajoutant des sous-comptes pertinents pour un suivi détaillé.
+            Il vous servira de base pour organiser leurs comptes, enregistrer leurs opérations et préparer leurs états financiers. N'hésitez pas à l'adapter précisément au contexte unique de votre client, notamment en ajoutant des sous-comptes pertinents pour un suivi détaillé et un reporting sur mesure.
           </p>
         </CardContent>
       </Card>
@@ -52,27 +53,12 @@ const PlanComptable: React.FC<PlanComptableProps> = ({ navigate }) => { // Compo
               Cliquez ci-dessous pour télécharger le fichier Excel du plan comptable.
             </p>
             <p className="text-sm text-gray-600">
-              **Note importante :** Ce fichier Excel est un support commun utilisé par plusieurs de nos outils (<span
-                className="text-blue-600 hover:underline cursor-pointer"
-                onClick={() => navigate('plan-comptable')} // Lien vers cette page (optionnel)
-              >
-                plan comptable
-              </span>, <span
-                className="text-blue-600 hover:underline cursor-pointer"
-                onClick={() => navigate('tva-coefficient')} // Lien vers Coefficient TVA
-              >
-                coefficient de déduction TVA
-              </span>, et <span
-                className="text-blue-600 hover:underline cursor-pointer"
-                onClick={() => navigate('resultat-fiscal')} // Lien vers Résultat Fiscal
-              >
-                résultat fiscal
-              </span>). Il est essentiel de le remplir avec les données spécifiques à votre école avant d'utiliser les calculateurs.
+              **Note importante :** Ce fichier Excel est un support commun utilisé par plusieurs de nos outils pour les Écoles de Production. Il est essentiel de le remplir avec les données spécifiques de votre client avant d'utiliser les calculateurs associés.
             </p>
           </div>
           <a
             href={excelFilePath}
-            download="PLAN_COMPTABLE_ECOLE_PRODUCTION.xlsx"
+            download="ANNEXE 4 - EXEMPLE DE PLAN COMPTABLE ADAPTE.xlsx"
             className="flex-shrink-0"
           >
             <Button className="btn-primary flex items-center gap-2 py-3 px-6 text-lg">
@@ -94,10 +80,10 @@ const PlanComptable: React.FC<PlanComptableProps> = ({ navigate }) => { // Compo
             Pour une utilisation optimale de ce plan comptable, nous vous recommandons de :
           </p>
           <ul className="list-disc pl-5 space-y-2">
-            <li>Revoir les comptes proposés et les adapter aux spécificités de vos activités.</li>
-            <li>Ajouter des sous-comptes pour un suivi analytique précis de vos projets et filières.</li>
-            <li>Collaborer avec votre expert-comptable pour valider les adaptations et assurer la conformité.</li>
-            <li>Mettre à jour régulièrement ce plan en fonction de l'évolution de votre école.</li>
+            <li>Revoir les comptes proposés et les adapter aux spécificités des activités de votre client.</li>
+            <li>Ajouter des sous-comptes pour un suivi analytique précis de leurs projets et filières.</li>
+            <li>Valider les adaptations avec le responsable de l'école pour assurer la cohérence et l'adhésion.</li>
+            <li>Mettre à jour régulièrement ce plan en fonction de l'évolution de l'école.</li>
           </ul>
         </CardContent>
       </Card>
