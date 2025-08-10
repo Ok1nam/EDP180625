@@ -218,6 +218,15 @@ export default function SuiviSubvention() {
     });
   };
 
+  const sanitizeCSVValue = (value: string | number | undefined | null): string => {
+    if (value === undefined || value === null) {
+      return '';
+    }
+    const str = String(value);
+    // Escape double quotes and enclose in quotes to handle commas and other special characters
+    return `"${str.replace(/"/g, '""')}"`;
+  };
+
   const exportToCSV = () => {
     if (applications.length === 0) {
       toast({
@@ -259,34 +268,34 @@ export default function SuiviSubvention() {
       const appRemainingAmount = (app.amountObtained || 0) - appTotalReceivedAmount;
 
       return [
-        `"${String(app.projectTitle).replace(/"/g, '""')}"`, // ID
-        `"${String(app.programName).replace(/"/g, '""')}"`, // Nom de la subvention / Appel à projets
-        `"${String(app.fundingBody).replace(/"/g, '""')}"`,
-        `"${String(app.financeurType).replace(/"/g, '""')}"`,
-        `"${String(app.objectGrant).replace(/"/g, '""')}"`,
-        String(app.submissionDeadline),
-        String(app.submissionDateActual),
-        String(app.amountSolicited),
-        String(app.amountObtained),
-        String(app.notificationDate),
-        String(app.advanceReceivedDate),
-        String(app.advanceReceivedAmount),
-        String(app.balanceReceivedDate),
-        String(app.balanceReceivedAmount),
-        String(parseFloat(appTotalReceivedAmount.toFixed(2))),
-        String(parseFloat(appRemainingAmount.toFixed(2))),
-        String(parseFloat(appCompletionRate.toFixed(2))),
-        `"${String(app.justificatifs).replace(/"/g, '""')}"`,
-        String(app.justificatifsDeadline),
-        `"${String(app.currentStatus).replace(/"/g, '""')}"`,
-        `"${String(app.nextSteps).replace(/"/g, '""')}"`,
-        `"${String(app.internalResponsible).replace(/"/g, '""')}"`,
-      ];
+        sanitizeCSVValue(app.projectTitle),
+        sanitizeCSVValue(app.programName),
+        sanitizeCSVValue(app.fundingBody),
+        sanitizeCSVValue(app.financeurType),
+        sanitizeCSVValue(app.objectGrant),
+        sanitizeCSVValue(app.submissionDeadline),
+        sanitizeCSVValue(app.submissionDateActual),
+        sanitizeCSVValue(app.amountSolicited),
+        sanitizeCSVValue(app.amountObtained),
+        sanitizeCSVValue(app.notificationDate),
+        sanitizeCSVValue(app.advanceReceivedDate),
+        sanitizeCSVValue(app.advanceReceivedAmount),
+        sanitizeCSVValue(app.balanceReceivedDate),
+        sanitizeCSVValue(app.balanceReceivedAmount),
+        sanitizeCSVValue(parseFloat(appTotalReceivedAmount.toFixed(2))),
+        sanitizeCSVValue(parseFloat(appRemainingAmount.toFixed(2))),
+        sanitizeCSVValue(parseFloat(appCompletionRate.toFixed(2))),
+        sanitizeCSVValue(app.justificatifs),
+        sanitizeCSVValue(app.justificatifsDeadline),
+        sanitizeCSVValue(app.currentStatus),
+        sanitizeCSVValue(app.nextSteps),
+        sanitizeCSVValue(app.internalResponsible),
+      ].join(';');
     });
 
     const csvContent = [
-      headers.join(';'),
-      ...rows.map(row => row.join(';'))
+      headers.map(sanitizeCSVValue).join(';'),
+      ...rows
     ].join('\n');
 
     const blob = new Blob([new Uint8Array([0xEF, 0xBB, 0xBF]), csvContent], { type: 'text/csv;charset=utf-8-bom;' });
