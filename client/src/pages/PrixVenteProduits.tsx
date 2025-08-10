@@ -1,7 +1,7 @@
 // client/src/pages/PrixVenteProduits.tsx
 
 import React, { useState, useEffect } from 'react';
-import { Calculator, DollarSign, Euro, Percent, Package, Users, Factory, LineChart, RefreshCcw } from "lucide-react";
+import { Calculator, DollarSign, Euro, Percent, Package, Users, Factory, LineChart, RefreshCcw, Lightbulb } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -96,27 +96,68 @@ const PrixVenteProduits: React.FC<PrixVenteProduitsProps> = ({ navigate }) => {
     setUnitMarginAmount(null);
   };
 
-  // Optionnel: Recalculer automatiquement quand les inputs changent
-  // useEffect(() => {
-  //   calculatePrices();
-  // }, [rawMaterialsCost, directLaborHours, hourlyLaborRate, indirectCosts, desiredMarginPercentage, tvaRate]);
+  // Le chemin vers le fichier du tableau
+  const prixDeRevientFilePath = "/fichiers/ANNEXE 19 - Trame du Tableau prix de revient.xlsx";
 
 
   return (
     <section id="prix-vente-produits" className="max-w-4xl mx-auto px-4 py-8">
       <h1 className="flex items-center gap-3 mb-6 text-3xl font-bold text-gray-800">
-        <Calculator className="w-8 h-8 text-blue-600" /> {/* Icône Calculatrice */}
+        <Calculator className="w-8 h-8 text-blue-600" />
         Calcul du Prix de Vente des Produits
       </h1>
       
       <p className="mb-8 text-lg text-gray-700 leading-relaxed">
-        Déterminez le prix de vente optimal pour les produits fabriqués par votre École de Production en tenant compte de tous les coûts et de la marge souhaitée. Cet outil vous aide à assurer la rentabilité de votre production.
+        Cet outil vous permet de calculer précisément le coût de revient complet d’un produit fabriqué et de déterminer un prix de vente adapté. Il est essentiel pour piloter la rentabilité de l’activité de production de votre École de Production.
       </p>
+
+      {/* Section Objectifs */}
+      <Card className="mb-6 shadow-md">
+        <CardHeader className="bg-gray-50 border-b">
+          <CardTitle className="text-xl font-bold text-gray-700 flex items-center gap-2">
+            <Lightbulb className="w-5 h-5 text-orange-500" />
+            Objectifs de l'outil
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="p-6 text-gray-700 space-y-4">
+          <ul className="list-disc pl-5 space-y-2">
+            <li>**Calculer précisément le coût de revient complet** d’un produit fabriqué, en intégrant toutes les charges liées à sa réalisation (matières premières, consommables, sous-traitance et main-d'œuvre élèves).</li>
+            <li>**Déterminer un prix de vente adapté,** prenant en compte la marge brute ou nette souhaitée, ainsi que la réalité du marché.</li>
+            <li>**Contribuer au pilotage de la rentabilité** de l’activité de production de l’EDP, en fournissant une vision claire des coûts et marges par produit.</li>
+            <li>**Servir d’aide à la décision** dans la négociation commerciale, en mesurant l’impact de différentes hypothèses de coûts et de prix.</li>
+          </ul>
+        </CardContent>
+      </Card>
+
+      {/* Téléchargement du tableau */}
+      <Card className="mb-6 shadow-md">
+        <CardHeader className="bg-gray-50 border-b">
+          <CardTitle className="text-xl font-bold text-gray-700 flex items-center gap-2">
+            <Download className="w-5 h-5 text-blue-600" />
+            Télécharger le Tableau de Calcul du Prix de Revient
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="p-6 text-center">
+          <p className="mb-4">
+            Accédez à notre modèle de tableau de calcul du prix de revient, un outil essentiel pour une gestion financière rigoureuse de votre École de Production. Ce fichier est au format `.xlsx`.
+          </p>
+          <a href={prixDeRevientFilePath} download="ANNEXE 19 - Trame du Tableau prix de revient.xlsx">
+            <Button className="btn-primary">
+              <Download className="w-4 h-4 mr-2" />
+              Télécharger le Tableau
+            </Button>
+          </a>
+          <p className="italic text-sm text-gray-600 mt-4">
+            **Conseil :** Utilisez ce tableau pour affiner vos stratégies de prix et maximiser votre rentabilité.
+          </p>
+        </CardContent>
+      </Card>
+
 
       <Card className="mb-6 shadow-lg">
         <CardHeader className="bg-blue-50 border-b">
           <CardTitle className="text-xl font-bold text-blue-700 flex items-center gap-2">
-            <DollarSign className="w-5 h-5" /> Inputs financiers
+            <DollarSign className="w-5 h-5" /> Simulateur de Prix de Vente
           </CardTitle>
         </CardHeader>
         <CardContent className="p-6 space-y-5">
@@ -132,7 +173,7 @@ const PrixVenteProduits: React.FC<PrixVenteProduitsProps> = ({ navigate }) => {
               />
             </div>
             <div>
-              <Label htmlFor="direct-labor-hours">Heures de Main d'Œuvre Directe</Label>
+              <Label htmlFor="direct-labor-hours">Heures de Main d'Œuvre Directe (Élèves)</Label>
               <Input
                 id="direct-labor-hours"
                 type="number"
@@ -155,13 +196,13 @@ const PrixVenteProduits: React.FC<PrixVenteProduitsProps> = ({ navigate }) => {
               />
             </div>
             <div>
-              <Label htmlFor="indirect-costs">Coûts Indirects de Production (€)</Label>
+              <Label htmlFor="indirect-costs">Consommables, Sous-traitance, Charges Indirectes (€)</Label>
               <Input
                 id="indirect-costs"
                 type="number"
                 value={indirectCosts}
                 onChange={(e) => setIndirectCosts(e.target.value === '' ? '' : parseFloat(e.target.value))}
-                placeholder="Ex: 15 (électricité, amortissement machines...)"
+                placeholder="Ex: 15"
               />
             </div>
           </div>
@@ -215,7 +256,7 @@ const PrixVenteProduits: React.FC<PrixVenteProduitsProps> = ({ navigate }) => {
                   {unitCostPrice.toLocaleString('fr-FR', { style: 'currency', currency: 'EUR' })}
                 </p>
                 <p className="text-sm text-gray-500">
-                  (Matières Premières + Main d'Œuvre Directe + Coûts Indirects)
+                  (Matières Premières + Main d'Œuvre Directe + Charges Indirectes)
                 </p>
               </div>
               <div>
