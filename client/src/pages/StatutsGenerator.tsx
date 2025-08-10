@@ -1,7 +1,7 @@
 // client/src/pages/StatutsGenerator.tsx
 
 import React, { useState } from "react";
-import { FileText, Download, Building, User, Gavel, FileText as FileWord } from "lucide-react"; // Import de l'icône FileText pour le docx
+import { FileText, Download, Building, User, Gavel, FileText as FileWord } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -149,8 +149,8 @@ En cas de dissolution, prononcée par une AG extraordinaire, un ou plusieurs liq
 
 Fait à ${formData.ville || '[Ville signature statuts]'}, le ${dateDuJour || '[Date signature statuts]'}
 
-Le Président(e):                          Le Secrétaire:
-${formData.presidentName || '[Nom prénom président]'}                    ${formData.secretaireName || '[Nom prénom secrétaire]'}
+Le Président(e):                          Le Secrétaire(e):
+${formData.presidentName || '[Nom prénom président(e)]'}                    ${formData.secretaireName || '[Nom prénom secrétaire(e)]'}
 
 Signature :                           Signature :
 `;
@@ -283,7 +283,7 @@ Signature :                           Signature :
           </CardHeader>
           <CardContent className="space-y-4">
             <div>
-              <Label htmlFor="president">Nom et prénom du président *</Label>
+              <Label htmlFor="president">Nom et prénom du président(e) *</Label>
               <Input
                 id="president"
                 value={formData.presidentName}
@@ -294,7 +294,7 @@ Signature :                           Signature :
             </div>
 
             <div>
-              <Label htmlFor="secretaire">Nom et prénom du secrétaire *</Label>
+              <Label htmlFor="secretaire">Nom et prénom du secrétaire(e) *</Label>
               <Input
                 id="secretaire"
                 value={formData.secretaireName}
@@ -319,7 +319,7 @@ Signature :                           Signature :
                 disabled={!isFormValid}
               >
                 <Download className="w-4 h-4 mr-2" />
-                Télécharger les statuts (fichier .txt)
+                Télécharger les statuts remplis (.txt)
               </Button>
 
               <a
@@ -331,7 +331,7 @@ Signature :                           Signature :
                   className="w-full btn-secondary flex items-center gap-2"
                 >
                   <FileWord className="w-4 h-4" />
-                  Télécharger le modèle (.docx)
+                  Télécharger le modèle à remplir (.docx)
                 </Button>
               </a>
               
