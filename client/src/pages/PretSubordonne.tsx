@@ -1,5 +1,7 @@
+// client/src/pages/PretSubordonne.tsx
+
 import React, { useState } from 'react';
-import { Handshake, Download, FileText, Printer } from "lucide-react";
+import { Handshake, Download, FileText, Printer, PiggyBank } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -104,8 +106,51 @@ export default function PretSubordonne({ navigate }: PretSubordonneProps) {
       </h1>
 
       <p className="mb-8 text-lg text-gray-700 leading-relaxed">
-        Remplissez le formulaire ci-dessous pour générer un aperçu du contrat de prêt subordonné. Vous pouvez aussi télécharger le modèle de contrat original au format .docx pour le modifier.
+        Le prêt subordonné est un outil de financement hybride, situé entre les fonds propres et les dettes bancaires classiques. Pour une École de Production, il représente un moyen efficace de sécuriser les premières années d’activité, en renforçant la structure financière sans alourdir immédiatement la charge de remboursement.
       </p>
+
+      {/* Section Pourquoi recourir à un Prêt Subordonné ? */}
+      <Card className="mb-6 shadow-md">
+        <CardHeader className="bg-gray-50 border-b">
+          <CardTitle className="text-xl font-bold text-gray-700 flex items-center gap-2">
+            <PiggyBank className="w-5 h-5 text-green-600" />
+            Pourquoi recourir à un Prêt Subordonné ?
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="p-6 text-gray-700">
+          <p className="mb-4">
+            Ce type de financement présente plusieurs atouts pour les porteurs de projet :
+          </p>
+          <ul className="list-disc pl-5 space-y-2">
+            <li>**Renforcer la solidité financière :** Bien que classé en dette, il est souvent assimilé à des quasi-fonds propres, améliorant la perception de solvabilité par les financeurs.</li>
+            <li>**Faciliter l’accès à d’autres financements :** Il rassure les banques et organismes publics, ouvrant la porte à des prêts complémentaires.</li>
+            <li>**Alléger la pression sur la trésorerie :** Les remboursements peuvent être différés, laissant du temps pour que l’école atteigne sa vitesse de croisière.</li>
+            <li>**Encadrer le risque :** Les modalités de subordination assurent que ce prêt est remboursé après les autres dettes, ce qui le rend plus souple pour l’emprunteur.</li>
+          </ul>
+        </CardContent>
+      </Card>
+
+      {/* Section Les éléments clés du modèle de contrat */}
+      <Card className="mb-6 shadow-md">
+        <CardHeader className="bg-gray-50 border-b">
+          <CardTitle className="text-xl font-bold text-gray-700 flex items-center gap-2">
+            <FileText className="w-5 h-5 text-purple-600" />
+            Les éléments clés du modèle de contrat
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="p-6 text-gray-700">
+          <p className="mb-4">
+            Le modèle de contrat inclus dans cet outil précise notamment :
+          </p>
+          <ul className="list-disc pl-5 space-y-2">
+            <li>**Durée et modalités de remboursement :** Souvent longues (7 à 10 ans), avec possibilité de différé.</li>
+            <li>**Conditions financières :** Taux d’intérêt fixe, calcul et échéancier détaillés.</li>
+            <li>**Clauses de subordination :** Remboursement après désintéressement des autres créanciers.</li>
+            <li>**Obligations de l’emprunteur :** Utilisation des fonds, respect des conditions FNEP, reporting régulier.</li>
+            <li>**Références juridiques :** Code monétaire et financier, Code de commerce, Plan Comptable Général.</li>
+          </ul>
+        </CardContent>
+      </Card>
 
       {/* Téléchargement du document original */}
       <Card className="mb-6 shadow-md">
@@ -116,6 +161,9 @@ export default function PretSubordonne({ navigate }: PretSubordonneProps) {
           </CardTitle>
         </CardHeader>
         <CardContent className="p-6 text-center">
+          <p className="mb-4">
+            Accédez à notre modèle complet de contrat, conforme aux exigences des partenaires institutionnels (Banque des Territoires, France Active, etc.). Il est fourni au format .docx pour être adapté à votre projet.
+          </p>
           <a href="/fichiers/ANNEXE 16 MODELE CONTRAT PRET SUBORDONNE.docx" download>
             <Button className="btn-primary">
               <Download className="w-4 h-4 mr-2" />
@@ -123,7 +171,7 @@ export default function PretSubordonne({ navigate }: PretSubordonneProps) {
             </Button>
           </a>
           <p className="italic text-sm text-gray-600 mt-4">
-            Il est fortement recommandé de faire relire et adapter ce contrat par un expert-comptable ou un conseil juridique.
+            **Conseil :** Faites relire et adapter ce contrat par votre expert-comptable ou votre conseil juridique pour garantir sa conformité aux spécificités de votre montage financier.
           </p>
         </CardContent>
       </Card>
