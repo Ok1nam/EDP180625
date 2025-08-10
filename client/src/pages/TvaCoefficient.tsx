@@ -39,17 +39,17 @@ const TvaCoefficient: React.FC<TvaCoefficientProps> = ({ navigate }) => {
           </p>
           <ul className="list-disc pl-5 space-y-2">
             <li>
-              **Coefficient d'assujettissement (CSA)** : Mesure l'utilisation des biens pour des opérations imposables.
+              **Coefficient d'assujettissement (CoAS)** : Mesure l'utilisation des biens pour des opérations imposables.
             </li>
             <li>
-              **Coefficient de taxation (CT)** : Tient compte du régime des recettes, taxables ou exonérées.
+              **Coefficient de taxation (CoT)** : Tient compte du régime des recettes, taxables ou exonérées.
             </li>
             <li>
-              **Coefficient d'admission (CA)** : Indique si la TVA est exclue par nature (ex. : véhicules de tourisme).
+              **Coefficient d'admission (CoAD)** : Indique si la TVA est exclue par nature (ex. : véhicules de tourisme).
             </li>
           </ul>
           <p>
-            Pour les Écoles de Production, le CSA et le CA sont généralement à 100 %, sauf cas particuliers. Le coefficient de déduction correspond donc directement au **coefficient de taxation**, qui est calculé par la formule suivante :
+            Pour les Écoles de Production, le CoAS et le CoAD sont généralement à 100 %, sauf cas particuliers. Le coefficient de déduction correspond donc directement au **coefficient de taxation**, qui est calculé par la formule suivante :
           </p>
           <p className="font-bold text-center my-4 text-blue-700">
             Coefficient de déduction = Recettes soumises à TVA / Recettes totales

@@ -10,7 +10,8 @@ interface ResultatFiscalProps {
 }
 
 const ResultatFiscal: React.FC<ResultatFiscalProps> = ({ navigate }) => {
-  const excelFilePath = "/fichiers/ECOLE_DE_PRODUCTION_MODELE.xlsx";
+  // Chemin mis à jour vers le nouveau fichier Excel
+  const excelFilePath = "/fichiers/ANNEXE 6 ET 7 - Trame calcul coefficient déduction et résultat fiscal 080825.xlsm";
 
   return (
     <section id="resultat-fiscal" className="max-w-4xl mx-auto px-4 py-8">
@@ -20,7 +21,7 @@ const ResultatFiscal: React.FC<ResultatFiscalProps> = ({ navigate }) => {
       </h1>
 
       <p className="mb-8 text-lg text-gray-700 leading-relaxed">
-        Comprendre et calculer le résultat fiscal est une étape essentielle pour toute École de Production. Cette trame vous guide à travers les ajustements nécessaires entre le résultat comptable et le résultat imposable, en tenant compte des spécificités fiscales propres à votre statut.
+        En tant qu'expert-comptable, maîtriser le calcul du résultat fiscal de votre client, une École de Production, est fondamental. Cette trame est conçue pour vous guider à travers les ajustements nécessaires entre le résultat comptable et le résultat imposable, en intégrant les spécificités fiscales propres à ces établissements.
       </p>
 
       <Card className="mb-8 shadow-md">
@@ -32,21 +33,21 @@ const ResultatFiscal: React.FC<ResultatFiscalProps> = ({ navigate }) => {
         </CardHeader>
         <CardContent className="text-gray-700 space-y-4">
           <p>
-            Le résultat fiscal se détermine à partir du résultat comptable (avant impôt) en lui appliquant des **retraitements extra-comptables**. Ces retraitements sont nécessaires pour respecter les règles fiscales qui peuvent différer des règles comptables.
+            Le résultat fiscal se détermine à partir du résultat comptable (avant impôt) de l'École de Production, en y appliquant des **retraitements extra-comptables**. Ces retraitements sont indispensables pour aligner le résultat comptable avec les règles fiscales, qui peuvent différer des normes comptables.
           </p>
           <p>
-            Les principaux types de retraitements sont :
+            Les principaux types de retraitements à considérer sont :
           </p>
           <ul className="list-disc pl-5 space-y-2">
             <li>
-              **Réintégrations :** Ajout au résultat comptable de charges qui sont déductibles d'un point de vue comptable mais non admises fiscalement (ex: certaines amortissements non-déductibles, amendes, etc.).
+              **Réintégrations :** Il s'agit d'ajouter au résultat comptable les charges qui sont déductibles d'un point de vue comptable mais non admises fiscalement (ex: certaines amortissements non-déductibles, amendes, pénalités, etc.).
             </li>
             <li>
-              **Déductions :** Soustraction du résultat comptable de produits non imposables ou de charges non déduites comptablement mais admises fiscalement (ex: produits non imposables, provisions réglementées, etc.).
+              **Déductions :** Inversement, il faut soustraire du résultat comptable les produits non imposables ou les charges non déduites comptablement mais admises fiscalement (ex: certains produits financiers non imposables, reprises de provisions réglementées, etc.).
             </li>
           </ul>
           <p>
-            Notre fichier Excel vous accompagnera pas à pas dans l'identification et l'application de ces ajustements, afin d'obtenir un résultat fiscal précis et conforme.
+            Notre fichier Excel vous accompagnera pas à pas dans l'identification et l'application de ces ajustements, vous permettant d'obtenir un résultat fiscal précis et conforme pour l'établissement.
           </p>
         </CardContent>
       </Card>
@@ -56,34 +57,19 @@ const ResultatFiscal: React.FC<ResultatFiscalProps> = ({ navigate }) => {
           <CardTitle className="text-2xl font-bold text-blue-700 flex items-center gap-3">
             <Download className="w-6 h-6" /> Télécharger la Trame de Calcul
           </CardTitle>
-        </CardHeader>
+G        </CardHeader>
         <CardContent className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
           <div className="text-base text-gray-800 flex-1">
             <p className="mb-2">
-              Cliquez ci-dessous pour télécharger le fichier Excel qui vous permettra de calculer votre résultat fiscal.
+              Cliquez ci-dessous pour télécharger le fichier Excel qui vous permettra de calculer le résultat fiscal de votre client.
             </p>
             <p className="text-sm text-gray-600">
-              **Note importante :** Ce fichier Excel est un support commun utilisé par plusieurs de nos outils (<span
-                className="text-blue-600 hover:underline cursor-pointer"
-                onClick={() => navigate('plan-comptable')} // Lien vers Plan Comptable
-              >
-                plan comptable
-              </span>, <span
-                className="text-blue-600 hover:underline cursor-pointer"
-                onClick={() => navigate('tva-coefficient')} // Lien vers Coefficient TVA
-              >
-                coefficient de déduction TVA
-              </span>, et <span
-                className="text-blue-600 hover:underline cursor-pointer"
-                onClick={() => navigate('resultat-fiscal')} // Lien vers cette page (optionnel)
-              >
-                résultat fiscal
-              </span>). Il est essentiel de le remplir avec les données spécifiques à votre école avant d'utiliser les calculateurs.
+              **Note importante :** Ce fichier Excel est **lié** à plusieurs de nos outils. Il est essentiel de le remplir avec les données spécifiques de l'École de Production de votre client avant d'utiliser les calculateurs.
             </p>
           </div>
           <a
             href={excelFilePath}
-            download="TRAME_RESULTAT_FISCAL_MODELE.xlsx"
+            download="ANNEXE 6 ET 7 - Trame calcul coefficient déduction et résultat fiscal 080825.xlsm" // Nom du fichier Excel mis à jour
             className="flex-shrink-0"
           >
             <Button className="btn-primary flex items-center gap-2 py-3 px-6 text-lg">
@@ -102,16 +88,16 @@ const ResultatFiscal: React.FC<ResultatFiscalProps> = ({ navigate }) => {
         </CardHeader>
         <CardContent className="text-gray-700 space-y-4">
           <p>
-            Pour garantir la justesse de votre calcul du résultat fiscal :
+            Pour garantir la justesse de votre calcul du résultat fiscal et la conformité des déclarations :
           </p>
           <ul className="list-disc pl-5 space-y-2">
-            <li>Toujours partir de votre bilan et compte de résultat comptable finalisé.</li>
-            <li>Bien identifier toutes les charges et produits qui peuvent faire l'objet de retraitements fiscaux.</li>
-            <li>Consulter régulièrement la législation fiscale en vigueur, qui peut évoluer.</li>
-            <li>Ne pas hésiter à solliciter l'aide de votre expert-comptable pour les cas complexes ou la validation finale.</li>
+            <li>Toujours partir du bilan et compte de résultat comptable finalisé de l'établissement.</li>
+            <li>Identifier méticuleusement toutes les charges et produits pouvant faire l'objet de retraitements fiscaux spécifiques aux organismes sans but lucratif ou aux Écoles de Production.</li>
+            <li>Rester informé des évolutions de la législation fiscale en vigueur.</li>
+            <li>N'hésitez pas à solliciter l'avis d'un spécialiste en droit fiscal pour les situations complexes ou pour la validation finale.</li>
           </ul>
           <p>
-            Ce document est un outil d'aide ; il ne remplace pas l'expertise d'un professionnel du droit fiscal.
+            Ce document est un outil d'aide ; il ne saurait se substituer à une consultation juridique ou fiscale approfondie.
           </p>
         </CardContent>
       </Card>
