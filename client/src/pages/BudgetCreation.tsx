@@ -20,7 +20,7 @@ const BudgetCreation: React.FC<BudgetCreationProps> = ({ navigate }) => {
       </h1>
       
       <p className="mb-8 text-lg text-gray-700 leading-relaxed">
-        L'élaboration d'un budget prévisionnel détaillé est une étape incontournable pour la création d'une École de Production. Ce document anticipe l'ensemble des recettes et des dépenses sur plusieurs années d'activité et permet de valider la faisabilité financière de votre projet.
+        Construire un budget prévisionnel clair et structuré est une étape stratégique pour lancer votre École de Production. Notre modèle, inspiré des pratiques professionnelles, vous permet d’anticiper les besoins financiers, d’organiser vos dépenses et de vérifier la viabilité économique de votre projet sur plusieurs années.
       </p>
 
       {/* Section Pourquoi un budget de création ? */}
@@ -33,14 +33,14 @@ const BudgetCreation: React.FC<BudgetCreationProps> = ({ navigate }) => {
         </CardHeader>
         <CardContent className="p-6 text-gray-700 space-y-4">
           <p>
-            Ce modèle est un outil financier puissant et complet qui vous permet de :
+            Ce modèle Excel automatisé est conçu pour vous aider à :
           </p>
           <ul className="list-disc pl-5 space-y-2">
-            <li>**Estimer les besoins de financement :** Déterminer le capital de départ nécessaire.</li>
-            <li>**Anticiper la rentabilité :** Projeter les flux de trésorerie et le résultat attendu sur 3 à 5 ans.</li>
-            <li>**Convaincre les financeurs :** Présenter une vision claire et chiffrée du modèle économique.</li>
-            <li>**Planifier les dépenses :** Gérer les coûts de démarrage et les charges récurrentes, notamment les salaires et les investissements matériels.</li>
-            <li>**Fixer des objectifs réalistes :** Servir de feuille de route financière pour les premières années de l'école.</li>
+            <li>**Évaluer le financement initial** : Identifier précisément le capital nécessaire pour lancer l’activité.</li>
+            <li>**Projeter la performance** : Simuler la trésorerie, le chiffre d’affaires et le résultat sur 3 à 5 ans.</li>
+            <li>**Rassurer vos partenaires** : Présenter un dossier chiffré et cohérent aux banques, investisseurs ou collectivités.</li>
+            <li>**Planifier vos charges** : Anticiper salaires, achats de matériel, frais de fonctionnement et investissements.</li>
+            <li>**Piloter vos objectifs** : Utiliser le prévisionnel comme tableau de bord pour suivre et ajuster votre trajectoire financière.</li>
           </ul>
         </CardContent>
       </Card>
@@ -55,25 +55,15 @@ const BudgetCreation: React.FC<BudgetCreationProps> = ({ navigate }) => {
         </CardHeader>
         <CardContent className="p-6 text-gray-700 space-y-4">
           <p>
-            Le modèle inclus les postes suivants :
+            Le modèle intègre :
           </p>
           <ul className="list-disc pl-5 space-y-2">
-            <li>**Investissements Initiaux :** Locaux, équipements d'atelier, matériel pédagogique.</li>
-            <li>**Charges de Personnel :** Salaires des formateurs, personnel administratif.</li>
-            <li>**Charges de Fonctionnement :** Énergie, assurances, fournitures, entretien.</li>
-            <li>**Produits de la Production :** Chiffre d'affaires estimé des ventes de produits/services.</li>
-            <li>**Subventions et Autres Financements :** <span 
-                className="text-blue-600 hover:underline cursor-pointer font-medium"
-                onClick={() => navigate && navigate('suivi-subventions')}
-              >
-                Aides publiques
-              </span>, <span 
-                className="text-blue-600 hover:underline cursor-pointer font-medium"
-                onClick={() => navigate && navigate('suivi-prets')}
-              >
-                prêts
-              </span>, mécénat.</li>
-            <li>**Fonds de Roulement :** Liquidités nécessaires pour couvrir les dépenses courantes avant que l'école ne génère suffisamment de revenus.</li>
+            <li>**Investissements Initiaux** : Aménagement des locaux, équipements techniques, matériel pédagogique.</li>
+            <li>**Charges de Personnel** : Rémunérations des formateurs et de l’équipe administrative.</li>
+            <li>**Charges de Fonctionnement** : Énergie, assurances, fournitures, entretien.</li>
+            <li>**Produits de la Production** : Estimations de ventes de produits ou prestations.</li>
+            <li>**Subventions et Financements** : Aides publiques, mécénat, prêts bancaires.</li>
+            <li>**Fonds de Roulement** : Trésorerie nécessaire pour absorber le décalage entre dépenses et recettes.</li>
           </ul>
         </CardContent>
       </Card>
@@ -88,10 +78,10 @@ const BudgetCreation: React.FC<BudgetCreationProps> = ({ navigate }) => {
         <CardContent className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
           <div className="text-base text-gray-800 flex-1">
             <p className="mb-2">
-              Obtenez notre modèle de budget prévisionnel de création pour planifier et structurer les aspects financiers de votre future École de Production. Ce fichier est au format `.xlsm` (Excel avec macros).
+              Accédez à notre modèle de budget prévisionnel interactif au format .xlsm (Excel avec macros) pour préparer et sécuriser le financement de votre École de Production.
             </p>
             <p className="text-sm text-gray-600">
-              **Conseil :** Adaptez ce modèle à la spécificité de votre projet et aux exigences des organismes de financement que vous sollicitez.
+              **Conseil :** Personnalisez chaque poste selon vos spécificités et les critères des financeurs que vous ciblez.
             </p>
           </div>
           <a
