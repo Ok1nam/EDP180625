@@ -1,44 +1,44 @@
 // client/src/pages/HabilitationTaxe.tsx
 
 import React from 'react';
-import { ShieldCheck, School, FileText, Lightbulb, Search } from "lucide-react"; // Icônes pertinentes
+import { ShieldCheck, Download, School, FileText, Lightbulb } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
-interface HabilitationTaxeProps { // Correction de l'interface ici
+interface HabilitationTaxeProps {
   navigate?: (page: string) => void;
 }
 
-export default function HabilitationTaxe({ navigate }: HabilitationTaxeProps) { // Correction du nom de la fonction ici
+export default function HabilitationTaxe({ navigate }: HabilitationTaxeProps) {
   return (
     <section id="habilitation-taxe" className="max-w-4xl mx-auto px-4 py-8">
       <h1 className="flex items-center gap-3 mb-6 text-3xl font-bold text-gray-800">
-        <ShieldCheck className="w-8 h-8 text-green-600" /> {/* Icône de bouclier avec coche pour l'habilitation */}
-        Habilitation Taxe d'Apprentissage : Un Enjeu Majeur
+        <ShieldCheck className="w-8 h-8 text-green-600" />
+        Habilitation Taxe d'Apprentissage : Percevoir le Solde
       </h1>
       
       <p className="mb-8 text-lg text-gray-700 leading-relaxed">
-        La taxe d'apprentissage est un impôt dû par les entreprises, dont l'objectif est de financer le développement de l'apprentissage et des formations technologiques et professionnelles. Pour les Écoles de Production, être habilitée à percevoir cette taxe est une source de financement vitale. Cette page vous guide sur les aspects clés de cette habilitation.
+        L'habilitation à percevoir le solde de la taxe d'apprentissage est une démarche essentielle pour les Écoles de Production. Ce solde représente 13% de la taxe et peut être directement versé par les entreprises aux établissements qu'elles soutiennent. Cette page vous fournit un exemple de formulaire pour vous accompagner dans ce processus.
       </p>
 
-      {/* Section Comprendre la Taxe d'Apprentissage */}
+      {/* Section Le Solde de la Taxe d'Apprentissage */}
       <Card className="mb-6 shadow-md">
         <CardHeader className="bg-gray-50 border-b">
           <CardTitle className="text-xl font-bold text-gray-700 flex items-center gap-2">
             <School className="w-5 h-5 text-blue-600" />
-            La Taxe d'Apprentissage en bref
+            Comprendre le Solde de la Taxe
           </CardTitle>
         </CardHeader>
         <CardContent className="p-6 text-gray-700 space-y-4">
           <p>
-            La taxe d'apprentissage est un levier financier essentiel pour le développement des compétences et l'adéquation formation-emploi. Elle se compose de deux parts :
+            Depuis la réforme de la formation professionnelle, la taxe d'apprentissage se décompose en deux parts distinctes :
           </p>
           <ul className="list-disc pl-5 space-y-2">
-            <li>**La part principale (87%) :** Destinée au financement des formations par apprentissage.</li>
-            <li>**Le solde (13%) :** Il est directement versé par les entreprises aux établissements et formations qu'elles choisissent de soutenir (hors apprentissage), à condition qu'ils soient habilités à le percevoir. C'est cette part qui est particulièrement pertinente pour les Écoles de Production.</li>
+            <li>**Une part principale (87%) :** Collectée par les URSSAF et l'ACOSS pour financer l'apprentissage.</li>
+            <li>**Le solde (13%) :** C'est le "hors quota" ou "solde", géré par la Caisse des Dépôts et Consignations (CDC) via la plateforme SOLTéA. Ce montant est versé par les entreprises aux établissements habilités qu'elles choisissent.</li>
           </ul>
           <p>
-            Depuis 2023, la collecte et le reversement du solde de la taxe d'apprentissage sont gérés par l'URSSAF et la Caisse des Dépôts et Consignations via la plateforme SOLTéA.
+            Pour une École de Production, la capacité à percevoir ce solde est une source de financement directe et stratégique.
           </p>
         </CardContent>
       </Card>
@@ -48,49 +48,43 @@ export default function HabilitationTaxe({ navigate }: HabilitationTaxeProps) { 
         <CardHeader className="bg-gray-50 border-b">
           <CardTitle className="text-xl font-bold text-gray-700 flex items-center gap-2">
             <Lightbulb className="w-5 h-5 text-orange-500" />
-            Obtenir et Maintenir l'Habilitation
+            Le processus d'Habilitation
           </CardTitle>
         </CardHeader>
         <CardContent className="p-6 text-gray-700 space-y-4">
           <p>
-            Pour qu'une École de Production puisse bénéficier du solde de la taxe d'apprentissage, elle doit être explicitement répertoriée comme établissement ou organisme habilité à percevoir cette contribution.
+            Pour être habilitée à percevoir le solde, votre École de Production doit être inscrite sur la liste nationale des établissements et organismes de formation habilités. Cette inscription se fait généralement auprès de l'autorité compétente (comme la Délégation Régionale Académique à la Formation Professionnelle, Initiale et Continue - DRAFPIC).
           </p>
           <ul className="list-disc pl-5 space-y-2">
-            <li>**Critères d'éligibilité :** Les Écoles de Production sont généralement éligibles en tant qu'organismes concourant aux missions de service public de l'enseignement technique ou supérieur. Il est crucial de s'assurer que votre école est bien inscrite sur la liste nationale des établissements habilités.</li>
-            <li>**Processus :** L'inscription et la mise à jour des informations se font via des plateformes dédiées. Une vérification régulière de votre statut est recommandée.</li>
-            <li>**Communication aux entreprises :** Une fois habilitée, votre école doit informer les entreprises partenaires de sa capacité à percevoir le solde de la taxe d'apprentissage et les guider sur la procédure de versement via SOLTéA.</li>
+            <li>**Critères d'éligibilité :** Les Écoles de Production sont éligibles en tant qu'organismes concourant aux missions de service public de l'enseignement technique.</li>
+            <li>**La plateforme SOLTéA :** Une fois habilitée, votre école doit s'inscrire sur SOLTéA. C'est sur cette plateforme que les entreprises désignent les établissements qu'elles souhaitent soutenir.</li>
+            <li>**Communication :** Il est crucial de communiquer à vos entreprises partenaires votre statut d'habilité et de les guider sur la procédure de versement via SOLTéA.</li>
           </ul>
         </CardContent>
       </Card>
 
-      {/* Section Outils de Vérification et Ressources (Placeholders) */}
+      {/* Section Téléchargement du Formulaire d'Exemple */}
       <Card className="mb-6 shadow-md">
         <CardHeader className="bg-gray-50 border-b">
           <CardTitle className="text-xl font-bold text-gray-700 flex items-center gap-2">
-            <Search className="w-5 h-5 text-purple-600" />
-            Vérification et Documentation
+            <Download className="w-5 h-5 text-blue-600" />
+            Télécharger le Formulaire d'Habilitation
           </CardTitle>
         </CardHeader>
         <CardContent className="p-6 text-gray-700 space-y-4">
           <p>
-            Assurez-vous que votre École de Production est bien répertoriée et que toutes vos informations sont à jour pour maximiser vos chances de percevoir la taxe d'apprentissage.
+            Pour vous aider à préparer votre demande d'habilitation, nous mettons à votre disposition un exemple de formulaire. Ce document vous permet de voir les informations requises par les autorités compétentes.
           </p>
-          <ul className="list-disc pl-5 space-y-2">
-            <li>
-              **Vérificateur d'habilitation (à venir) :** Un outil pour rechercher rapidement le statut d'habilitation de votre école via son SIRET ou son nom.
-            </li>
-            <li>
-              **Guide des procédures (à venir) :** Un pas-à-pas pour l'inscription sur SOLTéA et les bonnes pratiques de communication aux entreprises.
-            </li>
-            <li>
-              **Ressources officielles :** Liens directs vers les sites de l'URSSAF, la Caisse des Dépôts et Consignations (SOLTéA) et le Ministère du Travail.
-              <a href="https://www.soltea.education.gouv.fr/" target="_blank" rel="noopener noreferrer" className="block mt-2 text-blue-600 hover:underline">
-                Accéder à la plateforme SOLTéA <FileText className="inline-block ml-1 w-4 h-4" />
-              </a>
-            </li>
-          </ul>
+          <div className="text-center">
+            <a href="/fichiers/Annexe 17 - Exemple de formulaire de demande d'habilitation taxe apprentissage.pdf" download>
+              <Button className="btn-primary">
+                <FileText className="w-4 h-4 mr-2" />
+                Télécharger le formulaire d'exemple
+              </Button>
+            </a>
+          </div>
           <p className="italic text-sm text-gray-600 mt-4">
-            (Outils interactifs et informations complémentaires en cours de développement.)
+            **Note :** Il s'agit d'un document d'exemple. Le formulaire officiel est à demander auprès de votre DRAFPIC ou de l'autorité compétente de votre région.
           </p>
         </CardContent>
       </Card>
