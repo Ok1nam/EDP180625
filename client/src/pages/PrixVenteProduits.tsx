@@ -1,7 +1,7 @@
 // client/src/pages/PrixVenteProduits.tsx
 
 import React, { useState, useEffect } from 'react';
-import { Calculator, DollarSign, Euro, Percent, Package, Users, Factory, LineChart, RefreshCcw, Lightbulb } from "lucide-react";
+import { Calculator, DollarSign, Euro, Percent, Package, Users, Factory, LineChart, RefreshCcw, Lightbulb, Download } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
