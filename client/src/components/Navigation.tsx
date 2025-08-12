@@ -4,10 +4,8 @@ import { useState, useEffect } from "react";
 import {
   Home,
   Wrench,
-  // BarChart3 est toujours nécessaire pour le "Tableau de bord"
   BarChart3,
   BookOpen,
-  // Phone est disponible mais non utilisé
   FileText,
   Calculator,
   TrendingUp,
@@ -51,27 +49,17 @@ const menuStructure = [
       { id: "calculateurs", path: "/calculateurs", label: "Tableau calcul de coût", icon: Calculator },
       { id: "prix-vente", path: "/prix-vente", label: "Tableau de détermination du prix de vente des produits", icon: PieChart },
       { id: "rapport-adapte", path: "/rapport-adapte", label: "Modèle de rapport adapté", icon: FileText },
-      // =======================================================
-      // DÉBUT DES ITEMS DÉPLACÉS DEPUIS "SUIVIS"
-      // =======================================================
       { id: "suivi-subventions", path: "/suivi-subventions", label: "Suivi des subventions", icon: Euro },
       { id: "suivi-prets", path: "/suivi-prets", label: "Suivi des prêts", icon: DollarSign },
       { id: "tableau-bord", path: "/tableau-bord", label: "Tableau de bord financier & extra-financier", icon: BarChart3 },
-      // "Suivi des partenariats" n'a pas été ajouté, comme demandé.
-      // =======================================================
-      // FIN DES ITEMS DÉPLACÉS
-      // =======================================================
     ],
   },
-  // La section "Suivis" a été complètement supprimée
   {
     id: "documentation",
     path: "/documentation",
-    // MODIFIÉ ICI : le label a été simplifié
     label: "Documentation",
     icon: BookOpen,
     items: [
-      // SUPPRIMÉ : l'item "Méthodologie" a été enlevé
       { id: "cartographie", path: "/cartographie", label: "Cartographie des écoles de production en France", icon: MapPin },
       { id: "organigramme", path: "/organigramme", label: "Exemple d'organigramme", icon: Building },
       { id: "entretiens", path: "/entretiens", label: "Entretiens effectués auprès des porteurs de projet", icon: MessageCircle },
@@ -91,7 +79,6 @@ const menuStructure = [
   },
 ];
 
-// Le reste du composant reste inchangé
 interface NavigationProps {
   navigate: (path: string) => void;
   isBurgerMenuOpen: boolean;
@@ -148,13 +135,28 @@ export default function Navigation({ navigate, isBurgerMenuOpen, setIsBurgerMenu
                 </span>
               )}
             </button>
-
+            
+            {/* ======================================================= */}
+            {/* DÉBUT DE LA CORRECTION                                 */}
+            {/* ======================================================= */}
             {section.items.length > 1 && openSubmenu === section.path && (
               <ul className="bg-gray-700">
-                {item.icon && <item.icon className="w-4 h-4" />}
-                {item.label}
+                {section.items.map((item) => (
+                  <li key={item.id}>
+                    <button
+                      onClick={() => handleItemClick(item.path, false)}
+                      className="w-full flex items-center gap-3 pl-12 pr-4 py-3 text-white text-sm hover:bg-gray-600 transition-colors duration-200 text-left"
+                    >
+                      {item.icon && <item.icon className="w-4 h-4" />}
+                      {item.label}
+                    </button>
+                  </li>
+                ))}
               </ul>
             )}
+            {/* ======================================================= */}
+            {/* FIN DE LA CORRECTION                                    */}
+            {/* ======================================================= */}
           </li>
         ))}
       </ul>
