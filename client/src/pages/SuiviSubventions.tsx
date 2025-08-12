@@ -8,10 +8,9 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
-// CORRECTION FINALE (1/2) : On importe la fonction 'toast' directement.
-import { toast } from "@/components/ui/toaster";
+// LA VOICI : LA CORRECTION BASÉE SUR VOTRE ANCIEN CODE
+import { useToast } from "@/hooks/use-toast";
 
-// ... (Le reste des interfaces et constantes est inchangé) ...
 interface SubsidyApplication {
   id: string;
   projectTitle: string;
@@ -61,18 +60,13 @@ const statusOptions = [
   'En attente de solde'
 ];
 
-
 export default function SuiviSubvention() {
-  // CORRECTION FINALE (2/2) : On supprime cette ligne, car le hook useToast() n'existe pas.
-  // const { toast } = useToast(); 
-
+  // On remet l'appel au hook, qui est la bonne façon de faire
+  const { toast } = useToast();
   const [savedData, setSavedData] = useLocalStorage<SubsidyApplication[]>('subsidy_applications', []);
   const [applications, setApplications] = useState<SubsidyApplication[]>(savedData);
   const [showForm, setShowForm] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
-
-  // ... (Le reste du code est correct et n'a pas besoin de changer) ...
-  // Les appels à toast({...}) fonctionneront car 'toast' est maintenant la fonction importée.
 
   const [formData, setFormData] = useState<Partial<SubsidyApplication>>({
     amountSolicited: 0,
@@ -196,10 +190,10 @@ export default function SuiviSubvention() {
     });
   };
   
-  // Le reste du code est inchangé
+  // Le reste du code est inchangé et correct
   return (
     <section>
-      {/* ... */}
+      {/* ... Le JSX reste identique ... */}
     </section>
   )
 }
