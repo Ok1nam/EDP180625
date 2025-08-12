@@ -1,9 +1,9 @@
 import {
   Home,
   Wrench,
-  BarChart3, // Icône pour Suivis
-  FileText, // Pour Documentation & Guides
-  HelpCircle // NOUVEAU : Icône pour Contact & Aide
+  // BarChart3 a été supprimé d'ici
+  FileText,
+  HelpCircle
 } from "lucide-react";
 
 interface FooterProps {
@@ -14,11 +14,9 @@ export default function Footer({ navigate }: FooterProps) {
   const footerLinks = [
     { id: "accueil", label: "Accueil", icon: Home },
     { id: "outils", label: "Outils", icon: Wrench },
-    { id: "suivis", label: "Suivis", icon: BarChart3 },
-    // J'ai renommé le label pour mieux correspondre à la page intermédiaire DocumentationPage
+    // La ligne "Suivis" a été supprimée d'ici
     { id: "documentation", label: "Documentation & Guides", icon: FileText },
-    // MODIFIÉ ICI : L'ID pointe maintenant vers la nouvelle page intermédiaire
-    { id: "contact-et-aide", label: "Contact & Aide", icon: HelpCircle }, // NOUVEAU ID et NOUVELLE ICÔNE
+    { id: "contact-et-aide", label: "Contact & Aide", icon: HelpCircle },
   ];
 
   return (

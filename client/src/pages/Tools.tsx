@@ -2,7 +2,7 @@
 
 import React from 'react';
 import {
-  Wrench, // Icône principale pour la page Tools
+  Wrench,
   FileText,
   Calculator,
   TrendingUp,
@@ -12,19 +12,19 @@ import {
   DollarSign,
   Folder,
   Euro,
-  PieChart
-} from "lucide-react"; // Importez toutes les icônes nécessaires
+  PieChart,
+  BarChart3 // AJOUTÉ : Icône nécessaire pour le tableau de bord
+} from "lucide-react";
 
-// Import des composants UI de Shadcn/ui, comme dans votre exemple Calculators.tsx
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 
-interface ToolsProps { // Renommée de OutilsPageProps à ToolsProps
+interface ToolsProps {
     navigate: (page: string) => void;
 }
 
-// Définition de la structure des données des outils
-// C'est la même structure que dans votre menuStructure pour la section "outils"
+// La liste des outils inclut maintenant les suivis
 const outils = [
+    // Outils existants
     { id: "plan-comptable", label: "Plan comptable adapté", icon: FileText, description: "Accédez à un plan comptable spécifique pour les écoles de production." },
     { id: "tva-coefficient", label: "Trame de calcul du coefficient de déduction de TVA", icon: Calculator, description: "Calculez simplement votre coefficient de déduction de TVA." },
     { id: "resultat-fiscal", label: "Trame de calcul du résultat fiscal", icon: TrendingUp, description: "Estimez le résultat fiscal de votre école avec notre trame dédiée." },
@@ -37,16 +37,23 @@ const outils = [
     { id: "habilitation-taxe", label: "Exemple de formulaire de demande d'habilitation taxe apprentissage", icon: Euro, description: "Accédez au formulaire et aux instructions pour l'habilitation." },
     { id: "calculateurs", label: "Tableau calcul de coût", icon: Calculator, description: "Calculez et suivez vos coûts pédagogiques et de production." },
     { id: "prix-vente", label: "Tableau de détermination du prix de vente des produits", icon: PieChart, description: "Définissez une stratégie de prix pour les produits de votre école." },
-    { id: "rapport-adapte", label: "Modèle de rapport adapté", icon: FileText, description: "Obtenez un modèle de rapport financier adapté à votre structure." }
+    { id: "rapport-adapte", label: "Modèle de rapport adapté", icon: FileText, description: "Obtenez un modèle de rapport financier adapté à votre structure." },
+
+    // ===============================================
+    // AJOUT DES CARTES DE "SUIVIS"
+    // ===============================================
+    { id: "suivi-subventions", label: "Suivi des subventions", icon: Euro, description: "Gardez un œil sur l'état de vos demandes et l'utilisation de vos subventions." },
+    { id: "suivi-prets", label: "Suivi des prêts", icon: DollarSign, description: "Gérez et visualisez l'échéancier et les remboursements de vos prêts." },
+    { id: "tableau-bord", label: "Tableau de bord financier & extra-financier", icon: BarChart3, description: "Consultez un aperçu complet de la performance de votre école." }
 ];
 
 
-const Tools: React.FC<ToolsProps> = ({ navigate }) => { // Renommée de OutilsPage à Tools
+const Tools: React.FC<ToolsProps> = ({ navigate }) => {
     return (
-        <section id="tools-page"> {/* L'ID de la section peut rester comme vous le souhaitez, 'tools-page' est cohérent */}
+        <section id="tools-page">
             <h1 className="flex items-center gap-2 mb-6 text-2xl font-bold text-gray-800">
-                <Wrench className="w-6 h-6" /> {/* Icône principale de la page Tools */}
-                Nos Outils d'Accompagnement
+                <Wrench className="w-6 h-6" />
+                Nos Outils et Suivis
             </h1>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -54,11 +61,11 @@ const Tools: React.FC<ToolsProps> = ({ navigate }) => { // Renommée de OutilsPa
                     <Card
                         key={outil.id}
                         className="card-hover cursor-pointer"
-                        onClick={() => navigate(outil.id)} // Navigue vers la page de l'outil
+                        onClick={() => navigate(outil.id)}
                     >
                         <CardContent className="p-6">
                             <h3 className="flex items-center gap-2 text-lg font-semibold mb-3 text-primary">
-                                <outil.icon className="w-6 h-6" /> {/* Icône spécifique à l'outil */}
+                                <outil.icon className="w-6 h-6" />
                                 {outil.label}
                             </h3>
                             <p className="text-gray-600 leading-relaxed">
@@ -72,4 +79,4 @@ const Tools: React.FC<ToolsProps> = ({ navigate }) => { // Renommée de OutilsPa
     );
 };
 
-export default Tools; // Exportez le composant Tools
+export default Tools;
