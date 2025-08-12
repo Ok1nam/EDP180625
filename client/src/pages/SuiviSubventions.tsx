@@ -8,7 +8,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Checkbox } from "@/components/ui/checkbox";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
-import { useToast } from "@/components/ui/use-toast";
+// CORRECTION ICI : Le chemin d'import est maintenant correct
+import { useToast } from "@/components/ui/toast";
 
 interface SubsidyApplication {
   id: string; // Internal unique ID
@@ -68,6 +69,7 @@ export default function SuiviSubvention() {
   const [showForm, setShowForm] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
 
+  // CORRECTION ICI : Suppression des clés en double
   const [formData, setFormData] = useState<Partial<SubsidyApplication>>({
     amountSolicited: 0,
     amountObtained: 0,
@@ -80,9 +82,7 @@ export default function SuiviSubvention() {
     submissionDateActual: '',
     notificationDate: '',
     advanceReceivedDate: '',
-    advanceReceivedAmount: 0,
     balanceReceivedDate: '',
-    balanceReceivedAmount: 0,
     justificatifs: '',
     justificatifsDeadline: '',
     nextSteps: '',
@@ -100,6 +100,7 @@ export default function SuiviSubvention() {
 
 
   const resetForm = () => {
+    // CORRECTION ICI : Suppression des clés en double
     setFormData({
       amountSolicited: 0,
       amountObtained: 0,
@@ -112,9 +113,7 @@ export default function SuiviSubvention() {
       submissionDateActual: '',
       notificationDate: '',
       advanceReceivedDate: '',
-      advanceReceivedAmount: 0,
       balanceReceivedDate: '',
-      balanceReceivedAmount: 0,
       justificatifs: '',
       justificatifsDeadline: '',
       nextSteps: '',
