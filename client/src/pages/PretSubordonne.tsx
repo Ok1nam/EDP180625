@@ -100,7 +100,7 @@ export default function PretSubordonne({ navigate }: PretSubordonneProps) {
     <section id="pret-subordonne" className="max-w-4xl mx-auto px-4 py-8">
       <h1 className="flex items-center gap-3 mb-6 text-3xl font-bold text-[#3C5F58]">
         <Handshake className="w-8 h-8 text-[#3C5F58]" />
-        Le **Prêt Subordonné** : un levier stratégique pour votre École de Production
+        Le Prêt Subordonné : un levier stratégique pour votre École de Production
       </h1>
 
       <p className="mb-8 text-lg text-gray-700 leading-relaxed">
@@ -112,7 +112,7 @@ export default function PretSubordonne({ navigate }: PretSubordonneProps) {
         <CardHeader className="bg-gray-50 border-b">
           <CardTitle className="text-xl font-bold text-[#3C5F58] flex items-center gap-2">
             <PiggyBank className="w-5 h-5 text-[#3C5F58]" />
-            Pourquoi recourir à un **Prêt Subordonné** ?
+            Pourquoi recourir à un Prêt Subordonné ?
           </CardTitle>
         </CardHeader>
         <CardContent className="p-6 text-gray-700">
@@ -120,10 +120,10 @@ export default function PretSubordonne({ navigate }: PretSubordonneProps) {
             Ce type de financement présente plusieurs atouts pour les porteurs de projet :
           </p>
           <ul className="list-disc pl-5 space-y-2">
-            <li>**Renforcer la solidité financière** : Bien que classé en dette, il est souvent assimilé à des quasi-fonds propres, améliorant la perception de solvabilité par les financeurs.</li>
-            <li>**Faciliter l’accès à d’autres financements** : Il rassure les banques et organismes publics, ouvrant la porte à des prêts complémentaires.</li>
-            <li>**Alléger la pression sur la trésorerie** : Les remboursements peuvent être différés, laissant du temps pour que l’école atteigne sa vitesse de croisière.</li>
-            <li>**Encadrer le risque** : Les modalités de subordination assurent que ce prêt est remboursé après les autres dettes, ce qui le rend plus souple pour l’emprunteur.</li>
+            <li><span className="font-bold">Renforcer la solidité financière</span> : Bien que classé en dette, il est souvent assimilé à des quasi-fonds propres, améliorant la perception de solvabilité par les financeurs.</li>
+            <li><span className="font-bold">Faciliter l’accès à d’autres financements</span> : Il rassure les banques et organismes publics, ouvrant la porte à des prêts complémentaires.</li>
+            <li><span className="font-bold">Alléger la pression sur la trésorerie</span> : Les remboursements peuvent être différés, laissant du temps pour que l’école atteigne sa vitesse de croisière.</li>
+            <li><span className="font-bold">Encadrer le risque</span> : Les modalités de subordination assurent que ce prêt est remboursé après les autres dettes, ce qui le rend plus souple pour l’emprunteur.</li>
           </ul>
         </CardContent>
       </Card>
@@ -141,11 +141,11 @@ export default function PretSubordonne({ navigate }: PretSubordonneProps) {
             Le modèle de contrat inclus dans cet outil précise notamment :
           </p>
           <ul className="list-disc pl-5 space-y-2">
-            <li>**Durée et modalités de remboursement** : Souvent longues (7 à 10 ans), avec possibilité de différé.</li>
-            <li>**Conditions financières** : Taux d’intérêt fixe, calcul et échéancier détaillés.</li>
-            <li>**Clauses de subordination** : Remboursement après désintéressement des autres créanciers.</li>
-            <li>**Obligations de l’emprunteur** : Utilisation des fonds, respect des conditions FNEP, reporting régulier.</li>
-            <li>**Références juridiques** : Code monétaire et financier, Code de commerce, Plan Comptable Général.</li>
+            <li><span className="font-bold">Durée et modalités de remboursement</span> : Souvent longues (7 à 10 ans), avec possibilité de différé.</li>
+            <li><span className="font-bold">Conditions financières</span> : Taux d’intérêt fixe, calcul et échéancier détaillés.</li>
+            <li><span className="font-bold">Clauses de subordination</span> : Remboursement après désintéressement des autres créanciers.</li>
+            <li><span className="font-bold">Obligations de l’emprunteur</span> : Utilisation des fonds, respect des conditions FNEP, reporting régulier.</li>
+            <li><span className="font-bold">Références juridiques</span> : Code monétaire et financier, Code de commerce, Plan Comptable Général.</li>
           </ul>
         </CardContent>
       </Card>
@@ -160,7 +160,7 @@ export default function PretSubordonne({ navigate }: PretSubordonneProps) {
         </CardHeader>
         <CardContent className="p-6 text-center">
           <p className="mb-4">
-            Accédez à notre modèle complet de contrat, conforme aux exigences des partenaires institutionnels (**Banque des Territoires**, **France Active**, etc.). Il est fourni au format .docx pour être adapté à votre projet.
+            Accédez à notre modèle complet de contrat, conforme aux exigences des partenaires institutionnels (Banque des Territoires, France Active, etc.). Il est fourni au format .docx pour être adapté à votre projet.
           </p>
           <a href="/fichiers/ANNEXE 16 MODELE CONTRAT PRET SUBORDONNE.docx" download>
             <Button className="bg-[#2E5941] hover:bg-[#3C5F58] text-white">
@@ -169,7 +169,7 @@ export default function PretSubordonne({ navigate }: PretSubordonneProps) {
             </Button>
           </a>
           <p className="italic text-sm text-gray-600 mt-4">
-            **Conseil :** Faites relire et adapter ce contrat par votre expert-comptable ou votre conseil juridique pour garantir sa conformité aux spécificités de votre montage financier.
+            <span className="font-bold">Conseil :</span> Faites relire et adapter ce contrat par votre expert-comptable ou votre conseil juridique pour garantir sa conformité aux spécificités de votre montage financier.
           </p>
         </CardContent>
       </Card>
@@ -183,7 +183,7 @@ export default function PretSubordonne({ navigate }: PretSubordonneProps) {
           </CardTitle>
         </CardHeader>
         <CardContent className="p-6 text-gray-700 space-y-6">
-          <h3 className="font-semibold text-lg">**Informations sur l'emprunteur**</h3>
+          <h3 className="font-semibold text-lg"><span className="font-bold">Informations sur l'emprunteur</span></h3>
           <div className="grid md:grid-cols-2 gap-4">
             <div>
               <Label htmlFor="nomAssociation">Nom de l'association</Label>
@@ -207,7 +207,7 @@ export default function PretSubordonne({ navigate }: PretSubordonneProps) {
             </div>
           </div>
 
-          <h3 className="font-semibold text-lg mt-6">**Détails financiers du prêt**</h3>
+          <h3 className="font-semibold text-lg mt-6"><span className="font-bold">Détails financiers du prêt</span></h3>
           <div className="grid md:grid-cols-2 gap-4">
             <div>
               <Label htmlFor="montantPretAccepte">Montant du prêt subordonné accepté (€)</Label>
@@ -235,7 +235,7 @@ export default function PretSubordonne({ navigate }: PretSubordonneProps) {
             </div>
           </div>
 
-          <h3 className="font-semibold text-lg mt-6">**Conditions du prêt**</h3>
+          <h3 className="font-semibold text-lg mt-6"><span className="font-bold">Conditions du prêt</span></h3>
           <div className="grid md:grid-cols-2 gap-4">
             <div>
               <Label htmlFor="dureePret">Durée du prêt (en années)</Label>
@@ -255,7 +255,7 @@ export default function PretSubordonne({ navigate }: PretSubordonneProps) {
             </div>
           </div>
 
-          <h3 className="font-semibold text-lg mt-6">**Informations sur le bailleur**</h3>
+          <h3 className="font-semibold text-lg mt-6"><span className="font-bold">Informations sur le bailleur</span></h3>
           <div className="grid md:grid-cols-2 gap-4">
             <div>
               <Label htmlFor="nomSocieteBailleur">Nom de la société bailleuse</Label>
