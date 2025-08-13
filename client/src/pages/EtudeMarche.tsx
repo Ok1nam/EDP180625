@@ -98,7 +98,7 @@ const EtudeMarche: React.FC<EtudeMarcheProps> = ({ navigate }) => {
         <div className="text-center mt-8">
           <Button
             onClick={() => navigate('accueil')}
-            className="px-6 py-3 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors text-lg"
+            className="px-6 py-3 bg-[#2E5941] text-white rounded-md hover:bg-green-800 transition-colors text-lg"
           >
             Retour à l'accueil
           </Button>
