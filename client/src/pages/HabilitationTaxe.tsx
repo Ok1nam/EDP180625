@@ -1,7 +1,5 @@
-// client/src/pages/HabilitationTaxe.tsx
-
 import React from 'react';
-import { ShieldCheck, Download, FileText, BookOpen, Lightbulb } from "lucide-react";
+import { ShieldCheck, Download, FileText, BookOpen, Lightbulb, ExternalLink } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
@@ -12,8 +10,8 @@ interface HabilitationTaxeProps {
 export default function HabilitationTaxe({ navigate }: HabilitationTaxeProps) {
   return (
     <section id="habilitation-taxe" className="max-w-4xl mx-auto px-4 py-8">
-      <h1 className="flex items-center gap-3 mb-6 text-3xl font-bold text-gray-800">
-        <ShieldCheck className="w-8 h-8 text-green-600" />
+      <h1 className="flex items-center gap-3 mb-6 text-3xl font-bold text-[#3C5F58]">
+        <ShieldCheck className="w-8 h-8 text-[#3C5F58]" />
         Habilitation Taxe d'Apprentissage : Le Guide SOLTéA
       </h1>
       
@@ -24,18 +22,18 @@ export default function HabilitationTaxe({ navigate }: HabilitationTaxeProps) {
       {/* Objectifs du guide */}
       <Card className="mb-6 shadow-md">
         <CardHeader className="bg-gray-50 border-b">
-          <CardTitle className="text-xl font-bold text-gray-700 flex items-center gap-2">
-            <BookOpen className="w-5 h-5 text-purple-600" />
+          <CardTitle className="text-xl font-bold text-[#3C5F58] flex items-center gap-2">
+            <BookOpen className="w-5 h-5 text-[#3C5F58]" />
             Objectifs de ce guide
           </CardTitle>
         </CardHeader>
         <CardContent className="p-6 text-gray-700">
           <p className="mb-4">Ce document pratique, inspiré du guide utilisateur officiel de SOLTéA, est adapté aux spécificités des Écoles de Production. Il :</p>
           <ul className="list-disc pl-5 space-y-2">
-            <li>détaille les étapes clés du dépôt de demande sur la plateforme SOLTéA,</li>
-            <li>précise les éléments attendus (informations, pièces justificatives, formations RNCP...),</li>
-            <li>alerte sur les points de vigilance pour éviter les rejets ou retards,</li>
-            <li>rappelle les références réglementaires à connaître pour comprendre le processus.</li>
+            <li><span className="font-bold">détaille les étapes clés</span> du dépôt de demande sur la plateforme SOLTéA,</li>
+            <li><span className="font-bold">précise les éléments attendus</span> (informations, pièces justificatives, formations RNCP...),</li>
+            <li><span className="font-bold">alerte sur les points de vigilance</span> pour éviter les rejets ou retards,</li>
+            <li><span className="font-bold">rappelle les références réglementaires</span> à connaître pour comprendre le processus.</li>
           </ul>
         </CardContent>
       </Card>
@@ -43,8 +41,8 @@ export default function HabilitationTaxe({ navigate }: HabilitationTaxeProps) {
       {/* A savoir */}
       <Card className="mb-6 shadow-md">
         <CardHeader className="bg-gray-50 border-b">
-          <CardTitle className="text-xl font-bold text-gray-700 flex items-center gap-2">
-            <Lightbulb className="w-5 h-5 text-orange-500" />
+          <CardTitle className="text-xl font-bold text-[#3C5F58] flex items-center gap-2">
+            <Lightbulb className="w-5 h-5 text-[#3C5F58]" />
             Points de vigilance
           </CardTitle>
         </CardHeader>
@@ -58,8 +56,8 @@ export default function HabilitationTaxe({ navigate }: HabilitationTaxeProps) {
       {/* Section Téléchargement du Guide */}
       <Card className="mb-6 shadow-md">
         <CardHeader className="bg-gray-50 border-b">
-          <CardTitle className="text-xl font-bold text-gray-700 flex items-center gap-2">
-            <Download className="w-5 h-5 text-blue-600" />
+          <CardTitle className="text-xl font-bold text-[#3C5F58] flex items-center gap-2">
+            <Download className="w-5 h-5 text-[#3C5F58]" />
             Télécharger le Guide d'Habilitation
           </CardTitle>
         </CardHeader>
@@ -69,14 +67,14 @@ export default function HabilitationTaxe({ navigate }: HabilitationTaxeProps) {
           </p>
           <div className="text-center">
             <a href="/fichiers/Annexe 17 - Exemple de formulaire de demande d'habilitation taxe apprentissage.pdf" download>
-              <Button className="btn-primary">
+              <Button className="bg-[#2E5941] hover:bg-[#3C5F58] text-white">
                 <FileText className="w-4 h-4 mr-2" />
                 Télécharger le guide au format PDF
               </Button>
             </a>
           </div>
           <p className="italic text-sm text-gray-600 mt-4">
-            Pour plus d'informations, vous pouvez vous rendre sur la <a href="https://soltea.education.gouv.fr" target="_blank" rel="noopener noreferrer" className="text-blue-600 hover:underline">plateforme SOLTéA</a>.
+            Pour plus d'informations, vous pouvez vous rendre sur la <a href="https://soltea.education.gouv.fr" target="_blank" rel="noopener noreferrer" className="text-[#3C5F58] hover:underline flex items-center justify-center gap-1">plateforme SOLTéA <ExternalLink size={14}/></a>.
           </p>
         </CardContent>
       </Card>
@@ -86,7 +84,7 @@ export default function HabilitationTaxe({ navigate }: HabilitationTaxeProps) {
         <div className="text-center mt-8">
           <Button
             onClick={() => navigate('accueil')}
-            className="px-6 py-3 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors text-lg"
+            className="px-6 py-3 bg-[#2E5941] text-white rounded-md hover:bg-[#3C5F58] transition-colors text-lg"
           >
             Retour à l'accueil
           </Button>
