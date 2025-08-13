@@ -14,7 +14,7 @@ interface ContactEtAideProps {
 const optionsAide = [
   { 
     id: "contact", 
-    label: "Contacter l'Expert-Comptable", 
+    label: "Contacter l'Expert-Comptable stagiaire", 
     icon: Mail, 
     description: "Posez vos questions ou envoyez-nous un message direct à Laura Gombaud." 
   },
