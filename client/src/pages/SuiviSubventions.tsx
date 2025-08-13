@@ -240,7 +240,11 @@ export default function SuiviSubvention() {
       {!showForm ? (
         <div className="mb-8">
           <Button
-            onClick={() => { setShowForm(true); resetForm(); }}
+            onClick={() => {
+              // CORRECTIF : Cette ligne a été modifiée pour garantir que le formulaire est réinitialisé avant d'être affiché.
+              resetForm();
+              setShowForm(true);
+            }}
             className="flex items-center gap-2 py-3 px-6 text-lg bg-[#2E5941] hover:bg-[#3C5F58] transition-colors"
           >
             <PlusCircle className="w-5 h-5" /> Ajouter un nouveau dossier
