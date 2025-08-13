@@ -125,7 +125,7 @@ Explorer les Outils Pratiques
 onClick={() => navigate('documentation')}
 className="inline-flex items-center justify-center px-8 py-3.5 border border-white text-lg font-semibold rounded-full text-white bg-transparent hover:bg-white hover:bg-opacity-20 transition-all duration-300 transform hover:scale-105 shadow-lg cursor-pointer"
 >
-Documentation & Études de Cas
+Documentation & Guides
 <ChevronRight className="ml-2 w-5 h-5" />
 </a>
 </div>

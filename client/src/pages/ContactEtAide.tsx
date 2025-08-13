@@ -1,5 +1,3 @@
-// client/src/pages/ContactEtAide.tsx
-
 import React from 'react';
 import {
   HelpCircle, 
@@ -31,8 +29,8 @@ const optionsAide = [
 const ContactEtAide: React.FC<ContactEtAideProps> = ({ navigate }) => {
   return (
     <section id="contact-et-aide-page" className="max-w-4xl mx-auto px-4 py-8">
-      <h1 className="flex items-center gap-2 mb-6 text-3xl font-bold text-gray-800">
-        <HelpCircle className="w-8 h-8 text-purple-600" />
+      <h1 className="flex items-center gap-2 mb-6 text-3xl font-bold text-[#3C5F58]">
+        <HelpCircle className="w-8 h-8" />
         Contact & Aide
       </h1>
       
@@ -44,11 +42,11 @@ const ContactEtAide: React.FC<ContactEtAideProps> = ({ navigate }) => {
         {optionsAide.map((option) => (
           <Card
             key={option.id}
-            className="card-hover cursor-pointer"
+            className="card-hover cursor-pointer transition-transform duration-200 hover:scale-105"
             onClick={() => navigate(option.id)} 
           >
             <CardContent className="p-6">
-              <h3 className="flex items-center gap-2 text-lg font-semibold mb-3 text-primary">
+              <h3 className="flex items-center gap-2 text-lg font-semibold mb-3 text-[#2E5941]">
                 <option.icon className="w-6 h-6" />
                 {option.label}
               </h3>
