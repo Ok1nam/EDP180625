@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { FileText, Download, Euro, Building, Users, Target, CalendarDays, Percent, ClipboardList, Clock, UserRound, PlusCircle, Trash2, Edit, CheckSquare, XSquare } from "lucide-react";
+import { FileText, Download, Euro, Building, Users, Target, CalendarDays, Percent, ClipboardList, Clock, UserRound, PlusCircle, Trash2, Edit, CheckSquare, XSquare, FileSpreadsheet } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -238,10 +238,9 @@ export default function SuiviSubvention() {
       </p>
 
       {!showForm ? (
-        <div className="mb-8">
+        <div className="mb-8 flex gap-2">
           <Button
             onClick={() => {
-              // CORRECTIF : Cette ligne a été modifiée pour garantir que le formulaire est réinitialisé avant d'être affiché.
               resetForm();
               setShowForm(true);
             }}
@@ -249,6 +248,13 @@ export default function SuiviSubvention() {
           >
             <PlusCircle className="w-5 h-5" /> Ajouter un nouveau dossier
           </Button>
+          <a
+            href="/fichiers/ANNEXE 14 TABLEAU DE SUIVI DES SUBVENTIONS.xlsx"
+            download
+            className="flex items-center gap-2 py-3 px-6 text-lg border-2 border-[#2E5941] text-[#2E5941] hover:bg-[#2E5941]/10 transition-colors rounded-lg font-medium"
+          >
+            <FileSpreadsheet className="w-5 h-5" /> Télécharger le modèle Excel
+          </a>
         </div>
       ) : (
         <Card className="mb-8 shadow-md p-6">
