@@ -1,5 +1,3 @@
-// client/src/pages/CriteresLabel.tsx
-
 import React, { useState, useEffect } from 'react';
 import { CheckCircle, Award, Lightbulb, XCircle } from "lucide-react"; 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -187,10 +185,10 @@ export default function CriteresLabel({ navigate }: CriteresLabelProps) {
               L'obtention du label "École de Production" est un gage de qualité et de reconnaissance, ouvrant la voie à des financements spécifiques et à une meilleure visibilité.
             </p>
             <p>
-              **Documentation :** Assurez-vous de pouvoir fournir toutes les preuves documentaires nécessaires pour chaque critère coché (bilans financiers, procès-verbaux de CA, programmes pédagogiques, etc.).
+              <span className="font-bold">Documentation :</span> Assurez-vous de pouvoir fournir toutes les preuves documentaires nécessaires pour chaque critère coché (bilans financiers, procès-verbaux de CA, programmes pédagogiques, etc.).
             </p>
             <p>
-              **Accompagnement :** N'hésitez pas à vous faire accompagner par des experts ou le réseau national des Écoles de Production pour préparer votre dossier de labellisation. Le <span
+              <span className="font-bold">Accompagnement :</span> N'hésitez pas à vous faire accompagner par des experts ou le réseau national des Écoles de Production pour préparer votre dossier de labellisation. Le <span
                   className="text-blue-600 hover:underline cursor-pointer font-medium"
                   onClick={() => navigate && navigate('expert-comptable')}
               >
@@ -198,7 +196,7 @@ export default function CriteresLabel({ navigate }: CriteresLabelProps) {
               </span> est crucial pour les aspects financiers et organisationnels.
             </p>
             <p>
-              **Audit :** Le processus de labellisation implique généralement un audit approfondi de votre structure et de vos pratiques. Une bonne préparation est clé.
+              <span className="font-bold">Audit :</span> Le processus de labellisation implique généralement un audit approfondi de votre structure et de vos pratiques. Une bonne préparation est clé.
             </p>
           </div>
         </CardContent>
