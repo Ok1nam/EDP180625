@@ -26,7 +26,7 @@ export default function Contact() {
                   href="mailto:laura.gombaud@example.com" 
                   className="text-blue-600 hover:text-blue-800 transition-colors"
                 >
-                  laura.gombaud@example.com
+                  laura.gombaud@gmail.com
                 </a>
               </p>
             </div>
@@ -54,7 +54,7 @@ export default function Contact() {
                     download="notice_utilisation.pdf" // Nom du fichier lors du téléchargement
                     className="text-blue-600 hover:text-blue-800 transition-colors font-medium"
                   >
-                    Télécharger la notice d'utilisation
+                    Télécharger la notice d'agrément
                   </a>
                 </p>
 
