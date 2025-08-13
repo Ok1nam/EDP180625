@@ -169,7 +169,7 @@ const Entretiens: React.FC<EntretiensProps> = ({ navigate }) => {
                   {entretien.questions.map((qna, qnaIndex) => (
                     <div key={qnaIndex} className="bg-gray-50 p-4 rounded-md border border-gray-200">
                       <p className="font-semibold text-gray-800 mb-1">
-                        <span className="text-[#3C5F58]">Question :</span> {qna.question}
+                        <span className="text-[#3C5F58]">Question :</span> {qna.question.substring(qna.question.indexOf(':') + 2)}
                       </p>
                       <p className="pl-4 border-l-2 border-[#2E5941] text-gray-600 italic">
                         <span className="font-semibold text-[#3C5F58]">Réponse :</span> {qna.answer}
@@ -185,7 +185,7 @@ const Entretiens: React.FC<EntretiensProps> = ({ navigate }) => {
       
       {/* Section des boutons */}
       <div className="flex flex-col md:flex-row gap-4 mt-8 justify-center">
-        {/* Nouveau bouton de téléchargement */}
+        {/* Bouton de téléchargement */}
         <Button
             asChild
             className="flex-1 flex items-center justify-center gap-2 py-3 px-6 text-lg bg-[#2E5941] text-white hover:bg-[#3C5F58] transition-colors rounded-lg font-medium"
