@@ -1,5 +1,5 @@
-import { useState } from "react";
-import { FileText, Download, Euro, Building, Users, Target, CalendarDays, Percent, ClipboardList, Clock, UserRound } from "lucide-react";
+import React, { useState } from "react";
+import { FileText, Download, Euro, Building, Users, Target, CalendarDays, Percent, ClipboardList, Clock, UserRound, PlusCircle, Edit, Trash2, ArrowLeft } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -9,11 +9,11 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Checkbox } from "@/components/ui/checkbox";
 import { useLocalStorage } from "@/hooks/useLocalStorage";
 import { useToast } from "@/hooks/use-toast";
+import { Progress } from "@/components/ui/progress";
 
-// Nouvelle interface mise à jour pour inclure tous les champs du dossier type
+// Interface pour un dossier de subvention
 interface SubsidyApplication {
   id: string;
-  // Partie 1: Informations générales sur la structure
   organizationName: string;
   acronym?: string;
   legalStatus: string;
@@ -35,11 +35,8 @@ interface SubsidyApplication {
   volunteerCount?: number;
   employeeCount?: number;
   uaiNumber?: string;
-  // Ces deux champs sont des champs de texte pour simplifier l'intégration du tableau
   mainFinancialPartnersPublic?: string;
   mainFinancialPartnersPrivate?: string;
-  
-  // Partie 2: Présentation de l'école de production
   missionStatement?: string;
   historyAndGenesis?: string;
   targetAudience?: string;
@@ -53,8 +50,6 @@ interface SubsidyApplication {
   territorialAnchorage?: string;
   localPartnerships?: string;
   employmentPartnerships?: string;
-  
-  // Partie 3: Le projet spécifique
   projectTitle: string;
   fundingPurpose: string[];
   contextAndJustification?: string;
@@ -87,8 +82,6 @@ interface SubsidyApplication {
   desiredSupport: string[];
   synergies?: string;
   vision10Years?: string;
-  
-  // Partie 4: Budget prévisionnel
   projectBudgetYear1?: number;
   projectBudgetYear2?: number;
   projectBudgetYear3?: number;
@@ -101,13 +94,9 @@ interface SubsidyApplication {
   acquiredFundingSource2?: string;
   acquiredFundingSource3?: string;
   totalAcquiredFunding?: number;
-  
-  // Partie 5: Moyens humains et matériels
   teamDescription?: string;
   premisesAndEquipment?: string;
-  
-  // Anciens champs conservés pour cohérence si besoin, à adapter
-  fundingBody: string; // Ajout du fundingBody
+  fundingBody: string;
   programName?: string;
   financeurType: 'Public' | 'Privé' | 'Autres' | '';
   objectGrant?: string;
@@ -193,7 +182,23 @@ const desiredSupportOptions = [
 
 const ageRanges = ["12 à 15 ans", "16 à 18 ans", "19 à 25 ans"];
 
-export default function SubsidyGenerator() {
+const getStatusColor = (status: SubsidyApplication['currentStatus']) => {
+  const colors = {
+    'À identifier': 'bg-gray-100 text-gray-800',
+    'En veille': 'bg-blue-100 text-blue-800',
+    'À préparer': 'bg-yellow-100 text-yellow-800',
+    'À déposer': 'bg-orange-100 text-orange-800',
+    'Dossier déposé': 'bg-purple-100 text-purple-800',
+    'En instruction': 'bg-indigo-100 text-indigo-800',
+    'Accordé / Avance reçue': 'bg-green-100 text-green-800',
+    'Refusé': 'bg-red-100 text-red-800',
+    'Clôturée / Reçue': 'bg-emerald-100 text-emerald-800',
+    'En attente de solde': 'bg-cyan-100 text-cyan-800',
+  };
+  return colors[status] || 'bg-gray-100 text-gray-800';
+};
+
+const SubsidyGenerator: React.FC = () => {
   const { toast } = useToast();
   const [savedData, setSavedData] = useLocalStorage<SubsidyApplication[]>('subsidy_applications', []);
   const [applications, setApplications] = useState<SubsidyApplication[]>(savedData);
@@ -209,6 +214,12 @@ export default function SubsidyGenerator() {
     isEligibleForMecenat: false,
     hasPreviousSupport: false,
     isCollaborativeProject: false,
+    totalAmountSolicited: 0,
+    projectTitle: '',
+    organizationName: '',
+    legalStatus: '',
+    siretNumber: '',
+    fundingBody: '',
   });
   const [selectedFundingBody, setSelectedFundingBody] = useState<string>('');
 
@@ -223,10 +234,26 @@ export default function SubsidyGenerator() {
       isEligibleForMecenat: false,
       hasPreviousSupport: false,
       isCollaborativeProject: false,
+      totalAmountSolicited: 0,
+      projectTitle: '',
+      organizationName: '',
+      legalStatus: '',
+      siretNumber: '',
+      fundingBody: '',
     });
     setEditingId(null);
     setShowForm(false);
     setSelectedFundingBody('');
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { id, value } = e.target;
+    setFormData(prev => ({ ...prev, [id.replace(/-/g, '')]: value }));
+  };
+  
+  const handleNumberInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { id, value } = e.target;
+    setFormData(prev => ({ ...prev, [id.replace(/-/g, '')]: parseFloat(value) || 0 }));
   };
 
   const handleCheckboxChange = (field: keyof SubsidyApplication, value: string, checked: boolean) => {
@@ -252,6 +279,7 @@ export default function SubsidyGenerator() {
       toast({
         title: "Erreur",
         description: "Veuillez remplir les champs obligatoires (Nom du projet, Nom de l'organisation, Organisme financeur de la subvention, Montant sollicité).",
+        variant: "destructive",
       });
       return;
     }
@@ -275,7 +303,7 @@ export default function SubsidyGenerator() {
       hasPreviousSupport: formData.hasPreviousSupport ?? false,
       isCollaborativeProject: formData.isCollaborativeProject ?? false,
       financeurType: formData.financeurType || '',
-      fundingBody: formData.fundingBody || '', // Assurez-vous que ce champ est bien initialisé
+      fundingBody: formData.fundingBody || '',
     } as SubsidyApplication;
 
     let updatedApplications;
@@ -313,377 +341,243 @@ export default function SubsidyGenerator() {
     });
   };
 
-  const getStatusColor = (status: SubsidyApplication['currentStatus']) => {
-    const colors = {
-      'À identifier': 'bg-gray-100 text-gray-800',
-      'En veille': 'bg-blue-100 text-blue-800',
-      'À préparer': 'bg-yellow-100 text-yellow-800',
-      'À déposer': 'bg-orange-100 text-orange-800',
-      'Dossier déposé': 'bg-purple-100 text-purple-800',
-      'En instruction': 'bg-indigo-100 text-indigo-800',
-      'Accordé / Avance reçue': 'bg-green-100 text-green-800',
-      'Refusé': 'bg-red-100 text-red-800',
-      'Clôturée / Reçue': 'bg-emerald-100 text-emerald-800',
-      'En attente de solde': 'bg-cyan-100 text-cyan-800',
-    };
-    return colors[status] || 'bg-gray-100 text-gray-800';
-  };
-
   const calculateStats = () => {
     const total = applications.length;
     const deposited = applications.filter(a => a.currentStatus === 'Dossier déposé').length;
     const approved = applications.filter(a => a.currentStatus === 'Accordé / Avance reçue' || a.currentStatus === 'Clôturée / Reçue').length;
     const totalAmountSolicited = applications.reduce((sum, a) => sum + (a.totalAmountSolicited || 0), 0);
     const totalAmountObtained = applications.reduce((sum, a) => sum + (a.amountObtained || 0), 0);
-
     return { total, deposited, approved, totalAmountSolicited, totalAmountObtained };
   };
 
   const stats = calculateStats();
 
   return (
-    <section id="subsidy-generator">
-      <h1 className="flex items-center gap-2 mb-6 text-2xl font-bold text-gray-800">
-        <FileText className="w-6 h-6" />
+    <section id="subsidy-generator" className="max-w-4xl mx-auto px-4 py-8">
+      <h1 className="flex items-center gap-3 mb-6 text-3xl font-bold text-[#3C5F58]">
+        <FileText className="w-8 h-8" />
         Suivi et Génération des Dossiers de Subventions
       </h1>
 
-      <p className="mb-6 text-gray-600 leading-relaxed">
-        Gérez et suivez l'ensemble des dossiers de demande de subventions pour les Écoles de Production de vos clients, du montage au versement final.
+      <p className="mb-8 text-lg text-gray-700 leading-relaxed">
+        Cet outil vous permet de gérer de manière centralisée les dossiers de subventions, du montage initial au suivi des versements, en passant par l'envoi des justificatifs. Un tableau de bord interactif vous aide à <span className="font-bold">piloter vos ressources</span> et à assurer la <span className="font-bold">viabilité de votre modèle économique</span>.
       </p>
 
-      <div className="grid md:grid-cols-5 gap-4 mb-6">
-        <Card>
-          <CardContent className="p-4 text-center">
-            <div className="text-2xl font-bold text-blue-600">{stats.total}</div>
-            <div className="text-sm text-gray-600">Total dossiers</div>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardContent className="p-4 text-center">
-            <div className="text-2xl font-bold text-purple-600">{stats.deposited}</div>
-            <div className="text-sm text-gray-600">Dossiers déposés</div>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardContent className="p-4 text-center">
-            <div className="text-2xl font-bold text-green-600">{stats.approved}</div>
-            <div className="text-sm text-gray-600">Dossiers acceptés</div>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardContent className="p-4 text-center">
-            <div className="text-2xl font-bold text-indigo-600">{stats.totalAmountSolicited.toLocaleString()} €</div>
-            <div className="text-sm text-gray-600">Montant sollicité</div>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardContent className="p-4 text-center">
-            <div className="text-2xl font-bold text-emerald-600">{stats.totalAmountObtained.toLocaleString()} €</div>
-            <div className="text-sm text-gray-600">Montant obtenu</div>
-          </CardContent>
-        </Card>
-      </div>
-
-      <div className="flex justify-between items-center mb-6">
-        <h2 className="text-xl font-semibold">Liste des subventions</h2>
-        <Button
-          onClick={() => { resetForm(); setShowForm(true); }}
-          className="btn-primary"
-        >
-          Nouvelle subvention
+      {showForm && (
+        <Button onClick={() => setShowForm(false)} variant="ghost" className="mb-4 text-[#2E5941] hover:bg-gray-100">
+          <ArrowLeft className="mr-2 w-4 h-4" /> Retour au tableau de bord
         </Button>
-      </div>
+      )}
+
+      {!showForm && (
+        <>
+          <div className="grid md:grid-cols-5 gap-4 mb-6">
+            <Card className="shadow-sm">
+              <CardContent className="p-4 text-center">
+                <div className="text-2xl font-bold text-[#3C5F58]">{stats.total}</div>
+                <div className="text-sm text-gray-600">Dossiers totaux</div>
+              </CardContent>
+            </Card>
+            <Card className="shadow-sm">
+              <CardContent className="p-4 text-center">
+                <div className="text-2xl font-bold text-purple-600">{stats.deposited}</div>
+                <div className="text-sm text-gray-600">Dossiers déposés</div>
+              </CardContent>
+            </Card>
+            <Card className="shadow-sm">
+              <CardContent className="p-4 text-center">
+                <div className="text-2xl font-bold text-green-600">{stats.approved}</div>
+                <div className="text-sm text-gray-600">Dossiers acceptés</div>
+              </CardContent>
+            </Card>
+            <Card className="shadow-sm">
+              <CardContent className="p-4 text-center">
+                <div className="text-2xl font-bold text-indigo-600">{stats.totalAmountSolicited.toLocaleString()} €</div>
+                <div className="text-sm text-gray-600">Montant sollicité</div>
+              </CardContent>
+            </Card>
+            <Card className="shadow-sm">
+              <CardContent className="p-4 text-center">
+                <div className="text-2xl font-bold text-emerald-600">{stats.totalAmountObtained.toLocaleString()} €</div>
+                <div className="text-sm text-gray-600">Montant obtenu</div>
+              </CardContent>
+            </Card>
+          </div>
+
+          <div className="flex justify-between items-center mb-6">
+            <h2 className="text-xl font-bold text-[#3C5F58]">Liste des subventions</h2>
+            <Button
+              onClick={() => { resetForm(); setShowForm(true); }}
+              className="flex items-center gap-2 py-3 px-6 text-lg bg-[#2E5941] hover:bg-[#3C5F58] transition-colors"
+            >
+              <PlusCircle className="w-5 h-5" />
+              Nouveau dossier
+            </Button>
+          </div>
+        </>
+      )}
 
       {showForm && (
-        <Card className="mb-6">
-          <CardHeader>
-            <CardTitle>{editingId ? 'Modifier' : 'Nouveau'} dossier de subvention</CardTitle>
+        <Card className="mb-6 shadow-md">
+          <CardHeader className="bg-gray-50 border-b">
+            <CardTitle className="text-xl font-bold text-[#3C5F58] flex items-center gap-2">
+              <FileText className="w-5 h-5 text-orange-500" />
+              {editingId ? 'Modifier un dossier existant' : 'Créer un nouveau dossier'}
+            </CardTitle>
           </CardHeader>
-          <CardContent className="space-y-6">
+          <CardContent className="p-6 space-y-6">
             {/* Section 1: Informations générales sur la structure */}
-            <h3 className="text-lg font-semibold mt-4">1. Informations générales sur la structure</h3>
-            <div className="grid md:grid-cols-2 gap-4">
-              <div>
-                <Label htmlFor="organization-name">Nom de la structure *</Label>
-                <Input id="organization-name" value={formData.organizationName || ''} onChange={(e) => setFormData({...formData, organizationName: e.target.value})} placeholder="Ex: Association L'École de la Réussite" />
+            <div className="bg-gray-50 p-4 rounded-lg">
+              <h3 className="text-lg font-bold text-[#3C5F58] mb-4">1. Informations générales sur la structure</h3>
+              <div className="grid md:grid-cols-2 gap-4">
+                <div>
+                  <Label htmlFor="organization-name" className="font-bold">Nom de la structure <span className="text-red-500">*</span></Label>
+                  <Input id="organization-name" value={formData.organizationName || ''} onChange={(e) => setFormData({...formData, organizationName: e.target.value})} placeholder="Ex: Association L'École de la Réussite" />
+                </div>
+                <div>
+                  <Label htmlFor="acronym" className="font-bold">Sigle (si applicable)</Label>
+                  <Input id="acronym" value={formData.acronym || ''} onChange={(e) => setFormData({...formData, acronym: e.target.value})} />
+                </div>
+                <div>
+                  <Label htmlFor="legal-status" className="font-bold">Statut juridique <span className="text-red-500">*</span></Label>
+                  <Input id="legal-status" value={formData.legalStatus || ''} onChange={(e) => setFormData({...formData, legalStatus: e.target.value})} placeholder="Ex: Association Loi 1901" />
+                </div>
+                <div>
+                  <Label htmlFor="creation-date" className="font-bold">Date de création de la structure</Label>
+                  <Input id="creation-date" type="date" value={formData.creationDate || ''} onChange={(e) => setFormData({...formData, creationDate: e.target.value})} />
+                </div>
               </div>
-              <div>
-                <Label htmlFor="acronym">Sigle (si applicable)</Label>
-                <Input id="acronym" value={formData.acronym || ''} onChange={(e) => setFormData({...formData, acronym: e.target.value})} />
+              <div className="grid md:grid-cols-3 gap-4 mt-4">
+                <div>
+                  <Label htmlFor="siret" className="font-bold">Numéro SIRET <span className="text-red-500">*</span></Label>
+                  <Input id="siret" value={formData.siretNumber || ''} onChange={(e) => setFormData({...formData, siretNumber: e.target.value})} placeholder="12345678901234" />
+                </div>
+                <div>
+                  <Label htmlFor="rna" className="font-bold">Numéro RNA</Label>
+                  <Input id="rna" value={formData.rnaNumber || ''} onChange={(e) => setFormData({...formData, rnaNumber: e.target.value})} />
+                </div>
+                <div>
+                  <Label htmlFor="uai" className="font-bold">Numéro UAI</Label>
+                  <Input id="uai" value={formData.uaiNumber || ''} onChange={(e) => setFormData({...formData, uaiNumber: e.target.value})} />
+                </div>
               </div>
-            </div>
-            <div className="grid md:grid-cols-2 gap-4">
-              <div>
-                <Label htmlFor="legal-status">Statut juridique *</Label>
-                <Input id="legal-status" value={formData.legalStatus || ''} onChange={(e) => setFormData({...formData, legalStatus: e.target.value})} placeholder="Ex: Association Loi 1901" />
-              </div>
-              <div>
-                <Label htmlFor="creation-date">Date de création de la structure</Label>
-                <Input id="creation-date" type="date" value={formData.creationDate || ''} onChange={(e) => setFormData({...formData, creationDate: e.target.value})} />
-              </div>
-            </div>
-            <div className="grid md:grid-cols-3 gap-4">
-              <div>
-                <Label htmlFor="siret">Numéro SIRET *</Label>
-                <Input id="siret" value={formData.siretNumber || ''} onChange={(e) => setFormData({...formData, siretNumber: e.target.value})} placeholder="12345678901234" />
-              </div>
-              <div>
-                <Label htmlFor="rna">Numéro RNA</Label>
-                <Input id="rna" value={formData.rnaNumber || ''} onChange={(e) => setFormData({...formData, rnaNumber: e.target.value})} />
-              </div>
-              <div>
-                <Label htmlFor="uai">Numéro UAI</Label>
-                <Input id="uai" value={formData.uaiNumber || ''} onChange={(e) => setFormData({...formData, uaiNumber: e.target.value})} />
-              </div>
-            </div>
-            <div className="grid md:grid-cols-2 gap-4">
-              <div>
-                <Label htmlFor="address-siege">Adresse du siège social</Label>
-                <Input id="address-siege" value={formData.address || ''} onChange={(e) => setFormData({...formData, address: e.target.value})} />
-              </div>
-              <div>
-                <Label htmlFor="address-locaux">Adresse des locaux de l'école</Label>
-                <Input id="address-locaux" value={formData.schoolAddress || ''} onChange={(e) => setFormData({...formData, schoolAddress: e.target.value})} />
-              </div>
-            </div>
-            <div className="grid md:grid-cols-2 gap-4">
-              <div>
-                <Label htmlFor="legal-representative-name">Nom et fonction du représentant légal</Label>
-                <Input id="legal-representative-name" value={formData.legalRepresentativeName || ''} onChange={(e) => setFormData({...formData, legalRepresentativeName: e.target.value})} placeholder="Nom Prénom, Fonction" />
-              </div>
-              <div>
-                <Label htmlFor="website">Site internet de la structure</Label>
-                <Input id="website" value={formData.website || ''} onChange={(e) => setFormData({...formData, website: e.target.value})} />
-              </div>
-            </div>
-            <div className="flex items-center space-x-2">
-              <Checkbox
-                id="mecenat"
-                checked={formData.isEligibleForMecenat}
-                onCheckedChange={(checked) => setFormData({...formData, isEligibleForMecenat: checked as boolean})}
-              />
-              <Label htmlFor="mecenat">Éligibilité au mécénat au sens de l'article 238 bis du code général des Impôts ?</Label>
-            </div>
-            <div className="grid md:grid-cols-3 gap-4">
-              <div>
-                <Label htmlFor="total-products">Total des produits (dernier exercice clos)</Label>
-                <Input id="total-products" type="number" value={formData.totalProductsLastYear || ''} onChange={(e) => setFormData({...formData, totalProductsLastYear: parseFloat(e.target.value) || 0})} />
-              </div>
-              <div>
-                <Label htmlFor="volunteer-count">Nombre de bénévoles (dernier exercice clos)</Label>
-                <Input id="volunteer-count" type="number" value={formData.volunteerCount || ''} onChange={(e) => setFormData({...formData, volunteerCount: parseInt(e.target.value) || 0})} />
-              </div>
-              <div>
-                <Label htmlFor="employee-count">Nombre de salariés (dernier exercice clos)</Label>
-                <Input id="employee-count" type="number" value={formData.employeeCount || ''} onChange={(e) => setFormData({...formData, employeeCount: parseInt(e.target.value) || 0})} />
-              </div>
-            </div>
-            <div>
-              <Label htmlFor="financial-partners-public">Principaux partenaires financiers publics</Label>
-              <Textarea id="financial-partners-public" value={formData.mainFinancialPartnersPublic || ''} onChange={(e) => setFormData({...formData, mainFinancialPartnersPublic: e.target.value})} placeholder="Nom de l'acteur, Type d'acteur, % dans le budget total" rows={3} />
-            </div>
-            <div>
-              <Label htmlFor="financial-partners-private">Principaux partenaires financiers privés</Label>
-              <Textarea id="financial-partners-private" value={formData.mainFinancialPartnersPrivate || ''} onChange={(e) => setFormData({...formData, mainFinancialPartnersPrivate: e.target.value})} placeholder="Nom de l'acteur, Type d'acteur, % dans le budget total" rows={3} />
             </div>
 
             {/* Section 2: Présentation de l'école de production */}
-            <h3 className="text-lg font-semibold mt-4">2. Présentation de l'école de production</h3>
-            <div>
-              <Label htmlFor="mission-statement">Mission(s) de la structure</Label>
-              <Textarea id="mission-statement" value={formData.missionStatement || ''} onChange={(e) => setFormData({...formData, missionStatement: e.target.value})} placeholder="Décrire la mission de l'école" rows={3} />
-            </div>
-            <div>
-              <Label htmlFor="history-genesis">Historique et genèse</Label>
-              <Textarea id="history-genesis" value={formData.historyAndGenesis || ''} onChange={(e) => setFormData({...formData, historyAndGenesis: e.target.value})} placeholder="Quand et comment l'école a-t-elle été créée ?" rows={3} />
-            </div>
-            <div>
-              <Label htmlFor="target-audience">Public cible</Label>
-              <Textarea id="target-audience" value={formData.targetAudienceDetails || ''} onChange={(e) => setFormData({...formData, targetAudienceDetails: e.target.value})} placeholder="Qui sont les jeunes accueillis ? (Âge, niveau scolaire à l'entrée, situation sociale.)" rows={3} />
+            <div className="bg-gray-50 p-4 rounded-lg">
+              <h3 className="text-lg font-bold text-[#3C5F58] mb-4">2. Présentation de l'école de production</h3>
+              <div>
+                <Label htmlFor="mission-statement" className="font-bold">Mission(s) de la structure</Label>
+                <Textarea id="mission-statement" value={formData.missionStatement || ''} onChange={handleInputChange} placeholder="Décrire la mission de l'école" rows={3} />
+              </div>
+              <div className="mt-4">
+                <Label htmlFor="target-audience" className="font-bold">Public cible</Label>
+                <Textarea id="target-audience" value={formData.targetAudienceDetails || ''} onChange={handleInputChange} placeholder="Qui sont les jeunes accueillis ? (Âge, niveau scolaire à l'entrée, situation sociale.)" rows={3} />
+              </div>
             </div>
 
-            {/* Section 3: Le projet spécifique */}
-            <h3 className="text-lg font-semibold mt-4">3. Le projet spécifique objet de la demande</h3>
-            <div>
-              <Label htmlFor="fundingBody">Organisme financeur de la subvention *</Label>
-              <Select
-                value={selectedFundingBody}
-                onValueChange={(value) => {
-                  setSelectedFundingBody(value);
-                  setFormData({...formData, fundingBody: value});
-                }}
-              >
-                <SelectTrigger>
-                  <SelectValue placeholder="Choisir un organisme" />
-                </SelectTrigger>
-                <SelectContent>
-                  {fundingBodies.map(body => (
-                    <SelectItem key={body.name} value={body.name}>
-                      {body.name}
-                    </SelectItem>
+            {/* Section 3: Le projet spécifique objet de la demande */}
+            <div className="bg-gray-50 p-4 rounded-lg">
+              <h3 className="text-lg font-bold text-[#3C5F58] mb-4">3. Le projet spécifique objet de la demande</h3>
+              <div className="grid md:grid-cols-2 gap-4">
+                <div>
+                  <Label htmlFor="fundingBody" className="font-bold">Organisme financeur de la subvention <span className="text-red-500">*</span></Label>
+                  <Select
+                    value={selectedFundingBody}
+                    onValueChange={(value) => {
+                      setSelectedFundingBody(value);
+                      setFormData({...formData, fundingBody: value});
+                    }}
+                  >
+                    <SelectTrigger>
+                      <SelectValue placeholder="Choisir un organisme" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {fundingBodies.map(body => (
+                        <SelectItem key={body.name} value={body.name}>
+                          {body.name}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div>
+                  <Label htmlFor="project-title" className="font-bold">Titre du projet <span className="text-red-500">*</span></Label>
+                  <Input id="project-title" value={formData.projectTitle || ''} onChange={handleInputChange} placeholder="Ex: Projet d'acquisition de machines numériques" />
+                </div>
+              </div>
+              <div className="mt-4">
+                <Label className="font-bold">Objet du besoin de financement</Label>
+                <div className="flex flex-wrap gap-4 mt-2">
+                  {fundingPurposeOptions.map(option => (
+                    <div key={option} className="flex items-center space-x-2">
+                      <Checkbox
+                        id={`funding-purpose-${option}`}
+                        checked={formData.fundingPurpose?.includes(option)}
+                        onCheckedChange={(checked) => handleCheckboxChange('fundingPurpose', option, checked as boolean)}
+                      />
+                      <Label htmlFor={`funding-purpose-${option}`}>{option}</Label>
+                    </div>
                   ))}
-                </SelectContent>
-              </Select>
-            </div>
-            <div>
-              <Label htmlFor="project-title">Titre du projet *</Label>
-              <Input id="project-title" value={formData.projectTitle || ''} onChange={(e) => setFormData({...formData, projectTitle: e.target.value})} placeholder="Ex: Projet d'acquisition de machines numériques" />
-            </div>
-            <div>
-              <Label>Objet du besoin de financement</Label>
-              <div className="flex flex-col space-y-2 mt-2">
-                {fundingPurposeOptions.map(option => (
-                  <div key={option} className="flex items-center space-x-2">
-                    <Checkbox
-                      id={`funding-purpose-${option}`}
-                      checked={formData.fundingPurpose?.includes(option)}
-                      onCheckedChange={(checked) => handleCheckboxChange('fundingPurpose', option, checked as boolean)}
-                    />
-                    <Label htmlFor={`funding-purpose-${option}`}>{option}</Label>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div>
-              <Label htmlFor="project-description-summary">Descriptif synthétique du projet (max 1000 caractères)</Label>
-              <Textarea id="project-description-summary" value={formData.projectDescriptionSummary || ''} onChange={(e) => setFormData({...formData, projectDescriptionSummary: e.target.value})} rows={4} maxLength={1000} />
-            </div>
-            <div>
-              <Label>Thématique principale adressée par le projet</Label>
-              <div className="flex flex-col space-y-2 mt-2">
-                {thematicAreasOptions.map(option => (
-                  <div key={option} className="flex items-center space-x-2">
-                    <Checkbox
-                      id={`thematic-area-${option}`}
-                      checked={formData.thematicAreas?.includes(option)}
-                      onCheckedChange={(checked) => handleCheckboxChange('thematicAreas', option, checked as boolean)}
-                    />
-                    <Label htmlFor={`thematic-area-${option}`}>{option}</Label>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div className="grid md:grid-cols-2 gap-4">
-              <div>
-                <Label>Durée du projet</Label>
-                <Select
-                  value={formData.projectDuration || ''}
-                  onValueChange={(value) => setFormData({...formData, projectDuration: value})}
-                >
-                  <SelectTrigger>
-                    <SelectValue placeholder="Choisir la durée" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {projectDurations.map(duration => (
-                      <SelectItem key={duration} value={duration}>
-                        {duration}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-              <div>
-                <Label htmlFor="support-duration">Durée du soutien demandé (ex: 24 mois)</Label>
-                <Input id="support-duration" value={formData.supportDurationRequested || ''} onChange={(e) => setFormData({...formData, supportDurationRequested: e.target.value})} />
-              </div>
-            </div>
-            <div>
-              <Label htmlFor="detailed-description">Descriptif détaillé du projet (max 2500 caractères)</Label>
-              <Textarea id="detailed-description" value={formData.projectDescriptionDetailed || ''} onChange={(e) => setFormData({...formData, projectDescriptionDetailed: e.target.value})} rows={6} maxLength={2500} />
-            </div>
-            <div>
-              <Label>Soutien souhaité du partenaire</Label>
-              <div className="flex flex-col space-y-2 mt-2">
-                {desiredSupportOptions.map(option => (
-                  <div key={option} className="flex items-center space-x-2">
-                    <Checkbox
-                      id={`desired-support-${option}`}
-                      checked={formData.desiredSupport?.includes(option)}
-                      onCheckedChange={(checked) => handleCheckboxChange('desiredSupport', option, checked as boolean)}
-                    />
-                    <Label htmlFor={`desired-support-${option}`}>{option}</Label>
-                  </div>
-                ))}
+                </div>
               </div>
             </div>
 
             {/* Section 4: Budget prévisionnel du projet */}
-            <h3 className="text-lg font-semibold mt-4">4. Budget prévisionnel du projet</h3>
-            <p className="text-sm text-gray-500">
-              Note: Le détail du budget prévisionnel des 3 années est à joindre au dossier.
-            </p>
-            <div className="grid md:grid-cols-3 gap-4">
-              <div>
-                <Label htmlFor="budget-an1">Année 1 (€)</Label>
-                <Input id="budget-an1" type="number" value={formData.projectBudgetYear1 || ''} onChange={(e) => setFormData({...formData, projectBudgetYear1: parseFloat(e.target.value) || 0})} />
+            <div className="bg-gray-50 p-4 rounded-lg">
+              <h3 className="text-lg font-bold text-[#3C5F58] mb-4">4. Budget prévisionnel du projet</h3>
+              <div className="grid md:grid-cols-2 gap-4">
+                <div>
+                  <Label htmlFor="total-cost" className="font-bold">Coût total du projet (sur la durée du soutien) <span className="text-red-500">*</span></Label>
+                  <Input id="total-cost" type="number" value={formData.totalProjectCost || ''} onChange={handleNumberInputChange} />
+                </div>
+                <div>
+                  <Label htmlFor="total-solicited" className="font-bold">Montant total sollicité <span className="text-red-500">*</span></Label>
+                  <Input id="total-solicited" type="number" value={formData.totalAmountSolicited || ''} onChange={handleNumberInputChange} />
+                </div>
               </div>
-              <div>
-                <Label htmlFor="budget-an2">Année 2 (€)</Label>
-                <Input id="budget-an2" type="number" value={formData.projectBudgetYear2 || ''} onChange={(e) => setFormData({...formData, projectBudgetYear2: parseFloat(e.target.value) || 0})} />
-              </div>
-              <div>
-                <Label htmlFor="budget-an3">Année 3 (€)</Label>
-                <Input id="budget-an3" type="number" value={formData.projectBudgetYear3 || ''} onChange={(e) => setFormData({...formData, projectBudgetYear3: parseFloat(e.target.value) || 0})} />
-              </div>
-            </div>
-            <div>
-              <Label htmlFor="total-cost">Coût total du projet (sur la durée du soutien) *</Label>
-              <Input id="total-cost" type="number" value={formData.totalProjectCost || ''} onChange={(e) => setFormData({...formData, totalProjectCost: parseFloat(e.target.value) || 0})} />
-            </div>
-            <div>
-              <Label htmlFor="total-solicited">Montant total sollicité *</Label>
-              <Input id="total-solicited" type="number" value={formData.totalAmountSolicited || ''} onChange={(e) => setFormData({...formData, totalAmountSolicited: parseFloat(e.target.value) || 0})} />
             </div>
 
-            {/* Section 5: Moyens humains et matériels de l'école */}
-            <h3 className="text-lg font-semibold mt-4">5. Moyens humains et matériels de l'école</h3>
-            <div>
-              <Label htmlFor="team-description">Équipe pédagogique et administrative</Label>
-              <Textarea id="team-description" value={formData.teamDescription || ''} onChange={(e) => setFormData({...formData, teamDescription: e.target.value})} placeholder="Organigramme simplifié, nombre de formateurs..." rows={3} />
-            </div>
-            <div>
-              <Label htmlFor="premises-equipment">Locaux et équipements généraux</Label>
-              <Textarea id="premises-equipment" value={formData.premisesAndEquipment || ''} onChange={(e) => setFormData({...formData, premisesAndEquipment: e.target.value})} placeholder="Description des ateliers, salles de cours, équipements..." rows={3} />
+            {/* Section 5: Suivi du dossier (champs conservés et ajustés) */}
+            <div className="bg-gray-50 p-4 rounded-lg">
+              <h3 className="text-lg font-bold text-[#3C5F58] mb-4">5. Suivi du dossier</h3>
+              <div className="grid md:grid-cols-2 gap-4">
+                <div>
+                  <Label htmlFor="current-status" className="font-bold">Statut Actuel <span className="text-red-500">*</span></Label>
+                  <Select
+                    value={formData.currentStatus || ''}
+                    onValueChange={(value) => setFormData({...formData, currentStatus: value as any})}
+                  >
+                    <SelectTrigger>
+                      <SelectValue placeholder="Sélectionner le statut" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {statusOptions.map(status => (
+                        <SelectItem key={status} value={status}>
+                          {status}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                </div>
+                <div>
+                  <Label htmlFor="internal-responsible" className="font-bold">Responsable Interne (École)</Label>
+                  <Input
+                    id="internal-responsible"
+                    value={formData.internalResponsible || ''}
+                    onChange={handleInputChange}
+                    placeholder="Ex: Directeur, Responsable Administratif..."
+                  />
+                </div>
+              </div>
             </div>
 
-            {/* Anciens champs de suivi, déplacés ici */}
-            <h3 className="text-lg font-semibold mt-4">Suivi du dossier</h3>
-            <div className="grid md:grid-cols-2 gap-4">
-              <div>
-                <Label htmlFor="current-status">Statut Actuel *</Label>
-                <Select
-                  value={formData.currentStatus || ''}
-                  onValueChange={(value) => setFormData({...formData, currentStatus: value as any})}
-                >
-                  <SelectTrigger>
-                    <SelectValue placeholder="Sélectionner le statut" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {statusOptions.map(status => (
-                      <SelectItem key={status} value={status}>
-                        {status}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-              <div>
-                <Label htmlFor="internal-responsible">Responsable Interne (École)</Label>
-                <Input
-                  id="internal-responsible"
-                  value={formData.internalResponsible || ''}
-                  onChange={(e) => setFormData({...formData, internalResponsible: e.target.value})}
-                  placeholder="Ex: Directeur, Responsable Administratif..."
-                />
-              </div>
-            </div>
-            <div className="flex gap-3">
-              <Button onClick={saveApplication} className="btn-primary">
-                {editingId ? 'Modifier' : 'Créer'}
-              </Button>
-              <Button onClick={resetForm} className="btn-secondary">
+            <div className="flex justify-end gap-2 mt-6">
+              <Button onClick={resetForm} variant="outline" className="text-red-500 hover:text-red-600 border-red-500">
                 Annuler
+              </Button>
+              <Button onClick={saveApplication} className="bg-[#2E5941] hover:bg-[#3C5F58]">
+                {editingId ? 'Modifier' : 'Créer'}
               </Button>
             </div>
           </CardContent>
@@ -691,11 +585,11 @@ export default function SubsidyGenerator() {
       )}
 
       {!showForm && applications.length > 0 && (
-        <div className="space-y-4">
+        <div className="space-y-4 mt-8">
           {applications.map(app => (
-            <Card key={app.id}>
+            <Card key={app.id} className="shadow-sm">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-lg font-bold">
+                <CardTitle className="text-lg font-bold text-gray-800">
                   {app.fundingBody}
                 </CardTitle>
                 <span className={`px-2 py-1 text-xs font-semibold rounded-full ${getStatusColor(app.currentStatus)}`}>
@@ -703,12 +597,16 @@ export default function SubsidyGenerator() {
                 </span>
               </CardHeader>
               <CardContent>
-                <p className="text-md font-medium text-gray-700">{app.projectTitle}</p>
+                <p className="text-md font-bold text-gray-700">{app.projectTitle}</p>
                 <p className="text-2xl font-bold text-blue-600 mt-2">{app.totalAmountSolicited.toLocaleString()} €</p>
                 <p className="text-xs text-gray-500 mt-1">{app.organizationName}</p>
                 <div className="flex space-x-2 mt-4">
-                  <Button size="sm" onClick={() => editApplication(app)}>Modifier</Button>
-                  <Button size="sm" variant="destructive" onClick={() => deleteApplication(app.id)}>Supprimer</Button>
+                  <Button size="sm" className="bg-[#2E5941] hover:bg-[#3C5F58]" onClick={() => editApplication(app)}>
+                    <Edit className="w-4 h-4 mr-2" /> Modifier
+                  </Button>
+                  <Button size="sm" variant="outline" className="text-red-500 border-red-500 hover:text-red-600" onClick={() => deleteApplication(app.id)}>
+                    <Trash2 className="w-4 h-4 mr-2" /> Supprimer
+                  </Button>
                 </div>
               </CardContent>
             </Card>
@@ -717,10 +615,12 @@ export default function SubsidyGenerator() {
       )}
 
       {!showForm && applications.length === 0 && (
-        <div className="text-center text-gray-500 p-8 border-2 border-dashed rounded-lg">
-          <p>Aucun dossier de subvention enregistré. <Button variant="link" onClick={() => setShowForm(true)} className="p-0 text-blue-600">Commencez-en un nouveau</Button>.</p>
+        <div className="text-center text-gray-500 p-8 border-2 border-dashed rounded-lg mt-8">
+          <p>Aucun dossier de subvention enregistré. <Button variant="link" onClick={() => setShowForm(true)} className="p-0 text-[#3C5F58] hover:text-[#2E5941]">Commencez-en un nouveau</Button>.</p>
         </div>
       )}
     </section>
   );
 }
+
+export default SubsidyGenerator;
