@@ -1,5 +1,5 @@
 import React from 'react';
-import { MessageSquareText, Users, Lightbulb, TrendingUp, ChevronDown } from "lucide-react";
+import { MessageSquareText, Users, Lightbulb, TrendingUp, ChevronDown, Download } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
@@ -183,17 +183,28 @@ const Entretiens: React.FC<EntretiensProps> = ({ navigate }) => {
         </CardContent>
       </Card>
       
-      {/* Bouton de retour à l'accueil */}
-      {navigate && (
-        <div className="text-center mt-8">
+      {/* Section des boutons */}
+      <div className="flex flex-col md:flex-row gap-4 mt-8 justify-center">
+        {/* Nouveau bouton de téléchargement */}
+        <Button
+            asChild
+            className="flex-1 flex items-center justify-center gap-2 py-3 px-6 text-lg bg-[#2E5941] text-white hover:bg-[#3C5F58] transition-colors rounded-lg font-medium"
+        >
+            <a href="/fichiers/ANNEXE 3 - ENTRETIENS EFFECTUES AUPRES DES PORTEURS DE PROJET.pdf" download>
+              <Download className="w-5 h-5" /> Télécharger les entretiens
+            </a>
+        </Button>
+
+        {/* Bouton de retour à l'accueil */}
+        {navigate && (
           <Button
             onClick={() => navigate('accueil')}
-            className="px-6 py-3 bg-[#2E5941] text-white rounded-md hover:bg-[#3C5F58] transition-colors text-lg"
+            className="flex-1 flex items-center justify-center px-6 py-3 bg-gray-50 text-gray-800 rounded-md border-2 border-gray-300 hover:bg-gray-100 transition-colors text-lg"
           >
             Retour à l'accueil
           </Button>
-        </div>
-      )}
+        )}
+      </div>
     </section>
   );
 };
