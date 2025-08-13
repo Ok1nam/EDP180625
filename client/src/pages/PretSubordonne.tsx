@@ -11,6 +11,7 @@ interface PretSubordonneProps {
 }
 
 export default function PretSubordonne({ navigate }: PretSubordonneProps) {
+  // État pour gérer les données du formulaire
   const [formData, setFormData] = useState({
     nomAssociation: "",
     adresseSiegeSocial: "",
@@ -31,8 +32,10 @@ export default function PretSubordonne({ navigate }: PretSubordonneProps) {
     dernierJourDisponibilite: "",
   });
 
+  // État pour stocker le texte généré à partir du formulaire
   const [generatedText, setGeneratedText] = useState<string>("");
 
+  // Gère les changements dans les champs du formulaire
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { id, value } = e.target;
     setFormData(prevData => ({
@@ -41,6 +44,7 @@ export default function PretSubordonne({ navigate }: PretSubordonneProps) {
     }));
   };
 
+  // Génère le texte du contrat en utilisant les données du formulaire
   const generateTxt = () => {
     const textContent = `
     CONTRAT DE PRET SUBORDONNE
@@ -86,6 +90,7 @@ export default function PretSubordonne({ navigate }: PretSubordonneProps) {
     setGeneratedText(textContent);
   };
   
+  // Gère le téléchargement du fichier texte généré
   const downloadTxt = () => {
     const element = document.createElement("a");
     const file = new Blob([generatedText], { type: 'text/plain' });
@@ -162,7 +167,8 @@ export default function PretSubordonne({ navigate }: PretSubordonneProps) {
           <p className="mb-4">
             Accédez à notre modèle complet de contrat, conforme aux exigences des partenaires institutionnels (Banque des Territoires, France Active, etc.). Il est fourni au format .docx pour être adapté à votre projet.
           </p>
-          <a href="/fichiers/ANNEXE 16 MODELE CONTRAT PRET SUBORDONNE.docx" download>
+          {/* Le lien de téléchargement a été mis à jour avec le nouveau nom de fichier */}
+          <a href="/fichiers/ANNEXE 16 - EXEMPLE DE CONTRAT DE PRET SUBORDONNE.docx" download="ANNEXE 16 - EXEMPLE DE CONTRAT DE PRET SUBORDONNE.docx">
             <Button className="bg-[#2E5941] hover:bg-[#3C5F58] text-white">
               <Download className="w-4 h-4 mr-2" />
               Télécharger le fichier .docx

@@ -55,9 +55,10 @@ const TvaCoefficient: React.FC<TvaCoefficientProps> = ({ navigate }) => {
         </CardContent>
       </Card>
         
-      <Card className="mb-8 shadow-lg border-2 border-[#D7B16A]">
+      {/* Mise à jour des classes Tailwind pour utiliser la couleur verte au lieu de la couleur dorée */}
+      <Card className="mb-8 shadow-lg border-2 border-[#2E5941]">
         <CardHeader>
-          <CardTitle className="text-2xl font-bold text-[#B68E3F] flex items-center gap-3">
+          <CardTitle className="text-2xl font-bold text-[#2E5941] flex items-center gap-3">
             <Download className="w-6 h-6" /> Télécharger la Trame de Calcul
           </CardTitle>
         </CardHeader>
@@ -75,7 +76,8 @@ const TvaCoefficient: React.FC<TvaCoefficientProps> = ({ navigate }) => {
             download="ANNEXE 6 ET 7 - Trame calcul coefficient déduction et résultat fiscal 080825.xlsm"
             className="flex-shrink-0"
           >
-            <Button className="bg-[#B68E3F] hover:bg-[#D7B16A] text-white flex items-center gap-2 py-3 px-6 text-lg">
+            {/* Mise à jour de la couleur du bouton */}
+            <Button className="bg-[#2E5941] hover:bg-[#3C5F58] text-white flex items-center gap-2 py-3 px-6 text-lg">
               <Download className="w-5 h-5" /> Télécharger le fichier
             </Button>
           </a>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Network, Users, Download, Lightbulb, Workflow } from "lucide-react";
+import { Network, Users, Lightbulb, Workflow } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
@@ -8,7 +8,8 @@ interface OrganigrammeProps {
 }
 
 const Organigramme: React.FC<OrganigrammeProps> = ({ navigate }) => {
-  const organigrammeFilePath = "/fichiers/ORGANIGRAMME_TYPE_ECOLE_PRODUCTION.pptx";
+  // Le chemin du fichier image est maintenant utilisé pour l'affichage direct
+  const organigrammeImagePath = "/fichiers/ANNEXE 2 - EXEMPLE D'ORGANIGRAMME D'UNE ECOLE DE PRODUCTION.png";
 
   return (
     <section id="organigramme-type" className="max-w-4xl mx-auto px-4 py-8">
@@ -64,37 +65,23 @@ const Organigramme: React.FC<OrganigrammeProps> = ({ navigate }) => {
             <li><span className="font-bold">Relations Partenaires :</span> Chargé de développement partenarial, relations entreprises.</li>
             <li><span className="font-bold">Vie Scolaire / Accompagnement Social :</span> Suivi des élèves, orientation.</li>
           </ul>
-          <p>
-            Le modèle proposé vous offre une base pour adapter ces fonctions à la taille et à la maturité de votre projet.
-          </p>
         </CardContent>
       </Card>
 
-      {/* Section Téléchargement du fichier */}
+      {/* Section Affichage de l'image de l'organigramme */}
+      {/* Cette carte remplace la section de téléchargement */}
       <Card className="mb-8 shadow-lg border-2 border-[#2E5941]">
         <CardHeader>
           <CardTitle className="text-2xl font-bold text-[#2E5941] flex items-center gap-3">
-            <Download className="w-6 h-6" /> Télécharger notre Modèle d'Organigramme
+            <Workflow className="w-6 h-6" /> Visualiser l'exemple d'organigramme
           </CardTitle>
         </CardHeader>
-        <CardContent className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
-          <div className="text-base text-gray-800 flex-1">
-            <p className="mb-2">
-              Obtenez un modèle d'organigramme prêt à être personnalisé. Ce document vous aidera à visualiser et à formaliser la structure de votre future École de Production.
-            </p>
-            <p className="text-sm text-gray-600">
-              <span className="font-bold">Conseil :</span> N'hésitez pas à faire évoluer votre organigramme à mesure que votre école grandit et que de nouvelles fonctions apparaissent.
-            </p>
-          </div>
-          <a
-            href={organigrammeFilePath}
-            download="ORGANIGRAMME_TYPE_ECOLE_PRODUCTION.pptx"
-            className="flex-shrink-0"
-          >
-            <Button className="bg-[#2E5941] hover:bg-[#3C5F58] text-white flex items-center gap-2 py-3 px-6 text-lg">
-              <Download className="w-5 h-5" /> Télécharger le modèle
-            </Button>
-          </a>
+        <CardContent className="p-6 flex justify-center">
+          <img 
+            src={organigrammeImagePath} 
+            alt="Exemple d'organigramme d'une École de Production" 
+            className="w-full h-auto rounded-lg shadow-md"
+          />
         </CardContent>
       </Card>
 

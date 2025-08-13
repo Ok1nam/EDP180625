@@ -8,7 +8,8 @@ interface GuideTvaProps {
 }
 
 const GuideTva: React.FC<GuideTvaProps> = ({ navigate }) => {
-  const guideTvaFilePath = "/fichiers/GUIDE_APPLICATION_TVA_MODELE.pdf";
+  // Le chemin a été mis à jour pour correspondre au nouveau nom de fichier dans le dossier public.
+  const guideTvaFilePath = "/fichiers/ANNEXE 5 - GUIDE D APPLICATION DE LA TVA.pdf";
 
   return (
     <section id="guide-tva" className="max-w-4xl mx-auto px-4 py-8">
@@ -89,7 +90,8 @@ const GuideTva: React.FC<GuideTvaProps> = ({ navigate }) => {
           </div>
           <a
             href={guideTvaFilePath}
-            download="GUIDE_APPLICATION_TVA_ECOLE_PRODUCTION.pdf"
+            // Le nom du fichier de téléchargement a également été mis à jour
+            download="ANNEXE 5 - GUIDE D APPLICATION DE LA TVA.pdf"
             className="flex-shrink-0"
           >
             <Button className="bg-[#2E5941] hover:bg-[#3C5F58] text-white flex items-center gap-2 py-3 px-6 text-lg">

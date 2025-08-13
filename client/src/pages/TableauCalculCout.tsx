@@ -1,5 +1,6 @@
 import React from 'react';
-import { Download, Calculator, Lightbulb, BarChart2 } from "lucide-react";
+import { Download, Calculator, Lightbulb } from "lucide-react";
+// Assurez-vous que les composants Card et Button sont correctement importés de votre bibliothèque UI (ex: shadcn/ui)
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
@@ -8,7 +9,8 @@ interface TableauCalculCoutProps {
 }
 
 const TableauCalculCout: React.FC<TableauCalculCoutProps> = ({ navigate }) => {
-  const calculCoutFilePath = "/fichiers/ANNEXE 18 - Trame du Tableau de Calcul des Coûts.xlsx";
+  // Le chemin du fichier a été mis à jour avec le nouveau nom
+  const calculCoutFilePath = "/fichiers/ANNEXE 18 - TABLEAU CALCUL DE COUT.xlsx";
 
   return (
     <section id="tableau-calcul-cout" className="max-w-4xl mx-auto px-4 py-8">
@@ -67,7 +69,7 @@ const TableauCalculCout: React.FC<TableauCalculCoutProps> = ({ navigate }) => {
           </div>
           <a
             href={calculCoutFilePath}
-            download="ANNEXE 18 - Trame du Tableau de Calcul des Coûts.xlsx"
+            download="ANNEXE 18 - TABLEAU CALCUL DE COUT.xlsx"
             className="flex-shrink-0"
           >
             <Button className="bg-[#2E5941] hover:bg-[#3C5F58] text-white flex items-center gap-2 py-3 px-6 text-lg">

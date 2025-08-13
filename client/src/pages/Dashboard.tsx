@@ -8,7 +8,8 @@ interface TableauDeBordProps {
 }
 
 const TableauDeBord: React.FC<TableauDeBordProps> = ({ navigate }) => {
-  const tableauDeBordFilePath = "/fichiers/ANNEXE 20 - Trame du Tableau de bord.xlsx";
+  // Le chemin du fichier a été mis à jour avec le nouveau nom
+  const tableauDeBordFilePath = "/fichiers/ANNEXE 20 - TABLEAU DE BORD FINANCIER ET EXTRA-FINANCIER.xlsx";
 
   return (
     <section id="tableau-de-bord" className="max-w-4xl mx-auto px-4 py-8">
@@ -63,7 +64,7 @@ const TableauDeBord: React.FC<TableauDeBordProps> = ({ navigate }) => {
           </div>
           <a
             href={tableauDeBordFilePath}
-            download="ANNEXE 20 - Trame du Tableau de bord.xlsx"
+            download="ANNEXE 20 - TABLEAU DE BORD FINANCIER ET EXTRA-FINANCIER.xlsx"
             className="flex-shrink-0"
           >
             <Button className="bg-[#2E5941] hover:bg-[#3C5F58] text-white flex items-center gap-2 py-3 px-6 text-lg">

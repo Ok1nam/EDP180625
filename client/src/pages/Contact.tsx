@@ -1,10 +1,9 @@
-import { Mail, Download, Linkedin } from "lucide-react"; // Ajout de Download et Linkedin, suppression de MessageCircle
+import { Mail, Download } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
-import { useToast } from "@/hooks/use-toast"; // useToast est maintenu au cas où d'autres toasts sont utilisés ailleurs, mais openSupportChat est retiré
+import { useToast } from "@/hooks/use-toast";
 
 export default function Contact() {
-  const { toast } = useToast(); // La variable toast est conservée mais la fonction openSupportChat est supprimée car elle n'est plus appelée.
+  const { toast } = useToast();
 
   return (
     <section id="apropos">
@@ -32,42 +31,39 @@ export default function Contact() {
             </div>
             
             <div>
-              <h3 className="text-lg font-semibold mb-4">Ressources et Contact</h3> {/* Nouveau titre */}
-              <div className="space-y-4"> {/* Conteneur pour les nouveaux éléments */}
-                {/* Lien pour télécharger le mémoire */}
+              <h3 className="text-lg font-semibold mb-4">Ressources</h3>
+              <div className="space-y-4">
+                {/* Lien pour télécharger la notice d'agrément */}
                 <p className="flex items-center gap-2">
                   <Download className="w-4 h-4" />
                   <a 
-                    href="/fichiers/memoire.pdf" // Chemin d'accès au fichier du mémoire
-                    download="memoire_laura_gombaud.pdf" // Nom du fichier lors du téléchargement
-                    className="text-blue-600 hover:text-blue-800 transition-colors font-medium"
-                  >
-                    Télécharger le mémoire
-                  </a>
-                </p>
-
-                {/* Lien pour télécharger la notice */}
-                <p className="flex items-center gap-2">
-                  <Download className="w-4 h-4" />
-                  <a 
-                    href="/fichiers/notice.pdf" // Chemin d'accès au fichier de la notice
-                    download="notice_utilisation.pdf" // Nom du fichier lors du téléchargement
+                    href="/fichiers/GOMBAUD Laura notice.pdf"
+                    download="GOMBAUD Laura notice.pdf"
                     className="text-blue-600 hover:text-blue-800 transition-colors font-medium"
                   >
                     Télécharger la notice d'agrément
                   </a>
                 </p>
-
-                {/* Icône LinkedIn */}
+                {/* Lien pour télécharger le T1 du mémoire */}
                 <p className="flex items-center gap-2">
-                  <Linkedin className="w-4 h-4" />
+                  <Download className="w-4 h-4" />
                   <a 
-                    href="https://www.linkedin.com/in/laura-gombaud-31686815b/?originalSubdomain=fr" 
-                    target="_blank" // Ouvre dans un nouvel onglet
-                    rel="noopener noreferrer" // Bonne pratique de sécurité
+                    href="/fichiers/MEMOIRE PARTIE I ET II.docx"
+                    download="MEMOIRE PARTIE I ET II.docx"
                     className="text-blue-600 hover:text-blue-800 transition-colors font-medium"
                   >
-                    Profil LinkedIn de Laura Gombaud
+                    Télécharger le T1 du mémoire
+                  </a>
+                </p>
+                {/* Lien pour télécharger le T2 (annexes) du mémoire */}
+                <p className="flex items-center gap-2">
+                  <Download className="w-4 h-4" />
+                  <a 
+                    href="/fichiers/memoire_t2.pdf" // Le chemin a été conservé car non spécifié
+                    download="memoire_laura_gombaud_t2.pdf"
+                    className="text-blue-600 hover:text-blue-800 transition-colors font-medium"
+                  >
+                    Télécharger le T2 (annexes) du mémoire
                   </a>
                 </p>
               </div>

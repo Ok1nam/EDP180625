@@ -8,7 +8,8 @@ interface RapportAdapteProps {
 }
 
 const RapportAdapte: React.FC<RapportAdapteProps> = ({ navigate }) => {
-  const rapportFilePath = "/fichiers/MODELE_RAPPORT_PARTENAIRES_EDP.pptx";
+  // Le chemin du fichier a été mis à jour avec le nouveau nom
+  const rapportFilePath = "/fichiers/ANNEXE 21 - MODELE DE RAPPORT ADAPTE.pptx";
 
   return (
     <section id="rapport-adapte" className="max-w-4xl mx-auto px-4 py-8">
@@ -85,7 +86,7 @@ const RapportAdapte: React.FC<RapportAdapteProps> = ({ navigate }) => {
           </div>
           <a
             href={rapportFilePath}
-            download="MODELE_RAPPORT_PARTENAIRES_ECOLE_PRODUCTION.pptx"
+            download="ANNEXE 21 - MODELE DE RAPPORT ADAPTE.pptx"
             className="flex-shrink-0"
           >
             <Button className="bg-[#2E5941] hover:bg-[#3C5F58] text-white flex items-center gap-2 py-3 px-6 text-lg">

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Calculator, DollarSign, Euro, Percent, Package, Users, Factory, LineChart, RefreshCcw, Lightbulb, Download } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -94,9 +94,8 @@ const PrixVenteProduits: React.FC<PrixVenteProduitsProps> = ({ navigate }) => {
     setUnitMarginAmount(null);
   };
 
-  // Le chemin vers le fichier du tableau
-  const prixDeRevientFilePath = "/fichiers/ANNEXE 19 - Trame du Tableau prix de revient.xlsx";
-
+  // Le chemin vers le fichier du tableau, mis à jour
+  const prixDeRevientFilePath = "/fichiers/ANNEXE 19 - TABLEAU DE DETERMINATION DU PRIX DE VENTE DES PRODUITS.xlsx";
 
   return (
     <section id="prix-vente-produits" className="max-w-4xl mx-auto px-4 py-8">
@@ -142,7 +141,7 @@ const PrixVenteProduits: React.FC<PrixVenteProduitsProps> = ({ navigate }) => {
           <p className="mb-4">
             Pour une approche plus détaillée, ce tableau de calcul du prix de revient est un outil essentiel pour une gestion financière rigoureuse de l'École de Production de votre client. Il est fourni au format `.xlsx`.
           </p>
-          <a href={prixDeRevientFilePath} download="ANNEXE 19 - Trame du Tableau prix de revient.xlsx">
+          <a href={prixDeRevientFilePath} download="ANNEXE 19 - TABLEAU DE DETERMINATION DU PRIX DE VENTE DES PRODUITS.xlsx">
             <Button className="bg-[#2E5941] hover:bg-[#3C5F58] text-white">
               <Download className="w-4 h-4 mr-2" />
               Télécharger le Tableau
