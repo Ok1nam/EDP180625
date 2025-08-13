@@ -470,16 +470,16 @@ Signature :                           Signature :
           </h3>
           <div className="text-base text-gray-700 space-y-3">
             <p>
-              **Objet social :** L'objet social est le cœur de votre association. La formule pré-remplie est adaptée aux Écoles de Production. Il est essentiel que l'objet statutaire affirme un but éducatif et une gestion désintéressée. Si votre projet a des spécificités uniques, vous devez l'affiner.
+              <span className="font-bold">Objet social :</span> L'objet social est le cœur de votre association. La formule pré-remplie est adaptée aux Écoles de Production. Il est essentiel que l'objet statutaire affirme un but éducatif et une gestion désintéressée. Si votre projet a des spécificités uniques, vous devez l'affiner.
             </p>
             <p>
-              **Ressources :** Le modèle intègre les produits des activités économiques des élèves (vente, sous-traitance) comme une ressource de l'association. Cela est crucial pour le statut d'École de Production.
+              <span className="font-bold">Ressources :</span> Le modèle intègre les produits des activités économiques des élèves (vente, sous-traitance) comme une ressource de l'association. Cela est crucial pour le statut d'École de Production.
             </p>
             <p>
-              **Déclaration :** Une fois les statuts signés par les membres fondateurs, vous devez déclarer votre association en préfecture ou sous-préfecture, ou en ligne.
+              <span className="font-bold">Déclaration :</span> Une fois les statuts signés par les membres fondateurs, vous devez déclarer votre association en préfecture ou sous-préfecture, ou en ligne.
             </p>
             <p>
-              **Règlement Intérieur :** Il est fortement recommandé d'établir un règlement intérieur pour préciser les modalités de fonctionnement interne non prévues par les statuts.
+              <span className="font-bold">Règlement Intérieur :</span> Il est fortement recommandé d'établir un règlement intérieur pour préciser les modalités de fonctionnement interne non prévues par les statuts.
             </p>
             <p className="text-sm italic text-gray-600 mt-4">
               Ce générateur fournit une trame adaptable selon le contexte local. Pour une conformité totale et adaptée à votre situation spécifique, notamment pour les aspects fiscaux et comptables complexes, il est vivement conseillé de consulter un expert.

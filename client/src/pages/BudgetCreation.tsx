@@ -66,9 +66,9 @@ const BudgetCreation: React.FC<BudgetCreationProps> = ({ navigate }) => {
       </Card>
 
       {/* Section Téléchargement */}
-      <Card className="mb-8 shadow-lg border-2 border-purple-500">
+      <Card className="mb-8 shadow-lg border-2 border-[#3C5F58]">
         <CardHeader>
-          <CardTitle className="text-2xl font-bold text-purple-700 flex items-center gap-3">
+          <CardTitle className="text-2xl font-bold text-[#2E5941] flex items-center gap-3">
             <Download className="w-6 h-6" /> Télécharger le Modèle de Budget de Création
           </CardTitle>
         </CardHeader>

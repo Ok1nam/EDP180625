@@ -20,7 +20,7 @@ interface ToolsProps {
     navigate: (page: string) => void;
 }
 
-// La liste des outils inclut maintenant les suivis
+// La liste des outils est maintenant réorganisée pour correspondre à l'ordre de la navigation
 const outils = [
     // Outils existants
     { id: "plan-comptable", label: "Plan comptable adapté", icon: FileText, description: "Accédez à un plan comptable spécifique pour les écoles de production." },
@@ -31,20 +31,15 @@ const outils = [
     { id: "criteres-label", label: "Liste de vérification des critères à remplir pour obtenir le label", icon: CheckSquare, description: "Assurez-vous de respecter tous les critères pour le label." },
     { id: "budget-creation", label: "Trame de budget à la création", icon: DollarSign, description: "Élaborez votre budget prévisionnel pour le lancement de l'école." },
     { id: "subventions", label: "Dossier type demande subvention", icon: Folder, description: "Préparez votre dossier de demande de subvention avec ce modèle." },
+    { id: "suivi-subventions", label: "Suivi des subventions", icon: Euro, description: "Gardez un œil sur l'état de vos demandes et l'utilisation de vos subventions." },
+    { id: "suivi-prets", label: "Suivi des prêts", icon: DollarSign, description: "Gérez et visualisez l'échéancier et les remboursements de vos prêts." },
     { id: "pret-subordonne", label: "Exemple de contrat de prêt subordonné", icon: FileText, description: "Modèle pour un contrat de prêt subordonné spécifique." },
     { id: "habilitation-taxe", label: "Exemple de formulaire de demande d'habilitation taxe apprentissage", icon: Euro, description: "Accédez au formulaire et aux instructions pour l'habilitation." },
     { id: "calculateurs", label: "Tableau calcul de coût", icon: Calculator, description: "Calculez et suivez vos coûts pédagogiques et de production." },
     { id: "prix-vente", label: "Tableau de détermination du prix de vente des produits", icon: PieChart, description: "Définissez une stratégie de prix pour les produits de votre école." },
+    { id: "tableau-bord", label: "Tableau de bord financier & extra-financier", icon: BarChart3, description: "Consultez un aperçu complet de la performance de votre école." },
     { id: "rapport-adapte", label: "Modèle de rapport adapté", icon: FileText, description: "Obtenez un modèle de rapport financier adapté à votre structure." },
-
-    // ===============================================
-    // AJOUT DES CARTES DE "SUIVIS"
-    // ===============================================
-    { id: "suivi-subventions", label: "Suivi des subventions", icon: Euro, description: "Gardez un œil sur l'état de vos demandes et l'utilisation de vos subventions." },
-    { id: "suivi-prets", label: "Suivi des prêts", icon: DollarSign, description: "Gérez et visualisez l'échéancier et les remboursements de vos prêts." },
-    { id: "tableau-bord", label: "Tableau de bord financier & extra-financier", icon: BarChart3, description: "Consultez un aperçu complet de la performance de votre école." }
 ];
-
 
 const Tools: React.FC<ToolsProps> = ({ navigate }) => {
     return (
