@@ -351,8 +351,7 @@ export default function SuiviPrets() {
         <div className="flex mt-4">
             <Button
                 onClick={downloadExcelTemplate}
-                className="text-sm px-4 py-2 border border-gray-300 rounded-md bg-white hover:bg-gray-100 text-gray-700"
-                variant="outline"
+                className="bg-[#2E5941] hover:bg-[#3C5F58] text-white"
             >
                 <File className="w-4 h-4 mr-2" />
                 Télécharger le modèle Excel
@@ -410,7 +409,7 @@ export default function SuiviPrets() {
         <div className="flex gap-3">
           <Button
             onClick={exportToCSV}
-            className="text-sm px-4 py-2 border border-gray-300 rounded-md bg-white hover:bg-gray-100 text-gray-700"
+            className="bg-[#2E5941] hover:bg-[#3C5F58] text-white"
             disabled={loans.length === 0}
           >
             <FileDown className="w-4 h-4 mr-2" />
