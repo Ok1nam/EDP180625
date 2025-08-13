@@ -1,5 +1,3 @@
-// client/src/pages/ResultatFiscal.tsx
-
 import React from 'react';
 import { Download, FileText, TrendingUp } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -17,11 +15,11 @@ const ResultatFiscal: React.FC<ResultatFiscalProps> = ({ navigate }) => {
     <section id="resultat-fiscal" className="max-w-4xl mx-auto px-4 py-8">
       <h1 className="flex items-center gap-2 mb-6 text-3xl font-bold text-gray-800">
         <TrendingUp className="w-8 h-8 text-primary" />
-        Trame de Calcul du Résultat Fiscal
+        Trame de Calcul du Résultat Fiscal : de l'approche comptable à la réalité fiscale
       </h1>
 
       <p className="mb-8 text-lg text-gray-700 leading-relaxed">
-        En tant qu'expert-comptable, maîtriser le calcul du résultat fiscal de votre client, une École de Production, est fondamental. Cette trame est conçue pour vous guider à travers les ajustements nécessaires entre le résultat comptable et le résultat imposable, en intégrant les spécificités fiscales propres à ces établissements.
+        En tant qu'expert-comptable, la détermination du résultat fiscal d'une École de Production est une étape fondamentale. Elle exige une méthodologie rigoureuse pour concilier le résultat comptable et le résultat imposable. Cette trame est un outil essentiel pour identifier et appliquer les retraitements extra-comptables spécifiques à ces établissements, garantissant ainsi une déclaration fiscale précise et conforme.
       </p>
 
       <Card className="mb-8 shadow-md">
@@ -33,21 +31,21 @@ const ResultatFiscal: React.FC<ResultatFiscalProps> = ({ navigate }) => {
         </CardHeader>
         <CardContent className="text-gray-700 space-y-4">
           <p>
-            Le résultat fiscal se détermine à partir du résultat comptable (avant impôt) de l'École de Production, en y appliquant des **retraitements extra-comptables**. Ces retraitements sont indispensables pour aligner le résultat comptable avec les règles fiscales, qui peuvent différer des normes comptables.
+            Le résultat fiscal est calculé à partir du résultat comptable (avant impôt), en y apportant des **ajustements extra-comptables**. Ces retraitements sont indispensables pour se conformer aux règles fiscales qui peuvent différer des normes comptables.
           </p>
           <p>
-            Les principaux types de retraitements à considérer sont :
+            Les principaux retraitements à considérer sont :
           </p>
           <ul className="list-disc pl-5 space-y-2">
             <li>
-              **Réintégrations :** Il s'agit d'ajouter au résultat comptable les charges qui sont déductibles d'un point de vue comptable mais non admises fiscalement (ex: certaines amortissements non-déductibles, amendes, pénalités, etc.).
+              **Réintégrations :** Il s'agit d'ajouter au résultat comptable les charges qui, bien que déductibles comptablement, ne sont pas admises fiscalement (ex : certaines amortissements, amendes, pénalités...).
             </li>
             <li>
-              **Déductions :** Inversement, il faut soustraire du résultat comptable les produits non imposables ou les charges non déduites comptablement mais admises fiscalement (ex: certains produits financiers non imposables, reprises de provisions réglementées, etc.).
+              **Déductions :** À l'inverse, il faut soustraire du résultat comptable les produits non imposables ou les charges non déduites comptablement mais admises fiscalement (ex : produits financiers non imposables, reprises de provisions réglementées...).
             </li>
           </ul>
           <p>
-            Notre fichier Excel vous accompagnera pas à pas dans l'identification et l'application de ces ajustements, vous permettant d'obtenir un résultat fiscal précis et conforme pour l'établissement.
+            Notre fichier Excel vous guide pas à pas dans l'application de ces ajustements, vous permettant ainsi d'obtenir un résultat fiscal fiable et conforme.
           </p>
         </CardContent>
       </Card>
@@ -57,14 +55,14 @@ const ResultatFiscal: React.FC<ResultatFiscalProps> = ({ navigate }) => {
           <CardTitle className="text-2xl font-bold text-blue-700 flex items-center gap-3">
             <Download className="w-6 h-6" /> Télécharger la Trame de Calcul
           </CardTitle>
-G        </CardHeader>
+        </CardHeader>
         <CardContent className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
           <div className="text-base text-gray-800 flex-1">
             <p className="mb-2">
-              Cliquez ci-dessous pour télécharger le fichier Excel qui vous permettra de calculer le résultat fiscal de votre client.
+              Téléchargez le fichier Excel qui vous permettra de calculer le résultat fiscal de votre client.
             </p>
             <p className="text-sm text-gray-600">
-              **Note importante :** Ce fichier Excel est **lié** à plusieurs de nos outils. Il est essentiel de le remplir avec les données spécifiques de l'École de Production de votre client avant d'utiliser les calculateurs.
+              **Note importante :** Ce fichier est **lié** à plusieurs de nos outils. Il est essentiel de le remplir avec les données spécifiques de l'École de Production de votre client avant d'utiliser les calculateurs.
             </p>
           </div>
           <a
@@ -88,16 +86,16 @@ G        </CardHeader>
         </CardHeader>
         <CardContent className="text-gray-700 space-y-4">
           <p>
-            Pour garantir la justesse de votre calcul du résultat fiscal et la conformité des déclarations :
+            Pour garantir la justesse de votre calcul et la conformité des déclarations :
           </p>
           <ul className="list-disc pl-5 space-y-2">
-            <li>Toujours partir du bilan et compte de résultat comptable finalisé de l'établissement.</li>
-            <li>Identifier méticuleusement toutes les charges et produits pouvant faire l'objet de retraitements fiscaux spécifiques aux organismes sans but lucratif ou aux Écoles de Production.</li>
-            <li>Rester informé des évolutions de la législation fiscale en vigueur.</li>
-            <li>N'hésitez pas à solliciter l'avis d'un spécialiste en droit fiscal pour les situations complexes ou pour la validation finale.</li>
+            <li>**Point de départ :** Basez-vous toujours sur le bilan et le compte de résultat comptable finalisé de l'établissement.</li>
+            <li>**Identification des retraitements :** Identifiez méticuleusement toutes les charges et produits pouvant faire l'objet de retraitements fiscaux, spécifiques aux organismes sans but lucratif ou aux Écoles de Production.</li>
+            <li>**Veille fiscale :** Restez informé des évolutions de la législation fiscale en vigueur.</li>
+            <li>**Validation :** Pour les situations complexes, n'hésitez pas à solliciter l'avis d'un spécialiste en droit fiscal.</li>
           </ul>
           <p>
-            Ce document est un outil d'aide ; il ne saurait se substituer à une consultation juridique ou fiscale approfondie.
+            Ce document est un outil d'aide et de formalisation ; il ne saurait se substituer à une consultation juridique ou fiscale approfondie.
           </p>
         </CardContent>
       </Card>
