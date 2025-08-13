@@ -73,7 +73,7 @@ const menuStructure = [
     label: "Contact & Aide",
     icon: HelpCircle,
     items: [
-      { id: "expert-comptable", path: "/expert-comptable", label: "Contact Expert-Comptable", icon: Calculator },
+      { id: "expert-comptable", path: "/expert-comptable", label: "Contact Expert-Comptable stagiaire", icon: Calculator },
       { id: "edp", path: "/edp", label: "L'École de Production", icon: Building },
     ],
   },
