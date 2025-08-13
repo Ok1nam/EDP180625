@@ -238,23 +238,25 @@ export default function SuiviSubvention() {
       </p>
 
       {!showForm ? (
-        <div className="mb-8 flex gap-2">
+        <div className="mb-8 flex flex-col md:flex-row gap-2">
           <Button
             onClick={() => {
               resetForm();
               setShowForm(true);
             }}
-            className="flex-1 md:flex-none flex items-center justify-center gap-2 py-3 px-6 text-lg bg-[#2E5941] hover:bg-[#3C5F58] transition-colors"
+            className="flex-1 flex items-center justify-center gap-2 py-3 px-6 text-lg bg-[#2E5941] hover:bg-[#3C5F58] transition-colors"
           >
             <PlusCircle className="w-5 h-5" /> Ajouter un nouveau dossier
           </Button>
-          <a
-            href="/fichiers/ANNEXE 14 TABLEAU DE SUIVI DES SUBVENTIONS.xlsx"
-            download
-            className="flex-1 md:flex-none flex items-center justify-center gap-2 py-3 px-6 text-lg border-2 border-[#2E5941] text-[#2E5941] hover:bg-[#2E5941]/10 transition-colors rounded-lg font-medium"
+          <Button
+            asChild
+            variant="outline"
+            className="flex-1 flex items-center justify-center gap-2 py-3 px-6 text-lg border-2 border-[#2E5941] text-[#2E5941] hover:bg-[#2E5941]/10 transition-colors rounded-lg font-medium"
           >
-            <FileSpreadsheet className="w-5 h-5" /> Télécharger le modèle Excel
-          </a>
+            <a href="/fichiers/ANNEXE 14 TABLEAU DE SUIVI DES SUBVENTIONS.xlsx" download>
+              <FileSpreadsheet className="w-5 h-5" /> Télécharger le modèle Excel
+            </a>
+          </Button>
         </div>
       ) : (
         <Card className="mb-8 shadow-md p-6">
