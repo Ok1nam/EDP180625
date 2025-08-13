@@ -13,7 +13,7 @@ const BudgetCreation: React.FC<BudgetCreationProps> = ({ navigate }) => {
   return (
     <section id="budget-creation" className="max-w-4xl mx-auto px-4 py-8">
       <h1 className="flex items-center gap-3 mb-6 text-3xl font-bold text-gray-800">
-        <DollarSign className="w-8 h-8 text-green-600" />
+        <DollarSign className="w-8 h-8 text-[#3C5F58]" />
         Budget Prévisionnel de Création
       </h1>
       
@@ -24,7 +24,7 @@ const BudgetCreation: React.FC<BudgetCreationProps> = ({ navigate }) => {
       {/* Section Pourquoi un budget de création ? */}
       <Card className="mb-6 shadow-md">
         <CardHeader className="bg-gray-50 border-b">
-          <CardTitle className="text-xl font-bold text-gray-700 flex items-center gap-2">
+          <CardTitle className="text-xl font-bold text-[#3C5F58] flex items-center gap-2">
             <Lightbulb className="w-5 h-5 text-orange-500" />
             Pourquoi un Budget de Création ?
           </CardTitle>
@@ -46,7 +46,7 @@ const BudgetCreation: React.FC<BudgetCreationProps> = ({ navigate }) => {
       {/* Section Composantes Clés */}
       <Card className="mb-6 shadow-md">
         <CardHeader className="bg-gray-50 border-b">
-          <CardTitle className="text-xl font-bold text-gray-700 flex items-center gap-2">
+          <CardTitle className="text-xl font-bold text-[#3C5F58] flex items-center gap-2">
             <PieChart className="w-5 h-5 text-blue-600" />
             Les Éléments du Modèle Prévisionnel
           </CardTitle>
@@ -86,7 +86,7 @@ const BudgetCreation: React.FC<BudgetCreationProps> = ({ navigate }) => {
             download="BUDGET_ECOLE_DE_PRODUCTION_MODELE.xlsm"
             className="flex-shrink-0"
           >
-            <Button className="btn-primary flex items-center gap-2 py-3 px-6 text-lg">
+            <Button className="btn-primary flex items-center gap-2 py-3 px-6 text-lg bg-[#2E5941] hover:bg-[#3C5F58]">
               <Download className="w-5 h-5" /> Télécharger le modèle
             </Button>
           </a>
@@ -97,7 +97,7 @@ const BudgetCreation: React.FC<BudgetCreationProps> = ({ navigate }) => {
         <div className="text-center mt-8">
           <Button
             onClick={() => navigate('accueil')}
-            className="px-6 py-3 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors text-lg"
+            className="px-6 py-3 bg-[#2E5941] text-white rounded-md hover:bg-[#3C5F58] transition-colors text-lg"
           >
             Retour à l'accueil
           </Button>

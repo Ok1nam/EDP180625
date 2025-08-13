@@ -123,7 +123,7 @@ export default function Questionnaire({ navigate }: QuestionnaireProps) {
   return (
     <section id="arbre">
       <h1 className="flex items-center gap-2 mb-6 text-2xl font-bold text-gray-800">
-        <TreePine className="w-6 h-6" />
+        <TreePine className="w-6 h-6 text-[#3C5F58]" />
         Arbre de décision
       </h1>
       
@@ -133,7 +133,7 @@ export default function Questionnaire({ navigate }: QuestionnaireProps) {
       
       <Card className="mb-6">
         <CardContent className="p-6">
-          <div className="font-semibold text-primary mb-2">
+          <div className="font-semibold text-[#3C5F58] mb-2">
             {state.isCompleted 
               ? 'Questionnaire terminé ✅' 
               : state.isStarted 
@@ -141,12 +141,12 @@ export default function Questionnaire({ navigate }: QuestionnaireProps) {
                 : 'Prêt à commencer'
             }
           </div>
-          <Progress value={progress} className="h-2" />
+          <Progress value={progress} className="h-2 bg-[#2E5941]" />
         </CardContent>
       </Card>
       
       {!state.isStarted && (
-        <Button onClick={startQuestionnaire} className="btn-primary">
+        <Button onClick={startQuestionnaire} className="px-6 py-3 bg-[#2E5941] text-white rounded-md hover:bg-[#3C5F58] transition-colors text-lg">
           <Play className="w-4 h-4 mr-2" />
           Lancer le questionnaire
         </Button>
@@ -156,12 +156,12 @@ export default function Questionnaire({ navigate }: QuestionnaireProps) {
         <Card className="mb-6">
           <CardContent className="p-6">
             {state.currentIndex === 0 && (
-              <h2 className="text-xl font-semibold mb-4 text-primary flex items-center gap-2">
+              <h2 className="text-xl font-semibold mb-4 text-[#3C5F58] flex items-center gap-2">
                 🧠 Volet 1 – Capacités personnelles du porteur de projet
               </h2>
             )}
             {state.currentIndex === 10 && (
-              <h2 className="text-xl font-semibold mb-4 text-primary flex items-center gap-2">
+              <h2 className="text-xl font-semibold mb-4 text-[#3C5F58] flex items-center gap-2">
                 🔧 Volet 2 – Maturité du projet d'École de Production
               </h2>
             )}
@@ -173,14 +173,14 @@ export default function Questionnaire({ navigate }: QuestionnaireProps) {
             <div className="flex gap-3 mb-4">
               <Button 
                 onClick={() => answerQuestion('OUI')}
-                className="btn-success"
+                className="bg-green-600 text-white hover:bg-green-700 transition-colors"
               >
                 <Check className="w-4 h-4 mr-2" />
                 OUI
               </Button>
               <Button 
                 onClick={() => answerQuestion('NON')}
-                className="btn-danger"
+                className="bg-red-600 text-white hover:bg-red-700 transition-colors"
               >
                 <X className="w-4 h-4 mr-2" />
                 NON
@@ -188,7 +188,7 @@ export default function Questionnaire({ navigate }: QuestionnaireProps) {
               <Button 
                 onClick={goToPrevious}
                 disabled={state.currentIndex === 0}
-                className="btn-secondary"
+                className="bg-gray-400 text-white hover:bg-gray-500 transition-colors"
               >
                 <ArrowLeft className="w-4 h-4 mr-2" />
                 Précédent
@@ -208,10 +208,10 @@ export default function Questionnaire({ navigate }: QuestionnaireProps) {
         <div className="space-y-6">
           <Card>
             <CardContent className="p-6">
-              <h3 className="text-xl font-semibold mb-4">📊 Résultats de l'évaluation</h3>
+              <h3 className="text-xl font-semibold mb-4 text-[#3C5F58]">📊 Résultats de l'évaluation</h3>
               <div className="grid md:grid-cols-2 gap-6">
                 <div className="text-center">
-                  <div className="text-4xl font-bold text-primary">{generateReport().score.toFixed(0)}%</div>
+                  <div className="text-4xl font-bold text-[#3C5F58]">{generateReport().score.toFixed(0)}%</div>
                   <div className="text-gray-600">Score global</div>
                 </div>
                 <div className="text-center">
@@ -225,21 +225,30 @@ export default function Questionnaire({ navigate }: QuestionnaireProps) {
           </Card>
           
           <div className="flex flex-wrap gap-3">
-            <Button onClick={() => navigate('outils')} className="btn-secondary">
+            <Button onClick={() => navigate('outils')} className="px-6 py-3 bg-gray-400 text-white rounded-md hover:bg-gray-500 transition-colors text-lg">
               <ArrowLeft className="w-4 h-4 mr-2" />
               Retour aux outils
             </Button>
-            <Button onClick={resetQuestionnaire} className="btn-secondary">
+            <Button onClick={resetQuestionnaire} className="px-6 py-3 bg-gray-400 text-white rounded-md hover:bg-gray-500 transition-colors text-lg">
               <RotateCcw className="w-4 h-4 mr-2" />
               Recommencer
             </Button>
-            <Button onClick={exportResults} className="btn-primary">
+            <Button onClick={exportResults} className="px-6 py-3 bg-[#2E5941] text-white rounded-md hover:bg-[#3C5F58] transition-colors text-lg">
               <Download className="w-4 h-4 mr-2" />
               Exporter PDF
             </Button>
-            <Button onClick={saveProgress} className="btn-warning">
+            <Button onClick={saveProgress} className="px-6 py-3 bg-yellow-600 text-white rounded-md hover:bg-yellow-700 transition-colors text-lg">
               <Save className="w-4 h-4 mr-2" />
               Sauvegarder
+            </Button>
+          </div>
+          
+          <div className="text-center mt-8">
+            <Button
+              onClick={() => navigate('accueil')}
+              className="px-6 py-3 bg-[#2E5941] text-white rounded-md hover:bg-[#3C5F58] transition-colors text-lg"
+            >
+              Retour à l'accueil
             </Button>
           </div>
         </div>

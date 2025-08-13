@@ -121,7 +121,7 @@ export default function CriteresLabel({ navigate }: CriteresLabelProps) {
   return (
     <section id="criteres-label" className="max-w-4xl mx-auto px-4 py-8">
       <h1 className="flex items-center gap-2 mb-6 text-3xl font-bold text-gray-800">
-        <Award className="w-8 h-8 text-yellow-500" />
+        <Award className="w-8 h-8 text-[#3C5F58]" />
         Critères d'Obtention du Label "École de Production"
       </h1>
       
@@ -131,16 +131,16 @@ export default function CriteresLabel({ navigate }: CriteresLabelProps) {
 
       {/* Barre de progression */}
       <Card className="mb-8 p-6 shadow-md">
-        <CardTitle className="mb-4 text-xl font-semibold flex items-center gap-2">
-            <CheckCircle className="w-5 h-5 text-green-600" />
+        <CardTitle className="mb-4 text-xl font-semibold flex items-center gap-2 text-[#3C5F58]">
+            <CheckCircle className="w-5 h-5 text-[#3C5F58]" />
             Progression de votre labellisation
         </CardTitle>
         <div className="flex items-center gap-4">
-          <Progress value={progressValue} className="w-full h-3 bg-gray-200" />
+          <Progress value={progressValue} className="w-full h-3 bg-[#2E5941]" />
           <span className="font-semibold text-gray-800">{completedCriteriaCount}/{totalCriteria} ({progressValue.toFixed(0)}%)</span>
         </div>
         {progressValue === 100 && (
-          <p className="mt-4 text-center text-green-600 font-bold text-lg animate-bounce">
+          <p className="mt-4 text-center text-[#2E5941] font-bold text-lg animate-bounce">
             🎉 Félicitations ! Tous les critères sont cochés. Votre dossier est prêt !
           </p>
         )}
@@ -150,7 +150,7 @@ export default function CriteresLabel({ navigate }: CriteresLabelProps) {
       {Object.entries(groupedCriteria).map(([category, criteria]) => (
         <Card key={category} className="mb-6 shadow-sm">
           <CardHeader className="bg-gray-50 border-b">
-            <CardTitle className="text-xl font-bold text-gray-700 flex items-center gap-2">
+            <CardTitle className="text-xl font-bold text-[#3C5F58] flex items-center gap-2">
               <Lightbulb className="w-5 h-5 text-orange-500" />
               {category}
             </CardTitle>
@@ -162,7 +162,7 @@ export default function CriteresLabel({ navigate }: CriteresLabelProps) {
                   id={criterion.id}
                   checked={!!checkedCriteria[criterion.id]}
                   onCheckedChange={(checked) => handleCheckboxChange(criterion.id, checked === true)}
-                  className="mt-1"
+                  className="mt-1 border-[#3C5F58] data-[state=checked]:bg-[#2E5941] data-[state=checked]:text-white"
                 />
                 <Label htmlFor={criterion.id} className="text-base text-gray-800 cursor-pointer flex-1 leading-relaxed">
                   {criterion.text}
@@ -176,7 +176,7 @@ export default function CriteresLabel({ navigate }: CriteresLabelProps) {
       {/* Section Information et conseils */}
       <Card className="mt-8 shadow-md">
         <CardContent className="p-6">
-          <h3 className="text-xl font-semibold mb-3 flex items-center gap-2 text-gray-800">
+          <h3 className="text-xl font-semibold mb-3 flex items-center gap-2 text-[#3C5F58]">
             <Lightbulb className="w-5 h-5 text-blue-600" />
             Conseils pour la labellisation
           </h3>
@@ -207,7 +207,7 @@ export default function CriteresLabel({ navigate }: CriteresLabelProps) {
         <div className="text-center mt-8">
           <Button
             onClick={() => navigate('accueil')}
-            className="px-6 py-3 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors text-lg"
+            className="px-6 py-3 bg-[#2E5941] text-white rounded-md hover:bg-[#3C5F58] transition-colors text-lg"
           >
             Retour à l'accueil
           </Button>

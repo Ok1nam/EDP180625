@@ -13,7 +13,7 @@ const PlanComptable: React.FC<PlanComptableProps> = ({ navigate }) => {
   return (
     <section id="plan-comptable" className="max-w-4xl mx-auto px-4 py-8">
       <h1 className="flex items-center gap-2 mb-6 text-3xl font-bold text-gray-800">
-        <FileText className="w-8 h-8 text-primary" />
+        <FileText className="w-8 h-8 text-[#3C5F58]" />
         Plan Comptable Adapté : un outil stratégique pour la gestion des Écoles de Production
       </h1>
 
@@ -23,8 +23,8 @@ const PlanComptable: React.FC<PlanComptableProps> = ({ navigate }) => {
 
       <Card className="mb-8 shadow-md">
         <CardHeader>
-          <CardTitle className="text-xl font-semibold flex items-center gap-2">
-            <FileText className="w-5 h-5" />
+          <CardTitle className="text-xl font-semibold flex items-center gap-2 text-[#3C5F58]">
+            <FileText className="w-5 h-5 text-[#3C5F58]" />
             Importance et Adaptabilité
           </CardTitle>
         </CardHeader>
@@ -43,9 +43,9 @@ const PlanComptable: React.FC<PlanComptableProps> = ({ navigate }) => {
         </CardContent>
       </Card>
 
-      <Card className="mb-8 shadow-lg border-2 border-blue-500">
+      <Card className="mb-8 shadow-lg border-2 border-[#3C5F58]">
         <CardHeader>
-          <CardTitle className="text-2xl font-bold text-blue-700 flex items-center gap-3">
+          <CardTitle className="text-2xl font-bold text-[#3C5F58] flex items-center gap-3">
             <Download className="w-6 h-6" /> Télécharger le Plan Comptable
           </CardTitle>
         </CardHeader>
@@ -55,7 +55,7 @@ const PlanComptable: React.FC<PlanComptableProps> = ({ navigate }) => {
               Cliquez ci-dessous pour télécharger le fichier Excel du plan comptable.
             </p>
             <p className="text-sm text-gray-600">
-              **Note importante :** Ce fichier Excel est un support commun utilisé par plusieurs de nos outils pour les Écoles de Production. Il est essentiel de le remplir avec les données spécifiques de votre client avant d'utiliser les calculateurs associés.
+              <span className="font-bold">Note importante :</span> Ce fichier Excel est un support commun utilisé par plusieurs de nos outils pour les Écoles de Production. Il est essentiel de le remplir avec les données spécifiques de votre client avant d'utiliser les calculateurs associés.
             </p>
           </div>
           <a
@@ -63,7 +63,7 @@ const PlanComptable: React.FC<PlanComptableProps> = ({ navigate }) => {
             download="ANNEXE 4 - EXEMPLE DE PLAN COMPTABLE ADAPTE.xlsx"
             className="flex-shrink-0"
           >
-            <Button className="btn-primary flex items-center gap-2 py-3 px-6 text-lg">
+            <Button className="flex items-center gap-2 py-3 px-6 text-lg bg-[#2E5941] text-white rounded-md hover:bg-[#3C5F58] transition-colors">
               <Download className="w-5 h-5" /> Télécharger le fichier
             </Button>
           </a>
@@ -72,8 +72,8 @@ const PlanComptable: React.FC<PlanComptableProps> = ({ navigate }) => {
 
       <Card className="shadow-md">
         <CardHeader>
-          <CardTitle className="text-xl font-semibold flex items-center gap-2">
-            <FileText className="w-5 h-5" />
+          <CardTitle className="text-xl font-semibold flex items-center gap-2 text-[#3C5F58]">
+            <FileText className="w-5 h-5 text-[#3C5F58]" />
             Conseils d'utilisation
           </CardTitle>
         </CardHeader>
@@ -86,6 +86,14 @@ const PlanComptable: React.FC<PlanComptableProps> = ({ navigate }) => {
             <li>Validez les choix comptables avec la direction de l'école. L'implication du dirigeant est primordiale pour la pertinence et l'adhésion au système.</li>
             <li>Considérez ce plan comme un document vivant. Mettez-le à jour régulièrement pour qu'il suive l'évolution de l'école, l'ajout de nouvelles filières ou de nouvelles subventions.</li>
           </ul>
+          <div className="text-center mt-8">
+            <Button
+              onClick={() => navigate('accueil')}
+              className="px-6 py-3 bg-[#2E5941] text-white rounded-md hover:bg-green-800 transition-colors text-lg"
+            >
+              Retour à l'accueil
+            </Button>
+          </div>
         </CardContent>
       </Card>
     </section>

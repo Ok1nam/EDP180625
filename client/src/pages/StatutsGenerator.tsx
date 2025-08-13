@@ -226,7 +226,7 @@ Signature :                           Signature :
   return (
     <section id="statuts-generator" className="max-w-6xl mx-auto px-4 py-8">
       <h1 className="flex items-center gap-2 mb-6 text-3xl font-bold text-gray-800">
-        <Gavel className="w-8 h-8 text-primary" />
+        <Gavel className="w-8 h-8 text-[#3C5F58]" />
         Générateur de Statuts d'Association (Loi 1901)
       </h1>
       
@@ -240,14 +240,14 @@ Signature :                           Signature :
       <div className="grid lg:grid-cols-2 gap-6">
         <Card>
           <CardHeader>
-            <CardTitle className="flex items-center gap-2">
+            <CardTitle className="flex items-center gap-2 text-[#3C5F58]">
               <Building className="w-5 h-5" />
               Informations Clés de l'Association
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             <div>
-              <Label htmlFor="association-name">Nom de l'association *</Label>
+              <Label htmlFor="association-name"><span className="font-bold">Nom de l'association *</span></Label>
               <Input
                 id="association-name"
                 value={formData.associationName}
@@ -258,7 +258,7 @@ Signature :                           Signature :
             </div>
             
             <div>
-              <Label htmlFor="adresse-postale">Adresse postale *</Label>
+              <Label htmlFor="adresse-postale"><span className="font-bold">Adresse postale *</span></Label>
               <Input
                 id="adresse-postale"
                 value={formData.adressePostale}
@@ -268,7 +268,7 @@ Signature :                           Signature :
               />
             </div>
             <div>
-              <Label htmlFor="code-postal">Code postal *</Label>
+              <Label htmlFor="code-postal"><span className="font-bold">Code postal *</span></Label>
               <Input
                 id="code-postal"
                 value={formData.codePostal}
@@ -278,7 +278,7 @@ Signature :                           Signature :
               />
             </div>
             <div>
-              <Label htmlFor="ville">Ville *</Label>
+              <Label htmlFor="ville"><span className="font-bold">Ville *</span></Label>
               <Input
                 id="ville"
                 value={formData.ville}
@@ -299,14 +299,14 @@ Signature :                           Signature :
 
         <Card>
           <CardHeader>
-            <CardTitle className="flex items-center gap-2">
+            <CardTitle className="flex items-center gap-2 text-[#3C5F58]">
               <User className="w-5 h-5" />
               Informations sur les Dirigeants
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             <div>
-              <Label htmlFor="president">Nom et prénom du président(e) *</Label>
+              <Label htmlFor="president"><span className="font-bold">Nom et prénom du président(e) *</span></Label>
               <Input
                 id="president"
                 value={formData.presidentName}
@@ -317,7 +317,7 @@ Signature :                           Signature :
             </div>
 
             <div>
-              <Label htmlFor="secretaire">Nom et prénom du secrétaire(e) *</Label>
+              <Label htmlFor="secretaire"><span className="font-bold">Nom et prénom du secrétaire(e) *</span></Label>
               <Input
                 id="secretaire"
                 value={formData.secretaireName}
@@ -332,14 +332,14 @@ Signature :                           Signature :
         {/* Nouvelle carte pour les informations financières */}
         <Card className="lg:col-span-2">
           <CardHeader>
-            <CardTitle className="flex items-center gap-2">
+            <CardTitle className="flex items-center gap-2 text-[#3C5F58]">
               <Euro className="w-5 h-5" />
               Informations Financières & Exercice Social
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             <div>
-              <Label htmlFor="cloture-exercice">Date de clôture d'exercice</Label>
+              <Label htmlFor="cloture-exercice"><span className="font-bold">Date de clôture d'exercice</span></Label>
               <Input
                 id="cloture-exercice"
                 type="text"
@@ -353,7 +353,7 @@ Signature :                           Signature :
               </p>
             </div>
             <div>
-              <Label htmlFor="cloture-premier-exercice">Date de clôture du premier exercice</Label>
+              <Label htmlFor="cloture-premier-exercice"><span className="font-bold">Date de clôture du premier exercice</span></Label>
               <Input
                 id="cloture-premier-exercice"
                 type="text"
@@ -367,7 +367,7 @@ Signature :                           Signature :
               </p>
             </div>
             <div>
-              <Label>Durée du premier exercice</Label>
+              <Label><span className="font-bold">Durée du premier exercice</span></Label>
               <div className="flex items-center space-x-4 mt-2">
                 <div className="flex items-center">
                   <input
@@ -376,7 +376,7 @@ Signature :                           Signature :
                     name="duree-premier-exercice"
                     checked={formData.dureePremierExercice === 'supérieur'}
                     onChange={() => handleRadioChange('supérieur')}
-                    className="h-4 w-4 text-primary focus:ring-primary"
+                    className="h-4 w-4 text-[#3C5F58] focus:ring-[#3C5F58]"
                   />
                   <label htmlFor="duree-superieur" className="ml-2 text-sm text-gray-700">Supérieure à 12 mois</label>
                 </div>
@@ -387,7 +387,7 @@ Signature :                           Signature :
                     name="duree-premier-exercice"
                     checked={formData.dureePremierExercice === 'inférieur'}
                     onChange={() => handleRadioChange('inférieur')}
-                    className="h-4 w-4 text-primary focus:ring-primary"
+                    className="h-4 w-4 text-[#3C5F58] focus:ring-[#3C5F58]"
                   />
                   <label htmlFor="duree-inferieur" className="ml-2 text-sm text-gray-700">Inférieure à 12 mois</label>
                 </div>
@@ -400,7 +400,7 @@ Signature :                           Signature :
       <div className="pt-4 space-y-3 mt-6">
         <Button 
           onClick={() => setShowPreview(!showPreview)}
-          className="w-full btn-secondary"
+          className="w-full bg-gray-400 text-white rounded-md hover:bg-gray-500 transition-colors py-3 px-6 text-lg"
           disabled={!isFormValid}
         >
           {showPreview ? 'Masquer l\'aperçu' : 'Aperçu des statuts'}
@@ -408,7 +408,7 @@ Signature :                           Signature :
         
         <Button 
           onClick={downloadStatuts}
-          className="w-full btn-primary"
+          className="w-full bg-[#2E5941] text-white rounded-md hover:bg-[#3C5F58] transition-colors py-3 px-6 text-lg"
           disabled={!isFormValid}
         >
           <Download className="w-4 h-4 mr-2" />
@@ -421,7 +421,7 @@ Signature :                           Signature :
           className="block"
         >
           <Button 
-            className="w-full btn-secondary flex items-center gap-2"
+            className="w-full bg-gray-400 text-white rounded-md hover:bg-gray-500 transition-colors py-3 px-6 text-lg flex items-center gap-2"
           >
             <FileWord className="w-4 h-4" />
             Télécharger le modèle à remplir (.docx)
@@ -430,7 +430,7 @@ Signature :                           Signature :
         
         <Button 
           onClick={resetForm}
-          className="w-full btn-secondary"
+          className="w-full bg-gray-400 text-white rounded-md hover:bg-gray-500 transition-colors py-3 px-6 text-lg"
         >
           Réinitialiser le formulaire
         </Button>
@@ -439,7 +439,7 @@ Signature :                           Signature :
       {!isFormValid && (
         <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-3 mt-4">
           <p className="text-sm text-yellow-800">
-            <strong>Champs obligatoires :</strong> Veuillez renseigner le nom de l'association, les noms des dirigeants et l'adresse complète.
+            <span className="font-bold">Champs obligatoires :</span> Veuillez renseigner le nom de l'association, les noms des dirigeants et l'adresse complète.
           </p>
         </div>
       )}
@@ -464,8 +464,8 @@ Signature :                           Signature :
 
       <Card className="mt-6 shadow-sm">
         <CardContent className="p-6">
-          <h3 className="text-xl font-semibold mb-4 text-gray-800">
-              <FileText className="inline-block w-6 h-6 mr-2 text-blue-600" />
+          <h3 className="text-xl font-semibold mb-4 text-[#3C5F58]">
+              <FileText className="inline-block w-6 h-6 mr-2 text-[#3C5F58]" />
               Conseils importants pour la création de votre association
           </h3>
           <div className="text-base text-gray-700 space-y-3">
@@ -487,6 +487,15 @@ Signature :                           Signature :
           </div>
         </CardContent>
       </Card>
+      
+      <div className="text-center mt-8">
+        <Button
+            onClick={() => navigate('accueil')}
+            className="px-6 py-3 bg-[#2E5941] text-white rounded-md hover:bg-[#3C5F58] transition-colors text-lg"
+        >
+            Retour à l'accueil
+        </Button>
+      </div>
     </section>
   );
 };
