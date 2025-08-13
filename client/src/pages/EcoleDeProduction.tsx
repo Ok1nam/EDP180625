@@ -24,7 +24,7 @@ const EcoleDeProduction: React.FC<EcoleDeProductionProps> = ({ navigate }) => {
         <CardHeader className="bg-gray-50 border-b">
           <CardTitle className="text-xl font-bold text-[#3C5F58] flex items-center gap-2">
             <Building2 className="w-5 h-5 text-[#3C5F58]" />
-            Une Pédagogie par le "Faire"
+            Une Pédagogie par le "Faire pour Apprendre"
           </CardTitle>
         </CardHeader>
         <CardContent className="p-6 text-gray-700 space-y-4">
@@ -85,32 +85,16 @@ const EcoleDeProduction: React.FC<EcoleDeProductionProps> = ({ navigate }) => {
         </a>
       </div>
 
-      {/* Boutons de navigation */}
+      {/* Bouton de retour à l'accueil */}
       <div className="flex flex-wrap justify-center gap-4 mt-8">
         {navigate && (
-          <>
-            <Button
-              onClick={() => navigate('questionnaire')}
-              className="btn-secondary flex items-center gap-2 px-6 py-3 text-lg bg-gray-100 border border-gray-300 hover:bg-gray-200"
-            >
-              <Lightbulb className="w-5 h-5 text-[#3C5F58]" />
-              Tester mon projet d'EDP
-            </Button>
-            <Button
-              onClick={() => navigate('methodo')}
-              className="btn-secondary flex items-center gap-2 px-6 py-3 text-lg bg-gray-100 border border-gray-300 hover:bg-gray-200"
-            >
-              <FileText className="w-5 h-5 text-[#3C5F58]" /> 
-              Voir la Méthodologie
-            </Button>
-            <Button
-              onClick={() => navigate('accueil')}
-              className="px-6 py-3 bg-[#2E5941] text-white rounded-md hover:bg-[#3C5F58] transition-colors text-lg flex items-center gap-2"
-            >
-              <ArrowLeft className="w-5 h-5" />
-              Retour à l'accueil
-            </Button>
-          </>
+          <Button
+            onClick={() => navigate('accueil')}
+            className="px-6 py-3 bg-[#2E5941] text-white rounded-md hover:bg-[#3C5F58] transition-colors text-lg flex items-center gap-2"
+          >
+            <ArrowLeft className="w-5 h-5" />
+            Retour à l'accueil
+          </Button>
         )}
       </div>
     </section>

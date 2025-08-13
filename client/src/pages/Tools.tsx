@@ -1,5 +1,3 @@
-// client/src/pages/Tools.tsx
-
 import React from 'react';
 import {
   Wrench,
@@ -50,8 +48,8 @@ const outils = [
 
 const Tools: React.FC<ToolsProps> = ({ navigate }) => {
     return (
-        <section id="tools-page">
-            <h1 className="flex items-center gap-2 mb-6 text-2xl font-bold text-gray-800">
+        <section id="tools-page" className="max-w-4xl mx-auto px-4 py-8">
+            <h1 className="flex items-center gap-2 mb-6 text-2xl font-bold text-[#3C5F58]">
                 <Wrench className="w-6 h-6" />
                 Nos Outils et Suivis
             </h1>
@@ -60,11 +58,11 @@ const Tools: React.FC<ToolsProps> = ({ navigate }) => {
                 {outils.map((outil) => (
                     <Card
                         key={outil.id}
-                        className="card-hover cursor-pointer"
+                        className="card-hover cursor-pointer transition-transform duration-200 hover:scale-105"
                         onClick={() => navigate(outil.id)}
                     >
                         <CardContent className="p-6">
-                            <h3 className="flex items-center gap-2 text-lg font-semibold mb-3 text-primary">
+                            <h3 className="flex items-center gap-2 text-lg font-semibold mb-3 text-[#2E5941]">
                                 <outil.icon className="w-6 h-6" />
                                 {outil.label}
                             </h3>
