@@ -244,14 +244,14 @@ export default function SuiviSubvention() {
               resetForm();
               setShowForm(true);
             }}
-            className="flex items-center gap-2 py-3 px-6 text-lg bg-[#2E5941] hover:bg-[#3C5F58] transition-colors"
+            className="flex-1 md:flex-none flex items-center justify-center gap-2 py-3 px-6 text-lg bg-[#2E5941] hover:bg-[#3C5F58] transition-colors"
           >
             <PlusCircle className="w-5 h-5" /> Ajouter un nouveau dossier
           </Button>
           <a
             href="/fichiers/ANNEXE 14 TABLEAU DE SUIVI DES SUBVENTIONS.xlsx"
             download
-            className="flex items-center gap-2 py-3 px-6 text-lg border-2 border-[#2E5941] text-[#2E5941] hover:bg-[#2E5941]/10 transition-colors rounded-lg font-medium"
+            className="flex-1 md:flex-none flex items-center justify-center gap-2 py-3 px-6 text-lg border-2 border-[#2E5941] text-[#2E5941] hover:bg-[#2E5941]/10 transition-colors rounded-lg font-medium"
           >
             <FileSpreadsheet className="w-5 h-5" /> Télécharger le modèle Excel
           </a>
@@ -267,11 +267,11 @@ export default function SuiviSubvention() {
           <CardContent className="space-y-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="space-y-2">
-                <Label htmlFor="grantName" className="font-bold">Nom de la subvention / Appel à projets</Label>
+                <Label htmlFor="grantName" className="font-bold">Nom de la subvention / Appel à projets <span className="text-red-500">*</span></Label>
                 <Input id="grantName" placeholder="Ex: Programme de formation pour la rentrée 2025" value={formData.grantName || ''} onChange={handleInputChange} />
               </div>
               <div className="space-y-2">
-                <Label htmlFor="fundingBody" className="font-bold">Organisme financeur</Label>
+                <Label htmlFor="fundingBody" className="font-bold">Organisme financeur <span className="text-red-500">*</span></Label>
                 <Select value={formData.fundingBody || ''} onValueChange={(value) => { setFormData(prev => ({ ...prev, fundingBody: value, programName: '' })); setSelectedFundingBody(value); }}>
                   <SelectTrigger>
                     <SelectValue placeholder="Sélectionnez un organisme" />
@@ -320,7 +320,7 @@ export default function SuiviSubvention() {
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               <div className="space-y-2">
-                  <Label htmlFor="amountSolicited" className="font-bold">Montant sollicité (€)</Label>
+                  <Label htmlFor="amountSolicited" className="font-bold">Montant sollicité (€) <span className="text-red-500">*</span></Label>
                   <Input id="amountSolicited" type="number" placeholder="0" value={formData.amountSolicited || 0} onChange={handleNumberInputChange} />
               </div>
               <div className="space-y-2">
@@ -380,7 +380,7 @@ export default function SuiviSubvention() {
             </div>
 
             <div className="space-y-2">
-              <Label htmlFor="currentStatus" className="font-bold">Statut actuel</Label>
+              <Label htmlFor="currentStatus" className="font-bold">Statut actuel <span className="text-red-500">*</span></Label>
               <Select value={formData.currentStatus || ''} onValueChange={(value: any) => setFormData(prev => ({ ...prev, currentStatus: value }))}>
                   <SelectTrigger>
                       <SelectValue placeholder="Sélectionnez un statut" />
