@@ -36,19 +36,7 @@ export default function Footer({ navigate }: FooterProps) {
           ))}
         </ul>
       </nav>
-      <div className="border-t border-gray-600 mt-8 pt-6 text-center">
-          <div className="flex items-center justify-center gap-3 mb-3">
-            <img
-              src="/logo-edp.png"
-              alt="Logo EDP"
-              className="w-8 h-8 object-contain"
-            />
-            {/* Ajustement de la couleur du texte pour la lisibilité */}
-            <div className="text-sm text-gray-900">
-              © 2025 Laura Gombaud – Soutenance DEC
-            </div>
-          </div>
-        </div>
+      {/* La section du logo et du copyright a été supprimée d'ici */}
     </footer>
   );
 }
