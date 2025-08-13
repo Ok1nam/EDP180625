@@ -1,345 +1,90 @@
-import { useState } from "react";
-import { FileText, Download, Save, Calculator, TrendingUp } from "lucide-react";
+import React from 'react';
+import { Lightbulb, Download, BarChart2 } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
-import { useToast } from "@/hooks/use-toast";
-import { useLocalStorage } from "@/hooks/useLocalStorage";
 
-interface BusinessPlanData {
-  projectName: string;
-  promoterName: string;
-  location: string;
-  targetSectors: string;
-  studentCapacity: number;
-  initialInvestment: number;
-  operatingCosts: number;
-  expectedRevenue: number;
-  partnerships: string;
-  competitionAnalysis: string;
-  marketingStrategy: string;
-  financialProjections: {
-    year1: { revenue: number; expenses: number; };
-    year2: { revenue: number; expenses: number; };
-    year3: { revenue: number; expenses: number; };
-  };
+interface TableauDeBordProps {
+  navigate?: (page: string) => void;
 }
 
-export default function BusinessPlan() {
-  const { toast } = useToast();
-  const [savedData, setSavedData] = useLocalStorage<BusinessPlanData>('business_plan_data', {
-    projectName: '',
-    promoterName: '',
-    location: '',
-    targetSectors: '',
-    studentCapacity: 20,
-    initialInvestment: 100000,
-    operatingCosts: 80000,
-    expectedRevenue: 90000,
-    partnerships: '',
-    competitionAnalysis: '',
-    marketingStrategy: '',
-    financialProjections: {
-      year1: { revenue: 90000, expenses: 80000 },
-      year2: { revenue: 110000, expenses: 85000 },
-      year3: { revenue: 130000, expenses: 90000 }
-    }
-  });
-
-  const [formData, setFormData] = useState<BusinessPlanData>(savedData);
-  const [activeSection, setActiveSection] = useState<string>('general');
-
-  const updateField = (field: string, value: any) => {
-    setFormData(prev => ({
-      ...prev,
-      [field]: value
-    }));
-  };
-
-  const updateFinancialProjection = (year: 'year1' | 'year2' | 'year3', type: 'revenue' | 'expenses', value: number) => {
-    setFormData(prev => ({
-      ...prev,
-      financialProjections: {
-        ...prev.financialProjections,
-        [year]: {
-          ...prev.financialProjections[year],
-          [type]: value
-        }
-      }
-    }));
-  };
-
-  const savePlan = () => {
-    setSavedData(formData);
-    toast({
-      title: "Business plan sauvegardé",
-      description: "Vos données ont été sauvegardées localement.",
-    });
-  };
-
-  const generateReport = () => {
-    toast({
-      title: "Génération du rapport",
-      description: "Génération du business plan PDF en cours...",
-    });
-  };
-
-  const calculateROI = () => {
-    const year3Profit = formData.financialProjections.year3.revenue - formData.financialProjections.year3.expenses;
-    return ((year3Profit / formData.initialInvestment) * 100).toFixed(1);
-  };
-
-  const calculateBreakeven = () => {
-    const avgAnnualProfit = (
-      (formData.financialProjections.year1.revenue - formData.financialProjections.year1.expenses) +
-      (formData.financialProjections.year2.revenue - formData.financialProjections.year2.expenses) +
-      (formData.financialProjections.year3.revenue - formData.financialProjections.year3.expenses)
-    ) / 3;
-    
-    if (avgAnnualProfit <= 0) return "Non rentable";
-    return (formData.initialInvestment / avgAnnualProfit).toFixed(1) + " ans";
-  };
-
-  const sections = [
-    { id: 'general', title: 'Informations générales', icon: FileText },
-    { id: 'market', title: 'Analyse de marché', icon: TrendingUp },
-    { id: 'financial', title: 'Projections financières', icon: Calculator },
-  ];
+const TableauDeBord: React.FC<TableauDeBordProps> = ({ navigate }) => {
+  const tableauDeBordFilePath = "/fichiers/ANNEXE 20 - Trame du Tableau de bord.xlsx";
 
   return (
-    <section id="business-plan">
-      <h1 className="flex items-center gap-2 mb-6 text-2xl font-bold text-gray-800">
-        <FileText className="w-6 h-6" />
-        Générateur de Business Plan
+    <section id="tableau-de-bord" className="max-w-4xl mx-auto px-4 py-8">
+      <h1 className="flex items-center gap-3 mb-6 text-3xl font-bold text-[#3C5F58]">
+        <BarChart2 className="w-8 h-8 text-[#3C5F58]" />
+        Tableau de Bord Financier & Extra-Financier
       </h1>
       
-      <p className="mb-6 text-gray-600 leading-relaxed">
-        Créez un business plan structuré pour votre projet d'école de production avec des projections financières automatisées.
+      <p className="mb-8 text-lg text-gray-700 leading-relaxed">
+        Ce tableau de bord est un outil de pilotage crucial, conçu pour vous, expert-comptable, afin de présenter à votre client un aperçu clair et synthétique de la santé financière et de l'impact social de son École de Production. Il complète le rapport annuel en intégrant des indicateurs clés pour la prise de décision stratégique.
       </p>
 
-      <div className="flex flex-wrap gap-2 mb-6">
-        {sections.map(({ id, title, icon: Icon }) => (
-          <Button
-            key={id}
-            onClick={() => setActiveSection(id)}
-            className={activeSection === id ? "btn-primary" : "btn-secondary"}
+      {/* Section Objectifs de l’outil */}
+      <Card className="mb-6 shadow-md">
+        <CardHeader className="bg-gray-50 border-b">
+          <CardTitle className="text-xl font-bold text-[#3C5F58] flex items-center gap-2">
+            <Lightbulb className="w-5 h-5 text-[#3C5F58]" />
+            Objectifs de l'outil pour votre client
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="p-6 text-gray-700 space-y-4">
+          <p>
+            Ce tableau de bord est conçu pour aider l’École de Production à :
+          </p>
+          <ul className="list-disc pl-5 space-y-2">
+            <li><span className="font-bold">Mesurer la performance financière</span> en suivant des indicateurs essentiels comme l’équilibre financier, la rentabilité de la production, ou le coût élève.</li>
+            <li><span className="font-bold">Évaluer l’impact extra-financier</span>, en incluant des métriques liées à l’insertion professionnelle, au taux de décrochage, ou au niveau de qualification obtenu par les élèves.</li>
+            <li><span className="font-bold">Faciliter le reporting et la communication</span> avec les partenaires et financeurs, en leur fournissant une vision complète et transparente de l’activité de l’EDP.</li>
+            <li><span className="font-bold">Anticiper les besoins et les risques</span> en analysant les tendances et en ajustant la stratégie de l’école de production en conséquence.</li>
+          </ul>
+          <p className="italic text-sm text-gray-600 mt-4">
+            Cet outil est indispensable pour transformer les données brutes en informations exploitables, garantissant une gestion proactive et un dialogue constructif avec les parties prenantes.
+          </p>
+        </CardContent>
+      </Card>
+
+      {/* Section Téléchargement */}
+      <Card className="mb-8 shadow-lg border-2 border-[#2E5941]">
+        <CardHeader>
+          <CardTitle className="text-2xl font-bold text-[#2E5941] flex items-center gap-3">
+            <Download className="w-6 h-6 text-[#2E5941]" /> Télécharger le Modèle de Tableau de Bord
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+          <div className="text-base text-gray-800 flex-1">
+            <p className="mb-2">
+              Accédez à notre modèle de tableau de bord financier et extra-financier, un outil prêt à l'emploi pour le suivi et le pilotage de l'École de Production de votre client. Ce fichier est au format `.xlsx`.
+            </p>
+            <p className="text-sm text-gray-600">
+              <span className="font-bold">Recommandation :</span> Adaptez les indicateurs à la spécificité de votre client pour un pilotage optimal.
+            </p>
+          </div>
+          <a
+            href={tableauDeBordFilePath}
+            download="ANNEXE 20 - Trame du Tableau de bord.xlsx"
+            className="flex-shrink-0"
           >
-            <Icon className="w-4 h-4 mr-2" />
-            {title}
+            <Button className="bg-[#2E5941] hover:bg-[#3C5F58] text-white flex items-center gap-2 py-3 px-6 text-lg">
+              <Download className="w-5 h-5" /> Télécharger le modèle
+            </Button>
+          </a>
+        </CardContent>
+      </Card>
+
+      {navigate && (
+        <div className="text-center mt-8">
+          <Button
+            onClick={() => navigate('accueil')}
+            className="px-6 py-3 bg-[#2E5941] text-white rounded-md hover:bg-[#3C5F58] transition-colors text-lg"
+          >
+            Retour à l'accueil
           </Button>
-        ))}
-      </div>
-
-      {activeSection === 'general' && (
-        <Card>
-          <CardHeader>
-            <CardTitle>Informations générales du projet</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="grid md:grid-cols-2 gap-4">
-              <div>
-                <Label htmlFor="project-name">Nom du projet</Label>
-                <Input
-                  id="project-name"
-                  value={formData.projectName}
-                  onChange={(e) => updateField('projectName', e.target.value)}
-                  placeholder="École de Production XYZ"
-                />
-              </div>
-              <div>
-                <Label htmlFor="promoter-name">Nom du porteur de projet</Label>
-                <Input
-                  id="promoter-name"
-                  value={formData.promoterName}
-                  onChange={(e) => updateField('promoterName', e.target.value)}
-                  placeholder="Votre nom"
-                />
-              </div>
-            </div>
-            
-            <div className="grid md:grid-cols-2 gap-4">
-              <div>
-                <Label htmlFor="location">Localisation</Label>
-                <Input
-                  id="location"
-                  value={formData.location}
-                  onChange={(e) => updateField('location', e.target.value)}
-                  placeholder="Ville, Région"
-                />
-              </div>
-              <div>
-                <Label htmlFor="capacity">Capacité d'accueil (étudiants)</Label>
-                <Input
-                  id="capacity"
-                  type="number"
-                  value={formData.studentCapacity}
-                  onChange={(e) => updateField('studentCapacity', parseInt(e.target.value) || 0)}
-                  placeholder="20"
-                />
-              </div>
-            </div>
-
-            <div>
-              <Label htmlFor="sectors">Secteurs d'activité ciblés</Label>
-              <Textarea
-                id="sectors"
-                value={formData.targetSectors}
-                onChange={(e) => updateField('targetSectors', e.target.value)}
-                placeholder="Bâtiment, Industrie, Services..."
-                rows={3}
-              />
-            </div>
-          </CardContent>
-        </Card>
-      )}
-
-      {activeSection === 'market' && (
-        <Card>
-          <CardHeader>
-            <CardTitle>Analyse de marché et stratégie</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div>
-              <Label htmlFor="partnerships">Partenariats entreprises</Label>
-              <Textarea
-                id="partnerships"
-                value={formData.partnerships}
-                onChange={(e) => updateField('partnerships', e.target.value)}
-                placeholder="Liste des entreprises partenaires et types de collaboration..."
-                rows={4}
-              />
-            </div>
-
-            <div>
-              <Label htmlFor="competition">Analyse concurrentielle</Label>
-              <Textarea
-                id="competition"
-                value={formData.competitionAnalysis}
-                onChange={(e) => updateField('competitionAnalysis', e.target.value)}
-                placeholder="Autres écoles, centres de formation dans la région..."
-                rows={4}
-              />
-            </div>
-
-            <div>
-              <Label htmlFor="marketing">Stratégie de communication</Label>
-              <Textarea
-                id="marketing"
-                value={formData.marketingStrategy}
-                onChange={(e) => updateField('marketingStrategy', e.target.value)}
-                placeholder="Plan de communication, recrutement des étudiants..."
-                rows={4}
-              />
-            </div>
-          </CardContent>
-        </Card>
-      )}
-
-      {activeSection === 'financial' && (
-        <div className="space-y-6">
-          <Card>
-            <CardHeader>
-              <CardTitle>Investissement initial</CardTitle>
-            </CardHeader>
-            <CardContent className="grid md:grid-cols-3 gap-4">
-              <div>
-                <Label htmlFor="initial-investment">Investissement initial (€)</Label>
-                <Input
-                  id="initial-investment"
-                  type="number"
-                  value={formData.initialInvestment}
-                  onChange={(e) => updateField('initialInvestment', parseInt(e.target.value) || 0)}
-                />
-              </div>
-              <div>
-                <Label htmlFor="operating-costs">Charges annuelles (€)</Label>
-                <Input
-                  id="operating-costs"
-                  type="number"
-                  value={formData.operatingCosts}
-                  onChange={(e) => updateField('operatingCosts', parseInt(e.target.value) || 0)}
-                />
-              </div>
-              <div>
-                <Label htmlFor="expected-revenue">Revenus attendus (€)</Label>
-                <Input
-                  id="expected-revenue"
-                  type="number"
-                  value={formData.expectedRevenue}
-                  onChange={(e) => updateField('expectedRevenue', parseInt(e.target.value) || 0)}
-                />
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <CardTitle>Projections sur 3 ans</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="grid md:grid-cols-3 gap-6">
-                {(['year1', 'year2', 'year3'] as const).map((year, index) => (
-                  <div key={year} className="space-y-3">
-                    <h4 className="font-semibold text-center">Année {index + 1}</h4>
-                    <div>
-                      <Label>Revenus (€)</Label>
-                      <Input
-                        type="number"
-                        value={formData.financialProjections[year].revenue}
-                        onChange={(e) => updateFinancialProjection(year, 'revenue', parseInt(e.target.value) || 0)}
-                      />
-                    </div>
-                    <div>
-                      <Label>Charges (€)</Label>
-                      <Input
-                        type="number"
-                        value={formData.financialProjections[year].expenses}
-                        onChange={(e) => updateFinancialProjection(year, 'expenses', parseInt(e.target.value) || 0)}
-                      />
-                    </div>
-                    <div className="text-center">
-                      <div className="font-medium">
-                        Résultat: {(formData.financialProjections[year].revenue - formData.financialProjections[year].expenses).toLocaleString()} €
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardHeader>
-              <CardTitle>Indicateurs clés</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="grid md:grid-cols-2 gap-6 text-center">
-                <div className="bg-blue-50 p-4 rounded-lg">
-                  <div className="text-2xl font-bold text-blue-600">{calculateROI()}%</div>
-                  <div className="text-sm text-gray-600">ROI Année 3</div>
-                </div>
-                <div className="bg-green-50 p-4 rounded-lg">
-                  <div className="text-2xl font-bold text-green-600">{calculateBreakeven()}</div>
-                  <div className="text-sm text-gray-600">Seuil de rentabilité</div>
-                </div>
-              </div>
-            </CardContent>
-          </Card>
         </div>
       )}
-
-      <div className="flex flex-wrap gap-3 mt-8">
-        <Button onClick={savePlan} className="btn-warning">
-          <Save className="w-4 h-4 mr-2" />
-          Sauvegarder
-        </Button>
-        <Button onClick={generateReport} className="btn-primary">
-          <Download className="w-4 h-4 mr-2" />
-          Générer le business plan PDF
-        </Button>
-      </div>
     </section>
   );
-}
+};
+
+export default TableauDeBord;
