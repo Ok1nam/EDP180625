@@ -1,5 +1,3 @@
-// client/src/pages/PrixVenteProduits.tsx
-
 import React, { useState, useEffect } from 'react';
 import { Calculator, DollarSign, Euro, Percent, Package, Users, Factory, LineChart, RefreshCcw, Lightbulb, Download } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -102,29 +100,32 @@ const PrixVenteProduits: React.FC<PrixVenteProduitsProps> = ({ navigate }) => {
 
   return (
     <section id="prix-vente-produits" className="max-w-4xl mx-auto px-4 py-8">
-      <h1 className="flex items-center gap-3 mb-6 text-3xl font-bold text-gray-800">
-        <Calculator className="w-8 h-8 text-blue-600" />
-        Calcul du Prix de Vente des Produits
+      <h1 className="flex items-center gap-3 mb-6 text-3xl font-bold text-[#3C5F58]">
+        <Calculator className="w-8 h-8 text-[#3C5F58]" />
+        Calcul du Prix de Vente des Productions
       </h1>
       
       <p className="mb-8 text-lg text-gray-700 leading-relaxed">
-        Cet outil vous permet de calculer précisément le coût de revient complet d’un produit fabriqué et de déterminer un prix de vente adapté. Il est essentiel pour piloter la rentabilité de l’activité de production de votre École de Production.
+        Ce simulateur est un outil essentiel pour vous, expert-comptable, afin d’aider votre client École de Production à déterminer avec précision le coût de revient complet d’un produit et à fixer un prix de vente compétitif. Il est basé sur la méthodologie détaillée dans le <span
+          className="text-[#3C5F58] hover:underline cursor-pointer font-medium"
+          onClick={() => navigate && navigate('tableau-calcul-cout')}
+        >Tableau de Calcul des Coûts</span>.
       </p>
 
       {/* Section Objectifs */}
       <Card className="mb-6 shadow-md">
         <CardHeader className="bg-gray-50 border-b">
-          <CardTitle className="text-xl font-bold text-gray-700 flex items-center gap-2">
-            <Lightbulb className="w-5 h-5 text-orange-500" />
-            Objectifs de l'outil
+          <CardTitle className="text-xl font-bold text-[#3C5F58] flex items-center gap-2">
+            <Lightbulb className="w-5 h-5 text-[#3C5F58]" />
+            Objectifs de l'outil pour votre client
           </CardTitle>
         </CardHeader>
         <CardContent className="p-6 text-gray-700 space-y-4">
           <ul className="list-disc pl-5 space-y-2">
-            <li>**Calculer précisément le coût de revient complet** d’un produit fabriqué, en intégrant toutes les charges liées à sa réalisation (matières premières, consommables, sous-traitance et main-d'œuvre élèves).</li>
-            <li>**Déterminer un prix de vente adapté,** prenant en compte la marge brute ou nette souhaitée, ainsi que la réalité du marché.</li>
-            <li>**Contribuer au pilotage de la rentabilité** de l’activité de production de l’EDP, en fournissant une vision claire des coûts et marges par produit.</li>
-            <li>**Servir d’aide à la décision** dans la négociation commerciale, en mesurant l’impact de différentes hypothèses de coûts et de prix.</li>
+            <li><span className="font-bold">Calculer précisément le coût de revient complet</span> d’un produit fabriqué, en intégrant toutes les charges liées à sa réalisation (matières premières, consommables, sous-traitance et main-d'œuvre des élèves).</li>
+            <li><span className="font-bold">Déterminer un prix de vente adapté</span>, prenant en compte la marge brute ou nette souhaitée, ainsi que la réalité du marché.</li>
+            <li><span className="font-bold">Contribuer au pilotage de la rentabilité</span> de l’activité de production de l’EDP, en fournissant une vision claire des coûts et marges par produit.</li>
+            <li><span className="font-bold">Servir d’aide à la décision</span> dans la négociation commerciale, en mesurant l’impact de différentes hypothèses de coûts et de prix.</li>
           </ul>
         </CardContent>
       </Card>
@@ -132,31 +133,31 @@ const PrixVenteProduits: React.FC<PrixVenteProduitsProps> = ({ navigate }) => {
       {/* Téléchargement du tableau */}
       <Card className="mb-6 shadow-md">
         <CardHeader className="bg-gray-50 border-b">
-          <CardTitle className="text-xl font-bold text-gray-700 flex items-center gap-2">
-            <Download className="w-5 h-5 text-blue-600" />
+          <CardTitle className="text-xl font-bold text-[#3C5F58] flex items-center gap-2">
+            <Download className="w-5 h-5 text-[#3C5F58]" />
             Télécharger le Tableau de Calcul du Prix de Revient
           </CardTitle>
         </CardHeader>
         <CardContent className="p-6 text-center">
           <p className="mb-4">
-            Accédez à notre modèle de tableau de calcul du prix de revient, un outil essentiel pour une gestion financière rigoureuse de votre École de Production. Ce fichier est au format `.xlsx`.
+            Pour une approche plus détaillée, ce tableau de calcul du prix de revient est un outil essentiel pour une gestion financière rigoureuse de l'École de Production de votre client. Il est fourni au format `.xlsx`.
           </p>
           <a href={prixDeRevientFilePath} download="ANNEXE 19 - Trame du Tableau prix de revient.xlsx">
-            <Button className="btn-primary">
+            <Button className="bg-[#2E5941] hover:bg-[#3C5F58] text-white">
               <Download className="w-4 h-4 mr-2" />
               Télécharger le Tableau
             </Button>
           </a>
           <p className="italic text-sm text-gray-600 mt-4">
-            **Conseil :** Utilisez ce tableau pour affiner vos stratégies de prix et maximiser votre rentabilité.
+            <span className="font-bold">Conseil :</span> Utilisez ce tableau pour affiner les stratégies de prix et maximiser la rentabilité de l'EDP.
           </p>
         </CardContent>
       </Card>
 
 
       <Card className="mb-6 shadow-lg">
-        <CardHeader className="bg-blue-50 border-b">
-          <CardTitle className="text-xl font-bold text-blue-700 flex items-center gap-2">
+        <CardHeader className="bg-[#F0F7F6] border-b">
+          <CardTitle className="text-xl font-bold text-[#3C5F58] flex items-center gap-2">
             <DollarSign className="w-5 h-5" /> Simulateur de Prix de Vente
           </CardTitle>
         </CardHeader>
@@ -231,10 +232,10 @@ const PrixVenteProduits: React.FC<PrixVenteProduitsProps> = ({ navigate }) => {
           </div>
 
           <div className="flex gap-3 pt-4">
-            <Button onClick={calculatePrices} className="btn-primary flex items-center gap-2">
+            <Button onClick={calculatePrices} className="bg-[#2E5941] hover:bg-[#3C5F58] text-white flex items-center gap-2">
               <Calculator className="w-5 h-5" /> Calculer les Prix
             </Button>
-            <Button onClick={resetAll} variant="outline" className="btn-secondary flex items-center gap-2">
+            <Button onClick={resetAll} variant="outline" className="btn-secondary flex items-center gap-2 border-gray-300 hover:bg-gray-100 text-gray-700">
               <RefreshCcw className="w-4 h-4" /> Réinitialiser
             </Button>
           </div>
@@ -242,9 +243,9 @@ const PrixVenteProduits: React.FC<PrixVenteProduitsProps> = ({ navigate }) => {
       </Card>
 
       {unitCostPrice !== null && (
-        <Card className="mb-6 shadow-lg border-2 border-green-500">
-          <CardHeader className="bg-green-50 border-b">
-            <CardTitle className="text-xl font-bold text-green-700 flex items-center gap-2">
+        <Card className="mb-6 shadow-lg border-2 border-[#2E5941]">
+          <CardHeader className="bg-[#F0F7F6] border-b">
+            <CardTitle className="text-xl font-bold text-[#3C5F58] flex items-center gap-2">
               <LineChart className="w-5 h-5" /> Résultats des Calculs
             </CardTitle>
           </CardHeader>
@@ -252,7 +253,7 @@ const PrixVenteProduits: React.FC<PrixVenteProduitsProps> = ({ navigate }) => {
             <div className="grid md:grid-cols-2 gap-4">
               <div>
                 <p className="text-lg text-gray-700 font-semibold">Coût de Revient Unitaire:</p>
-                <p className="text-2xl font-bold text-green-800">
+                <p className="text-2xl font-bold text-[#2E5941]">
                   {unitCostPrice.toLocaleString('fr-FR', { style: 'currency', currency: 'EUR' })}
                 </p>
                 <p className="text-sm text-gray-500">
@@ -261,7 +262,7 @@ const PrixVenteProduits: React.FC<PrixVenteProduitsProps> = ({ navigate }) => {
               </div>
               <div>
                 <p className="text-lg text-gray-700 font-semibold">Marge Unitaire Souhaitée:</p>
-                <p className="text-2xl font-bold text-blue-800">
+                <p className="text-2xl font-bold text-[#2E5941]">
                   {unitMarginAmount?.toLocaleString('fr-FR', { style: 'currency', currency: 'EUR' }) || 'N/A'}
                 </p>
                 <p className="text-sm text-gray-500">
@@ -275,13 +276,13 @@ const PrixVenteProduits: React.FC<PrixVenteProduitsProps> = ({ navigate }) => {
             <div className="grid md:grid-cols-2 gap-4">
               <div>
                 <p className="text-lg text-gray-700 font-semibold">Prix de Vente Hors Taxes (PVHT):</p>
-                <p className="text-3xl font-bold text-indigo-700">
+                <p className="text-3xl font-bold text-[#2E5941]">
                   {sellingPriceExVAT?.toLocaleString('fr-FR', { style: 'currency', currency: 'EUR' }) || 'N/A'}
                 </p>
               </div>
               <div>
                 <p className="text-lg text-gray-700 font-semibold">Prix de Vente Toutes Taxes Comprises (PVTTC):</p>
-                <p className="text-3xl font-bold text-purple-700">
+                <p className="text-3xl font-bold text-[#2E5941]">
                   {sellingPriceIncVAT?.toLocaleString('fr-FR', { style: 'currency', currency: 'EUR' }) || 'N/A'}
                 </p>
               </div>
@@ -295,7 +296,7 @@ const PrixVenteProduits: React.FC<PrixVenteProduitsProps> = ({ navigate }) => {
         <div className="text-center mt-8">
           <Button
             onClick={() => navigate('accueil')}
-            className="px-6 py-3 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors text-lg"
+            className="px-6 py-3 bg-[#2E5941] text-white rounded-md hover:bg-[#3C5F58] transition-colors text-lg"
           >
             Retour à l'accueil
           </Button>
