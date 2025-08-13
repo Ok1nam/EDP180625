@@ -253,7 +253,7 @@ export default function SuiviSubvention() {
             variant="outline"
             className="flex-1 flex items-center justify-center gap-2 py-3 px-6 text-lg border-2 border-[#2E5941] text-[#2E5941] hover:bg-[#2E5941]/10 transition-colors rounded-lg font-medium"
           >
-            <a href="/fichiers/ANNEXE 14 TABLEAU DE SUIVI DES SUBVENTIONS.xlsx" download>
+            <a href="/fichiers/ANNEXE 14 - TABLEAU DE SUIVI DES SUBVENTIONS.xlsx" download>
               <FileSpreadsheet className="w-5 h-5" /> Télécharger le modèle Excel
             </a>
           </Button>

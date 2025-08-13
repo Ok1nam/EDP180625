@@ -417,7 +417,7 @@ Signature :                           Signature :
 
         <a
           href={docxFilePath}
-          download="ANNEXE 9 EXEMPLE DE STATUTS.docx"
+          download="ANNEXE 9 - MODELE DE STATUTS.docx"
           className="block"
         >
           <Button 

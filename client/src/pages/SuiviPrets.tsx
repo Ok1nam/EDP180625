@@ -318,10 +318,11 @@ export default function SuiviPrets() {
   };
 
   const downloadExcelTemplate = () => {
-    const filePath = '/fichiers/TABLEAU DE SUIVI DES PRETS.xlsx';
+    // UPDATED FILE PATH
+    const filePath = '/fichiers/ANNEXE 15 - TABLEAU DE SUIVI DES PRETS.xlsx';
     const a = document.createElement('a');
     a.href = filePath;
-    a.download = `TABLEAU DE SUIVI DES PRETS.xlsx`;
+    a.download = `ANNEXE 15 - TABLEAU DE SUIVI DES PRETS.xlsx`;
     document.body.appendChild(a);
     a.click();
     document.body.removeChild(a);

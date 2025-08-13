@@ -83,7 +83,7 @@ const BudgetCreation: React.FC<BudgetCreationProps> = ({ navigate }) => {
           </div>
           <a
             href={budgetCreationFilePath}
-            download="BUDGET_ECOLE_DE_PRODUCTION_MODELE.xlsm"
+            download="ANNEXE 12 - TRAME DE BUDGET A LA CREATION.xlsm"
             className="flex-shrink-0"
           >
             <Button className="btn-primary flex items-center gap-2 py-3 px-6 text-lg bg-[#2E5941] hover:bg-[#3C5F58]">

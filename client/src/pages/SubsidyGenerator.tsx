@@ -351,6 +351,8 @@ const SubsidyGenerator: React.FC = () => {
   };
 
   const stats = calculateStats();
+  
+  const subventionFilePath = "/fichiers/ANNEXE 13 - DOSSIER TYPE DE DEMANDE DE SUBVENTION.docx";
 
   return (
     <section id="subsidy-generator" className="max-w-4xl mx-auto px-4 py-8">
@@ -362,6 +364,34 @@ const SubsidyGenerator: React.FC = () => {
       <p className="mb-8 text-lg text-gray-700 leading-relaxed">
         Cet outil vous permet de gérer de manière centralisée les dossiers de subventions, du montage initial au suivi des versements, en passant par l'envoi des justificatifs. Un tableau de bord interactif vous aide à <span className="font-bold">piloter vos ressources</span> et à assurer la <span className="font-bold">viabilité de votre modèle économique</span>.
       </p>
+
+      {/* Bouton de téléchargement du modèle de dossier de subvention */}
+      <Card className="mb-8 shadow-lg border-2 border-[#3C5F58]">
+        <CardHeader>
+          <CardTitle className="text-2xl font-bold text-[#3C5F58] flex items-center gap-3">
+            <Download className="w-6 h-6" /> Télécharger un modèle de dossier de subvention
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+          <div className="text-base text-gray-800 flex-1">
+            <p className="mb-2">
+              Téléchargez notre modèle type de dossier de demande de subvention au format Word.
+            </p>
+            <p className="text-sm text-gray-600">
+              <span className="font-bold">Conseil :</span> Ce modèle est un point de départ pour organiser les informations clés avant de les transférer sur les formulaires spécifiques des organismes financeurs.
+            </p>
+          </div>
+          <a
+            href={subventionFilePath}
+            download="ANNEXE_13_DOSSIER_TYPE_DE_DEMANDE_DE_SUBVENTION.docx"
+            className="flex-shrink-0"
+          >
+            <Button className="flex items-center gap-2 py-3 px-6 text-lg bg-[#2E5941] text-white rounded-md hover:bg-[#3C5F58] transition-colors">
+              <Download className="w-5 h-5" /> Télécharger le modèle
+            </Button>
+          </a>
+        </CardContent>
+      </Card>
 
       {showForm && (
         <Button onClick={() => setShowForm(false)} variant="ghost" className="mb-4 text-[#2E5941] hover:bg-gray-100">

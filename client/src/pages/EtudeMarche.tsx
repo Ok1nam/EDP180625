@@ -10,7 +10,8 @@ interface EtudeMarcheProps {
 const EtudeMarche: React.FC<EtudeMarcheProps> = ({ navigate }) => {
   // Le chemin du fichier doit être relatif au dossier 'public' à la racine de votre projet.
   // Assurez-vous que votre fichier d'étude de marché est bien placé dans 'public/fichiers/'
-  const etudeMarcheFilePath = "/fichiers/ANNEXE 11 ETUDE DE MARCHE.docx"; // Ou .docx, .pdf selon le format
+  const etudeMarcheFilePath = "/fichiers/ANNEXE 11 ETUDE DE MARCHE.docx";
+  const etudeMarcheExcelPath = "/fichiers/ANNEXE 11 - ETUDE DE MARCHE DU SECTEUR SELECTIONNE.xlsm";
 
   return (
     <section id="etude-marche" className="max-w-4xl mx-auto px-4 py-8">
@@ -65,7 +66,7 @@ const EtudeMarche: React.FC<EtudeMarcheProps> = ({ navigate }) => {
         </CardContent>
       </Card>
 
-      {/* Section Téléchargement du fichier */}
+      {/* Section Téléchargement du fichier .docx */}
       <Card className="mb-8 shadow-lg border-2 border-[#3C5F58]">
         <CardHeader>
           <CardTitle className="text-2xl font-bold text-[#3C5F58] flex items-center gap-3">
@@ -88,6 +89,34 @@ const EtudeMarche: React.FC<EtudeMarcheProps> = ({ navigate }) => {
           >
             <Button className="flex items-center gap-2 py-3 px-6 text-lg bg-[#2E5941] text-white rounded-md hover:bg-[#3C5F58] transition-colors">
               <Download className="w-5 h-5" /> Télécharger le modèle
+            </Button>
+          </a>
+        </CardContent>
+      </Card>
+
+      {/* Section Téléchargement du fichier .xlsm */}
+      <Card className="mb-8 shadow-lg border-2 border-[#3C5F58]">
+        <CardHeader>
+          <CardTitle className="text-2xl font-bold text-[#3C5F58] flex items-center gap-3">
+            <Download className="w-6 h-6" /> Télécharger l'étude de marché
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+          <div className="text-base text-gray-800 flex-1">
+            <p className="mb-2">
+              Téléchargez le document d'étude de marché au format Excel pour analyser en détail les données du secteur.
+            </p>
+            <p className="text-sm text-gray-600">
+              <span className="font-bold">Conseil :</span> Ce fichier contient des données chiffrées essentielles pour le budget prévisionnel.
+            </p>
+          </div>
+          <a
+            href={etudeMarcheExcelPath}
+            download="ANNEXE_11_ETUDE_DE_MARCHE_DU_SECTEUR_SELECTIONNE.xlsm"
+            className="flex-shrink-0"
+          >
+            <Button className="flex items-center gap-2 py-3 px-6 text-lg bg-[#2E5941] text-white rounded-md hover:bg-[#3C5F58] transition-colors">
+              <Download className="w-5 h-5" /> Télécharger l'étude
             </Button>
           </a>
         </CardContent>
