@@ -1,5 +1,3 @@
-// client/src/pages/EtudeMarche.tsx
-
 import React from 'react';
 import { Download, Target, Search, FileText, Lightbulb } from "lucide-react"; // Icônes pertinentes
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -12,7 +10,7 @@ interface EtudeMarcheProps {
 const EtudeMarche: React.FC<EtudeMarcheProps> = ({ navigate }) => {
   // Le chemin du fichier doit être relatif au dossier 'public' à la racine de votre projet.
   // Assurez-vous que votre fichier d'étude de marché est bien placé dans 'public/fichiers/'
-  const etudeMarcheFilePath = "/fichiers/ETUDE_MARCHE_MODELE.xlsx"; // Ou .docx, .pdf selon le format
+  const etudeMarcheFilePath = "/fichiers/ANNEXE 11 ETUDE DE MARCHE.docx"; // Ou .docx, .pdf selon le format
 
   return (
     <section id="etude-marche" className="max-w-4xl mx-auto px-4 py-8">
@@ -22,7 +20,7 @@ const EtudeMarche: React.FC<EtudeMarcheProps> = ({ navigate }) => {
       </h1>
       
       <p className="mb-8 text-lg text-gray-700 leading-relaxed">
-        L'étude de marché est une étape fondamentale dans la création de votre École de Production. Elle vous permet de valider la pertinence de votre projet, d'identifier les besoins locaux, d'analyser la concurrence et de définir votre positionnement stratégique. Un marché bien compris est la clé d'une implantation réussie.
+        L'étude de marché est une étape fondamentale pour l'ancrage territorial de votre École de Production. Elle vous permet de valider la pertinence du projet, de vérifier l'existence de <span className="font-bold">besoins locaux non couverts</span>, et d'établir une <span className="font-bold">stratégie d'implantation</span> cohérente avec les dynamiques économiques et sociales de votre territoire.
       </p>
 
       {/* Section Importance de l'Étude de Marché */}
@@ -38,17 +36,10 @@ const EtudeMarche: React.FC<EtudeMarcheProps> = ({ navigate }) => {
             Une étude de marché approfondie vous permet de :
           </p>
           <ul className="list-disc pl-5 space-y-2">
-            <li>**Confirmer le besoin :** S'assurer qu'il y a une demande suffisante pour la formation et la production proposées par l'école.</li>
-            <li>**Identifier les opportunités :** Détecter des créneaux non exploités ou des partenariats potentiels.</li>
-            <li>**Connaître la concurrence :** Comprendre le paysage éducatif et économique local pour mieux se différencier.</li>
-            <li>**Établir des prévisions réalistes :** Alimenter votre <span
-                className="text-blue-600 hover:underline cursor-pointer font-medium"
-                onClick={() => navigate && navigate('business-plan')}
-              >
-                business plan
-              </span> avec des données objectives.
-            </li>
-            <li>**Convaincre les partenaires :** Présenter un projet solide et argumenté aux financeurs et entreprises.</li>
+            <li><span className="font-bold">Valider la pertinence du projet</span> : Confirmer qu'il existe un besoin avéré pour une nouvelle offre de formation-production.</li>
+            <li><span className="font-bold">Identifier les partenaires locaux</span> : Détecter les entreprises, collectivités et associations avec lesquelles collaborer.</li>
+            <li><span className="font-bold">Comprendre le paysage économique</span> : Analyser les filières, les métiers en tension et les opportunités d'emploi sur le territoire.</li>
+            <li><span className="font-bold">Positionner l'école stratégiquement</span> : S'assurer que le projet s'insère de manière complémentaire et non concurrentielle avec l'existant.</li>
           </ul>
         </CardContent>
       </Card>
@@ -66,10 +57,10 @@ const EtudeMarche: React.FC<EtudeMarcheProps> = ({ navigate }) => {
             Une étude de marché pour une École de Production devrait inclure :
           </p>
           <ul className="list-disc pl-5 space-y-2">
-            <li>**Analyse de l'offre de formation :** Quels sont les établissements existants, leurs formations, leurs spécificités ?</li>
-            <li>**Analyse des besoins des entreprises :** Quels sont les métiers en tension sur le territoire ? Quelles compétences sont recherchées ?</li>
-            <li>**Analyse de la demande des jeunes :** Quels sont leurs centres d'intérêt, leurs difficultés, leurs aspirations professionnelles ?</li>
-            <li>**Étude des partenaires potentiels :** Identification des entreprises, collectivités, associations pouvant soutenir le projet.</li>
+            <li><span className="font-bold">Analyse de l'offre de formation existante</span> : Recenser les dispositifs de formation professionnelle et d'insertion présents sur le territoire.</li>
+            <li><span className="font-bold">Identification des besoins des entreprises</span> : Mener des entretiens avec les acteurs économiques pour connaître leurs besoins en compétences et en main d'œuvre.</li>
+            <li><span className="font-bold">Évaluation des publics cibles</span> : Analyser les besoins des jeunes sans qualification ou en décrochage scolaire.</li>
+            <li><span className="font-bold">Analyse des partenariats potentiels</span> : Identifier les acteurs publics et privés susceptibles de soutenir le projet (financements, commandes, stages).</li>
           </ul>
         </CardContent>
       </Card>
@@ -84,15 +75,15 @@ const EtudeMarche: React.FC<EtudeMarcheProps> = ({ navigate }) => {
         <CardContent className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
           <div className="text-base text-gray-800 flex-1">
             <p className="mb-2">
-              Téléchargez notre modèle pour vous aider à structurer et réaliser votre étude de marché spécifique aux Écoles de Production. Ce document contient des sections clés et des questions directrices.
+              Téléchargez notre modèle d'étude de marché au format Word pour vous aider à structurer votre analyse locale. Ce document est un guide de travail pour la collecte et l'organisation de vos informations.
             </p>
             <p className="text-sm text-gray-600">
-              **Note :** Ce modèle est une base à adapter. La qualité de votre étude dépendra de la pertinence des informations collectées et de votre analyse locale.
+              <span className="font-bold">Conseil :</span> Ce modèle est une base à adapter. La pertinence de votre étude dépendra de la qualité des données collectées sur votre territoire.
             </p>
           </div>
           <a
             href={etudeMarcheFilePath}
-            download="MODELE_ETUDE_MARCHE_ECOLE_PRODUCTION.xlsx" // Ou .docx, .pdf
+            download="MODELE_ETUDE_MARCHE_ECOLE_PRODUCTION.docx"
             className="flex-shrink-0"
           >
             <Button className="btn-primary flex items-center gap-2 py-3 px-6 text-lg">
