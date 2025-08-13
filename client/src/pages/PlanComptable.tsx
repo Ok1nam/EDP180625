@@ -1,5 +1,3 @@
-// client/src/pages/PlanComptable.tsx
-
 import React from 'react';
 import { Download, FileText } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -10,18 +8,17 @@ interface PlanComptableProps {
 }
 
 const PlanComptable: React.FC<PlanComptableProps> = ({ navigate }) => {
-  // Changement du chemin du fichier pour correspondre au nouveau nom
   const excelFilePath = "/fichiers/ANNEXE 4 - EXEMPLE DE PLAN COMPTABLE ADAPTE.xlsx";
 
   return (
     <section id="plan-comptable" className="max-w-4xl mx-auto px-4 py-8">
       <h1 className="flex items-center gap-2 mb-6 text-3xl font-bold text-gray-800">
         <FileText className="w-8 h-8 text-primary" />
-        Plan Comptable Adapté
+        Plan Comptable Adapté : un outil stratégique pour la gestion des Écoles de Production
       </h1>
 
       <p className="mb-8 text-lg text-gray-700 leading-relaxed">
-        Ce plan comptable est spécifiquement conçu pour accompagner la comptabilité d'une **École de Production**. En tant qu'expert-comptable, cet outil vous permet d'avoir une structure comptable optimisée pour les spécificités des activités pédagogiques et de production de ce type de client, facilitant ainsi la gestion et le suivi financier de leur établissement.
+        L'accompagnement d'une École de Production nécessite une approche comptable sur mesure, capable de refléter la dualité de sa mission : la formation des jeunes et l'activité économique. Ce plan comptable, élaboré spécifiquement pour ces structures, est une base de travail essentielle pour l'expert-comptable. Il vous permet de structurer la comptabilité de manière optimisée, en prenant en compte les spécificités uniques de leur modèle économique.
       </p>
 
       <Card className="mb-8 shadow-md">
@@ -33,10 +30,15 @@ const PlanComptable: React.FC<PlanComptableProps> = ({ navigate }) => {
         </CardHeader>
         <CardContent className="text-gray-700 space-y-4">
           <p>
-            L'adaptation d'un plan comptable est cruciale pour refléter fidèlement la réalité économique d'une École de Production. Ce modèle est conçu pour vous servir de base, en prenant en compte les spécificités de leur activité : la production de biens ou services par les élèves, les subventions spécifiques, et les charges liées à la formation.
+            Ce modèle de plan comptable n'est pas un simple document, c'est un levier de pilotage. Il a été conçu pour vous aider à traduire la réalité de l'École de Production dans une structure comptable logique et cohérente. Il intègre notamment les comptes nécessaires pour :
           </p>
+          <ul className="list-disc pl-5 space-y-2">
+            <li>Gérer les flux financiers liés aux activités de production.</li>
+            <li>Enregistrer les subventions de fonctionnement et d'investissement.</li>
+            <li>Suivre les charges de formation et les coûts pédagogiques.</li>
+          </ul>
           <p>
-            Il vous servira de base pour organiser leurs comptes, enregistrer leurs opérations et préparer leurs états financiers. N'hésitez pas à l'adapter précisément au contexte unique de votre client, notamment en ajoutant des sous-comptes pertinents pour un suivi détaillé et un reporting sur mesure.
+            Nous vous encourageons vivement à l'utiliser comme point de départ, en l'affinant par la création de sous-comptes analytiques. Cette personnalisation est la clé pour offrir à votre client un reporting financier sur mesure, facilitant ainsi les prises de décision et la communication avec les parties prenantes.
           </p>
         </CardContent>
       </Card>
@@ -77,13 +79,12 @@ const PlanComptable: React.FC<PlanComptableProps> = ({ navigate }) => {
         </CardHeader>
         <CardContent className="text-gray-700 space-y-4">
           <p>
-            Pour une utilisation optimale de ce plan comptable, nous vous recommandons de :
+            Pour tirer le meilleur parti de cet outil, suivez ces quelques recommandations :
           </p>
           <ul className="list-disc pl-5 space-y-2">
-            <li>Revoir les comptes proposés et les adapter aux spécificités des activités de votre client.</li>
-            <li>Ajouter des sous-comptes pour un suivi analytique précis de leurs projets et filières.</li>
-            <li>Valider les adaptations avec le responsable de l'école pour assurer la cohérence et l'adhésion.</li>
-            <li>Mettre à jour régulièrement ce plan en fonction de l'évolution de l'école.</li>
+            <li>Adaptez le plan aux spécificités de votre client. Chaque école a des activités de production et des besoins de suivi uniques.</li>
+            <li>Validez les choix comptables avec la direction de l'école. L'implication du dirigeant est primordiale pour la pertinence et l'adhésion au système.</li>
+            <li>Considérez ce plan comme un document vivant. Mettez-le à jour régulièrement pour qu'il suive l'évolution de l'école, l'ajout de nouvelles filières ou de nouvelles subventions.</li>
           </ul>
         </CardContent>
       </Card>
