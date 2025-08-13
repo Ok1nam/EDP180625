@@ -1,20 +1,19 @@
-// client/src/components/Header/Header.tsx
-
 import { Menu, X } from "lucide-react";
 
 interface HeaderProps {
-  isBurgerMenuOpen: boolean; // RENOMMÉ pour correspondre à App.tsx
-  setIsBurgerMenuOpen: (isOpen: boolean) => void; // RENOMMÉ pour correspondre à App.tsx
+  isBurgerMenuOpen: boolean;
+  setIsBurgerMenuOpen: (isOpen: boolean) => void;
 }
 
-export default function Header({ isBurgerMenuOpen, setIsBurgerMenuOpen }: HeaderProps) { // Utilise les nouveaux noms de props
+export default function Header({ isBurgerMenuOpen, setIsBurgerMenuOpen }: HeaderProps) {
   const toggleMenu = () => {
-    setIsBurgerMenuOpen(!isBurgerMenuOpen); // Utilise les nouveaux noms de props
+    setIsBurgerMenuOpen(!isBurgerMenuOpen);
   };
 
   return (
-    // RESTAURÉ : header-gradient pour le fond
-    <header className="header-gradient text-white p-4 md:p-8 min-h-[120px] flex items-center justify-between relative">
+    // Remplacement de header-gradient par la couleur de fond bg-[#B68E3F]
+    // Ajustement de la couleur du texte pour une meilleure lisibilité
+    <header className="bg-[#B68E3F] text-gray-900 p-4 md:p-8 min-h-[120px] flex items-center justify-between relative">
       <div className="flex items-center gap-4 max-w-[70%]">
         <img 
           src="/logo-edp.png" 
@@ -31,10 +30,12 @@ export default function Header({ isBurgerMenuOpen, setIsBurgerMenuOpen }: Header
         onClick={toggleMenu}
         aria-label="Toggle navigation menu"
       >
-        {isBurgerMenuOpen ? ( // Utilise le nouveau nom de prop
-          <X className="w-6 h-6 text-white" />
+        {isBurgerMenuOpen ? (
+          // Ajustement de la couleur de l'icône pour une meilleure lisibilité
+          <X className="w-6 h-6 text-gray-900" />
         ) : (
-          <Menu className="w-6 h-6 text-white" />
+          // Ajustement de la couleur de l'icône pour une meilleure lisibilité
+          <Menu className="w-6 h-6 text-gray-900" />
         )}
       </button>
     </header>
