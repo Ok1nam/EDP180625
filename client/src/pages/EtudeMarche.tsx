@@ -66,9 +66,9 @@ const EtudeMarche: React.FC<EtudeMarcheProps> = ({ navigate }) => {
       </Card>
 
       {/* Section Téléchargement du fichier */}
-      <Card className="mb-8 shadow-lg border-2 border-blue-500">
+      <Card className="mb-8 shadow-lg border-2 border-[#3C5F58]">
         <CardHeader>
-          <CardTitle className="text-2xl font-bold text-blue-700 flex items-center gap-3">
+          <CardTitle className="text-2xl font-bold text-[#3C5F58] flex items-center gap-3">
             <Download className="w-6 h-6" /> Télécharger notre Modèle d'Étude de Marché
           </CardTitle>
         </CardHeader>
@@ -86,14 +86,13 @@ const EtudeMarche: React.FC<EtudeMarcheProps> = ({ navigate }) => {
             download="MODELE_ETUDE_MARCHE_ECOLE_PRODUCTION.docx"
             className="flex-shrink-0"
           >
-            <Button className="btn-primary flex items-center gap-2 py-3 px-6 text-lg">
+            <Button className="flex items-center gap-2 py-3 px-6 text-lg bg-[#2E5941] text-white rounded-md hover:bg-[#3C5F58] transition-colors">
               <Download className="w-5 h-5" /> Télécharger le modèle
             </Button>
           </a>
         </CardContent>
       </Card>
 
-      {/* Bouton de retour à l'accueil */}
       {navigate && (
         <div className="text-center mt-8">
           <Button
