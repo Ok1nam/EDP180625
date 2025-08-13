@@ -16,11 +16,11 @@ const EtudeMarche: React.FC<EtudeMarcheProps> = ({ navigate }) => {
     <section id="etude-marche" className="max-w-4xl mx-auto px-4 py-8">
       <h1 className="flex items-center gap-3 mb-6 text-3xl font-bold text-gray-800">
         <Target className="w-8 h-8 text-indigo-600" /> {/* Icône cible pour l'étude de marché */}
-        Réaliser votre Étude de Marché
+        Accompagner votre client dans son Étude de Marché
       </h1>
       
       <p className="mb-8 text-lg text-gray-700 leading-relaxed">
-        L'étude de marché est une étape fondamentale pour l'ancrage territorial de votre École de Production. Elle vous permet de valider la pertinence du projet, de vérifier l'existence de <span className="font-bold">besoins locaux non couverts</span>, et d'établir une <span className="font-bold">stratégie d'implantation</span> cohérente avec les dynamiques économiques et sociales de votre territoire.
+        Votre rôle en tant qu'expert-comptable est d'accompagner votre client, le porteur de projet d'École de Production, dans la structuration de sa démarche. Une <span className="font-bold">étude de marché solide</span> est indispensable pour la préparation du business plan et la validation du <span className="font-bold">modèle économique</span>. Elle permet de s'assurer que le projet est ancré dans une réalité territoriale et répond à de véritables besoins.
       </p>
 
       {/* Section Importance de l'Étude de Marché */}
@@ -28,18 +28,18 @@ const EtudeMarche: React.FC<EtudeMarcheProps> = ({ navigate }) => {
         <CardHeader className="bg-gray-50 border-b">
           <CardTitle className="text-xl font-bold text-gray-700 flex items-center gap-2">
             <Lightbulb className="w-5 h-5 text-orange-500" />
-            Pourquoi une Étude de Marché ?
+            Pourquoi Guider une Étude de Marché ?
           </CardTitle>
         </CardHeader>
         <CardContent className="p-6 text-gray-700 space-y-4">
           <p>
-            Une étude de marché approfondie vous permet de :
+            En tant que conseil, vous aidez votre client à :
           </p>
           <ul className="list-disc pl-5 space-y-2">
-            <li><span className="font-bold">Valider la pertinence du projet</span> : Confirmer qu'il existe un besoin avéré pour une nouvelle offre de formation-production.</li>
-            <li><span className="font-bold">Identifier les partenaires locaux</span> : Détecter les entreprises, collectivités et associations avec lesquelles collaborer.</li>
-            <li><span className="font-bold">Comprendre le paysage économique</span> : Analyser les filières, les métiers en tension et les opportunités d'emploi sur le territoire.</li>
-            <li><span className="font-bold">Positionner l'école stratégiquement</span> : S'assurer que le projet s'insère de manière complémentaire et non concurrentielle avec l'existant.</li>
+            <li><span className="font-bold">Valider la pertinence du projet</span> : Confirmer l'existence d'un besoin avéré sur le marché local avant d'engager des financements.</li>
+            <li><span className="font-bold">Identifier les opportunités et les risques</span> : Détecter des créneaux non exploités et évaluer la concurrence pour un positionnement stratégique.</li>
+            <li><span className="font-bold">Établir des prévisions réalistes</span> : Utiliser des données objectives pour construire le business plan et les prévisionnels financiers.</li>
+            <li><span className="font-bold">Préparer un dossier de financement convaincant</span> : Fournir des arguments chiffrés et étayés pour rassurer les banques et les financeurs.</li>
           </ul>
         </CardContent>
       </Card>
@@ -54,13 +54,13 @@ const EtudeMarche: React.FC<EtudeMarcheProps> = ({ navigate }) => {
         </CardHeader>
         <CardContent className="p-6 text-gray-700 space-y-4">
           <p>
-            Une étude de marché pour une École de Production devrait inclure :
+            Vous pouvez guider votre client à structurer son étude autour des axes suivants :
           </p>
           <ul className="list-disc pl-5 space-y-2">
-            <li><span className="font-bold">Analyse de l'offre de formation existante</span> : Recenser les dispositifs de formation professionnelle et d'insertion présents sur le territoire.</li>
-            <li><span className="font-bold">Identification des besoins des entreprises</span> : Mener des entretiens avec les acteurs économiques pour connaître leurs besoins en compétences et en main d'œuvre.</li>
-            <li><span className="font-bold">Évaluation des publics cibles</span> : Analyser les besoins des jeunes sans qualification ou en décrochage scolaire.</li>
-            <li><span className="font-bold">Analyse des partenariats potentiels</span> : Identifier les acteurs publics et privés susceptibles de soutenir le projet (financements, commandes, stages).</li>
+            <li><span className="font-bold">Analyse de l'offre locale</span> : Recenser les établissements de formation et d'insertion professionnelle pour identifier le paysage éducatif existant.</li>
+            <li><span className="font-bold">Identification des besoins des entreprises</span> : Aider à mener des entretiens pour comprendre les métiers en tension et les attentes en matière de compétences.</li>
+            <li><span className="font-bold">Évaluation des publics cibles</span> : Analyser les besoins des jeunes sans qualification pour définir l'offre pédagogique.</li>
+            <li><span className="font-bold">Cartographie des partenariats</span> : Identifier les acteurs publics et privés susceptibles de soutenir le projet (financements, commandes, mécénat).</li>
           </ul>
         </CardContent>
       </Card>
@@ -75,10 +75,10 @@ const EtudeMarche: React.FC<EtudeMarcheProps> = ({ navigate }) => {
         <CardContent className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
           <div className="text-base text-gray-800 flex-1">
             <p className="mb-2">
-              Téléchargez notre modèle d'étude de marché au format Word pour vous aider à structurer votre analyse locale. Ce document est un guide de travail pour la collecte et l'organisation de vos informations.
+              Téléchargez notre modèle d'étude de marché au format Word. Il est conçu comme un <span className="font-bold">guide de travail pour le porteur de projet</span> et vous permettra d'organiser la collecte et l'analyse des informations clés.
             </p>
             <p className="text-sm text-gray-600">
-              <span className="font-bold">Conseil :</span> Ce modèle est une base à adapter. La pertinence de votre étude dépendra de la qualité des données collectées sur votre territoire.
+              <span className="font-bold">Conseil :</span> Ce modèle est une base de réflexion. L'aide que vous apporterez au client sera cruciale pour valider la pertinence des données et la cohérence de l'analyse.
             </p>
           </div>
           <a
