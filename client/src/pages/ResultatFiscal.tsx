@@ -38,10 +38,10 @@ const ResultatFiscal: React.FC<ResultatFiscalProps> = ({ navigate }) => {
           </p>
           <ul className="list-disc pl-5 space-y-2">
             <li>
-              **Réintégrations :** Il s'agit d'ajouter au résultat comptable les charges qui, bien que déductibles comptablement, ne sont pas admises fiscalement (ex : certaines amortissements, amendes, pénalités...).
+              Réintégrations : Il s'agit d'ajouter au résultat comptable les charges qui, bien que déductibles comptablement, ne sont pas admises fiscalement (ex : certaines amortissements, amendes, pénalités...).
             </li>
             <li>
-              **Déductions :** À l'inverse, il faut soustraire du résultat comptable les produits non imposables ou les charges non déduites comptablement mais admises fiscalement (ex : produits financiers non imposables, reprises de provisions réglementées...).
+              Déductions : À l'inverse, il faut soustraire du résultat comptable les produits non imposables ou les charges non déduites comptablement mais admises fiscalement (ex : produits financiers non imposables, reprises de provisions réglementées...).
             </li>
           </ul>
           <p>
@@ -62,7 +62,7 @@ const ResultatFiscal: React.FC<ResultatFiscalProps> = ({ navigate }) => {
               Téléchargez le fichier Excel qui vous permettra de calculer le résultat fiscal de votre client.
             </p>
             <p className="text-sm text-gray-600">
-              **Note importante :** Ce fichier est **lié** à plusieurs de nos outils. Il est essentiel de le remplir avec les données spécifiques de l'École de Production de votre client avant d'utiliser les calculateurs.
+              Note importante : Ce fichier est **lié** à plusieurs de nos outils. Il est essentiel de le remplir avec les données spécifiques de l'École de Production de votre client avant d'utiliser les calculateurs.
             </p>
           </div>
           <a
@@ -89,10 +89,10 @@ const ResultatFiscal: React.FC<ResultatFiscalProps> = ({ navigate }) => {
             Pour garantir la justesse de votre calcul et la conformité des déclarations :
           </p>
           <ul className="list-disc pl-5 space-y-2">
-            <li>**Point de départ :** Basez-vous toujours sur le bilan et le compte de résultat comptable finalisé de l'établissement.</li>
-            <li>**Identification des retraitements :** Identifiez méticuleusement toutes les charges et produits pouvant faire l'objet de retraitements fiscaux, spécifiques aux organismes sans but lucratif ou aux Écoles de Production.</li>
-            <li>**Veille fiscale :** Restez informé des évolutions de la législation fiscale en vigueur.</li>
-            <li>**Validation :** Pour les situations complexes, n'hésitez pas à solliciter l'avis d'un spécialiste en droit fiscal.</li>
+            <li>Point de départ : Basez-vous toujours sur le bilan et le compte de résultat comptable finalisé de l'établissement.</li>
+            <li>Identification des retraitements : Identifiez méticuleusement toutes les charges et produits pouvant faire l'objet de retraitements fiscaux, spécifiques aux organismes sans but lucratif ou aux Écoles de Production.</li>
+            <li>Veille fiscale : Restez informé des évolutions de la législation fiscale en vigueur.</li>
+            <li>Validation : Pour les situations complexes, n'hésitez pas à solliciter l'avis d'un spécialiste en droit fiscal.</li>
           </ul>
           <p>
             Ce document est un outil d'aide et de formalisation ; il ne saurait se substituer à une consultation juridique ou fiscale approfondie.

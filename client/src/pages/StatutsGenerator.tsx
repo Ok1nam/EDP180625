@@ -1,5 +1,3 @@
-// client/src/pages/StatutsGenerator.tsx
-
 import React, { useState } from "react";
 import { FileText, Download, Building, User, Gavel, FileText as FileWord, Euro } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
