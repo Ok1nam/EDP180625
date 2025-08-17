@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Plus, Banknote, Building2, CalendarDays, Percent, TrendingUp, HandCoins, ArrowRightFromLine, Wallet, Hourglass, FileText, Download, FileDown, File, Edit, Trash2 } from "lucide-react";
+import { Plus, Banknote, Building2, CalendarDays, Percent, TrendingUp, HandCoins, ArrowRightFromLine, Wallet, Hourglass, FileText, Download, FileDown, File, Edit, Trash2, Lightbulb, ClipboardList } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -239,98 +239,42 @@ export default function SuiviPrets() {
     }
 
     const headers = [
-      "ID Prêt",
-      "Nom du Prêt / Ligne de Crédit",
-      "Organisme Prêteur",
-      "Contact",
-      "Type de Prêt",
-      "Objet du Prêt",
-      "Date Octroi",
-      "Montant Initial du Prêt (€)",
-      "Taux d'intérêt (%)",
-      "Durée (années)",
-      "Périodicité Remboursement",
-      "Date de Déblocage",
-      "Date de Fin Prévue",
-      "Montant Échéance (€)",
-      "Capital Remboursé à Date (€)",
-      "Intérêts Payés à Date (€)",
-      "Capital Restant Dû (€)",
-      "Garanties",
-      "Conditions Particulières",
-      "Notes / Suivi",
-      "Statut",
-      "Prochaine Échéance",
-      "Responsable Interne",
-      "Dernière Mise à Jour"
+      "ID Prêt", "Nom du Prêt / Ligne de Crédit", "Organisme Prêteur", "Contact", "Type de Prêt", "Objet du Prêt",
+      "Date Octroi", "Montant Initial du Prêt (€)", "Taux d'intérêt (%)", "Durée (années)", "Périodicité Remboursement",
+      "Date de Déblocage", "Date de Fin Prévue", "Montant Échéance (€)", "Capital Remboursé à Date (€)", "Intérêts Payés à Date (€)",
+      "Capital Restant Dû (€)", "Garanties", "Conditions Particulières", "Notes / Suivi", "Statut", "Prochaine Échéance",
+      "Responsable Interne", "Dernière Mise à Jour"
     ];
 
     const rows = loans.map(loan => {
       const loanRemainingCapital = (loan.initialAmount || 0) - (loan.capitalRepaidToDate || 0);
-
       return [
-        `"${loan.id}"`,
-        `"${loan.loanReference.replace(/"/g, '""')}"`,
-        `"${loan.lenderName.replace(/"/g, '""')}"`,
-        `"${(loan.contactPerson || '').replace(/"/g, '""')}"`,
-        `"${loan.typeOfLoan.replace(/"/g, '""')}"`,
-        `"${loan.objectOfLoan.replace(/"/g, '""')}"`,
-        loan.agreementDate,
-        loan.initialAmount,
-        loan.interestRatePercentage || '',
-        loan.durationYears || '',
-        `"${loan.repaymentFrequency.replace(/"/g, '""')}"`,
-        loan.startDate,
-        loan.endDate || '',
-        loan.installmentAmount || '',
-        loan.capitalRepaidToDate || 0,
-        loan.interestPaidToDate || 0,
-        parseFloat(loanRemainingCapital.toFixed(2)),
-        `"${loan.guarantees.replace(/"/g, '""')}"`,
-        `"${loan.specialConditions.replace(/"/g, '""')}"`,
-        `"${loan.notesInternal.replace(/"/g, '""')}"`,
-        `"${statusOptions.find(s => s.value === loan.status)?.label.replace(/"/g, '""')}"`,
-        loan.nextInstallmentDate || '',
-        `"${loan.internalResponsible.replace(/"/g, '""')}"`,
-        loan.lastUpdate
+        `"${loan.id}"`, `"${loan.loanReference.replace(/"/g, '""')}"`, `"${loan.lenderName.replace(/"/g, '""')}"`,
+        `"${(loan.contactPerson || '').replace(/"/g, '""')}"`, `"${loan.typeOfLoan.replace(/"/g, '""')}"`, `"${loan.objectOfLoan.replace(/"/g, '""')}"`,
+        loan.agreementDate, loan.initialAmount, loan.interestRatePercentage || '', loan.durationYears || '',
+        `"${loan.repaymentFrequency.replace(/"/g, '""')}"`, loan.startDate, loan.endDate || '', loan.installmentAmount || '',
+        loan.capitalRepaidToDate || 0, loan.interestPaidToDate || 0, parseFloat(loanRemainingCapital.toFixed(2)),
+        `"${loan.guarantees.replace(/"/g, '""')}"`, `"${loan.specialConditions.replace(/"/g, '""')}"`, `"${loan.notesInternal.replace(/"/g, '""')}"`,
+        `"${statusOptions.find(s => s.value === loan.status)?.label.replace(/"/g, '""')}"`, loan.nextInstallmentDate || '',
+        `"${loan.internalResponsible.replace(/"/g, '""')}"`, loan.lastUpdate
       ];
     });
 
-    const csvContent = [
-      headers.join(';'),
-      ...rows.map(row => row.join(';'))
-    ].join('\n');
-
+    const csvContent = [headers.join(';'), ...rows.map(row => row.join(';'))].join('\n');
     const blob = new Blob([new Uint8Array([0xEF, 0xBB, 0xBF]), csvContent], { type: 'text/csv;charset=utf-8-bom;' });
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
-    a.href = url;
-    a.download = `suivi_prets_${new Date().toISOString().split('T')[0]}.csv`;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-    URL.revokeObjectURL(url);
+    a.href = url; a.download = `suivi_prets_${new Date().toISOString().split('T')[0]}.csv`;
+    document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url);
 
-    toast({
-      title: "Export CSV",
-      description: "Le fichier CSV a été généré et téléchargé.",
-    });
+    toast({ title: "Export CSV", description: "Le fichier CSV a été généré et téléchargé." });
   };
 
   const downloadExcelTemplate = () => {
-    // UPDATED FILE PATH
     const filePath = '/fichiers/ANNEXE 15 - TABLEAU DE SUIVI DES PRETS.xlsx';
-    const a = document.createElement('a');
-    a.href = filePath;
-    a.download = `ANNEXE 15 - TABLEAU DE SUIVI DES PRETS.xlsx`;
-    document.body.appendChild(a);
-    a.click();
-    document.body.removeChild(a);
-
-    toast({
-      title: "Téléchargement Modèle",
-      description: "Votre modèle Excel a été téléchargé.",
-    });
+    const a = document.createElement('a'); a.href = filePath; a.download = `ANNEXE 15 - TABLEAU DE SUIVI DES PRETS.xlsx`;
+    document.body.appendChild(a); a.click(); document.body.removeChild(a);
+    toast({ title: "Téléchargement Modèle", description: "Votre modèle Excel a été téléchargé." });
   };
 
   return (
@@ -340,19 +284,57 @@ export default function SuiviPrets() {
         Suivi des <span className="text-[#2E5941]">Financements</span> et Prêts
       </h1>
       
-      <p className="mb-6 text-lg text-gray-700 leading-relaxed">
-        Gérez et suivez l'ensemble des financements (prêts bancaires, prêts subordonnés, apports personnels, subventions de collectivités) reçus ou en cours de demande pour votre École de Production. Cet outil vous aide à <span className="font-bold">garder une trace de toutes les transactions de prêt</span>.
+      <p className="mb-8 text-lg text-gray-700 leading-relaxed">
+        Le suivi des prêts est crucial pour la santé financière de votre projet. Cet outil est conçu comme un véritable <span className="font-bold">tableau de bord stratégique</span> pour anticiper vos choix financiers, planifier vos besoins et négocier les meilleures conditions. Allez au-delà de la simple comptabilité et pilotez activement vos ressources.
       </p>
 
+      {/* Section Outil Stratégique */}
+      <Card className="mb-6 shadow-md bg-white">
+        <CardHeader className="bg-gray-50 border-b">
+          <CardTitle className="text-xl font-bold text-[#3C5F58] flex items-center gap-2">
+            <Lightbulb className="w-5 h-5 text-orange-500" />
+            Un Tableau de Bord pour l'Avenir
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="p-6 text-gray-700 space-y-4">
+          <p>
+            Contrairement à un logiciel comptable qui enregistre le passé, cet outil vous aide à <span className="font-bold">anticiper</span>. Il vous permet de croiser les opportunités de financement avec vos besoins futurs, offrant une vision claire des ressources mobilisables. C'est un support essentiel pour vos discussions avec les experts-comptables et les partenaires financiers.
+          </p>
+        </CardContent>
+      </Card>
+
+      {/* Section Éléments Clés */}
+      <Card className="mb-8 shadow-md bg-white">
+        <CardHeader className="bg-gray-50 border-b">
+          <CardTitle className="text-xl font-bold text-[#3C5F58] flex items-center gap-2">
+            <ClipboardList className="w-5 h-5 text-blue-600" />
+            Centralisez les Informations Essentielles
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="p-6 text-gray-700 space-y-4">
+          <p>
+            Chaque fiche de suivi est structurée pour centraliser toutes les données importantes :
+          </p>
+          <ul className="list-disc pl-5 space-y-2">
+            <li><span className="font-bold">Caractéristiques financières :</span> Montant, taux d’intérêt, durée, échéances de remboursement.</li>
+            <li><span className="font-bold">Objet et type de prêt :</span> Pour identifier la nature et le but de chaque financement.</li>
+            <li><span className="font-bold">Conditions spécifiques :</span> Garanties, modalités de suivi et exigences contractuelles.</li>
+            <li><span className="font-bold">Contacts et responsabilités :</span> Pour assurer un suivi clair et continu en interne.</li>
+          </ul>
+        </CardContent>
+      </Card>
+
       <div className="bg-gray-50 border-l-4 border-gray-200 text-gray-800 p-4 mb-6 rounded-md" role="alert">
-        <h3 className="font-semibold text-lg mb-2">Conseil pour le suivi des prêts :</h3>
-        <p className="text-sm leading-relaxed">
-          Pour le suivi du capital restant dû, vous devrez régulièrement mettre à jour les champs "<span className="font-bold">Capital Remboursé à Date</span>" et "<span className="font-bold">Intérêts Payés à Date</span>" après chaque échéance de remboursement. Le "Capital Restant Dû" sera alors calculé automatiquement.
-        </p>
-        <div className="flex mt-4">
+        <div className="flex items-start sm:items-center justify-between flex-col sm:flex-row gap-4">
+            <div>
+                <h3 className="font-semibold text-lg mb-2">Modèle Excel et Conseil d'Utilisation</h3>
+                <p className="text-sm leading-relaxed">
+                  Pour le suivi du capital restant dû, mettez à jour régulièrement les champs "<span className="font-bold">Capital Remboursé</span>" et "<span className="font-bold">Intérêts Payés</span>" après chaque échéance.
+                </p>
+            </div>
             <Button
                 onClick={downloadExcelTemplate}
-                className="bg-[#2E5941] hover:bg-[#3C5F58] text-white"
+                className="bg-[#2E5941] hover:bg-[#3C5F58] text-white flex-shrink-0"
             >
                 <File className="w-4 h-4 mr-2" />
                 Télécharger le modèle Excel
@@ -441,41 +423,21 @@ export default function SuiviPrets() {
               <div className="grid md:grid-cols-2 gap-4">
                 <div>
                   <Label htmlFor="loan-reference" className="font-bold">ID / Nom du Prêt <span className="text-red-500">*</span></Label>
-                  <Input
-                    id="loan-reference"
-                    value={formData.loanReference || ''}
-                    onChange={(e) => setFormData({...formData, loanReference: e.target.value})}
-                    placeholder="Ex: Prêt BPI Innovation 2025"
-                  />
+                  <Input id="loan-reference" value={formData.loanReference || ''} onChange={(e) => setFormData({...formData, loanReference: e.target.value})} placeholder="Ex: Prêt BPI Innovation 2025" />
                 </div>
                 <div>
                   <Label htmlFor="lender-name" className="font-bold">Nom de l'organisme / Source <span className="text-red-500">*</span></Label>
-                  <Input
-                    id="lender-name"
-                    value={formData.lenderName || ''}
-                    onChange={(e) => setFormData({...formData, lenderName: e.target.value})}
-                    placeholder="Ex: Banque XYZ, Région ABC"
-                  />
+                  <Input id="lender-name" value={formData.lenderName || ''} onChange={(e) => setFormData({...formData, lenderName: e.target.value})} placeholder="Ex: Banque XYZ, Région ABC" />
                 </div>
               </div>
               <div className="grid md:grid-cols-2 gap-4 mt-4">
                 <div>
                   <Label htmlFor="contact-person" className="font-bold">Personne de contact</Label>
-                  <Input
-                    id="contact-person"
-                    value={formData.contactPerson || ''}
-                    onChange={(e) => setFormData({...formData, contactPerson: e.target.value})}
-                    placeholder="Nom du contact chez le prêteur"
-                  />
+                  <Input id="contact-person" value={formData.contactPerson || ''} onChange={(e) => setFormData({...formData, contactPerson: e.target.value})} placeholder="Nom du contact chez le prêteur" />
                 </div>
                 <div>
                   <Label htmlFor="object-of-loan" className="font-bold">Objet du Prêt</Label>
-                  <Input
-                    id="object-of-loan"
-                    value={formData.objectOfLoan || ''}
-                    onChange={(e) => setFormData({...formData, objectOfLoan: e.target.value})}
-                    placeholder="Ex: Achat d'équipement, besoin en fonds de roulement"
-                  />
+                  <Input id="object-of-loan" value={formData.objectOfLoan || ''} onChange={(e) => setFormData({...formData, objectOfLoan: e.target.value})} placeholder="Ex: Achat d'équipement, besoin en fonds de roulement" />
                 </div>
               </div>
             </div>
@@ -486,54 +448,26 @@ export default function SuiviPrets() {
               <div className="grid md:grid-cols-4 gap-4">
                 <div>
                   <Label className="font-bold">Type de Prêt <span className="text-red-500">*</span></Label>
-                  <Select
-                    value={formData.typeOfLoan || ''}
-                    onValueChange={(value) => setFormData({...formData, typeOfLoan: value as any})}
-                  >
-                    <SelectTrigger>
-                      <SelectValue placeholder="Choisir un type de prêt" />
-                    </SelectTrigger>
+                  <Select value={formData.typeOfLoan || ''} onValueChange={(value) => setFormData({...formData, typeOfLoan: value as any})}>
+                    <SelectTrigger><SelectValue placeholder="Choisir un type de prêt" /></SelectTrigger>
                     <SelectContent>
                       {loanTypesOptions.map(type => (
-                        <SelectItem key={type.value} value={type.value}>
-                          <div className="flex items-center">
-                            {type.icon} {type.label}
-                          </div>
-                        </SelectItem>
+                        <SelectItem key={type.value} value={type.value}><div className="flex items-center">{type.icon} {type.label}</div></SelectItem>
                       ))}
                     </SelectContent>
                   </Select>
                 </div>
                 <div>
                   <Label htmlFor="initial-amount" className="font-bold">Montant Initial (€) <span className="text-red-500">*</span></Label>
-                  <Input
-                    id="initial-amount"
-                    type="number"
-                    value={formData.initialAmount || ''}
-                    onChange={(e) => setFormData({...formData, initialAmount: parseFloat(e.target.value) || 0})}
-                    placeholder="Ex: 100000"
-                  />
+                  <Input id="initial-amount" type="number" value={formData.initialAmount || ''} onChange={(e) => setFormData({...formData, initialAmount: parseFloat(e.target.value) || 0})} placeholder="Ex: 100000" />
                 </div>
                 <div>
                   <Label htmlFor="interest-rate-percentage" className="font-bold">Taux d'intérêt annuel (%)</Label>
-                  <Input
-                    id="interest-rate-percentage"
-                    type="number"
-                    step="0.01"
-                    value={formData.interestRatePercentage || ''}
-                    onChange={(e) => setFormData({...formData, interestRatePercentage: parseFloat(e.target.value) || 0})}
-                    placeholder="Ex: 1.5"
-                  />
+                  <Input id="interest-rate-percentage" type="number" step="0.01" value={formData.interestRatePercentage || ''} onChange={(e) => setFormData({...formData, interestRatePercentage: parseFloat(e.target.value) || 0})} placeholder="Ex: 1.5" />
                 </div>
                 <div>
                   <Label htmlFor="duration-years" className="font-bold">Durée (années)</Label>
-                  <Input
-                    id="duration-years"
-                    type="number"
-                    value={formData.durationYears || ''}
-                    onChange={(e) => setFormData({...formData, durationYears: parseFloat(e.target.value) || 0})}
-                    placeholder="Ex: 7"
-                  />
+                  <Input id="duration-years" type="number" value={formData.durationYears || ''} onChange={(e) => setFormData({...formData, durationYears: parseFloat(e.target.value) || 0})} placeholder="Ex: 7" />
                 </div>
               </div>
             </div>
@@ -544,42 +478,19 @@ export default function SuiviPrets() {
               <div className="grid md:grid-cols-4 gap-4">
                 <div>
                   <Label htmlFor="startDate" className="font-bold">Date de Déblocage <span className="text-red-500">*</span></Label>
-                  <Input
-                    id="startDate"
-                    type="date"
-                    value={formData.startDate || ''}
-                    onChange={(e) => setFormData({...formData, startDate: e.target.value})}
-                  />
+                  <Input id="startDate" type="date" value={formData.startDate || ''} onChange={(e) => setFormData({...formData, startDate: e.target.value})} />
                 </div>
                 <div>
                   <Label htmlFor="next-installment-date" className="font-bold">Prochaine Échéance</Label>
-                  <Input
-                    id="next-installment-date"
-                    type="date"
-                    value={formData.nextInstallmentDate || ''}
-                    onChange={(e) => setFormData({...formData, nextInstallmentDate: e.target.value})}
-                  />
+                  <Input id="next-installment-date" type="date" value={formData.nextInstallmentDate || ''} onChange={(e) => setFormData({...formData, nextInstallmentDate: e.target.value})} />
                 </div>
                 <div>
                   <Label htmlFor="capital-repaid-to-date" className="font-bold">Capital Remboursé à Date (€)</Label>
-                  <Input
-                    id="capital-repaid-to-date"
-                    type="number"
-                    step="any"
-                    value={formData.capitalRepaidToDate || 0}
-                    onChange={(e) => setFormData({...formData, capitalRepaidToDate: parseFloat(e.target.value) || 0})}
-                    placeholder="Ex: 10000"
-                  />
+                  <Input id="capital-repaid-to-date" type="number" step="any" value={formData.capitalRepaidToDate || 0} onChange={(e) => setFormData({...formData, capitalRepaidToDate: parseFloat(e.target.value) || 0})} placeholder="Ex: 10000" />
                 </div>
                 <div>
                   <Label htmlFor="remaining-capital" className="font-bold">Capital Restant Dû (€)</Label>
-                  <Input
-                    id="remaining-capital"
-                    type="number"
-                    value={parseFloat(remainingCapital.toFixed(2))}
-                    readOnly
-                    className="bg-gray-100"
-                  />
+                  <Input id="remaining-capital" type="number" value={parseFloat(remainingCapital.toFixed(2))} readOnly className="bg-gray-100" />
                 </div>
               </div>
             </div>
@@ -590,51 +501,29 @@ export default function SuiviPrets() {
               <div className="grid md:grid-cols-2 gap-4">
                 <div>
                   <Label htmlFor="status" className="font-bold">Statut <span className="text-red-500">*</span></Label>
-                  <Select
-                    value={formData.status || 'demande_en_cours'}
-                    onValueChange={(value) => setFormData({...formData, status: value as any})}
-                  >
-                    <SelectTrigger>
-                      <SelectValue placeholder="Sélectionner le statut" />
-                    </SelectTrigger>
+                  <Select value={formData.status || 'demande_en_cours'} onValueChange={(value) => setFormData({...formData, status: value as any})}>
+                    <SelectTrigger><SelectValue placeholder="Sélectionner le statut" /></SelectTrigger>
                     <SelectContent>
                       {statusOptions.map(status => (
-                        <SelectItem key={status.value} value={status.value}>
-                          {status.label}
-                        </SelectItem>
+                        <SelectItem key={status.value} value={status.value}>{status.label}</SelectItem>
                       ))}
                     </SelectContent>
                   </Select>
                 </div>
                 <div>
                   <Label htmlFor="internal-responsible" className="font-bold">Responsable Interne</Label>
-                  <Input
-                    id="internal-responsible"
-                    value={formData.internalResponsible || ''}
-                    onChange={(e) => setFormData({...formData, internalResponsible: e.target.value})}
-                    placeholder="Ex: Expert-comptable, Directeur..."
-                  />
+                  <Input id="internal-responsible" value={formData.internalResponsible || ''} onChange={(e) => setFormData({...formData, internalResponsible: e.target.value})} placeholder="Ex: Expert-comptable, Directeur..." />
                 </div>
               </div>
               <div className="mt-4">
                 <Label htmlFor="notes-internal" className="font-bold">Notes / Suivi (pour le cabinet)</Label>
-                <Textarea
-                  id="notes-internal"
-                  value={formData.notesInternal || ''}
-                  onChange={(e) => setFormData({...formData, notesInternal: e.target.value})}
-                  placeholder="Commentaires divers, rappels, contacts clés chez le prêteur, éléments à surveiller..."
-                  rows={3}
-                />
+                <Textarea id="notes-internal" value={formData.notesInternal || ''} onChange={(e) => setFormData({...formData, notesInternal: e.target.value})} placeholder="Commentaires, rappels, contacts, éléments à surveiller..." rows={3} />
               </div>
             </div>
 
             <div className="flex justify-end gap-2 mt-6">
-              <Button onClick={resetForm} variant="outline" className="text-red-500 hover:text-red-600 border-red-500">
-                Annuler
-              </Button>
-              <Button onClick={saveLoan} className="bg-[#2E5941] hover:bg-[#3C5F58]">
-                {editingId ? 'Modifier le financement' : 'Ajouter le financement'}
-              </Button>
+              <Button onClick={resetForm} variant="outline" className="text-red-500 hover:text-red-600 border-red-500">Annuler</Button>
+              <Button onClick={saveLoan} className="bg-[#2E5941] hover:bg-[#3C5F58]">{editingId ? 'Modifier le financement' : 'Ajouter le financement'}</Button>
             </div>
           </CardContent>
         </Card>
@@ -645,7 +534,6 @@ export default function SuiviPrets() {
         {loans.length > 0 ? (
           loans.map(loan => {
             const loanRemainingCapital = (loan.initialAmount || 0) - (loan.capitalRepaidToDate || 0);
-
             return (
               <Card key={loan.id} className="shadow-sm hover:shadow-lg transition-shadow duration-200">
                 <CardContent className="p-6">
@@ -653,18 +541,12 @@ export default function SuiviPrets() {
                     <div className="flex-1">
                       <div className="flex items-center gap-3 mb-2">
                         <h3 className="text-lg font-bold text-gray-800">{loan.loanReference}</h3>
-                        <Badge className={getStatusColor(loan.status)}>
-                          {statusOptions.find(s => s.value === loan.status)?.label}
-                        </Badge>
-                        <Badge variant="outline" className="text-sm">
-                          {loan.typeOfLoan}
-                        </Badge>
+                        <Badge className={getStatusColor(loan.status)}>{statusOptions.find(s => s.value === loan.status)?.label}</Badge>
+                        <Badge variant="outline" className="text-sm">{loan.typeOfLoan}</Badge>
                       </div>
                       <p className="text-gray-600 mb-1"><span className="font-semibold">Organisme :</span> {loan.lenderName}</p>
                       <p className="text-gray-600 mb-1"><span className="font-semibold">Montant initial :</span> {loan.initialAmount?.toLocaleString('fr-FR')} €</p>
-                      <p className="text-2xl font-bold text-red-600 mt-2">
-                        {parseFloat(loanRemainingCapital.toFixed(2)).toLocaleString('fr-FR')} €
-                      </p>
+                      <p className="text-2xl font-bold text-red-600 mt-2">{parseFloat(loanRemainingCapital.toFixed(2)).toLocaleString('fr-FR')} €</p>
                       <p className="text-sm text-gray-600">Capital Restant Dû</p>
                       {loan.nextInstallmentDate && (
                         <p className="text-sm text-gray-600 flex items-center gap-1 mt-2">
@@ -673,12 +555,8 @@ export default function SuiviPrets() {
                       )}
                     </div>
                     <div className="flex space-x-2">
-                      <Button variant="outline" size="sm" onClick={() => editLoan(loan)}>
-                        <Edit className="w-4 h-4 mr-2" /> Modifier
-                      </Button>
-                      <Button variant="destructive" size="sm" onClick={() => deleteLoan(loan.id)}>
-                        <Trash2 className="w-4 h-4 mr-2" /> Supprimer
-                      </Button>
+                      <Button variant="outline" size="sm" onClick={() => editLoan(loan)}><Edit className="w-4 h-4 mr-2" /> Modifier</Button>
+                      <Button variant="destructive" size="sm" onClick={() => deleteLoan(loan.id)}><Trash2 className="w-4 h-4 mr-2" /> Supprimer</Button>
                     </div>
                   </div>
                   {loan.objectOfLoan && <p className="text-sm text-gray-500 italic mb-2"><span className="font-semibold">Objet :</span> {loan.objectOfLoan}</p>}
@@ -690,7 +568,7 @@ export default function SuiviPrets() {
           })
         ) : (
           <div className="text-center text-gray-500 p-8 border-2 border-dashed rounded-lg mt-8">
-            <p>Aucun financement enregistré pour le moment. Cliquez sur "<span className="font-bold">Ajouter un financement</span>" pour commencer.</p>
+            <p>Aucun financement enregistré. Cliquez sur "<span className="font-bold">Ajouter un financement</span>" pour commencer.</p>
           </div>
         )}
       </div>
