@@ -1,6 +1,5 @@
 import React from 'react';
 import { ShieldCheck, Download, FileText, BookOpen, Lightbulb, ExternalLink } from "lucide-react";
-// Assurez-vous que les composants Card et Button sont correctement importés de votre bibliothèque UI (ex: shadcn/ui)
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
@@ -59,31 +58,24 @@ export default function HabilitationTaxe({ navigate }: HabilitationTaxeProps) {
         <CardHeader className="bg-gray-50 border-b">
           <CardTitle className="text-xl font-bold text-[#3C5F58] flex items-center gap-2">
             <Download className="w-5 h-5 text-[#3C5F58]" />
-            Télécharger les documents d'Habilitation
+            Télécharger le document d'Habilitation
           </CardTitle>
         </CardHeader>
         <CardContent className="p-6 text-gray-700 space-y-4">
-          <p>
-            Ces documents vous accompagnent pas à pas dans votre démarche d'habilitation sur la plateforme SOLTéA.
+          <p className="text-center">
+            Ce document vous accompagne pas à pas dans votre démarche d'habilitation sur la plateforme SOLTéA.
           </p>
-          <div className="flex flex-col md:flex-row gap-4 justify-center items-center">
-            {/* Bouton pour télécharger le guide PDF */}
+          <div className="flex justify-center items-center">
+            {/* Bouton pour télécharger le guide PDF (uniquement) */}
             <a href="/fichiers/Annexe 17 - Exemple de formulaire de demande d'habilitation taxe apprentissage.pdf" download>
               <Button className="bg-[#2E5941] hover:bg-[#3C5F58] text-white">
                 <FileText className="w-4 h-4 mr-2" />
                 Télécharger le guide (PDF)
               </Button>
             </a>
-            {/* Nouveau bouton pour télécharger l'exemple de formulaire DOCX */}
-            <a href="/fichiers/ANNEXE 17 - EXEMPLE DE FORMULAIRE DE DEMANDE DHABILITATION TAXE APPRENTISSAGE.docx" download>
-              <Button className="bg-[#2E5941] hover:bg-[#3C5F58] text-white">
-                <FileText className="w-4 h-4 mr-2" />
-                Télécharger l'exemple de formulaire (Word)
-              </Button>
-            </a>
           </div>
-          <p className="italic text-sm text-gray-600 mt-4">
-            Pour plus d'informations, vous pouvez vous rendre sur la <a href="https://soltea.education.gouv.fr" target="_blank" rel="noopener noreferrer" className="text-[#3C5F58] hover:underline flex items-center justify-center gap-1">plateforme SOLTéA <ExternalLink size={14}/></a>.
+          <p className="italic text-sm text-gray-600 mt-4 text-center">
+            Pour plus d'informations, vous pouvez vous rendre sur la <a href="https://soltea.education.gouv.fr" target="_blank" rel="noopener noreferrer" className="text-[#3C5F58] hover:underline inline-flex items-center gap-1">plateforme SOLTéA <ExternalLink size={14}/></a>.
           </p>
         </CardContent>
       </Card>
