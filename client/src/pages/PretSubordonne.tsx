@@ -175,7 +175,7 @@ export default function PretSubordonne({ navigate }: PretSubordonneProps) {
             </Button>
           </a>
           <p className="italic text-sm text-gray-600 mt-4">
-            <span className="font-bold">Conseil :</span> Faites relire et adapter ce contrat par votre expert-comptable ou votre conseil juridique pour garantir sa conformité aux spécificités de votre montage financier.
+            <span className="font-bold">Conseil :</span> Faites relire et adapter ce contrat pour garantir sa conformité aux spécificités de votre montage financier.
           </p>
         </CardContent>
       </Card>
