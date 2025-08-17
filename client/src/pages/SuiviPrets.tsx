@@ -15,7 +15,7 @@ interface Loan {
   id: string;
   loanReference: string;
   lenderName: string;
-  contactPerson?: string; // Ajout du contact
+  contactPerson?: string;
   typeOfLoan: 'Amortissable' | 'In Fine' | 'Ligne de Trésorerie / Découvert' | 'Prêt d\'Honneur' | 'Prêt Participatif' | '';
   objectOfLoan: string;
   agreementDate: string;
@@ -44,11 +44,10 @@ export default function SuiviPrets() {
   const [showForm, setShowForm] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
 
-  // Initialisation du formData avec des valeurs par défaut / vides pour les nouveaux prêts
   const [formData, setFormData] = useState<Partial<Loan>>({
     loanReference: '',
     lenderName: '',
-    contactPerson: '', // Initialisation du nouveau champ
+    contactPerson: '',
     typeOfLoan: '',
     objectOfLoan: '',
     agreementDate: '',
@@ -77,8 +76,6 @@ export default function SuiviPrets() {
     { value: 'Prêt d\'Honneur', label: 'Prêt d\'Honneur', icon: <TrendingUp className="w-4 h-4 mr-2" /> },
     { value: 'Prêt Participatif', label: 'Prêt Participatif', icon: <Building2 className="w-4 h-4 mr-2" /> }
   ];
-
-  const repaymentFrequencyOptions = ['Mensuelle', 'Trimestrielle', 'Semestrielle', 'Annuelle'];
 
   const statusOptions = [
     { value: 'demande_en_cours', label: 'Demande en cours', color: 'bg-yellow-100 text-yellow-800' },
@@ -203,26 +200,16 @@ export default function SuiviPrets() {
 
   const getStatsData = () => {
     const totalLoans = loans.length;
-    const activeLoans = loans.filter(l => l.status === 'accorde' || l.status === 'en_cours_remboursement').length;
     const totalAmountCommitted = loans.reduce((sum, l) => sum + l.initialAmount, 0);
     const totalRemainingCapital = loans.reduce((sum, l) => {
       const currentRemaining = (l.initialAmount || 0) - (l.capitalRepaidToDate || 0);
       return sum + currentRemaining;
     }, 0);
-    
-    const today = new Date().toISOString().split('T')[0];
-    const nextPaymentLoan = loans
-      .filter(l => (l.status === 'accorde' || l.status === 'en_cours_remboursement') && l.nextInstallmentDate && l.nextInstallmentDate >= today)
-      .sort((a, b) => (a.nextInstallmentDate || '').localeCompare(b.nextInstallmentDate || ''))[0];
 
     return { 
       totalLoans, 
-      activeLoans, 
       totalAmountCommitted,
       totalRemainingCapital,
-      nextPaymentDate: nextPaymentLoan ? nextPaymentLoan.nextInstallmentDate : null,
-      nextPaymentLender: nextPaymentLoan ? nextPaymentLoan.lenderName : null,
-      nextPaymentLoanReference: nextPaymentLoan ? nextPaymentLoan.loanReference : null,
     };
   };
 
@@ -263,8 +250,7 @@ export default function SuiviPrets() {
     const csvContent = [headers.join(';'), ...rows.map(row => row.join(';'))].join('\n');
     const blob = new Blob([new Uint8Array([0xEF, 0xBB, 0xBF]), csvContent], { type: 'text/csv;charset=utf-8-bom;' });
     const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url; a.download = `suivi_prets_${new Date().toISOString().split('T')[0]}.csv`;
+    const a = document.createElement('a'); a.href = url; a.download = `suivi_prets_${new Date().toISOString().split('T')[0]}.csv`;
     document.body.appendChild(a); a.click(); document.body.removeChild(a); URL.revokeObjectURL(url);
 
     toast({ title: "Export CSV", description: "Le fichier CSV a été généré et téléchargé." });
@@ -281,11 +267,11 @@ export default function SuiviPrets() {
     <section id="suivi-prets" className="max-w-6xl mx-auto px-4 py-8">
       <h1 className="flex items-center gap-3 mb-6 text-3xl font-bold text-[#3C5F58]">
         <Banknote className="w-8 h-8 text-[#3C5F58]" />
-        Suivi des <span className="text-[#2E5941]">Financements</span> et Prêts
+        Accompagner votre Client dans le Suivi de ses <span className="text-[#2E5941]">Financements</span>
       </h1>
       
       <p className="mb-8 text-lg text-gray-700 leading-relaxed">
-        Le suivi des prêts est crucial pour la santé financière de votre projet. Cet outil est conçu comme un véritable <span className="font-bold">tableau de bord stratégique</span> pour anticiper vos choix financiers, planifier vos besoins et négocier les meilleures conditions. Allez au-delà de la simple comptabilité et pilotez activement vos ressources.
+        Aidez votre client, l'École de Production, à structurer le suivi de ses financements. Cet outil vous permet de lui offrir un <span className="font-bold">tableau de bord stratégique</span> pour anticiper ses choix financiers, planifier ses besoins et l'assister dans la négociation des meilleures conditions. Positionnez-vous comme un partenaire clé allant au-delà de la simple comptabilité.
       </p>
 
       {/* Section Outil Stratégique */}
@@ -293,12 +279,12 @@ export default function SuiviPrets() {
         <CardHeader className="bg-gray-50 border-b">
           <CardTitle className="text-xl font-bold text-[#3C5F58] flex items-center gap-2">
             <Lightbulb className="w-5 h-5 text-orange-500" />
-            Un Tableau de Bord pour l'Avenir
+            Un Tableau de Bord pour l'Avenir de votre Client
           </CardTitle>
         </CardHeader>
         <CardContent className="p-6 text-gray-700 space-y-4">
           <p>
-            Contrairement à un logiciel comptable qui enregistre le passé, cet outil vous aide à <span className="font-bold">anticiper</span>. Il vous permet de croiser les opportunités de financement avec vos besoins futurs, offrant une vision claire des ressources mobilisables. C'est un support essentiel pour vos discussions avec les experts-comptables et les partenaires financiers.
+            Mettez à disposition de votre client un outil de pilotage financier tourné vers l'avenir. Contrairement à la comptabilité qui enregistre le passé, ce tableau de bord l'aide à <span className="font-bold">anticiper</span>. Utilisez-le pour l'aider à croiser les opportunités avec ses besoins futurs, lui offrant une vision claire des ressources mobilisables et devenant un support essentiel pour vos missions de conseil.
           </p>
         </CardContent>
       </Card>
@@ -308,12 +294,12 @@ export default function SuiviPrets() {
         <CardHeader className="bg-gray-50 border-b">
           <CardTitle className="text-xl font-bold text-[#3C5F58] flex items-center gap-2">
             <ClipboardList className="w-5 h-5 text-blue-600" />
-            Centralisez les Informations Essentielles
+            Guider la Centralisation des Données Clés
           </CardTitle>
         </CardHeader>
         <CardContent className="p-6 text-gray-700 space-y-4">
           <p>
-            Chaque fiche de suivi est structurée pour centraliser toutes les données importantes :
+            Guidez votre client dans la centralisation des informations essentielles pour chaque prêt. Cet outil vous permet de consolider :
           </p>
           <ul className="list-disc pl-5 space-y-2">
             <li><span className="font-bold">Caractéristiques financières :</span> Montant, taux d’intérêt, durée, échéances de remboursement.</li>
@@ -327,9 +313,9 @@ export default function SuiviPrets() {
       <div className="bg-gray-50 border-l-4 border-gray-200 text-gray-800 p-4 mb-6 rounded-md" role="alert">
         <div className="flex items-start sm:items-center justify-between flex-col sm:flex-row gap-4">
             <div>
-                <h3 className="font-semibold text-lg mb-2">Modèle Excel et Conseil d'Utilisation</h3>
+                <h3 className="font-semibold text-lg mb-2">Conseil pour votre Client et Modèle Excel</h3>
                 <p className="text-sm leading-relaxed">
-                  Pour le suivi du capital restant dû, mettez à jour régulièrement les champs "<span className="font-bold">Capital Remboursé</span>" et "<span className="font-bold">Intérêts Payés</span>" après chaque échéance.
+                  Conseillez à votre client de mettre à jour régulièrement le champ "<span className="font-bold">Capital Remboursé</span>" après chaque échéance pour un suivi précis.
                 </p>
             </div>
             <Button
@@ -337,13 +323,13 @@ export default function SuiviPrets() {
                 className="bg-[#2E5941] hover:bg-[#3C5F58] text-white flex-shrink-0"
             >
                 <File className="w-4 h-4 mr-2" />
-                Télécharger le modèle Excel
+                Télécharger le modèle
             </Button>
         </div>
       </div>
 
       {/* Cartes de Statistiques */}
-      <div className="grid md:grid-cols-4 gap-4 mb-6">
+      <div className="grid md:grid-cols-3 gap-4 mb-6">
         <Card className="shadow-sm">
           <CardContent className="p-4 text-center">
             <div className="text-2xl font-bold text-[#3C5F58]">{stats.totalLoans}</div>
@@ -355,7 +341,7 @@ export default function SuiviPrets() {
             <div className="text-2xl font-bold text-[#2E5941]">
               {stats.totalAmountCommitted.toLocaleString('fr-FR')} €
             </div>
-            <div className="text-sm text-gray-600">Montant total initial</div>
+            <div className="text-sm text-gray-600">Montant total engagé</div>
           </CardContent>
         </Card>
         <Card className="shadow-sm">
@@ -366,29 +352,10 @@ export default function SuiviPrets() {
             <div className="text-sm text-gray-600">Capital Restant Dû total</div>
           </CardContent>
         </Card>
-        <Card className="shadow-sm">
-          <CardContent className="p-4 text-center">
-            {stats.nextPaymentDate ? (
-              <>
-                <div className="text-xl font-bold text-orange-600">
-                  {new Date(stats.nextPaymentDate).toLocaleDateString('fr-FR')}
-                </div>
-                <div className="text-sm text-gray-600">
-                  Prochaine échéance (<span className="font-semibold">{stats.nextPaymentLoanReference}</span>)
-                </div>
-              </>
-            ) : (
-              <>
-                <div className="text-2xl font-bold text-gray-400">-</div>
-                <div className="text-sm text-gray-600">Aucune échéance à venir</div>
-              </>
-            )}
-          </CardContent>
-        </Card>
       </div>
 
       <div className="flex justify-between items-center mb-6">
-        <h2 className="text-xl font-bold text-[#3C5F58]">Liste des Financements</h2>
+        <h2 className="text-xl font-bold text-[#3C5F58]">Tableau de Bord des Financements du Client</h2>
         <div className="flex gap-3">
           <Button
             onClick={exportToCSV}
@@ -413,12 +380,12 @@ export default function SuiviPrets() {
           <CardHeader className="bg-gray-50 border-b">
             <CardTitle className="text-xl font-bold text-[#3C5F58] flex items-center gap-2">
               <Banknote className="w-5 h-5 text-orange-500" />
-              {editingId ? 'Modifier un financement' : 'Ajouter un nouveau financement'}
+              {editingId ? 'Modifier un financement pour le client' : 'Ajouter un financement pour le client'}
             </CardTitle>
           </CardHeader>
           <CardContent className="p-6 space-y-6">
-            {/* Section 1: Identification du Financement */}
-            <div className="bg-gray-50 p-4 rounded-lg">
+            {/* Sections du formulaire... */}
+             <div className="bg-gray-50 p-4 rounded-lg">
               <h3 className="text-lg font-bold text-[#3C5F58] mb-4">1. Identification du Financement</h3>
               <div className="grid md:grid-cols-2 gap-4">
                 <div>
@@ -441,15 +408,13 @@ export default function SuiviPrets() {
                 </div>
               </div>
             </div>
-
-            {/* Section 2: Conditions Financières */}
             <div className="bg-gray-50 p-4 rounded-lg">
               <h3 className="text-lg font-bold text-[#3C5F58] mb-4">2. Conditions Financières</h3>
               <div className="grid md:grid-cols-4 gap-4">
                 <div>
                   <Label className="font-bold">Type de Prêt <span className="text-red-500">*</span></Label>
                   <Select value={formData.typeOfLoan || ''} onValueChange={(value) => setFormData({...formData, typeOfLoan: value as any})}>
-                    <SelectTrigger><SelectValue placeholder="Choisir un type de prêt" /></SelectTrigger>
+                    <SelectTrigger><SelectValue placeholder="Choisir un type" /></SelectTrigger>
                     <SelectContent>
                       {loanTypesOptions.map(type => (
                         <SelectItem key={type.value} value={type.value}><div className="flex items-center">{type.icon} {type.label}</div></SelectItem>
@@ -462,7 +427,7 @@ export default function SuiviPrets() {
                   <Input id="initial-amount" type="number" value={formData.initialAmount || ''} onChange={(e) => setFormData({...formData, initialAmount: parseFloat(e.target.value) || 0})} placeholder="Ex: 100000" />
                 </div>
                 <div>
-                  <Label htmlFor="interest-rate-percentage" className="font-bold">Taux d'intérêt annuel (%)</Label>
+                  <Label htmlFor="interest-rate-percentage" className="font-bold">Taux d'intérêt (%)</Label>
                   <Input id="interest-rate-percentage" type="number" step="0.01" value={formData.interestRatePercentage || ''} onChange={(e) => setFormData({...formData, interestRatePercentage: parseFloat(e.target.value) || 0})} placeholder="Ex: 1.5" />
                 </div>
                 <div>
@@ -471,8 +436,6 @@ export default function SuiviPrets() {
                 </div>
               </div>
             </div>
-
-            {/* Section 3: Suivi et Échéances */}
             <div className="bg-gray-50 p-4 rounded-lg">
               <h3 className="text-lg font-bold text-[#3C5F58] mb-4">3. Suivi et Échéances</h3>
               <div className="grid md:grid-cols-4 gap-4">
@@ -494,8 +457,6 @@ export default function SuiviPrets() {
                 </div>
               </div>
             </div>
-
-            {/* Section 4: Statut et Conditions */}
             <div className="bg-gray-50 p-4 rounded-lg">
               <h3 className="text-lg font-bold text-[#3C5F58] mb-4">4. Statut et Conditions</h3>
               <div className="grid md:grid-cols-2 gap-4">
@@ -511,8 +472,8 @@ export default function SuiviPrets() {
                   </Select>
                 </div>
                 <div>
-                  <Label htmlFor="internal-responsible" className="font-bold">Responsable Interne</Label>
-                  <Input id="internal-responsible" value={formData.internalResponsible || ''} onChange={(e) => setFormData({...formData, internalResponsible: e.target.value})} placeholder="Ex: Expert-comptable, Directeur..." />
+                  <Label htmlFor="internal-responsible" className="font-bold">Responsable Interne (Client)</Label>
+                  <Input id="internal-responsible" value={formData.internalResponsible || ''} onChange={(e) => setFormData({...formData, internalResponsible: e.target.value})} placeholder="Ex: Directeur, RAF..." />
                 </div>
               </div>
               <div className="mt-4">
@@ -520,7 +481,6 @@ export default function SuiviPrets() {
                 <Textarea id="notes-internal" value={formData.notesInternal || ''} onChange={(e) => setFormData({...formData, notesInternal: e.target.value})} placeholder="Commentaires, rappels, contacts, éléments à surveiller..." rows={3} />
               </div>
             </div>
-
             <div className="flex justify-end gap-2 mt-6">
               <Button onClick={resetForm} variant="outline" className="text-red-500 hover:text-red-600 border-red-500">Annuler</Button>
               <Button onClick={saveLoan} className="bg-[#2E5941] hover:bg-[#3C5F58]">{editingId ? 'Modifier le financement' : 'Ajouter le financement'}</Button>
@@ -560,7 +520,7 @@ export default function SuiviPrets() {
                     </div>
                   </div>
                   {loan.objectOfLoan && <p className="text-sm text-gray-500 italic mb-2"><span className="font-semibold">Objet :</span> {loan.objectOfLoan}</p>}
-                  {loan.notesInternal && <p className="text-sm text-gray-500 italic">Notes : {loan.notesInternal}</p>}
+                  {loan.notesInternal && <p className="text-sm text-gray-500 italic">Notes du cabinet: {loan.notesInternal}</p>}
                   <p className="text-xs text-gray-400 mt-2">Dernière mise à jour : {new Date(loan.lastUpdate).toLocaleDateString('fr-FR')}</p>
                 </CardContent>
               </Card>
@@ -568,7 +528,7 @@ export default function SuiviPrets() {
           })
         ) : (
           <div className="text-center text-gray-500 p-8 border-2 border-dashed rounded-lg mt-8">
-            <p>Aucun financement enregistré. Cliquez sur "<span className="font-bold">Ajouter un financement</span>" pour commencer.</p>
+            <p>Aucun financement enregistré pour ce client. Cliquez sur "<span className="font-bold">Ajouter un financement</span>" pour commencer le suivi.</p>
           </div>
         )}
       </div>
