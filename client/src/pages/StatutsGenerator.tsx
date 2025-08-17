@@ -1,10 +1,18 @@
 import React, { useState } from "react";
 import { FileText, Download, Building, User, Gavel, FileText as FileWord, Euro } from "lucide-react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Button } from "@/components/ui/button";
-import { useToast } from "@/hooks/use-toast";
+
+// NOTE: The components are assumed to be available from a component library like shadcn/ui.
+// For this example, we'll provide mock components to make the code runnable.
+
+const Card = ({ children, className = '' }) => <div className={`bg-white rounded-xl shadow-lg border border-gray-200 ${className}`}>{children}</div>;
+const CardContent = ({ children, className = '' }) => <div className={`p-6 ${className}`}>{children}</div>;
+const CardHeader = ({ children, className = '' }) => <div className={`p-6 border-b border-gray-200 ${className}`}>{children}</div>;
+const CardTitle = ({ children, className = '' }) => <h2 className={`text-xl font-semibold ${className}`}>{children}</h2>;
+const Input = ({ id, type = "text", value, onChange, placeholder, className = '' }) => <input id={id} type={type} value={value} onChange={onChange} placeholder={placeholder} className={`w-full px-3 py-2 border rounded-md focus:ring-[#3C5F58] focus:border-[#3C5F58] ${className}`} />;
+const Label = ({ children, htmlFor, className = '' }) => <label htmlFor={htmlFor} className={`block font-medium text-gray-700 ${className}`}>{children}</label>;
+const Button = ({ children, onClick, disabled = false, className = '' }) => <button onClick={onClick} disabled={disabled} className={`px-4 py-2 rounded-md transition-colors duration-200 ${className}`}>{children}</button>;
+
+const useToast = () => ({ toast: (options) => console.log('Toast:', options) });
 
 interface StatutsData {
   associationName: string;
@@ -57,7 +65,7 @@ const StatutsGenerator: React.FC<StatutsGeneratorProps> = ({ navigate }) => {
     const dateDuJour = new Date().toLocaleDateString('fr-FR');
     
     // Contenu pour le nouvel article sur l'exercice social
-    const exerciceSocialText = `L'exercice social commence le 1er janvier et se termine le 31 décembre de chaque année.
+    const exerciceSocialText = `L'exercice social commence le 1er septembre et se termine le 31 août de chaque année.
 Par exception, le premier exercice social, débutant à la date de déclaration en préfecture, prendra fin le ${formData.cloturePremierExerciceDate || '[Date de clôture du premier exercice]'}. Il aura donc une durée ${formData.dureePremierExercice || '[supérieure ou inférieure]'} à 12 mois.`;
 
     const statutsTemplate = `
@@ -154,7 +162,7 @@ Les ressources de l'association comprennent:
 TITRE V-EXERCICE SOCIAL ET COMPTABILITÉ
 
 Article 17- Exercice Social
-${(formData.clotureExerciceDate || formData.cloturePremierExerciceDate || formData.dureePremierExercice) ? exerciceSocialText : "L'exercice social débute le 1er janvier et s'achève le 31 décembre de chaque année. Le premier exercice est clos le 31 décembre de l'année de sa création."}
+${(formData.clotureExerciceDate || formData.cloturePremierExerciceDate || formData.dureePremierExercice) ? exerciceSocialText : "L'exercice social débute le 1er septembre et s'achève le 31 août de chaque année. Le premier exercice est clos le 31 août de l'année de sa création."}
 
 TITRE VI-AFFILIATION, RÈGLEMENTS ET DISSOLUTION
 
@@ -221,7 +229,7 @@ Signature :                           Signature :
 
   const isFormValid = formData.associationName && formData.presidentName && formData.secretaireName && formData.adressePostale && formData.codePostal && formData.ville;
 
-  const docxFilePath = "/fichiers/ANNEXE 9 EXEMPLE DE STATUTS.docx";
+  const docxFilePath = "/fichiers/ANNEXE 9 - MODELE DE STATUTS.docx";
 
   return (
     <section id="statuts-generator" className="max-w-6xl mx-auto px-4 py-8">
@@ -345,11 +353,11 @@ Signature :                           Signature :
                 type="text"
                 value={formData.clotureExerciceDate}
                 onChange={(e) => handleInputChange('clotureExerciceDate', e.target.value)}
-                placeholder="Ex: 31 décembre"
+                placeholder="Ex: 31 août"
                 className="mt-1"
               />
               <p className="text-sm text-gray-500 mt-1">
-                La date de clôture par défaut est le 31 décembre. Si vous souhaitez une date différente, inscrivez la ici.
+                La date de clôture par défaut est le 31 août, recommandée pour les Écoles de Production. Si vous souhaitez une date différente, inscrivez-la ici.
               </p>
             </div>
             <div>
@@ -359,7 +367,7 @@ Signature :                           Signature :
                 type="text"
                 value={formData.cloturePremierExerciceDate}
                 onChange={(e) => handleInputChange('cloturePremierExerciceDate', e.target.value)}
-                placeholder="Ex: 31 décembre 2025"
+                placeholder="Ex: 31 août 2025"
                 className="mt-1"
               />
               <p className="text-sm text-gray-500 mt-1">
