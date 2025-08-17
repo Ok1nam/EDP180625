@@ -19,7 +19,7 @@ const Organigramme: React.FC<OrganigrammeProps> = ({ navigate }) => {
       </h1>
       
       <p className="mb-8 text-lg text-gray-700 leading-relaxed">
-        Ce modèle d'organigramme est un support pour vous, expert-comptable, afin d'aider votre client, l'École de Production, à structurer son équipe et à clarifier les rôles et les responsabilités. Une organisation claire est essentielle pour une gestion efficace et pour rassurer les parties prenantes.
+        Un organigramme est un outil essentiel pour structurer une équipe, clarifier les rôles et définir les responsabilités au sein d'une École de Production. Une organisation claire est un gage de gestion efficace et un élément clé pour rassurer les différentes parties prenantes (financeurs, partenaires, familles).
       </p>
 
       {/* Section Pourquoi un Organigramme ? */}
@@ -59,8 +59,8 @@ const Organigramme: React.FC<OrganigrammeProps> = ({ navigate }) => {
           <ul className="list-disc pl-5 space-y-2">
             <li><span className="font-bold">Conseil d'Administration / Bureau :</span> Définition des grandes orientations, validation stratégique.</li>
             <li><span className="font-bold">Direction :</span> Gestion globale de l'école, représentation, développement.</li>
-            <li><span className="font-bold">Pédagogie :</span> Formateurs, encadrants techniques, responsables de formation.</li>
-            <li><span className="font-bold">Production / Ateliers :</span> Maîtres de stage, chefs d'atelier, responsables qualité.</li>
+            <li><span className="font-bold">Pédagogie :</span> enseignants généraux & vacataires.</li>
+            <li><span className="font-bold">Production / Ateliers :</span> maitre profesionnel.</li>
             <li><span className="font-bold">Administration & Finance :</span> Gestionnaire, comptable, responsable RH.</li>
             <li><span className="font-bold">Relations Partenaires :</span> Chargé de développement partenarial, relations entreprises.</li>
             <li><span className="font-bold">Vie Scolaire / Accompagnement Social :</span> Suivi des élèves, orientation.</li>
@@ -69,7 +69,6 @@ const Organigramme: React.FC<OrganigrammeProps> = ({ navigate }) => {
       </Card>
 
       {/* Section Affichage de l'image de l'organigramme */}
-      {/* Cette carte remplace la section de téléchargement */}
       <Card className="mb-8 shadow-lg border-2 border-[#2E5941]">
         <CardHeader>
           <CardTitle className="text-2xl font-bold text-[#2E5941] flex items-center gap-3">
