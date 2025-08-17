@@ -1,5 +1,5 @@
 import React from 'react';
-import { Download, DollarSign, PieChart, Clock, FileText, Lightbulb } from "lucide-react";
+import { Download, DollarSign, PieChart, Lightbulb } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
@@ -18,7 +18,7 @@ const BudgetCreation: React.FC<BudgetCreationProps> = ({ navigate }) => {
       </h1>
       
       <p className="mb-8 text-lg text-gray-700 leading-relaxed">
-        La mise en place d'un budget prévisionnel est une étape cruciale pour l'élaboration d'un <span className="font-bold">modèle économique viable</span> dès le lancement de votre projet. Ce document vous permet de planifier les ressources et les dépenses nécessaires, en servant de base pour votre <span className="font-bold">dossier de financement</span> et pour la définition de votre stratégie financière initiale.
+        La mise en place d'un budget prévisionnel est une étape cruciale pour l'élaboration d'un <span className="font-bold">modèle économique viable</span> dès le lancement de votre projet. Ce document vous permet de planifier les ressources et les dépenses nécessaires, ainsi que de définir votre stratégie financière initiale.
       </p>
 
       {/* Section Pourquoi un budget de création ? */}
@@ -37,7 +37,6 @@ const BudgetCreation: React.FC<BudgetCreationProps> = ({ navigate }) => {
             <li><span className="font-bold">Évaluer les besoins de financement</span> : Identifier les ressources financières initiales pour le lancement et la pérennité de l'école.</li>
             <li><span className="font-bold">Anticiper les charges</span> : Détailler les coûts fixes et variables pour une gestion financière rigoureuse.</li>
             <li><span className="font-bold">Sécuriser le projet</span> : S'assurer de la viabilité économique à long terme et ajuster la stratégie si nécessaire.</li>
-            <li><span className="font-bold">Présenter un dossier solide</span> : Fournir un document chiffré et cohérent aux banques, investisseurs et partenaires.</li>
             <li><span className="font-bold">Démarrer avec une feuille de route financière</span> : Établir une base de référence pour le suivi et l'ajustement futurs.</li>
           </ul>
         </CardContent>
@@ -60,7 +59,6 @@ const BudgetCreation: React.FC<BudgetCreationProps> = ({ navigate }) => {
             <li><span className="font-bold">Dépenses de fonctionnement</span> : Frais courants (salaires, loyer, assurances...).</li>
             <li><span className="font-bold">Produits de l'activité de production</span> : Estimation des recettes issues de la production des élèves.</li>
             <li><span className="font-bold">Ressources externes</span> : Subventions, mécénat et contributions de partenaires.</li>
-            <li><span className="font-bold">Flux de trésorerie</span> : Prévision des entrées et sorties d'argent sur plusieurs années.</li>
           </ul>
         </CardContent>
       </Card>
