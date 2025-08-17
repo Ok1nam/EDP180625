@@ -267,7 +267,7 @@ export default function SuiviPrets() {
     <section id="suivi-prets" className="max-w-6xl mx-auto px-4 py-8">
       <h1 className="flex items-center gap-3 mb-6 text-3xl font-bold text-[#3C5F58]">
         <Banknote className="w-8 h-8 text-[#3C5F58]" />
-        Accompagner votre Client dans le Suivi de ses <span className="text-[#2E5941]">Financements</span>
+        Suivi Stratégique des <span className="text-[#2E5941]">Financements</span> et Prêts
       </h1>
       
       <p className="mb-8 text-lg text-gray-700 leading-relaxed">
@@ -279,7 +279,7 @@ export default function SuiviPrets() {
         <CardHeader className="bg-gray-50 border-b">
           <CardTitle className="text-xl font-bold text-[#3C5F58] flex items-center gap-2">
             <Lightbulb className="w-5 h-5 text-orange-500" />
-            Un Tableau de Bord pour l'Avenir de votre Client
+            Un Tableau de Bord pour l'Avenir
           </CardTitle>
         </CardHeader>
         <CardContent className="p-6 text-gray-700 space-y-4">
@@ -313,7 +313,7 @@ export default function SuiviPrets() {
       <div className="bg-gray-50 border-l-4 border-gray-200 text-gray-800 p-4 mb-6 rounded-md" role="alert">
         <div className="flex items-start sm:items-center justify-between flex-col sm:flex-row gap-4">
             <div>
-                <h3 className="font-semibold text-lg mb-2">Conseil pour votre Client et Modèle Excel</h3>
+                <h3 className="font-semibold text-lg mb-2">Conseils et Modèle Excel</h3>
                 <p className="text-sm leading-relaxed">
                   Conseillez à votre client de mettre à jour régulièrement le champ "<span className="font-bold">Capital Remboursé</span>" après chaque échéance pour un suivi précis.
                 </p>
@@ -355,7 +355,7 @@ export default function SuiviPrets() {
       </div>
 
       <div className="flex justify-between items-center mb-6">
-        <h2 className="text-xl font-bold text-[#3C5F58]">Tableau de Bord des Financements du Client</h2>
+        <h2 className="text-xl font-bold text-[#3C5F58]">Tableau de Bord des Financements</h2>
         <div className="flex gap-3">
           <Button
             onClick={exportToCSV}
@@ -380,7 +380,7 @@ export default function SuiviPrets() {
           <CardHeader className="bg-gray-50 border-b">
             <CardTitle className="text-xl font-bold text-[#3C5F58] flex items-center gap-2">
               <Banknote className="w-5 h-5 text-orange-500" />
-              {editingId ? 'Modifier un financement pour le client' : 'Ajouter un financement pour le client'}
+              {editingId ? 'Modifier un financement' : 'Ajouter un nouveau financement'}
             </CardTitle>
           </CardHeader>
           <CardContent className="p-6 space-y-6">
@@ -472,7 +472,7 @@ export default function SuiviPrets() {
                   </Select>
                 </div>
                 <div>
-                  <Label htmlFor="internal-responsible" className="font-bold">Responsable Interne (Client)</Label>
+                  <Label htmlFor="internal-responsible" className="font-bold">Responsable Interne (École)</Label>
                   <Input id="internal-responsible" value={formData.internalResponsible || ''} onChange={(e) => setFormData({...formData, internalResponsible: e.target.value})} placeholder="Ex: Directeur, RAF..." />
                 </div>
               </div>
@@ -528,7 +528,7 @@ export default function SuiviPrets() {
           })
         ) : (
           <div className="text-center text-gray-500 p-8 border-2 border-dashed rounded-lg mt-8">
-            <p>Aucun financement enregistré pour ce client. Cliquez sur "<span className="font-bold">Ajouter un financement</span>" pour commencer le suivi.</p>
+            <p>Aucun financement enregistré. Cliquez sur "<span className="font-bold">Ajouter un financement</span>" pour commencer le suivi.</p>
           </div>
         )}
       </div>
