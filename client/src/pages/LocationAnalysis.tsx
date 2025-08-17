@@ -17,7 +17,7 @@ const LocationAnalysis: React.FC<LocationAnalysisProps> = ({ navigate }) => {
       </h1>
       
       <p className="mb-8 text-lg text-gray-700 leading-relaxed">
-        En tant qu’expert-comptable, vous pouvez aider votre client, l’École de Production, à déterminer sa zone d’implantation. Une des premières étapes est de consulter la cartographie nationale des écoles existantes et des projets en cours. Cela permet d’évaluer la concurrence, d’identifier les zones de chalandise potentielles et de comprendre la répartition géographique du réseau.
+        Pour déterminer la zone d'implantation d'une future École de Production, l'une des premières étapes consiste à consulter la cartographie nationale du réseau. Cette ressource permet de visualiser les écoles existantes et les projets en cours de développement, offrant ainsi une vue d'ensemble du maillage territorial.
       </p>
 
       {/* Section Lien vers la carte */}
