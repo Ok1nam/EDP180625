@@ -19,7 +19,7 @@ const GuideTva: React.FC<GuideTvaProps> = ({ navigate }) => {
       </h1>
       
       <p className="mb-8 text-lg text-gray-700 leading-relaxed">
-        Ce guide est destiné à l'expert-comptable pour l'accompagner dans la gestion de la Taxe sur la Valeur Ajoutée (TVA) de son client, une École de Production. La nature mixte des activités de ces structures (formation et production) impose une vigilance particulière sur le plan fiscal.
+        La gestion de la Taxe sur la Valeur Ajoutée (TVA) pour une École de Production présente des spécificités importantes. En raison de la nature mixte de leurs activités (formation et production), une vigilance particulière est requise sur le plan fiscal. Ce guide a pour but de clarifier ces enjeux.
       </p>
 
       {/* Section Principes de la TVA et Écoles de Production */}
@@ -54,7 +54,7 @@ const GuideTva: React.FC<GuideTvaProps> = ({ navigate }) => {
         </CardHeader>
         <CardContent className="p-6 text-gray-700 space-y-4">
           <p>
-            Notre guide d'application de la TVA aborde les points essentiels pour vous aider :
+            Le guide d'application de la TVA aborde les points essentiels suivants :
           </p>
           <ul className="list-disc pl-5 space-y-2">
             <li><span className="font-bold">Les principes fondamentaux de la TVA</span> applicables aux associations.</li>
@@ -82,15 +82,14 @@ const GuideTva: React.FC<GuideTvaProps> = ({ navigate }) => {
         <CardContent className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
           <div className="text-base text-gray-800 flex-1">
             <p className="mb-2">
-              Obtenez le guide détaillé pour maîtriser l'application de la TVA au sein de l'École de Production de votre client.
+              Obtenez le guide détaillé pour maîtriser l'application de la TVA au sein d'une École de Production.
             </p>
             <p className="text-sm text-gray-600">
-              <span className="font-bold">Note :</span> Ce document est un outil d'aide à la décision. Il est recommandé de s'appuyer sur votre expertise pour valider les pratiques et garantir la conformité fiscale du client.
+              <span className="font-bold">Note :</span> Ce document est un outil d'aide. La validation des pratiques par un expert est recommandée pour garantir la conformité fiscale.
             </p>
           </div>
           <a
             href={guideTvaFilePath}
-            // Le nom du fichier de téléchargement a également été mis à jour
             download="ANNEXE 5 - GUIDE D APPLICATION DE LA TVA.pdf"
             className="flex-shrink-0"
           >
