@@ -69,7 +69,7 @@ export default function Home({ navigate }: HomeProps) {
         </div>
 
         <p className="text-lg text-gray-700 leading-relaxed mb-6">
-          Ce site constitue le support de mon mémoire de DEC, proposant une <strong>méthodologie opérationnelle</strong> pour accompagner les Écoles de Production. Vous y trouverez tous les outils, annexes et études de cas nécessaires pour maîtriser ce secteur en pleine expansion.
+          Ce site constitue le support de mon mémoire de DEC, proposant une <strong>méthodologie opérationnelle</strong> pour accompagner les Écoles de Production. Vous y trouverez tous les outils et annexes nécessaires pour maîtriser ce secteur en pleine expansion.
         </p>
 
         <div className="bg-[#184D31] bg-opacity-10 border-l-4 border-[#184D31] text-gray-800 p-6 rounded-md shadow-md">
@@ -83,7 +83,7 @@ export default function Home({ navigate }: HomeProps) {
         <div className="text-center mb-12">
           <h2 className="text-3xl sm:text-4xl font-bold text-gray-800 mb-6">Une méthodologie en 3 volets</h2>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-            Découvrez l'approche structurée issue de mon mémoire DEC, illustrée par 2 études de cas réelles : École Alpha (métallurgie) et École Bêta (menuiserie).
+            Découvrez l'approche structurée issue de mon mémoire DEC :
           </p>
         </div>
 
