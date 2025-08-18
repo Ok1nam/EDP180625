@@ -55,14 +55,13 @@ Un modèle hybride, des défis spécifiques
 </div>
 
 <div className="bg-green-50 border-l-4 border-[#184D31] p-6 rounded-md">
-<h3 className="font-bold text-lg text-[#184D31] mb-3">Votre rôle d'expert-comptable</h3>
-<ul className="text-gray-700 space-y-2">
-<li>• Évaluation de faisabilité économique</li>
-<li>• Mobilisation des financements complexes</li>
-<li>• Plan comptable adapté au modèle hybride</li>
-<li>• Tableaux de bord et indicateurs spécifiques</li>
-</ul>
-</div>
+    <h3 className="font-bold text-lg text-[#184D31] mb-3">Votre Levier d'Action Stratégique</h3>
+    <ul className="text-gray-700 space-y-2">
+        <li>• <strong>Sécuriser</strong> le montage financier du projet</li>
+        <li>• <strong>Structurer</strong> un cadre comptable et fiscal sur-mesure</li>
+        <li>• <strong>Piloter</strong> la double performance : sociale et économique</li>
+        <li>• <strong>Garantir</strong> la pérennité du modèle grâce à des outils de suivi adaptés</li>
+    </ul>
 </div>
 
 <p className="text-lg text-gray-700 leading-relaxed mb-6">
