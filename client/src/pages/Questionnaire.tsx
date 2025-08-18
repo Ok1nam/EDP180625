@@ -240,7 +240,7 @@ export default function Questionnaire({ navigate }: QuestionnaireProps) {
       </h1>
       
       <p className="mb-6 text-gray-600 leading-relaxed">
-        20 questions pour évaluer votre projet d'école de production et identifier les axes d'amélioration.
+        20 questions pour évaluer le projet d'école de production et identifier les axes d'amélioration.
       </p>
       
       <Card className="mb-6">
