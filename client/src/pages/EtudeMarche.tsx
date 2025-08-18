@@ -38,7 +38,6 @@ const EtudeMarche: React.FC<EtudeMarcheProps> = ({ navigate }) => {
             <li><span className="font-bold">Valider la pertinence du projet</span> : Confirmer l'existence d'un besoin avéré sur le marché local avant d'engager des financements.</li>
             <li><span className="font-bold">Identifier les opportunités et les risques</span> : Détecter des créneaux non exploités et évaluer la concurrence pour un positionnement stratégique.</li>
             <li><span className="font-bold">Établir des prévisions réalistes</span> : Utiliser des données objectives pour construire le business plan et les prévisionnels financiers.</li>
-            <li><span className="font-bold">Préparer un dossier de financement convaincant</span> : Fournir des arguments chiffrés et étayés pour rassurer les banques et les financeurs.</li>
           </ul>
         </CardContent>
       </Card>
