@@ -1,5 +1,3 @@
-// client/src/pages/Home.tsx
-
 import React from 'react';
 import { BriefcaseBusiness, Users, BarChart3, Rocket, Lightbulb, Scale, ChevronRight, BookOpen } from "lucide-react"; // Icônes adaptées au public expert-comptable
 import { Card, CardContent } from "@/components/ui/card";
@@ -24,11 +22,15 @@ return (
 <div className="relative z-10 max-w-4xl mx-auto text-center animate-fade-in-up">
 {/* Titre accrocheur avec l'enjeu social */}
 <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold mb-5 leading-tight tracking-tight drop-shadow-lg">
-42% des jeunes sans diplôme restent au chômage.<br/>
+42%<sup>*</sup> des jeunes sans diplôme restent au chômage.<br/>
 <span className="text-green-200">L'École de Production change la donne.</span>
 </h1>
+{/* Source ajoutée ici */}
+<p className="text-xs sm:text-sm text-green-200 opacity-70 mt-2">
+* Source : Insee, enquête Emploi 2023
+</p>
 {/* Sous-titre : positionnement expert */}
-<p className="text-xl sm:text-2xl opacity-95 mb-8 font-light max-w-3xl mx-auto">
+<p className="text-xl sm:text-2xl opacity-95 mt-8 mb-8 font-light max-w-3xl mx-auto">
 Expert-comptable, découvrez la méthodologie complète pour accompagner vos clients dans ce modèle hybride innovant : du montage financier au pilotage opérationnel.
 </p>
 </div>
