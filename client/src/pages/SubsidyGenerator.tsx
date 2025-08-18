@@ -1,7 +1,14 @@
 import React from 'react';
 import { Download, FileText, Lightbulb, Users, ClipboardList } from "lucide-react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Button } from "@/components/ui/button";
+
+// NOTE: The components are assumed to be available from a component library like shadcn/ui.
+// For this example, we'll provide mock components to make the code runnable.
+const Card = ({ children, className = '' }) => <div className={`bg-white rounded-xl shadow-lg border border-gray-200 ${className}`}>{children}</div>;
+const CardContent = ({ children, className = '' }) => <div className={`p-6 ${className}`}>{children}</div>;
+const CardHeader = ({ children, className = '' }) => <div className={`p-6 border-b border-gray-200 ${className}`}>{children}</div>;
+const CardTitle = ({ children, className = '' }) => <h2 className={`text-xl font-semibold ${className}`}>{children}</h2>;
+const Button = ({ children, className = '' }) => <button className={`px-4 py-2 rounded-md transition-colors duration-200 ${className}`}>{children}</button>;
+
 
 const SubsidyGenerator: React.FC = () => {
   const subventionFilePath = "/fichiers/ANNEXE 13 - DOSSIER TYPE DE DEMANDE DE SUBVENTION.docx";
@@ -14,7 +21,7 @@ const SubsidyGenerator: React.FC = () => {
       </h1>
 
       <p className="mb-8 text-lg text-gray-700 leading-relaxed">
-        Les demandes de subventions sont une étape cruciale mais souvent complexe. Chaque financeur a ses propres formulaires et attentes, ce qui rend le processus long et répétitif. Pour transformer cette contrainte en un levier d'efficacité, nous vous proposons un <span className="font-bold">outil stratégique</span> : un modèle de dossier à télécharger.
+        Les demandes de subventions sont une étape cruciale mais souvent complexe. Chaque financeur a ses propres formulaires et attentes. Pour transformer cette contrainte en un levier d'efficacité, ce <span className="font-bold">modèle de dossier</span> constitue un outil stratégique à mettre à disposition de votre client.
       </p>
       
       {/* Section Pourquoi un modèle type ? */}
@@ -27,12 +34,12 @@ const SubsidyGenerator: React.FC = () => {
         </CardHeader>
         <CardContent className="p-6 text-gray-700 space-y-4">
           <p>
-            L'objectif de ce modèle est de centraliser les réponses aux questions les plus fréquentes des financeurs. En préparant en amont une base d'informations complètes sur votre école et vos projets, vous pourrez :
+            L'objectif de ce modèle est de centraliser les réponses aux questions les plus fréquentes des financeurs. En préparant en amont une base d'informations complètes sur l'école et le projet, il est possible de :
           </p>
           <ul className="list-disc pl-5 space-y-2">
             <li><span className="font-bold">Pré-remplir 90% des formulaires</span> : La majorité du travail de rédaction est déjà faite, il ne reste que l'adaptation à chaque partenaire.</li>
-            <li><span className="font-bold">Gagner un temps précieux</span> : Fini la recherche répétitive d'informations. Concentrez-vous sur la personnalisation de vos demandes.</li>
-            <li><span className="font-bold">Assurer la cohérence de vos messages</span> : Garantissez une communication homogène et professionnelle, renforçant la crédibilité de votre projet.</li>
+            <li><span className="font-bold">Gagner un temps précieux</span> : Fini la recherche répétitive d'informations. L'essentiel du temps peut être consacré à la personnalisation des demandes.</li>
+            <li><span className="font-bold">Assurer la cohérence des messages</span> : Garantir une communication homogène et professionnelle, renforçant la crédibilité du projet.</li>
           </ul>
         </CardContent>
       </Card>
@@ -64,7 +71,7 @@ const SubsidyGenerator: React.FC = () => {
           </CardTitle>
         </CardHeader>
         <CardContent className="p-6 text-gray-700 space-y-4">
-          <p>Le dossier type est structuré en 6 parties claires pour couvrir tous les aspects de votre demande :</p>
+          <p>Le dossier type est structuré en 6 parties claires pour couvrir tous les aspects de la demande :</p>
           <ul className="list-decimal pl-5 space-y-2 font-medium">
             <li>Informations générales sur la structure</li>
             <li>Présentation de l’École de Production</li>
@@ -86,10 +93,10 @@ const SubsidyGenerator: React.FC = () => {
         <CardContent className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
           <div className="text-base text-gray-800 flex-1">
             <p className="mb-2">
-              Accédez à notre modèle complet au format Word pour préparer efficacement vos futures demandes de financement.
+              Accédez au modèle complet au format Word pour préparer efficacement les futures demandes de financement.
             </p>
             <p className="text-sm text-gray-600">
-              <span className="font-bold">Conseil :</span> Utilisez ce document comme votre base de travail principale. Mettez-le à jour régulièrement pour qu'il reflète toujours la situation actuelle de votre école.
+              <span className="font-bold">Conseil :</span> Utiliser ce document comme base de travail principale pour le client. Il doit être mis à jour régulièrement pour refléter la situation actuelle de l'école.
             </p>
           </div>
           <a
