@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Plus, Banknote, Building2, CalendarDays, Percent, TrendingUp, HandCoins, ArrowRightFromLine, Wallet, Hourglass, FileText, Download, FileDown, File, Edit, Trash2, Lightbulb, ClipboardList } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -7,7 +7,6 @@ import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
-import { useLocalStorage } from "@/hooks/useLocalStorage";
 import { useToast } from "@/hooks/use-toast";
 
 // Interface pour un prêt ou un financement
@@ -39,8 +38,16 @@ interface Loan {
 
 export default function SuiviPrets() {
   const { toast } = useToast();
-  const [savedLoans, setSavedLoans] = useLocalStorage<Loan[]>('loans_data', []);
-  const [loans, setLoans] = useState<Loan[]>(savedLoans);
+  // Correction: Remplacement de useLocalStorage par une gestion standard avec useState et useEffect
+  const [loans, setLoans] = useState<Loan[]>(() => {
+    try {
+      const item = window.localStorage.getItem('loans_data');
+      return item ? JSON.parse(item) : [];
+    } catch (error) {
+      console.error("Erreur lors de la lecture du localStorage", error);
+      return [];
+    }
+  });
   const [showForm, setShowForm] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
 
@@ -68,6 +75,15 @@ export default function SuiviPrets() {
     internalResponsible: '',
     lastUpdate: new Date().toISOString().split('T')[0],
   });
+
+  // Correction: Utilisation de useEffect pour sauvegarder dans le localStorage
+  useEffect(() => {
+    try {
+      window.localStorage.setItem('loans_data', JSON.stringify(loans));
+    } catch (error) {
+      console.error("Erreur lors de l'écriture dans le localStorage", error);
+    }
+  }, [loans]);
 
   const loanTypesOptions = [
     { value: 'Amortissable', label: 'Amortissable', icon: <Banknote className="w-4 h-4 mr-2" /> },
@@ -160,7 +176,6 @@ export default function SuiviPrets() {
     }
 
     setLoans(updatedLoans);
-    setSavedLoans(updatedLoans);
     resetForm();
 
     toast({
@@ -186,7 +201,6 @@ export default function SuiviPrets() {
   const deleteLoan = (id: string) => {
     const updatedLoans = loans.filter(l => l.id !== id);
     setLoans(updatedLoans);
-    setSavedLoans(updatedLoans);
     
     toast({
       title: "Financement supprimé",
@@ -265,7 +279,8 @@ export default function SuiviPrets() {
 
   return (
     <section id="suivi-prets" className="max-w-6xl mx-auto px-4 py-8">
-      <h1 className="flex items-center gap-3 mb-6 text-3xl font-bold text-[#3C5F58]">
+      {/* TITRE CORRIGÉ POUR LE MOBILE */}
+      <h1 className="flex flex-col sm:flex-row items-center text-center sm:text-left gap-3 mb-6 text-2xl sm:text-3xl font-bold text-[#3C5F58]">
         <Banknote className="w-8 h-8 text-[#3C5F58]" />
         Suivi Stratégique des <span className="text-[#2E5941]">Financements</span> et Prêts
       </h1>
@@ -354,9 +369,10 @@ export default function SuiviPrets() {
         </Card>
       </div>
 
-      <div className="flex justify-between items-center mb-6">
+      {/* ZONE DE BOUTONS CORRIGÉE POUR LE MOBILE */}
+      <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4 mb-6">
         <h2 className="text-xl font-bold text-[#3C5F58]">Tableau de Bord des Financements</h2>
-        <div className="flex gap-3">
+        <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
           <Button
             onClick={exportToCSV}
             className="bg-[#2E5941] hover:bg-[#3C5F58] text-white"
@@ -367,7 +383,7 @@ export default function SuiviPrets() {
           </Button>
           <Button 
             onClick={() => { resetForm(); setShowForm(true); }}
-            className="flex items-center gap-2 py-3 px-6 text-lg bg-[#2E5941] hover:bg-[#3C5F58] transition-colors"
+            className="flex items-center justify-center gap-2 py-3 px-6 text-lg bg-[#2E5941] hover:bg-[#3C5F58] transition-colors"
           >
             <Plus className="w-4 h-4 mr-2" />
             Ajouter un financement

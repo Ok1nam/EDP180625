@@ -234,7 +234,7 @@ export default function SuiviSubvention() {
       </h1>
 
       <p className="mb-8 text-lg text-gray-700 leading-relaxed">
-        Cet outil vous permet de gérer de manière centralisée les dossiers de subventions pour votre École de Production. Suivez l'état de chaque demande, les montants sollicités et reçus, et les échéances importantes pour assurer un <span className="font-bold">modèle économique pérenne</span>.
+        Cet outil permet de gérer de manière centralisée les dossiers de subventions pour un projet d'École de Production. Il est conçu pour suivre l'état de chaque demande, les montants sollicités et reçus, et les échéances importantes afin d'assurer la <span className="font-bold">pérennité du modèle économique</span>.
       </p>
 
       {!showForm ? (

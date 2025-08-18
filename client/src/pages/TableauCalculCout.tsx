@@ -20,7 +20,7 @@ const TableauCalculCout: React.FC<TableauCalculCoutProps> = ({ navigate }) => {
       </h1>
       
       <p className="mb-8 text-lg text-gray-700 leading-relaxed">
-        Ce tableau est un outil de calcul automatisé conçu pour déterminer avec précision le coût d'un élève et le coût horaire de la formation. Il est essentiel pour une gestion financière rigoureuse et pour établir le <span
+        Ce tableau est un outil de calcul automatisé conçu pour déterminer avec précision le coût d'un élève et mettre en avant les principaux indicateurs de production. Il est essentiel pour une gestion financière rigoureuse et pour établir le <span
           className="text-[#3C5F58] hover:underline cursor-pointer font-medium"
           onClick={() => navigate && navigate('prix-vente')}
         >coût de revient des productions de votre client</span>.
