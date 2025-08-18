@@ -18,7 +18,7 @@ const BudgetCreation: React.FC<BudgetCreationProps> = ({ navigate }) => {
       </h1>
       
       <p className="mb-8 text-lg text-gray-700 leading-relaxed">
-        La mise en place d'un budget prévisionnel est une étape cruciale pour l'élaboration d'un <span className="font-bold">modèle économique viable</span> dès le lancement de votre projet. Ce document vous permet de planifier les ressources et les dépenses nécessaires, ainsi que de définir votre stratégie financière initiale.
+        La mise en place d'un budget prévisionnel est une étape cruciale pour l'élaboration d'un <span className="font-bold">modèle économique viable</span> dès le lancement du projet. Ce document permet de planifier les ressources et les dépenses nécessaires, ainsi que de définir la stratégie financière initiale.
       </p>
 
       {/* Section Pourquoi un budget de création ? */}
@@ -73,10 +73,10 @@ const BudgetCreation: React.FC<BudgetCreationProps> = ({ navigate }) => {
         <CardContent className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
           <div className="text-base text-gray-800 flex-1">
             <p className="mb-2">
-              Accédez à notre modèle de budget prévisionnel interactif au format .xlsm (Excel avec macros) pour préparer et sécuriser le financement de votre École de Production.
+              Accédez à notre modèle de budget prévisionnel interactif au format .xlsm (Excel avec macros) pour préparer et sécuriser le financement de  l'école de Production.
             </p>
             <p className="text-sm text-gray-600">
-              <span className="font-bold">Conseil :</span> Adaptez ce modèle pour qu'il soit un outil de pilotage proactif, en lien direct avec les indicateurs de performance de votre école.
+              <span className="font-bold">Conseil :</span> Adaptez ce modèle pour qu'il soit un outil de pilotage proactif, en lien direct avec les indicateurs de performance de l'école.
             </p>
           </div>
           <a
