@@ -35,7 +35,7 @@ const PlanComptable: React.FC<PlanComptableProps> = ({ navigate }) => {
           <ul className="list-disc pl-5 space-y-2">
             <li>Gérer les flux financiers liés aux activités de production.</li>
             <li>Enregistrer les subventions de fonctionnement et d'investissement.</li>
-            <li>Suivre les charges de formation et les coûts pédagogiques.</li>
+            <li>Affecter les charges dans le bon secteur d'activité </li>
           </ul>
           <p>
             Nous vous encourageons vivement à l'utiliser comme point de départ, en l'affinant par la création de sous-comptes analytiques. Cette personnalisation est la clé pour offrir à votre client un reporting financier sur mesure, facilitant ainsi les prises de décision et la communication avec les parties prenantes.

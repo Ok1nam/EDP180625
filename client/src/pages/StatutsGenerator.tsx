@@ -64,7 +64,6 @@ const StatutsGenerator: React.FC<StatutsGeneratorProps> = ({ navigate }) => {
     const siegeSocialComplet = `${formData.adressePostale || '[adresse postale]'}, ${formData.codePostal || '[code postal]'} ${formData.ville || '[Ville]'}`;
     const dateDuJour = new Date().toLocaleDateString('fr-FR');
     
-    // Contenu pour le nouvel article sur l'exercice social
     const exerciceSocialText = `L'exercice social commence le 1er septembre et se termine le 31 août de chaque année.
 Par exception, le premier exercice social, débutant à la date de déclaration en préfecture, prendra fin le ${formData.cloturePremierExerciceDate || '[Date de clôture du premier exercice]'}. Il aura donc une durée ${formData.dureePremierExercice || '[supérieure ou inférieure]'} à 12 mois.`;
 
@@ -235,14 +234,14 @@ Signature :                           Signature :
     <section id="statuts-generator" className="max-w-6xl mx-auto px-4 py-8">
       <h1 className="flex items-center gap-2 mb-6 text-3xl font-bold text-gray-800">
         <Gavel className="w-8 h-8 text-[#3C5F58]" />
-        Générateur de Statuts d'Association (Loi 1901)
+        Générateur de Statuts pour École de Production (Association Loi 1901)
       </h1>
       
       <p className="mb-4 text-lg text-gray-700 leading-relaxed">
-        Ce modèle de statuts est conçu pour la création d'une École de Production sous la forme d'une association loi 1901 à but non lucratif. Il s'appuie sur le guide juridique et les recommandations de la Fédération pour garantir la compatibilité avec le label et permettre la reconnaissance d'intérêt général pour le mécénat.
+        Utilisez ce modèle pour préparer les statuts de l'École de Production de votre client. Il est conçu pour une association loi 1901 et s'appuie sur les recommandations de la Fédération pour garantir la compatibilité avec le label et la reconnaissance d'intérêt général.
       </p>
       <p className="mb-8 text-lg text-gray-700 leading-relaxed">
-        Remplissez les champs ci-dessous pour pré-remplir les informations clés. Vous pourrez ensuite télécharger le fichier .txt et l'adapter aux spécificités de votre projet avant de le signer et de le déclarer.
+        Remplissez les champs ci-dessous avec les informations du projet. Vous pourrez ensuite télécharger un fichier .txt à adapter aux spécificités du dossier avant la signature et la déclaration.
       </p>
 
       <div className="grid lg:grid-cols-2 gap-6">
@@ -299,7 +298,7 @@ Signature :                           Signature :
             <div className="bg-blue-50 border-l-4 border-blue-500 text-blue-800 p-3 shadow-sm">
               <p className="font-semibold mb-1">Objet social (pré-rempli) :</p>
               <p className="text-sm">
-                L'objet social, essentiel pour une École de Production, est déjà formulé dans les statuts générés pour affirmer un but éducatif et inclure l'activité lucrative accessoire. Vous pourrez l'affiner si nécessaire.
+                L'objet social, essentiel pour une École de Production, est déjà formulé pour affirmer un but éducatif et inclure l'activité lucrative accessoire. Il pourra être affiné si nécessaire.
               </p>
             </div>
           </CardContent>
@@ -337,7 +336,6 @@ Signature :                           Signature :
           </CardContent>
         </Card>
 
-        {/* Nouvelle carte pour les informations financières */}
         <Card className="lg:col-span-2">
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-[#3C5F58]">
@@ -357,7 +355,7 @@ Signature :                           Signature :
                 className="mt-1"
               />
               <p className="text-sm text-gray-500 mt-1">
-                La date de clôture par défaut est le 31 août, recommandée pour les Écoles de Production. Si vous souhaitez une date différente, inscrivez-la ici.
+                La date de clôture par défaut est le 31 août, recommandée pour les Écoles de Production. Si une autre date est souhaitée, l'inscrire ici.
               </p>
             </div>
             <div>
@@ -371,7 +369,7 @@ Signature :                           Signature :
                 className="mt-1"
               />
               <p className="text-sm text-gray-500 mt-1">
-                Le premier exercice peut avoir une durée différente de 12 mois. Indiquez la date de clôture de celui-ci.
+                Le premier exercice peut avoir une durée différente de 12 mois. Indiquer ici sa date de clôture.
               </p>
             </div>
             <div>
@@ -474,23 +472,23 @@ Signature :                           Signature :
         <CardContent className="p-6">
           <h3 className="text-xl font-semibold mb-4 text-[#3C5F58]">
               <FileText className="inline-block w-6 h-6 mr-2 text-[#3C5F58]" />
-              Conseils importants pour la création de votre association
+              Points de vigilance pour la création de l'association
           </h3>
           <div className="text-base text-gray-700 space-y-3">
             <p>
-              <span className="font-bold">Objet social :</span> L'objet social est le cœur de votre association. La formule pré-remplie est adaptée aux Écoles de Production. Il est essentiel que l'objet statutaire affirme un but éducatif et une gestion désintéressée. Si votre projet a des spécificités uniques, vous devez l'affiner.
+              <span className="font-bold">Objet social :</span> L'objet social est le cœur du projet associatif. La formule pré-remplie est adaptée aux Écoles de Production. Il est essentiel que l'objet statutaire affirme un but éducatif et une gestion désintéressée. Si le projet du client a des spécificités uniques, l'objet social devra être affiné.
             </p>
             <p>
               <span className="font-bold">Ressources :</span> Le modèle intègre les produits des activités économiques des élèves (vente, sous-traitance) comme une ressource de l'association. Cela est crucial pour le statut d'École de Production.
             </p>
             <p>
-              <span className="font-bold">Déclaration :</span> Une fois les statuts signés par les membres fondateurs, vous devez déclarer votre association en préfecture ou sous-préfecture, ou en ligne.
+              <span className="font-bold">Déclaration :</span> Une fois les statuts signés par les membres fondateurs, l'association doit être déclarée en préfecture ou sous-préfecture, ou en ligne.
             </p>
             <p>
               <span className="font-bold">Règlement Intérieur :</span> Il est fortement recommandé d'établir un règlement intérieur pour préciser les modalités de fonctionnement interne non prévues par les statuts.
             </p>
             <p className="text-sm italic text-gray-600 mt-4">
-              Ce générateur fournit une trame adaptable selon le contexte local. Pour une conformité totale et adaptée à votre situation spécifique, notamment pour les aspects fiscaux et comptables complexes, il est vivement conseillé de consulter un expert.
+              Ce générateur fournit une trame adaptable selon le contexte local. Pour une conformité totale et adaptée à la situation spécifique du projet, notamment pour les aspects fiscaux et comptables complexes, il est vivement conseillé de consulter un expert.
             </p>
           </div>
         </CardContent>
