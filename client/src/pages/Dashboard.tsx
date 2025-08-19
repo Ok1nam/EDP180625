@@ -8,8 +8,8 @@ interface TableauDeBordProps {
 }
 
 const TableauDeBord: React.FC<TableauDeBordProps> = ({ navigate }) => {
-  // Le chemin du fichier a été mis à jour avec le nouveau nom
-  const tableauDeBordFilePath = "/fichiers/ANNEXE 20 - TABLEAU DE BORD FINANCIER ET EXTRA-FINANCIER.xlsx";
+  // Le chemin du fichier a été corrigé pour pointer vers le bon fichier .xlsm
+  const tableauDeBordFilePath = "/fichiers/ANNEXE 20 - TABLEAU DE BORD FINANCIER ET EXTRA-FINANCIER.xlsm";
 
   return (
     <section id="tableau-de-bord" className="max-w-4xl mx-auto px-4 py-8">
@@ -19,7 +19,7 @@ const TableauDeBord: React.FC<TableauDeBordProps> = ({ navigate }) => {
       </h1>
       
       <p className="mb-8 text-lg text-gray-700 leading-relaxed">
-        Ce tableau de bord est un outil de pilotage crucial, conçu pour vous, expert-comptable, afin de présenter à votre client un aperçu clair et synthétique de la santé financière et de l'impact social de son École de Production. Il complète le rapport annuel en intégrant des indicateurs clés pour la prise de décision stratégique.
+        Ce tableau de bord est un outil de pilotage crucial, à construire en collaboration avec la direction de l'école, pour obtenir un aperçu clair et synthétique de sa santé financière et de son impact social. Il complète le rapport annuel en intégrant des indicateurs clés pour la prise de décision stratégique.
       </p>
 
       {/* Section Objectifs de l’outil */}
@@ -27,7 +27,7 @@ const TableauDeBord: React.FC<TableauDeBordProps> = ({ navigate }) => {
         <CardHeader className="bg-gray-50 border-b">
           <CardTitle className="text-xl font-bold text-[#3C5F58] flex items-center gap-2">
             <Lightbulb className="w-5 h-5 text-[#3C5F58]" />
-            Objectifs de l'outil pour votre client
+            Objectifs du Tableau de Bord
           </CardTitle>
         </CardHeader>
         <CardContent className="p-6 text-gray-700 space-y-4">
@@ -56,10 +56,10 @@ const TableauDeBord: React.FC<TableauDeBordProps> = ({ navigate }) => {
         <CardContent className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
           <div className="text-base text-gray-800 flex-1">
             <p className="mb-2">
-              Accédez à notre modèle de tableau de bord financier et extra-financier, un outil prêt à l'emploi pour le suivi et le pilotage de l'École de Production de votre client. Ce fichier est au format `.xlsx`.
+              Accédez à ce modèle de tableau de bord, un outil prêt à l'emploi pour le suivi et le pilotage de l'École de Production. Ce fichier est au format `.xlsm`.
             </p>
             <p className="text-sm text-gray-600">
-              <span className="font-bold">Recommandation :</span> Adaptez les indicateurs à la spécificité de votre client pour un pilotage optimal.
+              <span className="font-bold">Recommandation :</span> Adaptez les indicateurs aux spécificités de l'école pour un pilotage optimal.
             </p>
           </div>
           <a
