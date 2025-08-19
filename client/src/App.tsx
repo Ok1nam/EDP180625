@@ -1,93 +1,66 @@
 // client/src/App.tsx
 
-import React, { useState } from 'react';
-import { Switch, Route, useLocation, Link } from "wouter";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-
-// --- DÉBUT DES COMPOSANTS MOCK ---
-// Pour résoudre les erreurs d'importation, nous créons des versions simplifiées
-// des composants, pages et hooks directement dans ce fichier.
-
-const queryClient = new QueryClient();
-
-// Mocks pour les composants UI et hooks
-const Toaster = () => <div>Toaster Placeholder</div>;
-const TooltipProvider = ({ children }) => <>{children}</>;
-const Header = ({ isBurgerMenuOpen, setIsBurgerMenuOpen }) => (
-  <header className="bg-gray-800 text-white p-4 flex justify-between items-center">
-    <h1>Header</h1>
-    <button onClick={() => setIsBurgerMenuOpen(!isBurgerMenuOpen)}>Menu</button>
-  </header>
-);
-const Navigation = ({ navigate, isBurgerMenuOpen }) => (
-  <nav className={`bg-gray-700 text-white w-64 h-full fixed top-0 left-0 transform ${isBurgerMenuOpen ? 'translate-x-0' : '-translate-x-full'} transition-transform`}>
-    <ul className="p-4">
-      <li><a href="#" onClick={(e) => { e.preventDefault(); navigate('/accueil'); }}>Accueil</a></li>
-      <li><a href="#" onClick={(e) => { e.preventDefault(); navigate('/outils'); }}>Outils</a></li>
-    </ul>
-  </nav>
-);
-const Footer = ({ navigate }) => <footer className="bg-gray-800 text-white p-4 text-center">Footer</footer>;
-const LoginForm = ({ onLogin }) => (
-  <div className="p-4">
-    <h2>Login</h2>
-    <button onClick={onLogin}>Log In</button>
-  </div>
-);
-
-// Mocks pour les pages
-const Home = ({ navigate }) => <div><h1>Page d'Accueil</h1></div>;
-const Tools = ({ navigate }) => <div><h1>Page Outils</h1></div>;
-const Suivis = ({ navigate }) => <div><h1>Page Suivis</h1></div>;
-const Questionnaire = ({ navigate }) => <div><h1>Page Questionnaire</h1></div>;
-const Calculators = ({ navigate }) => <div><h1>Page Calculators</h1></div>;
-const BusinessPlan = ({ navigate }) => <div><h1>Page BusinessPlan</h1></div>;
-const PartnershipTracker = ({ navigate }) => <div><h1>Page PartnershipTracker</h1></div>;
-const PedagogicalCosts = ({ navigate }) => <div><h1>Page PedagogicalCosts</h1></div>;
-const TrainingPlanner = ({ navigate }) => <div><h1>Page TrainingPlanner</h1></div>;
-const SubsidyGenerator = ({ navigate }) => <div><h1>Page SubsidyGenerator</h1></div>;
-const StatutsGenerator = ({ navigate }) => <div><h1>Page StatutsGenerator</h1></div>;
-const UnderDevelopment = ({ title, navigate }) => <div><h1>Page en développement : {title}</h1></div>;
-const Dashboard = ({ navigate }) => <div><h1>Page Dashboard</h1></div>;
-const LocationAnalysis = ({ navigate }) => <div><h1>Page LocationAnalysis</h1></div>;
-const DocumentationPage = ({ navigate }) => <div><h1>Page Documentation</h1></div>;
-const Methodology = ({ navigate }) => <div><h1>Page Methodology</h1></div>;
-const Contact = ({ navigate }) => <div><h1>Page Contact</h1></div>;
-const TvaCoefficient = ({ navigate }) => <div><h1>Page TvaCoefficient</h1></div>;
-const PlanComptable = ({ navigate }) => <div><h1>Page PlanComptable</h1></div>;
-const CriteresLabel = ({ navigate }) => <div><h1>Page CriteresLabel</h1></div>;
-const PretSubordonne = ({ navigate }) => <div><h1>Page PretSubordonne</h1></div>;
-const HabilitationTaxe = ({ navigate }) => <div><h1>Page HabilitationTaxe</h1></div>;
-const Entretiens = ({ navigate }) => <div><h1>Page Entretiens</h1></div>;
-const Organigramme = ({ navigate }) => <div><h1>Page Organigramme</h1></div>;
-const EtudeMarche = ({ navigate }) => <div><h1>Page EtudeMarche</h1></div>;
-const GuideTva = ({ navigate }) => <div><h1>Page GuideTva</h1></div>;
-const SuiviPrets = ({ navigate }) => <div><h1>Page SuiviPrets</h1></div>;
-const SuiviSubventions = ({ navigate }) => <div><h1>Page SuiviSubventions</h1></div>;
-const RapportAdapte = ({ navigate }) => <div><h1>Page RapportAdapte</h1></div>;
-const PrixVenteProduits = ({ navigate }) => <div><h1>Page PrixVenteProduits</h1></div>;
-const TableauCalculCout = ({ navigate }) => <div><h1>Page TableauCalculCout</h1></div>;
-const BudgetCreation = ({ navigate }) => <div><h1>Page BudgetCreation</h1></div>;
-const EcoleDeProduction = ({ navigate }) => <div><h1>Page EcoleDeProduction</h1></div>;
-const ContactEtAide = ({ navigate }) => <div><h1>Page ContactEtAide</h1></div>;
-
-// Mock pour le hook d'authentification
-const useAuth = () => ({
-  isAuthenticated: true, // Simule un utilisateur authentifié
-  login: () => console.log("Login action"),
-});
-
-// --- FIN DES COMPOSANTS MOCK ---
+import { BrowserRouter as Router, Routes, Route, useNavigate, useLocation } from "react-router-dom"; // Importe de react-router-dom
+import { QueryClientProvider } from "@tanstack/react-query";
+import { queryClient } from "./lib/queryClient";
+import { Toaster } from "@/components/ui/toaster";
+import { TooltipProvider } from "@/components/ui/tooltip";
+import Header from "./components/Header";
+import Navigation from "./components/Navigation";
+import Footer from "./components/Footer";
+import LoginForm from "./components/LoginForm";
+// Importez toutes vos pages ici
+import Home from "./pages/Home";
+import Tools from "./pages/Tools";
+import Suivis from "./pages/Suivis";
+import Questionnaire from "./pages/Questionnaire";
+import Calculators from "./pages/Calculators";
+import BusinessPlan from "./pages/BusinessPlan";
+import PartnershipTracker from "./pages/PartnershipTracker";
+import PedagogicalCosts from "./pages/PedagogicalCosts";
+import TrainingPlanner from "./pages/TrainingPlanner";
+import SubsidyGenerator from "@/pages/SubsidyGenerator";
+import StatutsGenerator from "@/pages/StatutsGenerator";
+import UnderDevelopment from "@/pages/UnderDevelopment";
+import Dashboard from "./pages/Dashboard";
+import LocationAnalysis from "./pages/LocationAnalysis";
+import Guides from "./pages/Guides";
+import DocumentationPage from "./pages/DocumentationPage";
+import Methodology from "./pages/Methodology";
+import Annexes from "./pages/Annexes";
+import Contact from "./pages/Contact";
+import ResultatFiscal from "./pages/ResultatFiscal";
+import TvaCoefficient from "./pages/TvaCoefficient";
+import PlanComptable from "./pages/PlanComptable";
+import CriteresLabel from "./pages/CriteresLabel";
+import PretSubordonne from "./pages/PretSubordonne";
+import HabilitationTaxe from "./pages/HabilitationTaxe";
+import Entretiens from "./pages/Entretiens";
+import Organigramme from "./pages/Organigramme";
+import EtudeMarche from "./pages/EtudeMarche";
+import GuideTva from "./pages/GuideTva";
+import SuiviPrets from "./pages/SuiviPrets";
+import SuiviSubventions from "./pages/SuiviSubventions";
+import RapportAdapte from "./pages/RapportAdapte";
+import PrixVenteProduits from "./pages/PrixVenteProduits";
+import TableauCalculCout from "./pages/TableauCalculCout";
+import BudgetCreation from "./pages/BudgetCreation";
+import EcoleDeProduction from "./pages/EcoleDeProduction";
+import ContactEtAide from "./pages/ContactEtAide";
+import { useState } from "react";
+import { useAuth } from "./hooks/useAuth";
+import AnalyticsTracker from './components/AnalyticsTracker'; // Importe le nouveau composant
 
 function MainApplicationContent() {
   const { isAuthenticated, login } = useAuth();
   const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false);
-  const [, setLocation] = useLocation();
+  const navigateRR = useNavigate(); // Hook de React Router DOM pour la navigation
 
+  // La fonction navigate utilisera navigateRR de react-router-dom
   const navigate = (path: string) => {
-    setLocation(path);
+    navigateRR(path); // Change l'URL et déclenche le rendu de la route correspondante
     window.scrollTo({ top: 0, behavior: 'smooth' });
-    setIsBurgerMenuOpen(false);
+    setIsBurgerMenuOpen(false); // S'assure que le menu burger se ferme à la navigation
   };
 
   if (!isAuthenticated) {
@@ -99,47 +72,60 @@ function MainApplicationContent() {
       <Header isBurgerMenuOpen={isBurgerMenuOpen} setIsBurgerMenuOpen={setIsBurgerMenuOpen} />
       <Navigation navigate={navigate} isBurgerMenuOpen={isBurgerMenuOpen} setIsBurgerMenuOpen={setIsBurgerMenuOpen} />
       <main className="flex-1 px-8 py-8 max-w-6xl mx-auto w-full">
-        <Switch>
-          <Route path="/" component={() => <Home navigate={navigate} />} />
-          <Route path="/accueil" component={() => <Home navigate={navigate} />} />
-          <Route path="/outils" component={() => <Tools navigate={navigate} />} />
-          <Route path="/plan-comptable" component={() => <PlanComptable navigate={navigate} />} />
-          <Route path="/tva-coefficient" component={() => <TvaCoefficient navigate={navigate} />} />
-          <Route path="/arbre" component={() => <Questionnaire navigate={navigate} />} />
-          <Route path="/statuts" component={() => <StatutsGenerator navigate={navigate} />} />
-          <Route path="/criteres-label" component={() => <CriteresLabel navigate={navigate} />} />
-          <Route path="/budget-creation" component={() => <BudgetCreation navigate={navigate} />} />
-          <Route path="/subventions" component={() => <SubsidyGenerator navigate={navigate} />} />
-          <Route path="/pret-subordonne" component={() => <PretSubordonne navigate={navigate} />} />
-          <Route path="/habilitation-taxe" component={() => <HabilitationTaxe navigate={navigate} />} />
-          <Route path="/calculateurs" component={() => <TableauCalculCout navigate={navigate} />} />
-          <Route path="/prix-vente" component={() => <PrixVenteProduits navigate={navigate} />} />
-          <Route path="/rapport-adapte" component={() => <RapportAdapte navigate={navigate} />} />
-          <Route path="/suivis" component={() => <Suivis navigate={navigate} />} />
-          <Route path="/suivi-subventions" component={() => <SuiviSubventions navigate={navigate} />} />
-          <Route path="/suivi-prets" component={() => <SuiviPrets navigate={navigate} />} />
-          <Route path="/partenariats" component={() => <PartnershipTracker navigate={navigate} />} />
-          <Route path="/tableau-bord" component={() => <Dashboard navigate={navigate} />} />
-          <Route path="/documentation" component={() => <DocumentationPage navigate={navigate} />} />
-          <Route path="/methodo" component={() => <Methodology navigate={navigate} />} />
-          <Route path="/cartographie" component={() => <LocationAnalysis navigate={navigate} />} />
-          <Route path="/organigramme" component={() => <Organigramme navigate={navigate} />} />
-          <Route path="/entretiens" component={() => <Entretiens navigate={navigate} />} />
-          <Route path="/guide-tva" component={() => <GuideTva navigate={navigate} />} />
-          <Route path="/etude-marche" component={() => <EtudeMarche navigate={navigate} />} />
-          <Route path="/contact-et-aide" component={() => <ContactEtAide navigate={navigate} />} />
-          <Route path="/expert-comptable" component={() => <Contact navigate={navigate} />} /> 
-          <Route path="/edp" component={() => <EcoleDeProduction navigate={navigate} />} /> 
-          <Route path="/faq" component={() => <UnderDevelopment title="Foire Aux Questions (FAQ)" navigate={navigate} />} />
-          <Route path="/support" component={() => <UnderDevelopment title="Support Technique" navigate={navigate} />} />
-          <Route path="/contact" component={() => <Contact navigate={navigate} />} />
-          <Route path="/business-plan" component={() => <BusinessPlan navigate={navigate} />} />
-          <Route path="/couts-pedagogiques" component={() => <PedagogicalCosts navigate={navigate} />} />
-          <Route path="/planification" component={() => <TrainingPlanner navigate={navigate} />} />
-          <Route>
-            {() => <Home navigate={navigate} />}
-          </Route>
-        </Switch>
+        {/* Utilisation de Routes et Route pour le routage avec React Router DOM */}
+        <Routes>
+          {/* Route par défaut pour la page d'accueil */}
+          <Route path="/" element={<Home navigate={navigate} />} />
+          <Route path="/accueil" element={<Home navigate={navigate} />} />
+
+          {/* Outils */}
+          <Route path="/outils" element={<Tools navigate={navigate} />} />
+          <Route path="/plan-comptable" element={<PlanComptable navigate={navigate} />} />
+          <Route path="/tva-coefficient" element={<TvaCoefficient navigate={navigate} />} />
+          <Route path="/resultat-fiscal" element={<ResultatFiscal navigate={navigate} />} />
+          <Route path="/arbre" element={<Questionnaire navigate={navigate} />} />
+          <Route path="/statuts" element={<StatutsGenerator navigate={navigate} />} />
+          <Route path="/criteres-label" element={<CriteresLabel navigate={navigate} />} />
+          <Route path="/budget-creation" element={<BudgetCreation navigate={navigate} />} />
+          <Route path="/subventions" element={<SubsidyGenerator navigate={navigate} />} />
+          <Route path="/pret-subordonne" element={<PretSubordonne navigate={navigate} />} />
+          <Route path="/habilitation-taxe" element={<HabilitationTaxe navigate={navigate} />} />
+          <Route path="/calculateurs" element={<TableauCalculCout navigate={navigate} />} />
+          <Route path="/prix-vente" element={<PrixVenteProduits navigate={navigate} />} />
+          <Route path="/rapport-adapte" element={<RapportAdapte navigate={navigate} />} />
+
+          {/* Suivis */}
+          <Route path="/suivis" element={<Suivis navigate={navigate} />} />
+          <Route path="/suivi-subventions" element={<SuiviSubventions navigate={navigate} />} />
+          <Route path="/suivi-prets" element={<SuiviPrets navigate={navigate} />} />
+          <Route path="/partenariats" element={<PartnershipTracker navigate={navigate} />} />
+          <Route path="/tableau-bord" element={<Dashboard navigate={navigate} />} />
+
+          {/* Documentation & Guides */}
+          <Route path="/documentation" element={<DocumentationPage navigate={navigate} />} />
+          <Route path="/methodo" element={<Methodology navigate={navigate} />} />
+          <Route path="/cartographie" element={<LocationAnalysis navigate={navigate} />} />
+          <Route path="/organigramme" element={<Organigramme navigate={navigate} />} />
+          <Route path="/entretiens" element={<Entretiens navigate={navigate} />} />
+          <Route path="/guide-tva" element={<GuideTva navigate={navigate} />} />
+          <Route path="/etude-marche" element={<EtudeMarche navigate={navigate} />} />
+
+          {/* Contact & Aide */}
+          <Route path="/contact-et-aide" element={<ContactEtAide navigate={navigate} />} />
+          <Route path="/expert-comptable" element={<Contact navigate={navigate} />} />
+          <Route path="/edp" element={<EcoleDeProduction navigate={navigate} />} />
+          <Route path="/faq" element={<UnderDevelopment title="Foire Aux Questions (FAQ)" navigate={navigate} />} />
+          <Route path="/support" element={<UnderDevelopment title="Support Technique" navigate={navigate} />} />
+          <Route path="/contact" element={<Contact navigate={navigate} />} />
+
+          {/* Routes pour les pages qui étaient gérées par currentPage mais qui n'ont pas de lien direct dans le menu. */}
+          <Route path="/business-plan" element={<BusinessPlan navigate={navigate} />} />
+          <Route path="/couts-pedagogiques" element={<PedagogicalCosts navigate={navigate} />} />
+          <Route path="/planification" element={<TrainingPlanner navigate={navigate} />} />
+
+          {/* Route par défaut (404 ou redirige vers l'accueil) */}
+          <Route path="*" element={<Home navigate={navigate} />} />
+        </Routes>
       </main>
       <Footer navigate={navigate} />
     </div>
@@ -151,7 +137,10 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <Toaster />
-        <MainApplicationContent />
+        <Router> {/* Encadre l'application entière avec BrowserRouter */}
+          <AnalyticsTracker /> {/* Place AnalyticsTracker ici pour qu'il puisse accéder à useLocation */}
+          <MainApplicationContent />
+        </Router>
       </TooltipProvider>
     </QueryClientProvider>
   );

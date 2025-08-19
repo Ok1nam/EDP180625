@@ -1,6 +1,6 @@
 // client/src/components/Navigation/Navigation.tsx
 
-import React, { useState, useEffect } from "react";
+import { useState, useEffect } from "react";
 import {
   Home,
   Wrench,
@@ -136,6 +136,9 @@ export default function Navigation({ navigate, isBurgerMenuOpen, setIsBurgerMenu
               )}
             </button>
             
+            {/* ======================================================= */}
+            {/* DÉBUT DE LA CORRECTION                                 */}
+            {/* ======================================================= */}
             {section.items.length > 1 && openSubmenu === section.path && (
               <ul className="bg-gray-700">
                 {section.items.map((item) => (
@@ -151,6 +154,9 @@ export default function Navigation({ navigate, isBurgerMenuOpen, setIsBurgerMenu
                 ))}
               </ul>
             )}
+            {/* ======================================================= */}
+            {/* FIN DE LA CORRECTION                                    */}
+            {/* ======================================================= */}
           </li>
         ))}
       </ul>
