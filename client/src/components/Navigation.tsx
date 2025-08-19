@@ -1,6 +1,6 @@
 // client/src/components/Navigation/Navigation.tsx
 
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import {
   Home,
   Wrench,
@@ -37,7 +37,8 @@ const menuStructure = [
     icon: Wrench,
     items: [
       { id: "plan-comptable", path: "/plan-comptable", label: "Plan comptable adapté", icon: FileText },
-      { id: "tva-coefficient", path: "/tva-coefficient", label: "Trame de calcul du coefficient de déduction de TVA", icon: Calculator },
+      // Correction du libellé pour correspondre à la fusion
+      { id: "tva-coefficient", path: "/tva-coefficient", label: "Trame d’aide au calcul TVA, TS et résultat fiscal", icon: Calculator },
       { id: "arbre", path: "/arbre", label: "Arbre à la décision", icon: Target },
       { id: "statuts", path: "/statuts", label: "Générateur de statuts", icon: Building },
       { id: "criteres-label", path: "/criteres-label", label: "Liste de vérification des critères à remplir pour obtenir le label", icon: CheckSquare },
@@ -135,9 +136,6 @@ export default function Navigation({ navigate, isBurgerMenuOpen, setIsBurgerMenu
               )}
             </button>
             
-            {/* ======================================================= */}
-            {/* DÉBUT DE LA CORRECTION                                 */}
-            {/* ======================================================= */}
             {section.items.length > 1 && openSubmenu === section.path && (
               <ul className="bg-gray-700">
                 {section.items.map((item) => (
@@ -153,9 +151,6 @@ export default function Navigation({ navigate, isBurgerMenuOpen, setIsBurgerMenu
                 ))}
               </ul>
             )}
-            {/* ======================================================= */}
-            {/* FIN DE LA CORRECTION                                    */}
-            {/* ======================================================= */}
           </li>
         ))}
       </ul>
