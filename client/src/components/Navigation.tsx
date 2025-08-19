@@ -37,8 +37,8 @@ const menuStructure = [
     icon: Wrench,
     items: [
       { id: "plan-comptable", path: "/plan-comptable", label: "Plan comptable adapté", icon: FileText },
-      // Correction du libellé pour correspondre à la fusion
-      { id: "tva-coefficient", path: "/tva-coefficient", label: "Trame d’aide au calcul TVA, TS et résultat fiscal", icon: Calculator },
+      { id: "tva-coefficient", path: "/tva-coefficient", label: "Trame de calcul du coefficient de déduction de TVA", icon: Calculator },
+      { id: "resultat-fiscal", path: "/resultat-fiscal", label: "Trame de calcul du résultat fiscal", icon: TrendingUp },
       { id: "arbre", path: "/arbre", label: "Arbre à la décision", icon: Target },
       { id: "statuts", path: "/statuts", label: "Générateur de statuts", icon: Building },
       { id: "criteres-label", path: "/criteres-label", label: "Liste de vérification des critères à remplir pour obtenir le label", icon: CheckSquare },
