@@ -34,10 +34,10 @@ const TvaCoefficient: React.FC<TvaCoefficientProps> = ({ navigate }) => {
           </p>
           <ul className="list-disc pl-5 space-y-3">
             <li>
-              <span className="font-bold">Coefficient de déduction de TVA :</span> Il permet de calculer la proportion de TVA récupérable sur les dépenses mixtes (utilisées pour l'activité pédagogique exonérée et l'activité de production soumise). Le calcul se base sur le rapport : <span className="font-semibold text-[#2E5941]">Recettes soumises à TVA / Recettes totales</span>.
+              <span className="font-bold">Coefficient de déduction de TVA :</span> Il permet de calculer la proportion de TVA récupérable sur les dépenses mixtes (utilisées pour l'activité pédagogique exonérée et l'activité de production soumise).
             </li>
             <li>
-              <span className="font-bold">Coefficient d'assujettissement à la Taxe sur les Salaires (TS) :</span> Ce ratio est crucial pour déterminer la part des salaires soumise à cette taxe. Il se calcule sur la base du rapport entre les recettes n'ayant pas ouvert droit à déduction de la TVA et le total des recettes.
+              <span className="font-bold">Coefficient d'assujettissement à la Taxe sur les Salaires (TS) :</span> Ce ratio est crucial pour déterminer la part des salaires soumise à cette taxe.
             </li>
             <li>
               <span className="font-bold">Résultat Fiscal :</span> La trame vous aide à déterminer le résultat fiscal de l'activité lucrative, en partant du résultat comptable et en appliquant les réintégrations et déductions fiscales propres au statut de l'association.
