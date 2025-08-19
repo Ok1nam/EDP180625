@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { TreePine, Play, ArrowLeft, RotateCcw, Download, Save, Check, X } from "lucide-react";
 
 // NOTE: The Card, CardContent, Button, and Progress components are assumed to be
@@ -7,6 +7,8 @@ import { TreePine, Play, ArrowLeft, RotateCcw, Download, Save, Check, X } from "
 
 const Card = ({ children, className = '' }) => <div className={`bg-white rounded-xl shadow-lg border border-gray-200 ${className}`}>{children}</div>;
 const CardContent = ({ children, className = '' }) => <div className={`p-6 ${className}`}>{children}</div>;
+const CardHeader = ({ children, className = '' }) => <div className={`p-6 border-b border-gray-200 ${className}`}>{children}</div>;
+const CardTitle = ({ children, className = '' }) => <h2 className={`text-xl font-semibold ${className}`}>{children}</h2>;
 const Button = ({ children, onClick, disabled = false, className = '' }) => <button onClick={onClick} disabled={disabled} className={`px-4 py-2 rounded-md transition-colors duration-200 ${className}`}>{children}</button>;
 const Progress = ({ value, className = '' }) => <div className={`w-full h-2 bg-gray-200 rounded-full overflow-hidden ${className}`}><div style={{ width: `${value}%` }} className="h-full bg-green-500 transition-all duration-300"></div></div>;
 
@@ -231,6 +233,7 @@ export default function Questionnaire({ navigate }: QuestionnaireProps) {
 
   const progress = state.isStarted ? (state.currentIndex / questions.length) * 100 : 0;
   const currentQuestion = state.isStarted && state.currentIndex < questions.length ? questions[state.currentIndex] : null;
+  const pptxFilePath = "/fichiers/ANNEXE 8 - ARBRE A LA DECISION SUR LES CARACTERISTIQUES DU PORTEUR DE PROJET.pptx";
 
   return (
     <section id="arbre">
@@ -242,6 +245,21 @@ export default function Questionnaire({ navigate }: QuestionnaireProps) {
       <p className="mb-6 text-gray-600 leading-relaxed">
         20 questions pour évaluer le projet d'école de production et identifier les axes d'amélioration.
       </p>
+
+      {/* Section de téléchargement ajoutée */}
+      <Card className="mb-6 shadow-md">
+        <CardContent className="p-6 text-center">
+          <p className="mb-4">
+            Téléchargez la version PowerPoint de cet arbre de décision pour une utilisation hors ligne ou pour vos présentations.
+          </p>
+          <a href={pptxFilePath} download="ANNEXE 8 - ARBRE A LA DECISION SUR LES CARACTERISTIQUES DU PORTEUR DE PROJET.pptx">
+            <Button className="bg-[#2E5941] hover:bg-[#3C5F58] text-white">
+              <Download className="w-4 h-4 mr-2" />
+              Télécharger le modèle (.pptx)
+            </Button>
+          </a>
+        </CardContent>
+      </Card>
       
       <Card className="mb-6">
         <CardContent className="p-6">

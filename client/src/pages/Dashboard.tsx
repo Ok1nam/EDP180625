@@ -64,7 +64,7 @@ const TableauDeBord: React.FC<TableauDeBordProps> = ({ navigate }) => {
           </div>
           <a
             href={tableauDeBordFilePath}
-            download="ANNEXE 20 - TABLEAU DE BORD FINANCIER ET EXTRA-FINANCIER.xlsx"
+            download="ANNEXE 20 - TABLEAU DE BORD FINANCIER ET EXTRA-FINANCIER.xlsm"
             className="flex-shrink-0"
           >
             <Button className="bg-[#2E5941] hover:bg-[#3C5F58] text-white flex items-center gap-2 py-3 px-6 text-lg">

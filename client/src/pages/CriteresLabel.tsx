@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { CheckCircle, Award, Lightbulb, XCircle } from "lucide-react"; 
+import { CheckCircle, Award, Lightbulb, XCircle, Download } from "lucide-react"; 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Progress } from "@/components/ui/progress";
@@ -117,6 +117,7 @@ export default function CriteresLabel({ navigate }: CriteresLabelProps) {
 
   const totalCriteria = allCriteria.length;
   const completedCriteriaCount = Object.values(checkedCriteria).filter(Boolean).length;
+  const etudeMarcheExcelPath = "/fichiers/ANNEXE 10 - LISTE DE VERIFICATION DES CRITERES A REMPLIR POUR OBTENIR LE LABEL.docx";
 
   return (
     <section id="criteres-label" className="max-w-4xl mx-auto px-4 py-8">
@@ -133,7 +134,7 @@ export default function CriteresLabel({ navigate }: CriteresLabelProps) {
       <Card className="mb-8 p-6 shadow-md">
         <CardTitle className="mb-4 text-xl font-semibold flex items-center gap-2 text-[#3C5F58]">
             <CheckCircle className="w-5 h-5 text-[#3C5F58]" />
-            Progression de votre labellisation
+            Progression de la labellisation
         </CardTitle>
         <div className="flex items-center gap-4">
           <Progress value={progressValue} className="w-full h-3 bg-[#2E5941]" />
@@ -141,9 +142,34 @@ export default function CriteresLabel({ navigate }: CriteresLabelProps) {
         </div>
         {progressValue === 100 && (
           <p className="mt-4 text-center text-[#2E5941] font-bold text-lg animate-bounce">
-            🎉 Félicitations ! Tous les critères sont cochés. Votre dossier est prêt !
+            🎉 Félicitations ! Tous les critères sont cochés. Le dossier est prêt !
           </p>
         )}
+      </Card>
+
+      {/* Section de téléchargement ajoutée */}
+      <Card className="mb-8 shadow-lg border-2 border-[#3C5F58]">
+        <CardHeader>
+          <CardTitle className="text-2xl font-bold text-[#2E5941] flex items-center gap-3">
+            <Download className="w-6 h-6" /> Télécharger le Modèle d'Étude de Marché
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+          <div className="text-base text-gray-800 flex-1">
+            <p className="mb-2">
+              Utilisez ce modèle Excel pour guider votre client dans la réalisation de son étude de marché, un prérequis essentiel pour valider l'ancrage territorial du projet.
+            </p>
+          </div>
+          <a
+            href={etudeMarcheExcelPath}
+            download="ANNEXE 10 - LISTE DE VERIFICATION DES CRITERES A REMPLIR POUR OBTENIR LE LABEL.docx"
+            className="flex-shrink-0"
+          >
+            <Button className="flex items-center gap-2 py-3 px-6 text-lg bg-[#2E5941] text-white rounded-md hover:bg-[#3C5F58] transition-colors">
+              <Download className="w-5 h-5" /> Télécharger le modèle
+            </Button>
+          </a>
+        </CardContent>
       </Card>
 
       {/* Liste des critères par catégorie */}

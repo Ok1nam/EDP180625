@@ -1,5 +1,5 @@
 import React from 'react';
-import { Network, Users, Lightbulb, Workflow } from "lucide-react";
+import { Network, Users, Lightbulb, Workflow, Download } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
@@ -8,7 +8,7 @@ interface OrganigrammeProps {
 }
 
 const Organigramme: React.FC<OrganigrammeProps> = ({ navigate }) => {
-  // Le chemin du fichier image est maintenant utilisé pour l'affichage direct
+  // Le chemin du fichier image est utilisé pour l'affichage et le téléchargement
   const organigrammeImagePath = "/fichiers/ANNEXE 2 - EXEMPLE D'ORGANIGRAMME D'UNE ECOLE DE PRODUCTION.png";
 
   return (
@@ -81,6 +81,31 @@ const Organigramme: React.FC<OrganigrammeProps> = ({ navigate }) => {
             alt="Exemple d'organigramme d'une École de Production" 
             className="w-full h-auto rounded-lg shadow-md"
           />
+        </CardContent>
+      </Card>
+
+      {/* Section de téléchargement ajoutée */}
+      <Card className="mb-8 shadow-lg border-2 border-[#3C5F58]">
+        <CardHeader>
+          <CardTitle className="text-2xl font-bold text-[#2E5941] flex items-center gap-3">
+            <Download className="w-6 h-6" /> Télécharger le Modèle
+          </CardTitle>
+        </CardHeader>
+        <CardContent className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
+          <div className="text-base text-gray-800 flex-1">
+            <p className="mb-2">
+              Téléchargez ce modèle d'organigramme au format PNG pour l'adapter à la structure spécifique de l'école de votre client.
+            </p>
+          </div>
+          <a
+            href={organigrammeImagePath}
+            download="ANNEXE 2 - EXEMPLE D'ORGANIGRAMME D'UNE ECOLE DE PRODUCTION.png"
+            className="flex-shrink-0"
+          >
+            <Button className="flex items-center gap-2 py-3 px-6 text-lg bg-[#2E5941] text-white rounded-md hover:bg-[#3C5F58] transition-colors">
+              <Download className="w-5 h-5" /> Télécharger le modèle
+            </Button>
+          </a>
         </CardContent>
       </Card>
 
