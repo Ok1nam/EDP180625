@@ -51,7 +51,7 @@ const entretiensData = [
     ],
   },
   {
-    title: "Entretien 2 : Avec un enseignant-créateur de projet",
+    title: "Entretien 2 : Avec un Enseignant faisant parti de l'équipe projet",
     questions: [
       {
         question: "Q1: Qu'est-ce qui vous a motivé à initier un projet au sein de cette école de production ?",

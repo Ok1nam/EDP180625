@@ -8,7 +8,8 @@ interface BudgetCreationProps {
 }
 
 const BudgetCreation: React.FC<BudgetCreationProps> = ({ navigate }) => {
-  const budgetCreationFilePath = "/fichiers/ANNEXE 12 BUDGET ECOLE DE PRODUCTION VT09082025.xlsm";
+  // Correction du chemin pour pointer vers le bon fichier
+  const budgetCreationFilePath = "/fichiers/ANNEXE 12 - TRAME DE BUDGET A LA CREATION.xlsm";
 
   return (
     <section id="budget-creation" className="max-w-4xl mx-auto px-4 py-8">
