@@ -67,8 +67,7 @@ const menuStructure: MenuSection[] = [
     icon: Wrench,
     items: [
       { id: "plan-comptable", path: "/plan-comptable", label: "Plan comptable adapté", icon: FileText, description: "Accédez à un plan comptable spécifique pour les écoles de production." },
-      { id: "tva-coefficient", path: "/tva-coefficient", label: "Trame de calcul du coefficient de déduction de TVA", icon: Calculator, description: "Calculez simplement votre coefficient de déduction de TVA." },
-      { id: "resultat-fiscal", path: "/resultat-fiscal", label: "Trame de calcul du résultat fiscal", icon: TrendingUp, description: "Estimez le résultat fiscal de votre école avec notre trame dédiée." },
+      { id: "TVACoefficient", path: "/tva-coefficient", label: "Trame d’aide au calcul TVA, TS et résultat fiscal", icon: Calculator, description: "Un outil unique pour calculer le coefficient de TVA, la taxe sur les salaires et le résultat fiscal." },
       { id: "arbre", path: "/arbre", label: "Arbre à la décision", icon: Target, description: "Cet outil, conçu sous forme d'arbre décisionnel, permet de poser un diagnostic structuré sur le projet (pédagogique, économique, équipe, ancrage territorial, etc.). Son objectif est de sécuriser le démarrage en orientant l'accompagnement et en identifiant les freins à lever." },
       { id: "statuts", path: "/statuts", label: "Générateur de statuts", icon: Building, description: "Créez les statuts de votre association en vous assurant de leur conformité légale." },
       { id: "criteres-label", path: "/criteres-label", label: "Liste de vérification des critères à remplir pour obtenir le label", icon: CheckSquare, description: "Assurez-vous de respecter tous les critères pour le label." },

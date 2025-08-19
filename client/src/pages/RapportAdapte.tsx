@@ -19,7 +19,7 @@ const RapportAdapte: React.FC<RapportAdapteProps> = ({ navigate }) => {
       </h1>
       
       <p className="mb-8 text-lg text-gray-700 leading-relaxed">
-        Ce modèle de rapport est un outil stratégique pour vous, expert-comptable, afin d’aider votre client, l’École de Production, à présenter de manière professionnelle ses activités et son impact. Une communication transparente et régulière est fondamentale pour entretenir la confiance avec les partenaires, entreprises, collectivités, et financeurs.
+        Ce modèle de rapport est un outil stratégique, conçu par l'expert-comptable, pour apporter une valeur ajoutée à la présentation aux parties prenantes. Il permet à l'École de Production de communiquer de manière professionnelle sur ses activités et son impact, ce qui est fondamental pour entretenir la confiance avec les partenaires (entreprises, collectivités, financeurs).
       </p>
 
       {/* Section Objectifs de l’outil pour l’EDP */}
@@ -27,12 +27,12 @@ const RapportAdapte: React.FC<RapportAdapteProps> = ({ navigate }) => {
         <CardHeader className="bg-gray-50 border-b">
           <CardTitle className="text-xl font-bold text-[#3C5F58] flex items-center gap-2">
             <Lightbulb className="w-5 h-5 text-[#3C5F58]" />
-            Objectifs de l'outil pour votre client
+            Objectifs du Rapport pour l'École
           </CardTitle>
         </CardHeader>
         <CardContent className="p-6 text-gray-700 space-y-4">
           <p>
-            Ce rapport d'activité bien structuré et adapté permet à l'École de Production de :
+            Un rapport d'activité bien structuré et adapté permet à l'École de Production de :
           </p>
           <ul className="list-disc pl-5 space-y-2">
             <li><span className="font-bold">Démontrer la valeur ajoutée</span> en mettant en lumière les succès pédagogiques et l'insertion professionnelle des jeunes.</li>
@@ -54,7 +54,7 @@ const RapportAdapte: React.FC<RapportAdapteProps> = ({ navigate }) => {
         </CardHeader>
         <CardContent className="p-6 text-gray-700 space-y-4">
           <p>
-            Notre modèle de rapport est conçu pour inclure les sections suivantes, essentielles pour une École de Production :
+            Ce modèle de rapport est structuré autour des sections suivantes, essentielles pour une communication complète :
           </p>
           <ul className="list-disc pl-5 space-y-2">
             <li><span className="font-bold">Synthèse Exécutive :</span> Un résumé des faits marquants et des réalisations clés.</li>
@@ -78,7 +78,7 @@ const RapportAdapte: React.FC<RapportAdapteProps> = ({ navigate }) => {
         <CardContent className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
           <div className="text-base text-gray-800 flex-1">
             <p className="mb-2">
-              Obtenez un modèle de rapport d'activité complet au format PowerPoint, prêt à être personnalisé avec les données de l'École de Production. Ce support vous permettra de gagner un temps précieux et d’optimiser la communication avec les partenaires.
+              Ce support au format PowerPoint est prêt à être personnalisé avec les données de l'École de Production. Il constitue une base de travail efficace pour gagner un temps précieux et optimiser la communication avec les partenaires.
             </p>
             <p className="text-sm text-gray-600">
               <span className="font-bold">Conseil :</span> Adaptez le niveau de détail et le langage aux attentes spécifiques de chaque partenaire.
