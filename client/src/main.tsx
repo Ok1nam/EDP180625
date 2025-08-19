@@ -8,7 +8,7 @@ import './index.css';
 import ReactGA from 'react-ga4';
 
 // Remplace "TON_ID_DE_MESURE_ICI" par l'ID de mesure que tu as obtenu de Google Analytics (ex: G-XXXXXXXXXX)
-const GA_MEASUREMENT_ID = "TON_ID_DE_MESURE_ICI";
+const GA_MEASUREMENT_ID = "G-P8NLDE1L9L";
 ReactGA.initialize(GA_MEASUREMENT_ID);
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
