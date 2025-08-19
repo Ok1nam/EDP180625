@@ -14,48 +14,38 @@ const TvaCoefficient: React.FC<TvaCoefficientProps> = ({ navigate }) => {
     <section id="tva-coefficient" className="max-w-4xl mx-auto px-4 py-8">
       <h1 className="flex items-center gap-2 mb-6 text-3xl font-bold text-[#3C5F58]">
         <Percent className="w-8 h-8" />
-        Trame de Calcul du Coefficient de Déduction de TVA : sécuriser la récupération fiscale
+        Trame d’aide au calcul TVA, TS et résultat fiscal
       </h1>
 
       <p className="mb-8 text-lg text-gray-700 leading-relaxed">
-        La gestion de la TVA d’une École de Production est un enjeu fiscal majeur. En raison de leur double activité – une activité pédagogique exonérée et une activité de production soumise à TVA – il est essentiel de déterminer avec rigueur la part de TVA déductible sur les dépenses mixtes. Cette trame de calcul est un outil indispensable pour vous, expert-comptable, afin de formaliser et justifier la récupération fiscale pour votre client.
+        La gestion fiscale d’une École de Production présente des spécificités importantes. En raison de leur double activité, il est essentiel de déterminer avec rigueur non seulement la part de TVA déductible, mais aussi le coefficient d'assujettissement à la taxe sur les salaires et le résultat fiscal. Cette trame de calcul est un outil indispensable pour vous, expert-comptable, afin de formaliser et justifier ces trois aspects clés pour votre client.
       </p>
 
       <Card className="mb-8 shadow-md">
         <CardHeader>
           <CardTitle className="text-xl font-semibold flex items-center gap-2 text-[#2E5941]">
             <Calculator className="w-5 h-5" />
-            Comprendre le Coefficient de Déduction
+            Comprendre les Calculs Fiscaux
           </CardTitle>
         </CardHeader>
         <CardContent className="text-gray-700 space-y-4">
           <p>
-            Le coefficient de déduction est au cœur de la gestion fiscale des redevables partiels comme les Écoles de Production. Il permet de calculer la proportion de TVA récupérable sur les dépenses utilisées conjointement pour les activités assujetties et exonérées. Il se compose de trois éléments :
+            Cet outil vous guide sur trois calculs essentiels pour une École de Production :
           </p>
-          <ul className="list-disc pl-5 space-y-2">
-            <li className="font-bold">
-              Coefficient d'assujettissement (CoAS) : Mesure l'utilisation des biens et services pour des opérations imposables.
+          <ul className="list-disc pl-5 space-y-3">
+            <li>
+              <span className="font-bold">Coefficient de déduction de TVA :</span> Il permet de calculer la proportion de TVA récupérable sur les dépenses mixtes (utilisées pour l'activité pédagogique exonérée et l'activité de production soumise). Le calcul se base sur le rapport : <span className="font-semibold text-[#2E5941]">Recettes soumises à TVA / Recettes totales</span>.
             </li>
-            <li className="font-bold">
-              Coefficient de taxation (CoT) : Tient compte du régime des recettes (taxables ou exonérées).
+            <li>
+              <span className="font-bold">Coefficient d'assujettissement à la Taxe sur les Salaires (TS) :</span> Ce ratio est crucial pour déterminer la part des salaires soumise à cette taxe. Il se calcule sur la base du rapport entre les recettes n'ayant pas ouvert droit à déduction de la TVA et le total des recettes.
             </li>
-            <li className="font-bold">
-              Coefficient d'admission (CoAD) : Indique si la TVA est exclue par nature, comme c'est le cas pour les véhicules de tourisme.
+            <li>
+              <span className="font-bold">Résultat Fiscal :</span> La trame vous aide à déterminer le résultat fiscal de l'activité lucrative, en partant du résultat comptable et en appliquant les réintégrations et déductions fiscales propres au statut de l'association.
             </li>
           </ul>
-          <p>
-            Dans le cas des Écoles de Production, le CoAS et le CoAD sont généralement à 100 %, ce qui simplifie le calcul. Le coefficient de déduction correspond alors directement au <span className="font-bold">coefficient de taxation</span>, calculé selon la formule suivante :
-          </p>
-          <p className="font-bold text-center my-4 text-[#2E5941]">
-            Recettes soumises à TVA / Recettes totales
-          </p>
-          <p className="text-sm text-gray-600 font-bold">
-            Les recettes soumises à TVA incluent les ventes de biens et services et certaines subventions liées à des opérations imposables. Les recettes totales comprennent l'ensemble des revenus de l'école, y compris les subventions pédagogiques et les dons.
-          </p>
         </CardContent>
       </Card>
         
-      {/* Mise à jour des classes Tailwind pour utiliser la couleur verte au lieu de la couleur dorée */}
       <Card className="mb-8 shadow-lg border-2 border-[#2E5941]">
         <CardHeader>
           <CardTitle className="text-2xl font-bold text-[#2E5941] flex items-center gap-3">
@@ -65,10 +55,10 @@ const TvaCoefficient: React.FC<TvaCoefficientProps> = ({ navigate }) => {
         <CardContent className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
           <div className="text-base text-gray-800 flex-1">
             <p className="mb-2">
-              Téléchargez la trame de calcul Excel pour vous aider à déterminer le coefficient de déduction de votre client.
+              Téléchargez la trame de calcul Excel pour vous aider à déterminer le coefficient de déduction de TVA, le coefficient d'assujettissement à la taxe sur les salaires et le résultat fiscal de votre client.
             </p>
             <p className="text-sm text-gray-600 font-bold">
-              Note importante : Ce fichier est lié à plusieurs de nos outils. Il est essentiel de le remplir avec les données spécifiques de l'école avant d'utiliser les calculateurs. Pour une compréhension complète du contexte fiscal, nous vous invitons à consulter le guide d'application de la TVA.
+              Note importante : Ce fichier est lié à plusieurs de nos outils. Il est essentiel de le remplir avec les données spécifiques de l'école avant d'utiliser les calculateurs.
             </p>
           </div>
           <a
@@ -76,7 +66,6 @@ const TvaCoefficient: React.FC<TvaCoefficientProps> = ({ navigate }) => {
             download="ANNEXE 6 ET 7 - Trame calcul coefficient déduction et résultat fiscal 080825.xlsm"
             className="flex-shrink-0"
           >
-            {/* Mise à jour de la couleur du bouton */}
             <Button className="bg-[#2E5941] hover:bg-[#3C5F58] text-white flex items-center gap-2 py-3 px-6 text-lg">
               <Download className="w-5 h-5" /> Télécharger le fichier
             </Button>
@@ -93,14 +82,13 @@ const TvaCoefficient: React.FC<TvaCoefficientProps> = ({ navigate }) => {
         </CardHeader>
         <CardContent className="text-gray-700 space-y-4">
           <p>
-            Pour garantir la conformité fiscale et sécuriser les déclarations de TVA de votre client, une attention particulière doit être portée sur les points suivants :
+            Pour garantir la conformité fiscale et sécuriser les déclarations de votre client, une attention particulière doit être portée sur les points suivants :
           </p>
           <ul className="list-disc pl-5 space-y-2">
-            <li className="font-bold">Identification des recettes : Séparez clairement les recettes assujetties à la TVA des recettes exonérées.</li>
-            <li className="font-bold">Suivi des dépenses : Assurez un suivi analytique rigoureux de l'affectation des dépenses mutualisées, en conservant tous les justificatifs.</li>
-            <li className="font-bold">Calcul annuel : Le coefficient de déduction est déterminé à la clôture de l'exercice et s'applique à titre provisoire pour l'année suivante.</li>
-            <li className="font-bold">Régularisation : Une régularisation est à prévoir en fin d'exercice, une fois le coefficient définitif connu.</li>
-            <li className="font-bold">Première année : Par prudence, pour la première année d'activité, il est recommandé de ne pas récupérer la TVA sur les dépenses mutualisées, car le droit à déduction ne s'exerce qu'après la première clôture.</li>
+            <li className="font-bold">Sectorisation comptable : Une séparation claire des activités (lucratives et non lucratives) est la base de tous ces calculs.</li>
+            <li className="font-bold">Identification des recettes : Séparez rigoureusement les recettes assujetties à la TVA de celles qui sont exonérées.</li>
+            <li className="font-bold">Suivi des dépenses : Assurez un suivi analytique précis de l'affectation des dépenses mutualisées.</li>
+            <li className="font-bold">Calcul annuel : Les coefficients sont déterminés à la clôture de l'exercice et s'appliquent à titre provisoire pour l'année suivante, avec une régularisation en fin d'année.</li>
           </ul>
         </CardContent>
       </Card>

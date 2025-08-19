@@ -22,7 +22,7 @@ import {
   X,
 } from "lucide-react";
 
-// On simule les composants Card pour que le code soit fonctionnel
+// Les composants UI de base pour les cartes et le bouton
 const Card = ({ children, onClick }) => (
   <div
     className="bg-white rounded-xl shadow-lg border border-gray-200 cursor-pointer transition-transform duration-200 hover:scale-105"
@@ -67,19 +67,19 @@ const menuStructure: MenuSection[] = [
     icon: Wrench,
     items: [
       { id: "plan-comptable", path: "/plan-comptable", label: "Plan comptable adapté", icon: FileText, description: "Accédez à un plan comptable spécifique pour les écoles de production." },
-      { id: "tva-coefficient", path: "/tva-coefficient", label: "Trame d’aide au calcul TVA, TS et résultat fiscal", icon: Calculator, description: "Un outil unique pour calculer le coefficient de TVA, la taxe sur les salaires et le résultat fiscal." },
+      { id: "tva-coefficient", path: "/tva-coefficient", label: "Trame de calcul du coefficient de déduction de TVA", icon: Calculator, description: "Calculez simplement votre coefficient de déduction de TVA." },
       { id: "arbre", path: "/arbre", label: "Arbre à la décision", icon: Target, description: "Cet outil, conçu sous forme d'arbre décisionnel, permet de poser un diagnostic structuré sur le projet (pédagogique, économique, équipe, ancrage territorial, etc.). Son objectif est de sécuriser le démarrage en orientant l'accompagnement et en identifiant les freins à lever." },
       { id: "statuts", path: "/statuts", label: "Générateur de statuts", icon: Building, description: "Créez les statuts de votre association en vous assurant de leur conformité légale." },
-      { id: "criteres-label", path: "/criteres-label", label: "Liste de vérification des critères du label", icon: CheckSquare, description: "Assurez-vous de respecter tous les critères pour l'obtention du label." },
+      { id: "criteres-label", path: "/criteres-label", label: "Liste de vérification des critères à remplir pour obtenir le label", icon: CheckSquare, description: "Assurez-vous de respecter tous les critères pour le label." },
       { id: "budget-creation", path: "/budget-creation", label: "Trame de budget à la création", icon: DollarSign, description: "Élaborez votre budget prévisionnel pour le lancement de l'école." },
-      { id: "etude-marche", path: "/etude-marche", label: "Étude du marché du secteur", icon: Target, description: "Étudiez le marché de votre secteur pour prendre des décisions éclairées." },
+      { id: "etude-marche", path: "/etude-marche", label: "Étude du marché du secteur sélectionné", icon: Target, description: "Étudiez le marché de votre secteur pour prendre des décisions éclairées." },
       { id: "subventions", path: "/subventions", label: "Dossier type demande subvention", icon: Folder, description: "Préparez votre dossier de demande de subvention avec ce modèle." },
       { id: "suivi-subventions", path: "/suivi-subventions", label: "Suivi des subventions", icon: Euro, description: "Assurez le suivi de vos demandes de subventions et de leur utilisation." },
       { id: "suivi-prets", path: "/suivi-prets", label: "Suivi des prêts", icon: DollarSign, description: "Suivez l'évolution et l'état d'avancement de vos prêts." },
       { id: "pret-subordonne", path: "/pret-subordonne", label: "Exemple de contrat de prêt subordonné", icon: FileText, description: "Modèle pour un contrat de prêt subordonné spécifique." },
-      { id: "habilitation-taxe", path: "/habilitation-taxe", label: "Demande d'habilitation taxe apprentissage", icon: Euro, description: "Accédez au formulaire et aux instructions pour l'habilitation." },
+      { id: "habilitation-taxe", path: "/habilitation-taxe", label: "Exemple de formulaire de demande d'habilitation taxe apprentissage", icon: Euro, description: "Accédez au formulaire et aux instructions pour l'habilitation." },
       { id: "calculateurs", path: "/calculateurs", label: "Tableau calcul de coût", icon: Calculator, description: "Calculez et suivez vos coûts pédagogiques et de production." },
-      { id: "prix-vente", path: "/prix-vente", label: "Détermination du prix de vente", icon: PieChart, description: "Définissez une stratégie de prix pour les produits de votre école." },
+      { id: "prix-vente", path: "/prix-vente", label: "Tableau de détermination du prix de vente des produits", icon: PieChart, description: "Définissez une stratégie de prix pour les produits de votre école." },
       { id: "tableau-bord", path: "/tableau-bord", label: "Tableau de bord financier & extra-financier", icon: BarChart3, description: "Consultez un aperçu complet de la performance de votre école." },
       { id: "rapport-adapte", path: "/rapport-adapte", label: "Modèle de rapport adapté", icon: FileText, description: "Obtenez un modèle de rapport financier adapté à votre structure." },
     ],
@@ -108,7 +108,99 @@ const menuStructure: MenuSection[] = [
   },
 ];
 
-// Composant de la page Outils
+// Composant pour l'en-tête et la navigation (fusionné)
+const Header = ({ navigate, isBurgerMenuOpen, setIsBurgerMenuOpen }) => (
+  <header className="sticky top-0 bg-[#3C5F58] text-white p-4 flex justify-between items-center shadow-md z-50">
+    <div className="flex items-center gap-4">
+      <span className="text-xl font-bold">
+        Ecole de Production
+      </span>
+    </div>
+    <button
+      onClick={() => setIsBurgerMenuOpen(!isBurgerMenuOpen)}
+      className="md:hidden p-2 rounded-full hover:bg-white hover:bg-opacity-20 transition-colors duration-200"
+      aria-label="Toggle navigation menu"
+    >
+      {isBurgerMenuOpen ? <X size={24} /> : <Menu size={24} />}
+    </button>
+  </header>
+);
+
+// Composant de navigation (fusionné)
+const Navigation = ({ navigate, isBurgerMenuOpen, setIsBurgerMenuOpen }) => {
+  const [openSubmenu, setOpenSubmenu] = useState<string | null>(null);
+
+  useEffect(() => {
+    // Si le menu burger se ferme, on ferme aussi les sous-menus
+    if (!isBurgerMenuOpen) {
+      setOpenSubmenu(null);
+    }
+  }, [isBurgerMenuOpen]);
+
+  const handleItemClick = (path: string, isSectionHeader: boolean) => {
+    if (isSectionHeader) {
+      setOpenSubmenu(openSubmenu === path ? null : path);
+    } else {
+      navigate(path);
+      setIsBurgerMenuOpen(false);
+      setOpenSubmenu(null);
+    }
+  };
+
+  return (
+    <nav
+      className={`fixed top-0 right-0 w-80 h-full bg-gray-800 transition-transform duration-300 pt-16 z-40 shadow-lg overflow-y-auto ${
+        isBurgerMenuOpen ? "transform translate-x-0" : "transform translate-x-full"
+      }`}
+    >
+      <ul className="list-none">
+        {menuStructure.map((section: MenuSection) => (
+          <li key={section.id} className="border-b border-gray-600">
+            <button
+              onClick={() =>
+                section.items.length > 1
+                  ? handleItemClick(section.path, true)
+                  : handleItemClick(section.items[0].path, false)
+              }
+              className="w-full flex items-center justify-between gap-3 p-4 text-white text-lg hover:bg-gray-700 transition-colors duration-200 text-left font-semibold"
+            >
+              <span className="flex items-center gap-3">
+                {section.icon && <section.icon className="w-5 h-5" />}
+                {section.label}
+              </span>
+              {section.items.length > 1 && (
+                <span
+                  className={`transform transition-transform duration-200 ${
+                    openSubmenu === section.path ? "rotate-90" : ""
+                  }`}
+                >
+                  ▶
+                </span>
+              )}
+            </button>
+            {section.items.length > 1 && openSubmenu === section.path && (
+              <ul className="bg-gray-700">
+                {section.items.map((item: MenuItem) => (
+                  <li key={item.id}>
+                    <button
+                      onClick={() => handleItemClick(item.path, false)}
+                      className="w-full flex items-center gap-3 pl-12 pr-4 py-3 text-white text-sm hover:bg-gray-600 transition-colors duration-200 text-left"
+                    >
+                      {item.icon && <item.icon className="w-4 h-4" />}
+                      {item.label}
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            )}
+          </li>
+        ))}
+      </ul>
+    </nav>
+  );
+};
+
+// Composant Outils (fusionné)
 const ToolsPage = ({ navigate }) => {
   const outilsSection = menuStructure.find(section => section.id === "outils");
 
@@ -118,22 +210,19 @@ const ToolsPage = ({ navigate }) => {
 
   return (
     <section id="tools-page" className="max-w-4xl mx-auto px-4 py-8">
-      <h1 className="flex items-center gap-2 mb-6 text-3xl font-bold text-[#3C5F58]">
-        <Wrench className="w-8 h-8" />
-        Outils et Suivis
+      <h1 className="flex items-center gap-2 mb-6 text-2xl font-bold text-[#3C5F58]">
+        <Wrench className="w-6 h-6" />
+        Nos Outils et Suivis
       </h1>
-      <p className="mb-8 text-lg text-gray-700 leading-relaxed">
-        Cette section regroupe l'ensemble des outils pratiques et des modèles de suivi conçus pour accompagner la création et le pilotage d'une École de Production. Chaque outil a été pensé pour répondre à une étape clé du projet, de la structuration juridique au suivi financier.
-      </p>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {outilsSection.items.map((outil) => (
           <Card key={outil.id} onClick={() => navigate(outil.path)}>
             <CardContent>
-              <h3 className="flex items-center gap-3 text-lg font-semibold my-4 text-[#2E5941]">
-                <outil.icon className="w-6 h-6 flex-shrink-0" />
+              <h3 className="flex items-center gap-2 text-lg font-semibold mb-3 text-[#2E5941]">
+                <outil.icon className="w-6 h-6" />
                 {outil.label}
               </h3>
-              <p className="text-gray-600 leading-relaxed text-sm">
+              <p className="text-gray-600 leading-relaxed">
                 {outil.description}
               </p>
             </CardContent>
@@ -145,19 +234,52 @@ const ToolsPage = ({ navigate }) => {
 };
 
 // Le composant principal de l'application
-export default function App() {
+const App = () => {
   const [currentPage, setCurrentPage] = useState("outils");
+  const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false);
 
-  // La fonction navigate simule la navigation en changeant l'état
+  // Gère la navigation et la fermeture du menu
   const navigate = (path) => {
-    const pageId = path.replace('/', '');
-    console.log(`Navigation vers : ${pageId}`);
-    // Dans une vraie application, cela serait géré par un routeur.
-    // Pour la démo, on ne change pas de page visible mais on logue l'action.
-    // Si vous voulez simuler un changement de page, vous pourriez faire :
-    // setCurrentPage(pageId);
+    // Logic for routing based on path, we'll just use a simple switch for now
+    const section = menuStructure.flatMap(sec => sec.items).find(item => item.path === path);
+    if (section) {
+      setCurrentPage(section.id);
+    }
+    setIsBurgerMenuOpen(false);
   };
 
-  // Le rendu se concentre sur la page Outils
-  return <ToolsPage navigate={navigate} />;
-}
+  const renderContent = () => {
+    switch (currentPage) {
+      case "outils":
+        return <ToolsPage navigate={navigate} />;
+      // Ajoutez d'autres cas pour d'autres pages si nécessaire
+      default:
+        return (
+          <div className="p-8 text-center text-gray-500">
+            Contenu pour {currentPage} non implémenté.
+          </div>
+        );
+    }
+  };
+
+  return (
+    <div className="font-sans antialiased text-gray-900 bg-gray-50 min-h-screen">
+      <style>{`
+        body { font-family: 'Inter', sans-serif; }
+      `}</style>
+      <Header navigate={navigate} isBurgerMenuOpen={isBurgerMenuOpen} setIsBurgerMenuOpen={setIsBurgerMenuOpen} />
+      <Navigation navigate={navigate} isBurgerMenuOpen={isBurgerMenuOpen} setIsBurgerMenuOpen={setIsBurgerMenuOpen} />
+      <main className="p-4 pt-20 transition-all duration-300">
+        {renderContent()}
+      </main>
+      {isBurgerMenuOpen && (
+        <div
+          onClick={() => setIsBurgerMenuOpen(false)}
+          className="fixed inset-0 bg-black opacity-50 z-30"
+        ></div>
+      )}
+    </div>
+  );
+};
+
+export default App;
