@@ -14,7 +14,7 @@ export function useAuth() {
   // Comptes de démonstration
   const demoAccounts = [
     { username: 'admin', password: 'password' },
-    { username: 'expert-comptable', password: 'demo123' },
+    { username: 'expert-comptable', password: 'dec2025' },
     { username: 'directeur', password: 'ecole123' }
   ];
 
