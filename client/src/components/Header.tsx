@@ -26,17 +26,17 @@ export default function Header({ isBurgerMenuOpen, setIsBurgerMenuOpen }: Header
       </div>
 
       <button
-        className="burger w-12 h-12 flex flex-col justify-between cursor-pointer z-50 transition-all duration-300"
-        onClick={toggleMenu}
-        aria-label="Toggle navigation menu"
-      >
-        {isBurgerMenuOpen ? (
-          // Ajustement de la couleur de l'icône pour une meilleure lisibilité
-          <X className="w-6 h-6 text-gray-900" />
-        ) : (
-          // Ajustement de la couleur de l'icône pour une meilleure lisibilité
-          <Menu className="w-6 h-6 text-gray-900" />
-        )}
+  className="burger w-12 h-12 flex items-center justify-center cursor-pointer z-50 transition-all duration-300"
+  onClick={toggleMenu}
+  aria-label="Toggle navigation menu"
+>
+  {isBurgerMenuOpen ? (
+    // On agrandit l'icône ici aussi
+    <X className="w-10 h-10 text-gray-900" />
+  ) : (
+    // Et ici
+    <Menu className="w-10 h-10 text-gray-900" />
+  )}
       </button>
     </header>
   );
