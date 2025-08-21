@@ -26,7 +26,7 @@ export default function Header({ isBurgerMenuOpen, setIsBurgerMenuOpen }: Header
       </div>
 
       <button
-        className="burger w-8 h-6 flex flex-col justify-between cursor-pointer z-50 transition-all duration-300"
+        className="burger w-12 h-12 flex flex-col justify-between cursor-pointer z-50 transition-all duration-300"
         onClick={toggleMenu}
         aria-label="Toggle navigation menu"
       >
