@@ -60,7 +60,7 @@ const Organigramme: React.FC<OrganigrammeProps> = ({ navigate }) => {
             <li><span className="font-bold">Conseil d'Administration / Bureau :</span> Définition des grandes orientations, validation stratégique.</li>
             <li><span className="font-bold">Direction :</span> Gestion globale de l'école, représentation, développement.</li>
             <li><span className="font-bold">Pédagogie :</span> Enseignants généraux & vacataires.</li>
-            <li><span className="font-bold">Production / Ateliers :</span> Maîtres profesionnels.</li>
+            <li><span className="font-bold">Production / Ateliers :</span> Maîtres professionnels.</li>
             <li><span className="font-bold">Administration & Finance :</span> Gestionnaire, comptable, responsable RH.</li>
             <li><span className="font-bold">Relations Partenaires :</span> Chargé de développement partenarial, relations entreprises.</li>
             <li><span className="font-bold">Vie Scolaire / Accompagnement Social :</span> Suivi des élèves, orientation.</li>

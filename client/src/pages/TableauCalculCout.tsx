@@ -16,7 +16,7 @@ const TableauCalculCout: React.FC<TableauCalculCoutProps> = ({ navigate }) => {
     <section id="tableau-calcul-cout" className="max-w-4xl mx-auto px-4 py-8">
       <h1 className="flex items-center gap-3 mb-6 text-3xl font-bold text-[#3C5F58]">
         <Calculator className="w-8 h-8 text-[#3C5F58]" />
-        Tableau de Calcul des Coûts : Le coût d'un élève
+        Tableau de calcul des coûts : Le coût d'un élève
       </h1>
       
       <p className="mb-8 text-lg text-gray-700 leading-relaxed">
@@ -55,13 +55,13 @@ const TableauCalculCout: React.FC<TableauCalculCoutProps> = ({ navigate }) => {
       <Card className="mb-8 shadow-lg border-2 border-[#2E5941]">
         <CardHeader>
           <CardTitle className="text-2xl font-bold text-[#2E5941] flex items-center gap-3">
-            <Download className="w-6 h-6 text-[#2E5941]" /> Télécharger le Tableau de Calcul des Coûts
+            <Download className="w-6 h-6 text-[#2E5941]" /> Télécharger le Tableau de calcul des coûts
           </CardTitle>
         </CardHeader>
         <CardContent className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
           <div className="text-base text-gray-800 flex-1">
             <p className="mb-2">
-              Accédez à notre modèle de tableau de calcul des coûts, un outil essentiel pour une gestion financière rigoureuse et le pilotage de l'École de Production de votre client. Ce fichier est au format `.xlsx`.
+              Accédez à notre modèle de tableau de calcul des coûts, un outil essentiel pour une gestion financière rigoureuse et le pilotage de l'École de Production de votre client. 
             </p>
             <p className="text-sm text-gray-600">
               <span className="font-bold">Recommandation :</span> Assurez-vous d'activer les macros pour le bon fonctionnement de l'outil.

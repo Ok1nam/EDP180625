@@ -18,12 +18,12 @@ const PrixVenteProduits: React.FC<PrixVenteProduitsProps> = ({ navigate }) => {
     <section id="prix-vente-produits" className="max-w-4xl mx-auto px-4 py-8">
       <h1 className="flex items-center gap-3 mb-6 text-3xl font-bold text-[#3C5F58]">
         <Calculator className="w-8 h-8 text-[#3C5F58]" />
-        Calcul du Prix de Vente des Productions
+        Tableau de détermination du prix de vente des produits
       </h1>
       
       <p className="mb-8 text-lg text-gray-700 leading-relaxed">
-        Cet outil est essentiel pour vous, expert-comptable, afin d’aider votre client École de Production à déterminer avec précision le coût de revient complet d’un produit et à fixer un prix de vente compétitif. Il est basé sur la méthodologie détaillée dans le <span
-          className="text-[#3C5F58] hover:underline cursor-pointer font-medium"
+        Cet outil est essentiel pour vous, expert-comptable, afin d’aider votre client École de Production à déterminer avec précision le coût de revient complet d’un produit et à fixer un prix de vente compétitif. Il se base sur le coût horaire d'un élève, détaillée dans l'outil précédent, le <span
+          className="text-[#3C5F58] hover:underline cursor-pointer font-bold"
           onClick={() => navigate && navigate('tableau-calcul-cout')}
         >Tableau de Calcul des Coûts</span>.
       </p>
@@ -51,12 +51,12 @@ const PrixVenteProduits: React.FC<PrixVenteProduitsProps> = ({ navigate }) => {
         <CardHeader className="bg-gray-50 border-b">
           <CardTitle className="text-xl font-bold text-[#3C5F58] flex items-center gap-2">
             <Download className="w-5 h-5 text-[#3C5F58]" />
-            Télécharger le Tableau de Calcul du Prix de Revient
+            Télécharger le tableau de détermination du prix de vente des produits
           </CardTitle>
         </CardHeader>
         <CardContent className="p-6 text-center">
           <p className="mb-4">
-            Pour une approche plus détaillée, ce tableau de calcul du prix de revient est un outil essentiel pour une gestion financière rigoureuse de l'École de Production de votre client. Il est fourni au format `.xlsx`.
+            Pour une approche plus détaillée, cet outil est essentiel pour une gestion financière rigoureuse de l'École de Production de votre client.
           </p>
           <a href={prixDeRevientFilePath} download="ANNEXE 19 - TABLEAU DE DETERMINATION DU PRIX DE VENTE DES PRODUITS.xlsx">
             <Button className="bg-[#2E5941] hover:bg-[#3C5F58] text-white">
@@ -64,9 +64,6 @@ const PrixVenteProduits: React.FC<PrixVenteProduitsProps> = ({ navigate }) => {
               Télécharger le Tableau
             </Button>
           </a>
-          <p className="italic text-sm text-gray-600 mt-4">
-            <span className="font-bold">Conseil :</span> Utilisez ce tableau pour affiner les stratégies de prix et maximiser la rentabilité de l'EDP.
-          </p>
         </CardContent>
       </Card>
 

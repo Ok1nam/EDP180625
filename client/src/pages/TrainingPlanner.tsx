@@ -1,556 +1,387 @@
-import { useState } from "react";
-import { Calendar, Clock, Award, BookOpen, Users, CheckCircle, AlertCircle } from "lucide-react";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { Button } from "@/components/ui/button";
-import { Textarea } from "@/components/ui/textarea";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Badge } from "@/components/ui/badge";
-import { useLocalStorage } from "@/hooks/useLocalStorage";
-import { useToast } from "@/hooks/use-toast";
+import React, { useState, useEffect } from "react";
+import { TreePine, Play, ArrowLeft, RotateCcw, Download, Save, Check, X } from "lucide-react";
 
-interface TrainingModule {
-  id: string;
-  title: string;
-  sector: string;
-  duration: number; // en heures
-  startDate: string;
-  endDate: string;
-  instructor: string;
-  students: number;
-  objectives: string;
-  skills: string[];
-  certification: string;
-  status: 'planned' | 'in-progress' | 'completed' | 'cancelled';
-  prerequisites: string;
-  resources: string;
-}
+// NOTE: The Card, CardContent, Button, and Progress components are assumed to be
+// available from a component library like shadcn/ui.
+// For this example, we'll provide mock components to make the code runnable.
 
-interface TrainingPlan {
-  modules: TrainingModule[];
-  academicYear: string;
-}
+const Card = ({ children, className = '' }) => <div className={`bg-white rounded-xl shadow-lg border border-gray-200 ${className}`}>{children}</div>;
+const CardContent = ({ children, className = '' }) => <div className={`p-6 ${className}`}>{children}</div>;
+const CardHeader = ({ children, className = '' }) => <div className={`p-6 border-b border-gray-200 ${className}`}>{children}</div>;
+const CardTitle = ({ children, className = '' }) => <h2 className={`text-xl font-semibold ${className}`}>{children}</h2>;
+const Button = ({ children, onClick, disabled = false, className = '' }) => <button onClick={onClick} disabled={disabled} className={`px-4 py-2 rounded-md transition-colors duration-200 ${className}`}>{children}</button>;
+const Progress = ({ value, className = '' }) => <div className={`w-full h-2 bg-gray-200 rounded-full overflow-hidden ${className}`}><div style={{ width: `${value}%` }} className="h-full bg-green-500 transition-all duration-300"></div></div>;
 
-export default function TrainingPlanner() {
-  const { toast } = useToast();
-  const [savedData, setSavedData] = useLocalStorage<TrainingPlan>('training_plan_data', {
-    modules: [],
-    academicYear: '2024-2025'
+// NOTE: We are also assuming the existence of a mock toast and local storage hook.
+const useToast = () => ({ toast: (options) => console.log('Toast:', options) });
+const useLocalStorage = (key, initialValue) => {
+  const [value, setValue] = useState(() => {
+    try {
+      const item = window.localStorage.getItem(key);
+      return item ? JSON.parse(item) : initialValue;
+    } catch (error) {
+      console.log(error);
+      return initialValue;
+    }
   });
 
-  const [data, setData] = useState<TrainingPlan>(savedData);
-  const [showForm, setShowForm] = useState(false);
-  const [editingId, setEditingId] = useState<string | null>(null);
-  const [formData, setFormData] = useState<Partial<TrainingModule>>({});
-  const [currentView, setCurrentView] = useState<'calendar' | 'list'>('list');
+  useEffect(() => {
+    window.localStorage.setItem(key, JSON.stringify(value));
+  }, [key, value]);
 
-  const sectors = [
-    'Bâtiment', 'Industrie', 'Services', 'Restauration', 'Automobile', 
-    'Électricité', 'Plomberie', 'Informatique', 'Commerce', 'Logistique'
-  ];
+  return [value, setValue];
+};
 
-  const certificationTypes = [
-    'CAP', 'BAC Pro', 'BTS', 'Titre professionnel', 'Certification interne', 'Autre'
-  ];
+// NOTE: We need the questions data to be self-contained for the component to be runnable.
+export interface Question {
+  question: string;
+  advice: string;
+}
 
-  const resetForm = () => {
-    setFormData({});
-    setEditingId(null);
-    setShowForm(false);
+export const questions: Question[] = [
+  {
+    question: "Ai-je une motivation forte et pérenne pour porter ce projet dans la durée ?",
+    advice: "Réinterroger ses motivations et clarifier sa vision long terme"
+  },
+  {
+    question: "Est-ce que j'adhère pleinement aux valeurs du modèle EDP ?",
+    advice: "Acquérir de l'expérience ou se former aux valeurs EDP"
+  },
+  {
+    question: "Ai-je des compétences ou une expérience dans les domaines clés ?",
+    advice: "Se doter d'un collègue ou équipier en renfort"
+  },
+  {
+    question: "Suis-je prêt à gérer les difficultés du quotidien avec résilience ?",
+    advice: "Travailler sa résilience et ses capacités d'adaptation"
+  },
+  {
+    question: "Ai-je une capacité à fédérer autour d'un projet ?",
+    advice: "Construire une équipe complémentaire et développer son leadership"
+  },
+  {
+    question: "Ai-je une posture humaine adaptée à des jeunes en fragilité ?",
+    advice: "Développer sa posture éducative et ses compétences relationnelles"
+  },
+  {
+    question: "Suis-je disponible concrètement pour ce projet ?",
+    advice: "Revoir sa disponibilité personnelle et professionnelle"
+  },
+  {
+    question: "Ai-je formalisé une association ou structure juridique ?",
+    advice: "Sécuriser le cadre juridique et administratif"
+  },
+  {
+    question: "Ai-je identifié un ou plusieurs maîtres professionnels potentiels ?",
+    advice: "Chercher des référents métiers dans le tissu économique local"
+  },
+  {
+    question: "Ai-je défini un modèle économique soutenable ?",
+    advice: "Affiner le plan de financement initial et les prévisions"
+  },
+  {
+    question: "Le territoire choisi présente-t-il des opportunités économiques ?",
+    advice: "Approfondir l'étude de marché territoriale"
+  },
+  {
+    question: "Ai-je identifié les filières porteuses localement ?",
+    advice: "Analyser les besoins en compétences du territoire"
+  },
+  {
+    question: "Existe-t-il une demande avérée pour ce type de formation ?",
+    advice: "Réaliser une enquête de besoins plus poussée"
+  },
+  {
+    question: "Ai-je noué des partenariats avec des entreprises locales ?",
+    advice: "Développer un réseau d'entreprises partenaires"
+  },
+  {
+    question: "Les locaux envisagés sont-ils adaptés et conformes ?",
+    advice: "Vérifier la conformité réglementaire des locaux"
+  },
+  {
+    question: "Ai-je prévu un financement pour les 3 premières années ?",
+    advice: "Sécuriser le financement pluriannuel"
+  },
+  {
+    question: "L'équipe pédagogique est-elle constituée ?",
+    advice: "Recruter et former l'équipe pédagogique"
+  },
+  {
+    question: "Ai-je défini un plan de communication et de recrutement ?",
+    advice: "Élaborer une stratégie de communication ciblée"
+  },
+  {
+    question: "Les outils de pilotage sont-ils en place ?",
+    advice: "Mettre en place un système de suivi et d'indicateurs"
+  },
+  {
+    question: "Ai-je préparé l'ouverture et les premiers mois de fonctionnement ?",
+    advice: "Planifier la phase de démarrage opérationnel"
+  }
+];
+
+interface QuestionnaireProps {
+  navigate: (page: string) => void;
+}
+
+interface QuestionnaireState {
+  currentIndex: number;
+  responses: string[];
+  isStarted: boolean;
+  isCompleted: boolean;
+}
+
+export default function Questionnaire({ navigate }: QuestionnaireProps) {
+  const { toast } = useToast();
+  const [savedState, setSavedState] = useLocalStorage<QuestionnaireState>('questionnaire_state', {
+    currentIndex: 0,
+    responses: [],
+    isStarted: false,
+    isCompleted: false
+  });
+
+  const [state, setState] = useState<QuestionnaireState>(savedState);
+  const [showAdvice, setShowAdvice] = useState(false);
+
+  useEffect(() => {
+    setSavedState(state);
+  }, [state, setSavedState]);
+
+  const startQuestionnaire = () => {
+    setState({
+      currentIndex: 0,
+      responses: [],
+      isStarted: true,
+      isCompleted: false
+    });
+    setShowAdvice(false);
   };
 
-  const saveModule = () => {
-    if (!formData.title || !formData.sector || !formData.startDate) {
-      toast({
-        title: "Erreur",
-        description: "Veuillez remplir les champs obligatoires",
-      });
-      return;
-    }
-
-    const module: TrainingModule = {
-      id: editingId || Date.now().toString(),
-      title: formData.title || '',
-      sector: formData.sector || '',
-      duration: formData.duration || 0,
-      startDate: formData.startDate || '',
-      endDate: formData.endDate || '',
-      instructor: formData.instructor || '',
-      students: formData.students || 0,
-      objectives: formData.objectives || '',
-      skills: formData.skills || [],
-      certification: formData.certification || '',
-      status: formData.status || 'planned',
-      prerequisites: formData.prerequisites || '',
-      resources: formData.resources || ''
-    };
-
-    let updatedModules;
-    if (editingId) {
-      updatedModules = data.modules.map(m => m.id === editingId ? module : m);
+  const answerQuestion = (answer: string) => {
+    const newResponses = [...state.responses];
+    newResponses[state.currentIndex] = answer;
+    
+    if (answer === 'NON') {
+      setShowAdvice(true);
+      setTimeout(() => {
+        setShowAdvice(false);
+        moveToNext(newResponses);
+      }, 2000);
     } else {
-      updatedModules = [...data.modules, module];
+      moveToNext(newResponses);
     }
+  };
 
-    const newData = { ...data, modules: updatedModules };
-    setData(newData);
-    setSavedData(newData);
-    resetForm();
+  const moveToNext = (responses: string[]) => {
+    const nextIndex = state.currentIndex + 1;
+    if (nextIndex >= questions.length) {
+      setState(prev => ({
+        ...prev,
+        responses,
+        isCompleted: true
+      }));
+    } else {
+      setState(prev => ({
+        ...prev,
+        currentIndex: nextIndex,
+        responses
+      }));
+    }
+  };
 
+  const goToPrevious = () => {
+    if (state.currentIndex > 0) {
+      setState(prev => ({
+        ...prev,
+        currentIndex: prev.currentIndex - 1
+      }));
+      setShowAdvice(false);
+    }
+  };
+
+  const resetQuestionnaire = () => {
+    startQuestionnaire();
+  };
+
+  const exportResults = () => {
     toast({
-      title: "Module sauvegardé",
-      description: `${module.title} a été ${editingId ? 'modifié' : 'ajouté'} avec succès.`,
+      title: "Export en cours",
+      description: "Fonctionnalité d'export PDF en développement...",
     });
   };
 
-  const editModule = (module: TrainingModule) => {
-    setFormData(module);
-    setEditingId(module.id);
-    setShowForm(true);
-  };
-
-  const deleteModule = (id: string) => {
-    const updatedModules = data.modules.filter(m => m.id !== id);
-    const newData = { ...data, modules: updatedModules };
-    setData(newData);
-    setSavedData(newData);
-    
+  const saveProgress = () => {
     toast({
-      title: "Module supprimé",
-      description: "Le module a été supprimé avec succès.",
+      title: "Progression sauvegardée",
+      description: "Vos réponses ont été sauvegardées localement.",
     });
   };
 
-  const getStatusColor = (status: string) => {
-    const colors = {
-      'planned': 'bg-blue-100 text-blue-800',
-      'in-progress': 'bg-yellow-100 text-yellow-800',
-      'completed': 'bg-green-100 text-green-800',
-      'cancelled': 'bg-red-100 text-red-800'
-    };
-    return colors[status as keyof typeof colors] || 'bg-gray-100 text-gray-800';
-  };
-
-  const getStatusLabel = (status: string) => {
-    const labels = {
-      'planned': 'Planifié',
-      'in-progress': 'En cours',
-      'completed': 'Terminé',
-      'cancelled': 'Annulé'
-    };
-    return labels[status as keyof typeof labels] || status;
-  };
-
-  const calculateStats = () => {
-    const total = data.modules.length;
-    const completed = data.modules.filter(m => m.status === 'completed').length;
-    const inProgress = data.modules.filter(m => m.status === 'in-progress').length;
-    const totalHours = data.modules.reduce((sum, m) => sum + m.duration, 0);
-    const totalStudents = data.modules.reduce((sum, m) => sum + m.students, 0);
-
-    return { total, completed, inProgress, totalHours, totalStudents };
-  };
-
-  const stats = calculateStats();
-
-  const groupModulesByMonth = () => {
-    const grouped: { [key: string]: TrainingModule[] } = {};
+  const generateReport = () => {
+    const noCount = state.responses.filter(r => r === 'NON').length;
+    const score = ((questions.length - noCount) / questions.length) * 100;
     
-    data.modules.forEach(module => {
-      if (module.startDate) {
-        const date = new Date(module.startDate);
-        const monthKey = date.toLocaleDateString('fr-FR', { year: 'numeric', month: 'long' });
-        if (!grouped[monthKey]) {
-          grouped[monthKey] = [];
-        }
-        grouped[monthKey].push(module);
-      }
-    });
+    let assessment = '';
+    if (score >= 90) assessment = 'Excellent - Projet très mature';
+    else if (score >= 75) assessment = 'Bon - Quelques ajustements nécessaires';
+    else if (score >= 60) assessment = 'Moyen - Préparation à renforcer';
+    else assessment = 'Insuffisant - Projet à retravailler';
 
-    return grouped;
+    return { score, assessment, noCount };
   };
 
-  const modulesByMonth = groupModulesByMonth();
+  const progress = state.isStarted ? (state.currentIndex / questions.length) * 100 : 0;
+  const currentQuestion = state.isStarted && state.currentIndex < questions.length ? questions[state.currentIndex] : null;
+  const pptxFilePath = "/fichiers/ANNEXE 8 - ARBRE A LA DECISION SUR LES CARACTERISTIQUES DU PORTEUR DE PROJET.pptx";
 
   return (
-    <section id="training-planner">
+    <section id="arbre">
       <h1 className="flex items-center gap-2 mb-6 text-2xl font-bold text-gray-800">
-        <Calendar className="w-6 h-6" />
-        Planificateur de Formations
+        <TreePine className="w-6 h-6 text-[#3C5F58]" />
+        Arbre à la décision
       </h1>
       
       <p className="mb-6 text-gray-600 leading-relaxed">
-        Organisez et planifiez vos modules de formation, certifications et calendrier pédagogique annuel.
+        20 questions pour évaluer le projet d'école de production et identifier les axes d'amélioration.
       </p>
 
-      <div className="grid md:grid-cols-5 gap-4 mb-6">
-        <Card>
-          <CardContent className="p-4 text-center">
-            <div className="text-2xl font-bold text-blue-600">{stats.total}</div>
-            <div className="text-sm text-gray-600">Modules total</div>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardContent className="p-4 text-center">
-            <div className="text-2xl font-bold text-green-600">{stats.completed}</div>
-            <div className="text-sm text-gray-600">Terminés</div>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardContent className="p-4 text-center">
-            <div className="text-2xl font-bold text-yellow-600">{stats.inProgress}</div>
-            <div className="text-sm text-gray-600">En cours</div>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardContent className="p-4 text-center">
-            <div className="text-2xl font-bold text-purple-600">{stats.totalHours}</div>
-            <div className="text-sm text-gray-600">Heures total</div>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardContent className="p-4 text-center">
-            <div className="text-2xl font-bold text-orange-600">{stats.totalStudents}</div>
-            <div className="text-sm text-gray-600">Étudiants</div>
-          </CardContent>
-        </Card>
-      </div>
-
-      <div className="flex justify-between items-center mb-6">
-        <div className="flex gap-2">
-          <Button
-            onClick={() => setCurrentView('list')}
-            className={currentView === 'list' ? 'btn-primary' : 'btn-secondary'}
-          >
-            Vue liste
-          </Button>
-          <Button
-            onClick={() => setCurrentView('calendar')}
-            className={currentView === 'calendar' ? 'btn-primary' : 'btn-secondary'}
-          >
-            Vue calendrier
-          </Button>
-        </div>
-        <Button 
-          onClick={() => setShowForm(true)}
-          className="btn-primary"
-        >
-          Ajouter un module
+      {/* Section de téléchargement ajoutée */}
+      <Card className="mb-6 shadow-md">
+        <CardContent className="p-6 text-center">
+          <p className="mb-4">
+            Téléchargez la version PowerPoint de cet arbre à la décision pour une utilisation hors ligne ou pour vos présentations.
+          </p>
+          <a href={pptxFilePath} download="ANNEXE 8 - ARBRE A LA DECISION SUR LES CARACTERISTIQUES DU PORTEUR DE PROJET.pptx">
+            <Button className="bg-[#2E5941] hover:bg-[#3C5F58] text-white">
+              <Download className="w-4 h-4 mr-2" />
+              Télécharger le modèle (.pptx)
+            </Button>
+          </a>
+        </CardContent>
+      </Card>
+      
+      <Card className="mb-6">
+        <CardContent className="p-6">
+          <div className="font-semibold text-[#3C5F58] mb-2">
+            {state.isCompleted 
+              ? 'Questionnaire terminé ✅' 
+              : state.isStarted 
+                ? `Question ${state.currentIndex + 1} sur ${questions.length}`
+                : 'Prêt à commencer'
+            }
+          </div>
+          <Progress value={progress} className="h-2 bg-[#2E5941]" />
+        </CardContent>
+      </Card>
+      
+      {!state.isStarted && (
+        <Button onClick={startQuestionnaire} className="px-6 py-3 bg-[#2E5941] text-white rounded-md hover:bg-[#3C5F58] transition-colors text-lg">
+          <Play className="w-4 h-4 mr-2" />
+          Lancer le questionnaire
         </Button>
-      </div>
-
-      {showForm && (
+      )}
+      
+      {state.isStarted && currentQuestion && !state.isCompleted && (
         <Card className="mb-6">
-          <CardHeader>
-            <CardTitle>{editingId ? 'Modifier' : 'Nouveau'} module de formation</CardTitle>
-          </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="grid md:grid-cols-2 gap-4">
-              <div>
-                <Label htmlFor="title">Titre du module *</Label>
-                <Input
-                  id="title"
-                  value={formData.title || ''}
-                  onChange={(e) => setFormData({...formData, title: e.target.value})}
-                  placeholder="Ex: Initiation à la maçonnerie"
-                />
-              </div>
-              <div>
-                <Label>Secteur *</Label>
-                <Select
-                  value={formData.sector || ''}
-                  onValueChange={(value) => setFormData({...formData, sector: value})}
-                >
-                  <SelectTrigger>
-                    <SelectValue placeholder="Choisir un secteur" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {sectors.map(sector => (
-                      <SelectItem key={sector} value={sector}>
-                        {sector}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-            </div>
-
-            <div className="grid md:grid-cols-4 gap-4">
-              <div>
-                <Label htmlFor="duration">Durée (heures)</Label>
-                <Input
-                  id="duration"
-                  type="number"
-                  value={formData.duration || 0}
-                  onChange={(e) => setFormData({...formData, duration: parseInt(e.target.value) || 0})}
-                  placeholder="40"
-                />
-              </div>
-              <div>
-                <Label htmlFor="start-date">Date de début *</Label>
-                <Input
-                  id="start-date"
-                  type="date"
-                  value={formData.startDate || ''}
-                  onChange={(e) => setFormData({...formData, startDate: e.target.value})}
-                />
-              </div>
-              <div>
-                <Label htmlFor="end-date">Date de fin</Label>
-                <Input
-                  id="end-date"
-                  type="date"
-                  value={formData.endDate || ''}
-                  onChange={(e) => setFormData({...formData, endDate: e.target.value})}
-                />
-              </div>
-              <div>
-                <Label htmlFor="students">Nb étudiants</Label>
-                <Input
-                  id="students"
-                  type="number"
-                  value={formData.students || 0}
-                  onChange={(e) => setFormData({...formData, students: parseInt(e.target.value) || 0})}
-                  placeholder="12"
-                />
-              </div>
-            </div>
-
-            <div className="grid md:grid-cols-2 gap-4">
-              <div>
-                <Label htmlFor="instructor">Formateur</Label>
-                <Input
-                  id="instructor"
-                  value={formData.instructor || ''}
-                  onChange={(e) => setFormData({...formData, instructor: e.target.value})}
-                  placeholder="Nom du formateur"
-                />
-              </div>
-              <div>
-                <Label>Certification visée</Label>
-                <Select
-                  value={formData.certification || ''}
-                  onValueChange={(value) => setFormData({...formData, certification: value})}
-                >
-                  <SelectTrigger>
-                    <SelectValue placeholder="Type de certification" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {certificationTypes.map(cert => (
-                      <SelectItem key={cert} value={cert}>
-                        {cert}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </div>
-            </div>
-
-            <div>
-              <Label htmlFor="objectives">Objectifs pédagogiques</Label>
-              <Textarea
-                id="objectives"
-                value={formData.objectives || ''}
-                onChange={(e) => setFormData({...formData, objectives: e.target.value})}
-                placeholder="Définir les objectifs d'apprentissage..."
-                rows={3}
-              />
-            </div>
-
-            <div className="grid md:grid-cols-2 gap-4">
-              <div>
-                <Label htmlFor="prerequisites">Prérequis</Label>
-                <Textarea
-                  id="prerequisites"
-                  value={formData.prerequisites || ''}
-                  onChange={(e) => setFormData({...formData, prerequisites: e.target.value})}
-                  placeholder="Connaissances requises..."
-                  rows={2}
-                />
-              </div>
-              <div>
-                <Label htmlFor="resources">Ressources nécessaires</Label>
-                <Textarea
-                  id="resources"
-                  value={formData.resources || ''}
-                  onChange={(e) => setFormData({...formData, resources: e.target.value})}
-                  placeholder="Matériel, outils, supports..."
-                  rows={2}
-                />
-              </div>
-            </div>
-
-            <div>
-              <Label>Statut</Label>
-              <Select
-                value={formData.status || 'planned'}
-                onValueChange={(value) => setFormData({...formData, status: value as any})}
+          <CardContent className="p-6">
+            {/* Logic to show the heading for the entire section */}
+            {state.currentIndex >= 0 && state.currentIndex <= 9 && (
+              <h2 className="text-xl font-semibold mb-4 text-[#3C5F58] flex items-center gap-2">
+                🧠 Volet 1 – Capacités personnelles du porteur de projet
+              </h2>
+            )}
+            {state.currentIndex >= 10 && state.currentIndex <= 19 && (
+              <h2 className="text-xl font-semibold mb-4 text-[#3C5F58] flex items-center gap-2">
+                🔧 Volet 2 – Maturité du projet d'École de Production
+              </h2>
+            )}
+            
+            <p className="font-medium mb-4 text-lg">
+              {state.currentIndex + 1}. {currentQuestion.question}
+            </p>
+            
+            <div className="flex gap-3 mb-4">
+              <Button 
+                onClick={() => answerQuestion('OUI')}
+                className="bg-green-600 text-white hover:bg-green-700 transition-colors"
               >
-                <SelectTrigger>
-                  <SelectValue />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectItem value="planned">Planifié</SelectItem>
-                  <SelectItem value="in-progress">En cours</SelectItem>
-                  <SelectItem value="completed">Terminé</SelectItem>
-                  <SelectItem value="cancelled">Annulé</SelectItem>
-                </SelectContent>
-              </Select>
-            </div>
-
-            <div className="flex gap-3">
-              <Button onClick={saveModule} className="btn-primary">
-                {editingId ? 'Modifier' : 'Ajouter'}
+                <Check className="w-4 h-4 mr-2" />
+                OUI
               </Button>
-              <Button onClick={resetForm} className="btn-secondary">
-                Annuler
+              <Button 
+                onClick={() => answerQuestion('NON')}
+                className="bg-red-600 text-white hover:bg-red-700 transition-colors"
+              >
+                <X className="w-4 h-4 mr-2" />
+                NON
+              </Button>
+              <Button 
+                onClick={goToPrevious}
+                disabled={state.currentIndex === 0}
+                className="bg-gray-400 text-white hover:bg-gray-500 transition-colors"
+              >
+                <ArrowLeft className="w-4 h-4 mr-2" />
+                Précédent
               </Button>
             </div>
+            
+            {showAdvice && (
+              <div className="advice bg-yellow-50 p-4 rounded-lg border-l-4 border-yellow-400">
+                💡 Conseil : {currentQuestion.advice}
+              </div>
+            )}
           </CardContent>
         </Card>
       )}
-
-      {currentView === 'list' && (
-        <div className="space-y-4">
-          {data.modules.map(module => (
-            <Card key={module.id} className="card-hover">
-              <CardContent className="p-6">
-                <div className="flex justify-between items-start mb-4">
-                  <div className="flex-1">
-                    <div className="flex items-center gap-3 mb-2">
-                      <h3 className="text-lg font-semibold">{module.title}</h3>
-                      <Badge className={getStatusColor(module.status)}>
-                        {getStatusLabel(module.status)}
-                      </Badge>
-                      <Badge variant="outline">{module.sector}</Badge>
-                      {module.certification && (
-                        <Badge variant="outline" className="bg-purple-50 text-purple-700">
-                          <Award className="w-3 h-3 mr-1" />
-                          {module.certification}
-                        </Badge>
-                      )}
-                    </div>
-                    
-                    <div className="grid md:grid-cols-4 gap-4 text-sm text-gray-600 mb-3">
-                      <div className="flex items-center gap-2">
-                        <Calendar className="w-4 h-4" />
-                        {new Date(module.startDate).toLocaleDateString('fr-FR')}
-                        {module.endDate && ` - ${new Date(module.endDate).toLocaleDateString('fr-FR')}`}
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <Clock className="w-4 h-4" />
-                        {module.duration}h
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <Users className="w-4 h-4" />
-                        {module.students} étudiants
-                      </div>
-                      {module.instructor && (
-                        <div className="flex items-center gap-2">
-                          <BookOpen className="w-4 h-4" />
-                          {module.instructor}
-                        </div>
-                      )}
-                    </div>
-
-                    {module.objectives && (
-                      <div className="bg-blue-50 p-3 rounded-lg mb-3">
-                        <h4 className="font-medium text-blue-900 mb-1">Objectifs:</h4>
-                        <p className="text-sm text-blue-800">{module.objectives}</p>
-                      </div>
-                    )}
-
-                    <div className="flex gap-4 text-xs text-gray-500">
-                      {module.prerequisites && (
-                        <div>
-                          <span className="font-medium">Prérequis:</span> {module.prerequisites}
-                        </div>
-                      )}
-                      {module.resources && (
-                        <div>
-                          <span className="font-medium">Ressources:</span> {module.resources}
-                        </div>
-                      )}
-                    </div>
+      
+      {state.isCompleted && (
+        <div className="space-y-6">
+          <Card>
+            <CardContent className="p-6">
+              <h3 className="text-xl font-semibold mb-4 text-[#3C5F58]">📊 Résultats de l'évaluation</h3>
+              <div className="grid md:grid-cols-2 gap-6">
+                <div className="text-center">
+                  <div className="text-4xl font-bold text-[#3C5F58]">{generateReport().score.toFixed(0)}%</div>
+                  <div className="text-gray-600">Score global</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-lg font-semibold">{generateReport().assessment}</div>
+                  <div className="text-sm text-gray-600">
+                    {generateReport().noCount} points d'amélioration identifiés
                   </div>
                 </div>
-
-                <div className="flex justify-end gap-2">
-                  <Button 
-                    onClick={() => editModule(module)}
-                    className="btn-secondary text-xs px-3 py-1"
-                  >
-                    Modifier
-                  </Button>
-                  <Button 
-                    onClick={() => deleteModule(module.id)}
-                    className="btn-danger text-xs px-3 py-1"
-                  >
-                    Supprimer
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
-          ))}
-
-          {data.modules.length === 0 && (
-            <Card>
-              <CardContent className="p-8 text-center text-gray-500">
-                <Calendar className="w-12 h-12 mx-auto mb-4 text-gray-300" />
-                <p>Aucun module de formation planifié.</p>
-                <p className="text-sm">Cliquez sur "Ajouter un module" pour commencer.</p>
-              </CardContent>
-            </Card>
-          )}
-        </div>
-      )}
-
-      {currentView === 'calendar' && (
-        <div className="space-y-6">
-          {Object.entries(modulesByMonth).map(([month, modules]) => (
-            <Card key={month}>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Calendar className="w-5 h-5" />
-                  {month}
-                </CardTitle>
-              </CardHeader>
-              <CardContent>
-                <div className="grid gap-3">
-                  {modules.map(module => (
-                    <div key={module.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                      <div className="flex items-center gap-3">
-                        <div className={`w-3 h-3 rounded-full ${
-                          module.status === 'completed' ? 'bg-green-500' :
-                          module.status === 'in-progress' ? 'bg-yellow-500' :
-                          module.status === 'cancelled' ? 'bg-red-500' : 'bg-blue-500'
-                        }`}></div>
-                        <div>
-                          <div className="font-medium">{module.title}</div>
-                          <div className="text-sm text-gray-600">
-                            {module.sector} • {module.duration}h • {module.students} étudiants
-                          </div>
-                        </div>
-                      </div>
-                      <div className="text-sm text-gray-500">
-                        {new Date(module.startDate).toLocaleDateString('fr-FR')}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-          ))}
-
-          {Object.keys(modulesByMonth).length === 0 && (
-            <Card>
-              <CardContent className="p-8 text-center text-gray-500">
-                <Calendar className="w-12 h-12 mx-auto mb-4 text-gray-300" />
-                <p>Aucun module planifié dans le calendrier.</p>
-              </CardContent>
-            </Card>
-          )}
+              </div>
+            </CardContent>
+          </Card>
+          
+          <div className="flex flex-wrap gap-3">
+            <Button onClick={() => navigate('outils')} className="px-6 py-3 bg-gray-400 text-white rounded-md hover:bg-gray-500 transition-colors text-lg">
+              <ArrowLeft className="w-4 h-4 mr-2" />
+              Retour aux outils
+            </Button>
+            <Button onClick={resetQuestionnaire} className="px-6 py-3 bg-gray-400 text-white rounded-md hover:bg-gray-500 transition-colors text-lg">
+              <RotateCcw className="w-4 h-4 mr-2" />
+              Recommencer
+            </Button>
+            <Button onClick={exportResults} className="px-6 py-3 bg-[#2E5941] text-white rounded-md hover:bg-[#3C5F58] transition-colors text-lg">
+              <Download className="w-4 h-4 mr-2" />
+              Exporter PDF
+            </Button>
+            <Button onClick={saveProgress} className="px-6 py-3 bg-yellow-600 text-white rounded-md hover:bg-yellow-700 transition-colors text-lg">
+              <Save className="w-4 h-4 mr-2" />
+              Sauvegarder
+            </Button>
+          </div>
+          
+          <div className="text-center mt-8">
+            <Button
+              onClick={() => navigate('accueil')}
+              className="px-6 py-3 bg-[#2E5941] text-white rounded-md hover:bg-[#3C5F58] transition-colors text-lg"
+            >
+              Retour à l'accueil
+            </Button>
+          </div>
         </div>
       )}
     </section>
