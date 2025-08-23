@@ -15,7 +15,6 @@ import Tools from "./pages/Tools";
 import Suivis from "./pages/Suivis";
 import Questionnaire from "./pages/Questionnaire";
 import Calculators from "./pages/Calculators";
-import BusinessPlan from "./pages/BusinessPlan";
 import PartnershipTracker from "./pages/PartnershipTracker";
 import PedagogicalCosts from "./pages/PedagogicalCosts";
 import TrainingPlanner from "./pages/TrainingPlanner";
@@ -118,10 +117,7 @@ function MainApplicationContent() {
           <Route path="/support" element={<UnderDevelopment title="Support Technique" navigate={navigate} />} />
           <Route path="/contact" element={<Contact navigate={navigate} />} />
 
-          {/* Routes pour les pages qui étaient gérées par currentPage mais qui n'ont pas de lien direct dans le menu. */}
-          <Route path="/business-plan" element={<BusinessPlan navigate={navigate} />} />
-          <Route path="/couts-pedagogiques" element={<PedagogicalCosts navigate={navigate} />} />
-          <Route path="/planification" element={<TrainingPlanner navigate={navigate} />} />
+
 
           {/* Route par défaut (404 ou redirige vers l'accueil) */}
           <Route path="*" element={<Home navigate={navigate} />} />

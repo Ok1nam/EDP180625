@@ -12,11 +12,11 @@ const EcoleDeProduction: React.FC<EcoleDeProductionProps> = ({ navigate }) => {
     <section id="ecole-de-production" className="max-w-4xl mx-auto px-4 py-8">
       <h1 className="flex items-center gap-3 mb-6 text-3xl font-bold text-[#3C5F58]">
         <School className="w-8 h-8 text-[#3C5F58]" />
-        L'École de Production : Un Modèle Unique
+        L'École de production : Un modèle unique
       </h1>
       
       <p className="mb-8 text-lg text-gray-700 leading-relaxed">
-        Ce document présente le modèle d'une École de Production, à destination de l'expert-comptable. Il s'agit d'une démarche pédagogique innovante basée sur le "Faire pour Apprendre", combinant formation professionnelle, production de biens et services réels, et insertion socio-économique.
+        Ce document présente le modèle d'une école de production, à destination de l'expert-comptable. Il s'agit d'une démarche pédagogique innovante basée sur le "faire pour apprendre", combinant formation professionnelle, production de biens et services réels, et insertion socio-économique.
       </p>
 
       {/* Section : Qu'est-ce qu'une École de Production ? */}
@@ -24,7 +24,7 @@ const EcoleDeProduction: React.FC<EcoleDeProductionProps> = ({ navigate }) => {
         <CardHeader className="bg-gray-50 border-b">
           <CardTitle className="text-xl font-bold text-[#3C5F58] flex items-center gap-2">
             <Building2 className="w-5 h-5 text-[#3C5F58]" />
-            Une Pédagogie par le "Faire pour Apprendre"
+            Une Pédagogie par le "faire pour apprendre"
           </CardTitle>
         </CardHeader>
         <CardContent className="p-6 text-gray-700 space-y-4">
@@ -45,30 +45,30 @@ const EcoleDeProduction: React.FC<EcoleDeProductionProps> = ({ navigate }) => {
         <CardHeader className="bg-gray-50 border-b">
           <CardTitle className="text-xl font-bold text-[#3C5F58] flex items-center gap-2">
             <Lightbulb className="w-5 h-5 text-[#3C5F58]" />
-            Un Modèle Gagnant-Gagnant
+            Un modèle gagnant-gagnant
           </CardTitle>
         </CardHeader>
         <CardContent className="p-6 text-gray-700 space-y-4">
           <p>
-            Les Écoles de Production bénéficient à plusieurs acteurs :
+            Les écoles de production bénéficient à plusieurs acteurs :
           </p>
           <ul className="list-disc pl-5 space-y-2">
             <li>
               <div className="flex items-center gap-2">
                 <Users className="w-4 h-4 text-[#3C5F58]" />
-                <span className="font-bold">Pour les Jeunes :</span> Une insertion professionnelle réussie, une motivation accrue par le concret, et l'acquisition d'une véritable culture d'entreprise.
+                <span className="font-bold">Pour les jeunes :</span> Une insertion professionnelle réussie, une motivation accrue par le concret, et l'acquisition d'une véritable culture d'entreprise.
               </div>
             </li>
             <li>
               <div className="flex items-center gap-2">
                 <Handshake className="w-4 h-4 text-[#3C5F58]" />
-                <span className="font-bold">Pour les Entreprises :</span> Accès à des jeunes qualifiés et opérationnels, formés aux besoins réels du marché du travail, et une contribution à la RSE.
+                <span className="font-bold">Pour les entreprises :</span> Accès à des jeunes qualifiés et opérationnels, formés aux besoins réels du marché du travail, et une contribution à la RSE.
               </div>
             </li>
             <li>
               <div className="flex items-center gap-2">
                 <DollarSign className="w-4 h-4 text-[#3C5F58]" />
-                <span className="font-bold">Pour le Territoire :</span> Développement des compétences locales, lutte contre le décrochage scolaire, dynamisme économique et social.
+                <span className="font-bold">Pour le territoire :</span> Développement des compétences locales, lutte contre le décrochage scolaire, dynamisme économique et social.
               </div>
             </li>
           </ul>
@@ -81,7 +81,7 @@ const EcoleDeProduction: React.FC<EcoleDeProductionProps> = ({ navigate }) => {
           <Button 
             className="h-auto px-4 py-3 bg-[#2E5941] text-white rounded-md hover:bg-[#3C5F58] transition-colors text-base sm:text-lg flex items-center justify-center gap-2 whitespace-normal"
           >
-            En savoir plus sur les Écoles de Production
+            En savoir plus sur les écoles de production
             <ExternalLink className="w-5 h-5 flex-shrink-0" />
           </Button>
         </a>
