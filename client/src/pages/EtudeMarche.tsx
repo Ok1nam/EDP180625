@@ -75,9 +75,7 @@ const EtudeMarche: React.FC<EtudeMarcheProps> = ({ navigate }) => {
             <p className="mb-2">
               Téléchargez le document d'étude de marché au format Excel pour analyser en détail les données du secteur et organiser la collecte d'informations.
             </p>
-            <p className="text-sm text-gray-600">
-              <span className="font-bold">Conseil :</span> Ce fichier contient des données chiffrées essentielles pour construire le budget prévisionnel.
-            </p>
+
           </div>
           <a
             href={etudeMarcheExcelPath}
