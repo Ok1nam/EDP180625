@@ -14,15 +14,15 @@ interface ContactEtAideProps {
 const optionsAide = [
   { 
     id: "contact", 
-    label: "Contacter l'Expert-Comptable stagiaire", 
+    label: "Contacter l'auteur du mémoire", 
     icon: Mail, 
-    description: "Posez vos questions ou envoyez-nous un message direct à Laura Gombaud." 
+    description: "Envoyez-nous un message direct à Laura Gombaud." 
   },
   { 
     id: "edp", 
-    label: "Qu'est-ce qu'une École de Production ?", 
+    label: "Qu'est-ce qu'une école de production ?", 
     icon: School, 
-    description: "Découvrez le modèle unique des Écoles de Production et leur pédagogie." 
+    description: "Découvrez le modèle unique des écoles de production et leur pédagogie." 
   },
 ];
 
@@ -35,7 +35,7 @@ const ContactEtAide: React.FC<ContactEtAideProps> = ({ navigate }) => {
       </h1>
       
       <p className="mb-8 text-lg text-gray-700 leading-relaxed">
-        Vous avez des questions spécifiques sur le projet d'École de Production ou besoin d'informations sur l'accompagnement ?
+        Vous avez des questions spécifiques sur le projet d'école de production ou besoin d'informations sur l'accompagnement ?
       </p>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">

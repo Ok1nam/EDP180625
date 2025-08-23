@@ -18,11 +18,11 @@ export default function Contact() {
             <div>
               <h3 className="text-lg font-semibold mb-4">Auteur du mémoire</h3>
               <p className="font-medium text-lg">Laura Gombaud</p>
-              <p className="text-gray-600 mb-4">Candidate au Diplôme d'Expertise Comptable</p>
+              <p className="text-gray-600 mb-4">Expert-comptable mémorialiste</p>
               <p className="flex items-center gap-2">
                 <Mail className="w-4 h-4" />
                 <a 
-                  href="mailto:laura.gombaud@example.com" 
+                  href="mailto:laura.gombaud@gmail.com" 
                   className="text-blue-600 hover:text-blue-800 transition-colors"
                 >
                   laura.gombaud@gmail.com
