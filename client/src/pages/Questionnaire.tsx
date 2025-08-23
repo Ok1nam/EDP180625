@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { TreePine, Play, ArrowLeft, RotateCcw, Download, Save, Check, X } from "lucide-react";
+import { TreePine, Play, ArrowLeft, RotateCcw, Download, Save, Check, X, Briefcase } from "lucide-react";
 
-// NOTE: The Card, CardContent, Button, and Progress components are assumed to be
-// available from a component library like shadcn/ui.
-// For this example, we'll provide mock components to make the code runnable.
-
+// NOTE: Les composants Card, CardContent, Button, et Progress sont considérés comme disponibles.
 const Card = ({ children, className = '' }) => <div className={`bg-white rounded-xl shadow-lg border border-gray-200 ${className}`}>{children}</div>;
 const CardContent = ({ children, className = '' }) => <div className={`p-6 ${className}`}>{children}</div>;
 const CardHeader = ({ children, className = '' }) => <div className={`p-6 border-b border-gray-200 ${className}`}>{children}</div>;
@@ -12,7 +9,6 @@ const CardTitle = ({ children, className = '' }) => <h2 className={`text-xl font
 const Button = ({ children, onClick, disabled = false, className = '' }) => <button onClick={onClick} disabled={disabled} className={`px-4 py-2 rounded-md transition-colors duration-200 ${className}`}>{children}</button>;
 const Progress = ({ value, className = '' }) => <div className={`w-full h-2 bg-gray-200 rounded-full overflow-hidden ${className}`}><div style={{ width: `${value}%` }} className="h-full bg-green-500 transition-all duration-300"></div></div>;
 
-// NOTE: We are also assuming the existence of a mock toast and local storage hook.
 const useToast = () => ({ toast: (options) => console.log('Toast:', options) });
 const useLocalStorage = (key, initialValue) => {
   const [value, setValue] = useState(() => {
@@ -32,7 +28,6 @@ const useLocalStorage = (key, initialValue) => {
   return [value, setValue];
 };
 
-// NOTE: We need the questions data to be self-contained for the component to be runnable.
 export interface Question {
   question: string;
   advice: string;
@@ -44,8 +39,8 @@ export const questions: Question[] = [
     advice: "Réinterroger ses motivations et clarifier sa vision long terme"
   },
   {
-    question: "Est-ce que j'adhère pleinement aux valeurs du modèle EDP ?",
-    advice: "Acquérir de l'expérience ou se former aux valeurs EDP"
+    question: "Est-ce que j'adhère pleinement aux valeurs du modèle EdP ?",
+    advice: "Acquérir de l'expérience ou se former aux valeurs EdP"
   },
   {
     question: "Ai-je des compétences ou une expérience dans les domaines clés ?",
@@ -239,18 +234,18 @@ export default function Questionnaire({ navigate }: QuestionnaireProps) {
     <section id="arbre">
       <h1 className="flex items-center gap-2 mb-6 text-2xl font-bold text-gray-800">
         <TreePine className="w-6 h-6 text-[#3C5F58]" />
-        Arbre de décision
+        arbre de décision pour le projet de votre client
       </h1>
       
       <p className="mb-6 text-gray-600 leading-relaxed">
-        20 questions pour évaluer le projet d'école de production et identifier les axes d'amélioration.
+        Cet arbre de décision est un outil d'aide au diagnostic conçu pour vous, expert-comptable. Il vous permet de faire le point avec votre client, l'école de production, sur 20 questions clés pour évaluer la maturité de son projet et identifier les axes d'amélioration, tant sur le plan humain que technique.
       </p>
 
       {/* Section de téléchargement ajoutée */}
       <Card className="mb-6 shadow-md">
         <CardContent className="p-6 text-center">
           <p className="mb-4">
-            Téléchargez la version PowerPoint de cet arbre de décision pour une utilisation hors ligne ou pour vos présentations.
+            Téléchargez la version PowerPoint de cet arbre de décision pour l'utiliser comme support de présentation lors de vos rendez-vous avec votre client.
           </p>
           <a href={pptxFilePath} download="ANNEXE 8 - ARBRE A LA DECISION SUR LES CARACTERISTIQUES DU PORTEUR DE PROJET.pptx">
             <Button className="bg-[#2E5941] hover:bg-[#3C5F58] text-white">
@@ -265,10 +260,10 @@ export default function Questionnaire({ navigate }: QuestionnaireProps) {
         <CardContent className="p-6">
           <div className="font-semibold text-[#3C5F58] mb-2">
             {state.isCompleted 
-              ? 'Questionnaire terminé ✅' 
+              ? 'évaluation terminée ✅' 
               : state.isStarted 
-                ? `Question ${state.currentIndex + 1} sur ${questions.length}`
-                : 'Prêt à commencer'
+                ? `question ${state.currentIndex + 1} sur ${questions.length}`
+                : 'prêt à commencer l\'évaluation'
             }
           </div>
           <Progress value={progress} className="h-2 bg-[#2E5941]" />
@@ -278,22 +273,23 @@ export default function Questionnaire({ navigate }: QuestionnaireProps) {
       {!state.isStarted && (
         <Button onClick={startQuestionnaire} className="px-6 py-3 bg-[#2E5941] text-white rounded-md hover:bg-[#3C5F58] transition-colors text-lg">
           <Play className="w-4 h-4 mr-2" />
-          Lancer le questionnaire
+          lancer l'évaluation
         </Button>
       )}
       
       {state.isStarted && currentQuestion && !state.isCompleted && (
         <Card className="mb-6">
           <CardContent className="p-6">
-            {/* Logic to show the heading for the entire section */}
             {state.currentIndex >= 0 && state.currentIndex <= 9 && (
               <h2 className="text-xl font-semibold mb-4 text-[#3C5F58] flex items-center gap-2">
-                🧠 Volet 1 – Capacités personnelles du porteur de projet
+                <Briefcase className="w-5 h-5 text-gray-500" />
+                Volet 1 – Capacités du porteur de projet
               </h2>
             )}
             {state.currentIndex >= 10 && state.currentIndex <= 19 && (
               <h2 className="text-xl font-semibold mb-4 text-[#3C5F58] flex items-center gap-2">
-                🔧 Volet 2 – Maturité du projet d'École de Production
+                <Briefcase className="w-5 h-5 text-gray-500" />
+                Volet 2 – Maturité du projet de l'école de production
               </h2>
             )}
             
@@ -328,7 +324,7 @@ export default function Questionnaire({ navigate }: QuestionnaireProps) {
             
             {showAdvice && (
               <div className="advice bg-yellow-50 p-4 rounded-lg border-l-4 border-yellow-400">
-                💡 Conseil : {currentQuestion.advice}
+                💡 Conseil pour votre client : {currentQuestion.advice}
               </div>
             )}
           </CardContent>
@@ -339,16 +335,19 @@ export default function Questionnaire({ navigate }: QuestionnaireProps) {
         <div className="space-y-6">
           <Card>
             <CardContent className="p-6">
-              <h3 className="text-xl font-semibold mb-4 text-[#3C5F58]">📊 Résultats de l'évaluation</h3>
+              <h3 className="text-xl font-semibold mb-4 text-[#3C5F58] flex items-center gap-2">
+                <Briefcase className="w-5 h-5 text-gray-500" />
+                Résultats de l'évaluation
+              </h3>
               <div className="grid md:grid-cols-2 gap-6">
                 <div className="text-center">
                   <div className="text-4xl font-bold text-[#3C5F58]">{generateReport().score.toFixed(0)}%</div>
-                  <div className="text-gray-600">Score global</div>
+                  <div className="text-gray-600">Score de maturité</div>
                 </div>
                 <div className="text-center">
                   <div className="text-lg font-semibold">{generateReport().assessment}</div>
                   <div className="text-sm text-gray-600">
-                    {generateReport().noCount} points d'amélioration identifiés
+                    {generateReport().noCount} axes d'amélioration identifiés
                   </div>
                 </div>
               </div>
@@ -358,19 +357,19 @@ export default function Questionnaire({ navigate }: QuestionnaireProps) {
           <div className="flex flex-wrap gap-3">
             <Button onClick={() => navigate('outils')} className="px-6 py-3 bg-gray-400 text-white rounded-md hover:bg-gray-500 transition-colors text-lg">
               <ArrowLeft className="w-4 h-4 mr-2" />
-              Retour aux outils
+              retour aux outils
             </Button>
             <Button onClick={resetQuestionnaire} className="px-6 py-3 bg-gray-400 text-white rounded-md hover:bg-gray-500 transition-colors text-lg">
               <RotateCcw className="w-4 h-4 mr-2" />
-              Recommencer
+              recommencer l'évaluation
             </Button>
             <Button onClick={exportResults} className="px-6 py-3 bg-[#2E5941] text-white rounded-md hover:bg-[#3C5F58] transition-colors text-lg">
               <Download className="w-4 h-4 mr-2" />
-              Exporter PDF
+              exporter PDF
             </Button>
             <Button onClick={saveProgress} className="px-6 py-3 bg-yellow-600 text-white rounded-md hover:bg-yellow-700 transition-colors text-lg">
               <Save className="w-4 h-4 mr-2" />
-              Sauvegarder
+              sauvegarder
             </Button>
           </div>
           

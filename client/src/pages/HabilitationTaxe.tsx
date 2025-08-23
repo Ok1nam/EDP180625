@@ -1,5 +1,5 @@
 import React from 'react';
-import { ShieldCheck, Download, FileText, BookOpen, Lightbulb, ExternalLink } from "lucide-react";
+import { ShieldCheck, Download, FileText, BookOpen, Lightbulb, ExternalLink, Briefcase } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
@@ -12,28 +12,28 @@ export default function HabilitationTaxe({ navigate }: HabilitationTaxeProps) {
     <section id="habilitation-taxe" className="max-w-4xl mx-auto px-4 py-8">
       <h1 className="flex items-center gap-3 mb-6 text-3xl font-bold text-[#3C5F58]">
         <ShieldCheck className="w-8 h-8 text-[#3C5F58]" />
-        Habilitation Taxe d'Apprentissage : Le Guide SOLTéA
+        Habilitation taxe d'apprentissage : le guide pour votre client
       </h1>
       
       <p className="mb-8 text-lg text-gray-700 leading-relaxed">
-        Depuis 2024, la procédure d’habilitation pour percevoir le solde de la taxe d’apprentissage a été entièrement dématérialisée via la plateforme nationale SOLTéA. Le formulaire CERFA n°10103*03 n’est plus en usage. Ce guide a pour objectif d’accompagner les Écoles de Production (EdP) dans leur démarche pour bénéficier de cette ressource essentielle.
+        En tant qu'expert-comptable, vous êtes souvent sollicité pour les démarches administratives et financières complexes de vos clients. Ce guide est conçu pour vous aider à accompagner l'école de production dans sa procédure d’habilitation à percevoir le solde de la taxe d’apprentissage. Inspiré de la plateforme nationale SOLTéA, ce document est un atout pour sécuriser cette ressource essentielle.
       </p>
 
       {/* Objectifs du guide */}
       <Card className="mb-6 shadow-md">
         <CardHeader className="bg-gray-50 border-b">
           <CardTitle className="text-xl font-bold text-[#3C5F58] flex items-center gap-2">
-            <BookOpen className="w-5 h-5 text-[#3C5F58]" />
-            Objectifs de ce guide
+            <Briefcase className="w-5 h-5 text-gray-500" />
+            Les bénéfices pour votre mission de conseil
           </CardTitle>
         </CardHeader>
         <CardContent className="p-6 text-gray-700">
-          <p className="mb-4">Ce document pratique, inspiré du guide utilisateur officiel de SOLTéA, est adapté aux spécificités des Écoles de Production. Il :</p>
+          <p className="mb-4">Ce document pratique vous permet de guider votre client à travers les étapes clés de la procédure dématérialisée. Il :</p>
           <ul className="list-disc pl-5 space-y-2">
-            <li><span className="font-bold">détaille les étapes clés</span> du dépôt de demande sur la plateforme SOLTéA,</li>
-            <li><span className="font-bold">précise les éléments attendus</span> (informations, pièces justificatives, formations RNCP...),</li>
-            <li><span className="font-bold">alerte sur les points de vigilance</span> pour éviter les rejets ou retards,</li>
-            <li><span className="font-bold">rappelle les références réglementaires</span> à connaître pour comprendre le processus.</li>
+            <li><span className="font-bold">détaille les étapes clés</span> du dépôt de demande sur la plateforme SOLTéA pour vous et votre client,</li>
+            <li><span className="font-bold">précise les éléments attendus</span> (informations, pièces justificatives, formations RNCP...) pour que vous puissiez les préparer ensemble,</li>
+            <li><span className="font-bold">alerte sur les points de vigilance</span> pour éviter les rejets ou retards, renforçant votre rôle de sécurisation,</li>
+            <li><span className="font-bold">rappelle les références réglementaires</span> à connaître pour justifier vos conseils et décisions.</li>
           </ul>
         </CardContent>
       </Card>
@@ -42,13 +42,13 @@ export default function HabilitationTaxe({ navigate }: HabilitationTaxeProps) {
       <Card className="mb-6 shadow-md">
         <CardHeader className="bg-gray-50 border-b">
           <CardTitle className="text-xl font-bold text-[#3C5F58] flex items-center gap-2">
-            <Lightbulb className="w-5 h-5 text-[#3C5F58]" />
+            <Lightbulb className="w-5 h-5 text-orange-500" />
             Points de vigilance
           </CardTitle>
         </CardHeader>
         <CardContent className="p-6 text-gray-700">
           <p className="italic text-sm">
-            L’habilitation obtenue via SOLTéA n’est effective qu’après publication officielle des listes par les services de l’État en région (préfectures) ou par arrêté ministériel, généralement entre avril et mai.
+            L’habilitation obtenue via SOLTéA n’est effective qu’après publication officielle des listes par les services de l’état en région (préfectures) ou par arrêté ministériel, généralement entre avril et mai. Assurez-vous que votre client soit bien informé de ces délais.
           </p>
         </CardContent>
       </Card>
@@ -58,15 +58,14 @@ export default function HabilitationTaxe({ navigate }: HabilitationTaxeProps) {
         <CardHeader className="bg-gray-50 border-b">
           <CardTitle className="text-xl font-bold text-[#3C5F58] flex items-center gap-2">
             <Download className="w-5 h-5 text-[#3C5F58]" />
-            Télécharger le document d'Habilitation
+            Télécharger le guide d'habilitation pour votre client
           </CardTitle>
         </CardHeader>
         <CardContent className="p-6 text-gray-700 space-y-4">
           <p className="text-center">
-            Ce document vous accompagne pas à pas dans votre démarche d'habilitation sur la plateforme SOLTéA.
+            Ce document vous accompagne pas à pas dans la démarche d'habilitation de l'école de production sur la plateforme SOLTéA.
           </p>
           <div className="flex justify-center items-center">
-            {/* Bouton pour télécharger le guide PDF (uniquement) */}
             <a href="/fichiers/Annexe 17 - Exemple de formulaire de demande d'habilitation taxe apprentissage.pdf" download>
               <Button className="bg-[#2E5941] hover:bg-[#3C5F58] text-white">
                 <FileText className="w-4 h-4 mr-2" />

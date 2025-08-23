@@ -1,5 +1,5 @@
 import React from 'react';
-import { Network, Users, Lightbulb, Workflow, Download } from "lucide-react";
+import { Network, Users, Lightbulb, Workflow, Download, Briefcase } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
@@ -8,38 +8,37 @@ interface OrganigrammeProps {
 }
 
 const Organigramme: React.FC<OrganigrammeProps> = ({ navigate }) => {
-  // Le chemin du fichier image est utilisé pour l'affichage et le téléchargement
   const organigrammeImagePath = "/fichiers/ANNEXE 2 - EXEMPLE D'ORGANIGRAMME D'UNE ECOLE DE PRODUCTION.png";
 
   return (
     <section id="organigramme-type" className="max-w-4xl mx-auto px-4 py-8">
       <h1 className="flex items-center gap-3 mb-6 text-3xl font-bold text-[#3C5F58]">
         <Network className="w-8 h-8 text-[#3C5F58]" />
-        Exemple d'Organigramme d'une École de Production
+        Exemple d'organigramme pour l'école de production de votre client
       </h1>
       
       <p className="mb-8 text-lg text-gray-700 leading-relaxed">
-        Un organigramme est un outil essentiel pour structurer une équipe, clarifier les rôles et définir les responsabilités au sein d'une École de Production. Une organisation claire est un gage de gestion efficace et un élément clé pour rassurer les différentes parties prenantes (financeurs, partenaires, familles).
+        En tant qu'expert-comptable, vous savez qu'une structure organisationnelle claire est essentielle pour la bonne gestion d'un projet. Cet exemple d'organigramme est un outil pratique pour aider votre client, l'école de production, à clarifier les rôles et les responsabilités au sein de son équipe. Une organisation bien définie est un gage de crédibilité pour les financeurs et les partenaires.
       </p>
 
       {/* Section Pourquoi un Organigramme ? */}
       <Card className="mb-6 shadow-md">
         <CardHeader className="bg-gray-50 border-b">
           <CardTitle className="text-xl font-bold text-[#3C5F58] flex items-center gap-2">
-            <Lightbulb className="w-5 h-5 text-[#3C5F58]" />
-            L'Importance de la Structure Organisationnelle
+            <Briefcase className="w-5 h-5 text-gray-500" />
+            L'importance de la structure pour le pilotage
           </CardTitle>
         </CardHeader>
         <CardContent className="p-6 text-gray-700 space-y-4">
           <p>
-            Un organigramme bien défini permet à l'École de Production de :
+            Ce modèle vous permettra d'accompagner votre client à :
           </p>
           <ul className="list-disc pl-5 space-y-2">
-            <li><span className="font-bold">Clarifier les rôles et responsabilités :</span> Chaque membre de l'équipe sait quelle est sa place et ses missions.</li>
-            <li><span className="font-bold">Optimiser la communication :</span> Facilite les échanges et la circulation de l'information.</li>
-            <li><span className="font-bold">Identifier les besoins en recrutement :</span> Met en évidence les postes à pourvoir pour le bon fonctionnement.</li>
-            <li><span className="font-bold">Faciliter la prise de décision :</span> En connaissant la chaîne de commandement.</li>
-            <li><span className="font-bold">Présenter la structure aux partenaires :</span> Démontrer le sérieux et l'organisation de l'école.</li>
+            <li><span className="font-bold">Clarifier les rôles et responsabilités :</span> Pour vous assurer que les missions sont bien réparties, notamment pour la partie administrative et financière.</li>
+            <li><span className="font-bold">Optimiser la communication :</span> En identifiant les circuits de l'information pour une collaboration plus fluide.</li>
+            <li><span className="font-bold">Identifier les besoins en recrutement :</span> En mettant en évidence les postes clés pour une croissance saine et contrôlée.</li>
+            <li><span className="font-bold">Faciliter la prise de décision :</span> En comprenant la chaîne hiérarchique et les processus de validation.</li>
+            <li><span className="font-bold">Présenter une structure solide :</span> Pour renforcer le dossier de l'école auprès des partenaires et des financeurs.</li>
           </ul>
         </CardContent>
       </Card>
@@ -49,21 +48,21 @@ const Organigramme: React.FC<OrganigrammeProps> = ({ navigate }) => {
         <CardHeader className="bg-gray-50 border-b">
           <CardTitle className="text-xl font-bold text-[#3C5F58] flex items-center gap-2">
             <Users className="w-5 h-5 text-[#3C5F58]" />
-            Les Fonctions Essentielles
+            les fonctions essentielles
           </CardTitle>
         </CardHeader>
         <CardContent className="p-6 text-gray-700 space-y-4">
           <p>
-            Bien que chaque École de Production ait ses spécificités, un organigramme type inclut généralement les fonctions suivantes :
+            Ce modèle intègre les fonctions typiques d'une école de production et vous aide à :
           </p>
           <ul className="list-disc pl-5 space-y-2">
-            <li><span className="font-bold">Conseil d'Administration / Bureau :</span> Définition des grandes orientations, validation stratégique.</li>
-            <li><span className="font-bold">Direction :</span> Gestion globale de l'école, représentation, développement.</li>
-            <li><span className="font-bold">Pédagogie :</span> Enseignants généraux & vacataires.</li>
-            <li><span className="font-bold">Production / Ateliers :</span> Maîtres professionnels.</li>
-            <li><span className="font-bold">Administration & Finance :</span> Gestionnaire, comptable, responsable RH.</li>
-            <li><span className="font-bold">Relations Partenaires :</span> Chargé de développement partenarial, relations entreprises.</li>
-            <li><span className="font-bold">Vie Scolaire / Accompagnement Social :</span> Suivi des élèves, orientation.</li>
+            <li><span className="font-bold">conseil d'administration / bureau :</span> définir le rôle du conseil et des organes de gouvernance.</li>
+            <li><span className="font-bold">direction :</span> identifier la place de la gestion globale de l'école.</li>
+            <li><span className="font-bold">pédagogie :</span> structurer l'équipe des enseignants généraux.</li>
+            <li><span className="font-bold">production / ateliers :</span> clarifier le rôle des maîtres professionnels.</li>
+            <li><span className="font-bold">administration & finance :</span> positionner les rôles clés que vous accompagnez (gestionnaire, comptable).</li>
+            <li><span className="font-bold">relations partenaires :</span> organiser le développement des partenariats stratégiques.</li>
+            <li><span className="font-bold">vie scolaire / accompagnement social :</span> intégrer les fonctions de soutien aux élèves.</li>
           </ul>
         </CardContent>
       </Card>
@@ -78,7 +77,7 @@ const Organigramme: React.FC<OrganigrammeProps> = ({ navigate }) => {
         <CardContent className="p-6 flex justify-center">
           <img 
             src={organigrammeImagePath} 
-            alt="Exemple d'organigramme d'une École de Production" 
+            alt="Exemple d'organigramme d'une école de production" 
             className="w-full h-auto rounded-lg shadow-md"
           />
         </CardContent>
@@ -88,13 +87,16 @@ const Organigramme: React.FC<OrganigrammeProps> = ({ navigate }) => {
       <Card className="mb-8 shadow-lg border-2 border-[#3C5F58]">
         <CardHeader>
           <CardTitle className="text-2xl font-bold text-[#2E5941] flex items-center gap-3">
-            <Download className="w-6 h-6" /> Télécharger le Modèle
+            <Download className="w-6 h-6" /> Télécharger le modèle pour votre client
           </CardTitle>
         </CardHeader>
         <CardContent className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
           <div className="text-base text-gray-800 flex-1">
             <p className="mb-2">
-              Téléchargez ce modèle d'organigramme au format PNG pour l'adapter à la structure spécifique de l'école de votre client.
+              Téléchargez ce modèle d'organigramme au format PNG pour l'adapter facilement à la structure spécifique de l'école que vous accompagnez.
+            </p>
+            <p className="text-sm text-gray-600">
+              <span className="font-bold">Conseil :</span> Utilisez-le comme base de travail lors de vos sessions de conseil pour valider la répartition des responsabilités.
             </p>
           </div>
           <a

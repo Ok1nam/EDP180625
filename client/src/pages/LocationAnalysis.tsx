@@ -13,11 +13,11 @@ const LocationAnalysis: React.FC<LocationAnalysisProps> = ({ navigate }) => {
     <section id="cartographie-edp" className="max-w-4xl mx-auto px-4 py-8">
       <h1 className="flex items-center gap-3 mb-6 text-3xl font-bold text-[#3C5F58]">
         <Globe className="w-8 h-8 text-[#3C5F58]" />
-        Cartographie des Écoles de Production
+        Cartographie des écoles de production
       </h1>
       
       <p className="mb-8 text-lg text-gray-700 leading-relaxed">
-        Pour déterminer la zone d'implantation d'une future École de Production, l'une des premières étapes consiste à consulter la cartographie nationale du réseau. Cette ressource permet de visualiser les écoles existantes et les projets en cours de développement, offrant ainsi une vue d'ensemble du maillage territorial.
+        Pour déterminer la zone d'implantation d'une future école de production, l'une des premières étapes consiste à consulter la cartographie nationale du réseau. Cette ressource permet de visualiser les écoles existantes et les projets en cours de développement, offrant ainsi une vue d'ensemble du maillage territorial.
       </p>
 
       {/* Section Lien vers la carte */}
@@ -30,7 +30,7 @@ const LocationAnalysis: React.FC<LocationAnalysisProps> = ({ navigate }) => {
         <CardContent className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
           <div className="text-base text-gray-800 flex-1">
             <p className="mb-2">
-              Cliquez sur le bouton ci-dessous pour accéder directement à la carte interactive du réseau des Écoles de Production en France.
+              Cliquez sur le bouton ci-dessous pour accéder directement à la carte interactive du réseau des écoles de production en France.
             </p>
             <p className="text-sm text-gray-600">
               <span className="font-bold">Conseil :</span> Cette ressource est essentielle pour valider le choix d'implantation et pour les études de marché initiales.

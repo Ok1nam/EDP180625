@@ -58,7 +58,7 @@ export default function Home({ navigate }: HomeProps) {
 
           {/* NOUVELLE SECTION MODIFIÉE */}
           <div className="bg-green-50 border-l-4 border-[#184D31] p-6 rounded-md">
-            <h3 className="font-bold text-lg text-[#184D31] mb-3">Votre Levier d'Action Stratégique</h3>
+            <h3 className="font-bold text-lg text-[#184D31] mb-3">Vos leviers d'action stratégiques</h3>
             <ul className="text-gray-700 space-y-2">
               <li>• <strong>Sécuriser</strong> le montage financier du projet</li>
               <li>• <strong>Structurer</strong> un cadre comptable et fiscal sur-mesure</li>
@@ -69,7 +69,7 @@ export default function Home({ navigate }: HomeProps) {
         </div>
 
         <p className="text-lg text-gray-700 leading-relaxed mb-6">
-          Ce site constitue le support de mon mémoire de DEC, proposant une <strong>méthodologie opérationnelle</strong> pour accompagner les Écoles de Production. Vous y trouverez tous les outils et annexes nécessaires pour maîtriser ce secteur en pleine expansion.
+          Ce site constitue le support de mon mémoire de DEC, proposant une <strong>méthodologie opérationnelle</strong> pour accompagner les écoles de production. Vous y trouverez tous les outils et annexes nécessaires pour maîtriser ce secteur en pleine expansion.
         </p>
 
         <div className="bg-[#184D31] bg-opacity-10 border-l-4 border-[#184D31] text-gray-800 p-6 rounded-md shadow-md">
@@ -123,7 +123,7 @@ export default function Home({ navigate }: HomeProps) {
               onClick={() => navigate('outils')}
               className="inline-flex items-center justify-center px-8 py-3.5 border border-transparent text-lg font-semibold rounded-full bg-white text-[#184D31] hover:bg-green-50 transition-all duration-300 transform hover:scale-105 shadow-lg cursor-pointer"
             >
-              Explorer les Outils Pratiques
+              Explorer les outils pratiques
               <ChevronRight className="ml-2 w-5 h-5" />
             </a>
             <a
