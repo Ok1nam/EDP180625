@@ -15,11 +15,11 @@ const EtudeMarche: React.FC<EtudeMarcheProps> = ({ navigate }) => {
     <section id="etude-marche" className="max-w-4xl mx-auto px-4 py-8">
       <h1 className="flex items-center gap-3 mb-6 text-3xl font-bold text-gray-800">
         <Target className="w-8 h-8 text-indigo-600" /> {/* Icône cible pour l'étude de marché */}
-        Accompagner votre client dans son Étude de Marché
+        Accompagner votre client dans son étude de marché
       </h1>
       
       <p className="mb-8 text-lg text-gray-700 leading-relaxed">
-        Votre rôle en tant qu'expert-comptable est d'accompagner votre client, le porteur de projet d'École de Production, dans la structuration de sa démarche. Une <span className="font-bold">étude de marché solide</span> est indispensable pour la préparation du business plan et la validation du <span className="font-bold">modèle économique</span>. Elle permet de s'assurer que le projet est ancré dans une réalité territoriale et répond à de véritables besoins.
+        Votre rôle en tant qu'expert-comptable est d'accompagner votre client, le porteur de projet d'école de production, dans la structuration de sa démarche. Une <span className="font-bold">étude de marché solide</span> est indispensable pour la préparation du business plan et la validation du <span className="font-bold">modèle économique</span>. Elle permet de s'assurer que le projet est ancré dans une réalité territoriale et répond à de véritables besoins.
       </p>
 
       {/* Section Importance de l'Étude de Marché */}
@@ -27,7 +27,7 @@ const EtudeMarche: React.FC<EtudeMarcheProps> = ({ navigate }) => {
         <CardHeader className="bg-gray-50 border-b">
           <CardTitle className="text-xl font-bold text-gray-700 flex items-center gap-2">
             <Lightbulb className="w-5 h-5 text-orange-500" />
-            Pourquoi Guider une Étude de Marché ?
+            Pourquoi guider une étude de marché ?
           </CardTitle>
         </CardHeader>
         <CardContent className="p-6 text-gray-700 space-y-4">
@@ -47,7 +47,7 @@ const EtudeMarche: React.FC<EtudeMarcheProps> = ({ navigate }) => {
         <CardHeader className="bg-gray-50 border-b">
           <CardTitle className="text-xl font-bold text-gray-700 flex items-center gap-2">
             <Search className="w-5 h-5 text-purple-600" />
-            Les Composantes de l'Étude
+            Les composantes de l'étude
           </CardTitle>
         </CardHeader>
         <CardContent className="p-6 text-gray-700 space-y-4">
@@ -67,13 +67,13 @@ const EtudeMarche: React.FC<EtudeMarcheProps> = ({ navigate }) => {
       <Card className="mb-8 shadow-lg border-2 border-[#3C5F58]">
         <CardHeader>
           <CardTitle className="text-2xl font-bold text-[#3C5F58] flex items-center gap-3">
-            <Download className="w-6 h-6" /> Télécharger le Modèle d'Étude de Marché
+            <Download className="w-6 h-6" /> Télécharger le modèle d'étude de marché
           </CardTitle>
         </CardHeader>
         <CardContent className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
           <div className="text-base text-gray-800 flex-1">
             <p className="mb-2">
-              Téléchargez le document d'étude de marché au format Excel pour analyser en détail les données du secteur et organiser la collecte d'informations.
+              Téléchargez le document d'étude de marché au format excel pour analyser en détail les données du secteur et organiser la collecte d'informations.
             </p>
 
           </div>
