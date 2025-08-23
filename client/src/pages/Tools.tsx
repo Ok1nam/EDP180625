@@ -56,7 +56,7 @@ const Tools: React.FC<ToolsProps> = ({ navigate }) => {
     <section id="tools-page" className="max-w-4xl mx-auto px-4 py-8">
       <h1 className="flex items-center gap-3 mb-6 text-3xl font-bold text-[#3C5F58]">
         <Wrench className="w-8 h-8" />
-        Outils et Suivis
+        Outils et suivis
       </h1>
       <p className="mb-8 text-lg text-gray-700 leading-relaxed">
         Cette section regroupe l'ensemble des outils pratiques et des modèles de suivi conçus pour accompagner la création et le pilotage d'une École de Production. Chaque outil a été pensé pour répondre à une étape clé du projet, de la structuration juridique au suivi financier.

@@ -15,7 +15,6 @@ import Tools from "./pages/Tools";
 import Suivis from "./pages/Suivis";
 import Questionnaire from "./pages/Questionnaire";
 import Calculators from "./pages/Calculators";
-import PartnershipTracker from "./pages/PartnershipTracker";
 import PedagogicalCosts from "./pages/PedagogicalCosts";
 import TrainingPlanner from "./pages/TrainingPlanner";
 import SubsidyGenerator from "@/pages/SubsidyGenerator";
@@ -97,12 +96,10 @@ function MainApplicationContent() {
           <Route path="/suivis" element={<Suivis navigate={navigate} />} />
           <Route path="/suivi-subventions" element={<SuiviSubventions navigate={navigate} />} />
           <Route path="/suivi-prets" element={<SuiviPrets navigate={navigate} />} />
-          <Route path="/partenariats" element={<PartnershipTracker navigate={navigate} />} />
           <Route path="/tableau-bord" element={<Dashboard navigate={navigate} />} />
 
           {/* Documentation & Guides */}
           <Route path="/documentation" element={<DocumentationPage navigate={navigate} />} />
-          <Route path="/methodo" element={<Methodology navigate={navigate} />} />
           <Route path="/cartographie" element={<LocationAnalysis navigate={navigate} />} />
           <Route path="/organigramme" element={<Organigramme navigate={navigate} />} />
           <Route path="/entretiens" element={<Entretiens navigate={navigate} />} />
@@ -113,8 +110,6 @@ function MainApplicationContent() {
           <Route path="/contact-et-aide" element={<ContactEtAide navigate={navigate} />} />
           <Route path="/expert-comptable" element={<Contact navigate={navigate} />} />
           <Route path="/edp" element={<EcoleDeProduction navigate={navigate} />} />
-          <Route path="/faq" element={<UnderDevelopment title="Foire Aux Questions (FAQ)" navigate={navigate} />} />
-          <Route path="/support" element={<UnderDevelopment title="Support Technique" navigate={navigate} />} />
           <Route path="/contact" element={<Contact navigate={navigate} />} />
 
 
