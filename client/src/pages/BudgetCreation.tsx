@@ -1,5 +1,5 @@
 import React from 'react';
-import { Download, DollarSign, PieChart, Lightbulb } from "lucide-react";
+import { Download, DollarSign, PieChart, Lightbulb, Briefcase } from "lucide-react"; // Ajout de l'icône Briefcase
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
@@ -8,18 +8,17 @@ interface BudgetCreationProps {
 }
 
 const BudgetCreation: React.FC<BudgetCreationProps> = ({ navigate }) => {
-  // Correction du chemin pour pointer vers le bon fichier
   const budgetCreationFilePath = "/fichiers/ANNEXE 12 - TRAME DE BUDGET A LA CREATION.xlsm";
 
   return (
     <section id="budget-creation" className="max-w-4xl mx-auto px-4 py-8">
       <h1 className="flex items-center gap-3 mb-6 text-3xl font-bold text-gray-800">
         <DollarSign className="w-8 h-8 text-[#3C5F58]" />
-        Budget Prévisionnel de Création
+        Budget prévisionnel de création
       </h1>
       
       <p className="mb-8 text-lg text-gray-700 leading-relaxed">
-        La mise en place d'un budget prévisionnel est une étape cruciale pour l'élaboration d'un <span className="font-bold">modèle économique viable</span> dès le lancement du projet. Ce document permet de planifier les ressources et les dépenses nécessaires, ainsi que de définir la stratégie financière initiale.
+        En tant qu'expert-comptable, vous jouez un rôle stratégique dans l'élaboration d'un <span className="font-bold">modèle économique viable</span> pour vos clients Écoles de production. Cet outil est conçu pour vous permettre de traduire leur projet éducatif en une stratégie financière solide, facilitant ainsi leur lancement et leur pérennité.
       </p>
 
       {/* Section Pourquoi un budget de création ? */}
@@ -27,18 +26,18 @@ const BudgetCreation: React.FC<BudgetCreationProps> = ({ navigate }) => {
         <CardHeader className="bg-gray-50 border-b">
           <CardTitle className="text-xl font-bold text-[#3C5F58] flex items-center gap-2">
             <Lightbulb className="w-5 h-5 text-orange-500" />
-            Pourquoi un Budget de Création ?
+            Pourquoi cet outil pour votre client ?
           </CardTitle>
         </CardHeader>
         <CardContent className="p-6 text-gray-700 space-y-4">
           <p>
-            Ce modèle Excel automatisé est conçu pour vous aider à :
+            Ce modèle Excel automatisé est votre allié pour :
           </p>
           <ul className="list-disc pl-5 space-y-2">
-            <li><span className="font-bold">Évaluer les besoins de financement</span> : Identifier les ressources financières initiales pour le lancement et la pérennité de l'école.</li>
-            <li><span className="font-bold">Anticiper les charges</span> : Détailler les coûts fixes et variables pour une gestion financière rigoureuse.</li>
-            <li><span className="font-bold">Sécuriser le projet</span> : S'assurer de la viabilité économique à long terme et ajuster la stratégie si nécessaire.</li>
-            <li><span className="font-bold">Démarrer avec une feuille de route financière</span> : Établir une base de référence pour le suivi et l'ajustement futurs.</li>
+            <li><span className="font-bold">Évaluer les besoins de financement</span> : Accompagner l'école dans l'identification précise des ressources financières initiales, cruciales pour le lancement.</li>
+            <li><span className="font-bold">Anticiper les charges</span> : Détailler les coûts fixes et variables pour une gestion financière rigoureuse, en vous appuyant sur des données claires.</li>
+            <li><span className="font-bold">Sécuriser le projet</span> : Utiliser cet outil comme un levier pour s'assurer de la viabilité économique à long terme, ajustant la stratégie en amont.</li>
+            <li><span className="font-bold">Démarrer avec une feuille de route financière</span> : Offrir à votre client une base de référence structurée pour le suivi et le pilotage de son activité.</li>
           </ul>
         </CardContent>
       </Card>
@@ -48,18 +47,18 @@ const BudgetCreation: React.FC<BudgetCreationProps> = ({ navigate }) => {
         <CardHeader className="bg-gray-50 border-b">
           <CardTitle className="text-xl font-bold text-[#3C5F58] flex items-center gap-2">
             <PieChart className="w-5 h-5 text-blue-600" />
-            Les Éléments du Modèle Prévisionnel
+            Les éléments du modèle prévisionnel
           </CardTitle>
         </CardHeader>
         <CardContent className="p-6 text-gray-700 space-y-4">
           <p>
-            Le modèle intègre :
+            Ce modèle intègre les spécificités du secteur et vous permet d'analyser en détail :
           </p>
           <ul className="list-disc pl-5 space-y-2">
-            <li><span className="font-bold">Investissements de départ</span> : Aménagement de l'atelier, équipements, et autres coûts de création.</li>
-            <li><span className="font-bold">Dépenses de fonctionnement</span> : Frais courants (salaires, loyer, assurances...).</li>
+            <li><span className="font-bold">Investissements de départ</span> : Aménagement, équipements, et autres coûts spécifiques à la création d'une école de production.</li>
+            <li><span className="font-bold">Dépenses de fonctionnement</span> : Frais courants (salaires, loyer, assurances...) adaptés à leur structure.</li>
             <li><span className="font-bold">Produits de l'activité de production</span> : Estimation des recettes issues de la production des élèves.</li>
-            <li><span className="font-bold">Ressources externes</span> : Subventions, mécénat et contributions de partenaires.</li>
+            <li><span className="font-bold">Ressources externes</span> : Subventions, mécénat et contributions de partenaires, un point clé pour ce type de structure.</li>
           </ul>
         </CardContent>
       </Card>
@@ -68,16 +67,16 @@ const BudgetCreation: React.FC<BudgetCreationProps> = ({ navigate }) => {
       <Card className="mb-8 shadow-lg border-2 border-[#3C5F58]">
         <CardHeader>
           <CardTitle className="text-2xl font-bold text-[#2E5941] flex items-center gap-3">
-            <Download className="w-6 h-6" /> Télécharger le Modèle de Budget de Création
+            <Download className="w-6 h-6" /> Télécharger le modèle de budget de création
           </CardTitle>
         </CardHeader>
         <CardContent className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
           <div className="text-base text-gray-800 flex-1">
             <p className="mb-2">
-              Accédez à notre modèle de budget prévisionnel interactif au format .xlsm (Excel avec macros) pour préparer et sécuriser le financement de  l'école de Production.
+              Téléchargez ce modèle de budget prévisionnel interactif au format .xlsm (Excel avec macros). Il vous aidera à construire rapidement une vision financière claire et à préparer le financement de votre client École de production.
             </p>
             <p className="text-sm text-gray-600">
-              <span className="font-bold">Conseil :</span> Adaptez ce modèle pour qu'il soit un outil de pilotage proactif, en lien direct avec les indicateurs de performance de l'école.
+              <span className="font-bold">Conseil :</span> Utilisez ce modèle pour accompagner la prise de décision de votre client, en le transformant en un véritable outil de pilotage.
             </p>
           </div>
           <a
