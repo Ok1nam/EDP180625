@@ -10,19 +10,17 @@ import Navigation from "./components/Navigation";
 import Footer from "./components/Footer";
 import LoginForm from "./components/LoginForm";
 // Importez toutes vos pages ici
-import Home from "./pages/Home";
+import Home from "./pages/Accueil";
 import Tools from "./pages/PageOutils";
 import Questionnaire from "./pages/ArbreALaDecision";
 // Pages retirées : Calculators, BusinessPlan, PartnershipTracker, PedagogicalCosts, TrainingPlanner
 import SubsidyGenerator from "@/pages/DossierTypeSubvention";
 import StatutsGenerator from "@/pages/ModeleStatuts";
-import UnderDevelopment from "@/pages/UnderDevelopment";
 import Dashboard from "./pages/TableauDeBord";
 import LocationAnalysis from "./pages/Cartographie";
 // Pages retirées : Guides, Methodology, Annexes
 import DocumentationPage from "./pages/PageDocumentation";
 import Contact from "./pages/ContactExpertComptable";
-import ResultatFiscal from "./pages/zz_ResultatFiscal";
 import TvaCoefficient from "./pages/CoefficientTVA";
 import PlanComptable from "./pages/PlanComptable";
 import CriteresLabel from "./pages/Labellisation";
@@ -107,8 +105,6 @@ function MainApplicationContent() {
           <Route path="/contact-et-aide" element={<ContactEtAide navigate={navigate} />} />
           <Route path="/expert-comptable" element={<Contact navigate={navigate} />} />
           <Route path="/edp" element={<EcoleDeProduction navigate={navigate} />} />
-          <Route path="/faq" element={<UnderDevelopment title="Foire Aux Questions (FAQ)" navigate={navigate} />} />
-          <Route path="/support" element={<UnderDevelopment title="Support Technique" navigate={navigate} />} />
           <Route path="/contact" element={<Contact navigate={navigate} />} />
 
           {/* Routes pour les pages qui étaient gérées par currentPage mais qui n'ont pas de lien direct dans le menu. */}
