@@ -11,7 +11,8 @@ import Footer from "./components/Footer";
 import LoginForm from "./components/LoginForm";
 import Home from "./pages/Home";
 import Tools from "./pages/Tools";
-import PlanComptable from "./pages/PlanComptable"; // Ajout de l'import pour la page PlanComptable
+import PlanComptable from "./pages/PlanComptable";
+import TvaCoefficient from "./pages/TvaCoefficient"; // Ajout de l'import pour TvaCoefficient
 import { useState } from "react";
 import { useAuth } from "./hooks/useAuth";
 import AnalyticsTracker from './components/AnalyticsTracker'; 
@@ -40,7 +41,8 @@ function MainApplicationContent() {
           <Route path="/" element={<Home navigate={navigate} />} />
           <Route path="/accueil" element={<Home navigate={navigate} />} />
           <Route path="/outils" element={<Tools navigate={navigate} />} />
-          <Route path="/plan-comptable" element={<PlanComptable navigate={navigate} />} /> {/* Ajout de la route vers PlanComptable */}
+          <Route path="/plan-comptable" element={<PlanComptable navigate={navigate} />} />
+          <Route path="/tva-coefficient" element={<TvaCoefficient navigate={navigate} />} /> {/* Ajout de la route pour TvaCoefficient */}
         </Routes>
       </main>
       <Footer navigate={navigate} />
