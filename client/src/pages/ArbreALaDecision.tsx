@@ -358,7 +358,7 @@ export default function Questionnaire({ navigate }: QuestionnaireProps) {
               <ArrowLeft className="w-4 h-4 mr-2" />
               Retour aux outils
             </Button>
-            <Button onClick={resetQuestionnaire} className="px-6 py-3 bg-gray-400 text-white rounded-md hover:bg-gray-500 transition-colors text-lg flex items-center gap-2 justify-center flex-1">
+            <Button onClick={resetQuestionnaire} className="px-6 py-3 bg-gray-400 text-white rounded-md hover:bg-gray-500 transition-colors text-lg flex items-center gap-2 justify-center flex-1 whitespace-nowrap">
               <RotateCcw className="w-4 h-4 mr-2" />
               Recommencer l'évaluation
             </Button>
@@ -375,8 +375,7 @@ export default function Questionnaire({ navigate }: QuestionnaireProps) {
           <div className="text-center mt-8">
             <Button
               onClick={() => navigate('accueil')}
-              className="px-6 py-3 bg-[#2E5941] text-white rounded-md hover:bg-[#3C5F58] transition-colors text-lg flex items-center gap-2 justify-center"
-            >
+              className="px-6 py-3 bg-[#2E5941] text-white rounded-md hover:bg-[#3C5F58] transition-colors text-lg flex items-center gap-2 justify-center">
               Retour à l'accueil
             </Button>
           </div>
