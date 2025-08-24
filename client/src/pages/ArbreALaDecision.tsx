@@ -354,25 +354,23 @@ export default function Questionnaire({ navigate }: QuestionnaireProps) {
             </CardContent>
           </Card>
           
-          <div className="flex flex-wrap items-center justify-center gap-3 md:gap-4 lg:justify-between">
-            <div className="flex flex-wrap gap-3">
-              <Button onClick={() => navigate('outils')} className="px-6 py-3 bg-gray-400 text-white rounded-md hover:bg-gray-500 transition-colors text-lg">
-                <ArrowLeft className="w-4 h-4 mr-2" />
-                Retour aux outils
-              </Button>
-              <Button onClick={resetQuestionnaire} className="px-6 py-3 bg-gray-400 text-white rounded-md hover:bg-gray-500 transition-colors text-lg">
-                <RotateCcw className="w-4 h-4 mr-2" />
-                Recommencer l'évaluation
-              </Button>
-              <Button onClick={exportResults} className="px-6 py-3 bg-[#2E5941] text-white rounded-md hover:bg-[#3C5F58] transition-colors text-lg">
-                <Download className="w-4 h-4 mr-2" />
-                Exporter PDF
-              </Button>
-              <Button onClick={saveProgress} className="px-6 py-3 bg-yellow-600 text-white rounded-md hover:bg-yellow-700 transition-colors text-lg">
-                <Save className="w-4 h-4 mr-2" />
-                Sauvegarder
-              </Button>
-            </div>
+          <div className="flex flex-col sm:flex-row sm:flex-wrap items-center justify-center gap-3 md:gap-4 mt-6">
+            <Button onClick={() => navigate('outils')} className="px-6 py-3 bg-gray-400 text-white rounded-md hover:bg-gray-500 transition-colors text-lg flex-1">
+              <ArrowLeft className="w-4 h-4 mr-2" />
+              Retour aux outils
+            </Button>
+            <Button onClick={resetQuestionnaire} className="px-6 py-3 bg-gray-400 text-white rounded-md hover:bg-gray-500 transition-colors text-lg flex-1">
+              <RotateCcw className="w-4 h-4 mr-2" />
+              Recommencer l'évaluation
+            </Button>
+            <Button onClick={exportResults} className="px-6 py-3 bg-[#2E5941] text-white rounded-md hover:bg-[#3C5F58] transition-colors text-lg flex-1">
+              <Download className="w-4 h-4 mr-2" />
+              Exporter PDF
+            </Button>
+            <Button onClick={saveProgress} className="px-6 py-3 bg-yellow-600 text-white rounded-md hover:bg-yellow-700 transition-colors text-lg flex-1">
+              <Save className="w-4 h-4 mr-2" />
+              Sauvegarder
+            </Button>
           </div>
           
           <div className="text-center mt-8">
