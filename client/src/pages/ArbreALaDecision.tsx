@@ -234,7 +234,7 @@ export default function Questionnaire({ navigate }: QuestionnaireProps) {
     <section id="arbre">
       <h1 className="flex items-center gap-2 mb-6 text-2xl font-bold text-gray-800">
         <TreePine className="w-6 h-6 text-[#3C5F58]" />
-        arbre de décision pour le projet de votre client
+        Arbre de décision pour le projet de votre client
       </h1>
       
       <p className="mb-6 text-gray-600 leading-relaxed">
@@ -260,10 +260,10 @@ export default function Questionnaire({ navigate }: QuestionnaireProps) {
         <CardContent className="p-6">
           <div className="font-semibold text-[#3C5F58] mb-2">
             {state.isCompleted 
-              ? 'évaluation terminée ✅' 
+              ? 'Évaluation terminée ✅' 
               : state.isStarted 
-                ? `question ${state.currentIndex + 1} sur ${questions.length}`
-                : 'prêt à commencer l\'évaluation'
+                ? `Question ${state.currentIndex + 1} sur ${questions.length}`
+                : 'Prêt à commencer l\'évaluation'
             }
           </div>
           <Progress value={progress} className="h-2 bg-[#2E5941]" />
@@ -273,7 +273,7 @@ export default function Questionnaire({ navigate }: QuestionnaireProps) {
       {!state.isStarted && (
         <Button onClick={startQuestionnaire} className="px-6 py-3 bg-[#2E5941] text-white rounded-md hover:bg-[#3C5F58] transition-colors text-lg">
           <Play className="w-4 h-4 mr-2" />
-          lancer l'évaluation
+          Lancer l'évaluation
         </Button>
       )}
       
@@ -357,19 +357,19 @@ export default function Questionnaire({ navigate }: QuestionnaireProps) {
           <div className="flex flex-wrap gap-3">
             <Button onClick={() => navigate('outils')} className="px-6 py-3 bg-gray-400 text-white rounded-md hover:bg-gray-500 transition-colors text-lg">
               <ArrowLeft className="w-4 h-4 mr-2" />
-              retour aux outils
+              Retour aux outils
             </Button>
             <Button onClick={resetQuestionnaire} className="px-6 py-3 bg-gray-400 text-white rounded-md hover:bg-gray-500 transition-colors text-lg">
               <RotateCcw className="w-4 h-4 mr-2" />
-              recommencer l'évaluation
+              Recommencer l'évaluation
             </Button>
             <Button onClick={exportResults} className="px-6 py-3 bg-[#2E5941] text-white rounded-md hover:bg-[#3C5F58] transition-colors text-lg">
               <Download className="w-4 h-4 mr-2" />
-              exporter PDF
+              Exporter PDF
             </Button>
             <Button onClick={saveProgress} className="px-6 py-3 bg-yellow-600 text-white rounded-md hover:bg-yellow-700 transition-colors text-lg">
               <Save className="w-4 h-4 mr-2" />
-              sauvegarder
+              Sauvegarder
             </Button>
           </div>
           

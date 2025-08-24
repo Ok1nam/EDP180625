@@ -77,7 +77,7 @@ const TvaCoefficient: React.FC<TvaCoefficientProps> = ({ navigate }) => {
         <CardHeader>
           <CardTitle className="text-xl font-semibold flex items-center gap-2 text-[#2E5941]">
             <FileText className="w-5 h-5" />
-            conseils pour une gestion rigoureuse
+            Conseils pour une gestion rigoureuse
           </CardTitle>
         </CardHeader>
         <CardContent className="text-gray-700 space-y-4">
