@@ -11,17 +11,34 @@ import Footer from "./components/Footer";
 import LoginForm from "./components/LoginForm";
 import Home from "./pages/Home";
 import Tools from "./pages/Tools";
-import PlanComptable from "./pages/PlanComptable";
-import TvaCoefficient from "./pages/TvaCoefficient";
-import ResultatFiscal from "./pages/ResultatFiscal";
+import Suivis from "./pages/Suivis";
 import Questionnaire from "./pages/Questionnaire";
-import StatutsGenerator from "./pages/StatutsGenerator";
-import CriteresLabel from "./pages/CriteresLabel";
-import BudgetCreation from "./pages/BudgetCreation";
 import SubsidyGenerator from "@/pages/SubsidyGenerator";
-import Suivis from "./pages/Suivis"; // Ajout de l'import pour Suivis
-import SuiviSubventions from "./pages/SuiviSubventions"; // Ajout de l'import pour SuiviSubventions
-import SuiviPrets from "./pages/SuiviPrets"; // Ajout de l'import pour SuiviPrets
+import StatutsGenerator from "@/pages/StatutsGenerator";
+import UnderDevelopment from "@/pages/UnderDevelopment";
+import Dashboard from "./pages/Dashboard";
+import LocationAnalysis from "./pages/LocationAnalysis";
+import DocumentationPage from "./pages/DocumentationPage";
+import Methodology from "./pages/Methodology";
+import Contact from "./pages/Contact";
+import ResultatFiscal from "./pages/ResultatFiscal";
+import TvaCoefficient from "./pages/TvaCoefficient";
+import PlanComptable from "./pages/PlanComptable";
+import CriteresLabel from "./pages/CriteresLabel";
+import PretSubordonne from "./pages/PretSubordonne";
+import HabilitationTaxe from "./pages/HabilitationTaxe";
+import Entretiens from "./pages/Entretiens";
+import Organigramme from "./pages/Organigramme";
+import EtudeMarche from "./pages/EtudeMarche";
+import GuideTva from "./pages/GuideTva";
+import SuiviPrets from "./pages/SuiviPrets";
+import SuiviSubventions from "./pages/SuiviSubventions";
+import RapportAdapte from "./pages/RapportAdapte";
+import PrixVenteProduits from "./pages/PrixVenteProduits";
+import TableauCalculCout from "./pages/TableauCalculCout";
+import BudgetCreation from "./pages/BudgetCreation";
+import EcoleDeProduction from "./pages/EcoleDeProduction";
+import ContactEtAide from "./pages/ContactEtAide";
 import { useState } from "react";
 import { useAuth } from "./hooks/useAuth";
 import AnalyticsTracker from './components/AnalyticsTracker'; 
@@ -58,9 +75,16 @@ function MainApplicationContent() {
           <Route path="/criteres-label" element={<CriteresLabel navigate={navigate} />} />
           <Route path="/budget-creation" element={<BudgetCreation navigate={navigate} />} />
           <Route path="/subventions" element={<SubsidyGenerator navigate={navigate} />} />
-          <Route path="/suivis" element={<Suivis navigate={navigate} />} /> {/* Ajout de la route */}
-          <Route path="/suivi-subventions" element={<SuiviSubventions navigate={navigate} />} /> {/* Ajout de la route */}
-          <Route path="/suivi-prets" element={<SuiviPrets navigate={navigate} />} /> {/* Ajout de la route */}
+          <Route path="/suivis" element={<Suivis navigate={navigate} />} />
+          <Route path="/suivi-subventions" element={<SuiviSubventions navigate={navigate} />} />
+          <Route path="/suivi-prets" element={<SuiviPrets navigate={navigate} />} />
+          <Route path="/documentation" element={<DocumentationPage navigate={navigate} />} />
+          <Route path="/methodo" element={<Methodology navigate={navigate} />} />
+          <Route path="/cartographie" element={<LocationAnalysis navigate={navigate} />} />
+          <Route path="/organigramme" element={<Organigramme navigate={navigate} />} />
+          <Route path="/entretiens" element={<Entretiens navigate={navigate} />} />
+          <Route path="/guide-tva" element={<GuideTva navigate={navigate} />} />
+          <Route path="/etude-marche" element={<EtudeMarche navigate={navigate} />} />
         </Routes>
       </main>
       <Footer navigate={navigate} />
