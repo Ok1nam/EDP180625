@@ -17,7 +17,7 @@ import SubsidyGenerator from "@/pages/SubsidyGenerator";
 import StatutsGenerator from "./pages/StatutsGenerator";
 import UnderDevelopment from "@/pages/UnderDevelopment";
 import Dashboard from "./pages/Dashboard";
-import LocationAnalysis from "./pages/Pages/LocationAnalysis";
+import LocationAnalysis from "./pages/LocationAnalysis";
 import DocumentationPage from "./pages/DocumentationPage";
 import Methodology from "./pages/Methodology";
 import Contact from "./pages/Contact";
