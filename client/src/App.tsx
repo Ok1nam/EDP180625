@@ -11,24 +11,23 @@ import Footer from "./components/Footer";
 import LoginForm from "./components/LoginForm";
 // Importez toutes vos pages ici
 import Home from "./pages/Home";
-import Tools from "./pages/Tools";
-import Suivis from "./pages/Suivis";
-import Questionnaire from "./pages/Questionnaire";
+import Tools from "./pages/PageOutils";
+import Questionnaire from "./pages/ArbreALaDecision";
 // Pages retirées : Calculators, BusinessPlan, PartnershipTracker, PedagogicalCosts, TrainingPlanner
-import SubsidyGenerator from "@/pages/SubsidyGenerator";
-import StatutsGenerator from "@/pages/StatutsGenerator";
+import SubsidyGenerator from "@/pages/DossierTypeSubvention";
+import StatutsGenerator from "@/pages/ModeleStatuts";
 import UnderDevelopment from "@/pages/UnderDevelopment";
 import Dashboard from "./pages/TableauDeBord";
-import LocationAnalysis from "./pages/LocationAnalysis";
+import LocationAnalysis from "./pages/Cartographie";
 // Pages retirées : Guides, Methodology, Annexes
-import DocumentationPage from "./pages/DocumentationPage";
-import Contact from "./pages/Contact";
-import ResultatFiscal from "./pages/ResultatFiscal";
-import TvaCoefficient from "./pages/TvaCoefficient";
+import DocumentationPage from "./pages/PageDocumentation";
+import Contact from "./pages/ContactExpertComptable";
+import ResultatFiscal from "./pages/zz_ResultatFiscal";
+import TvaCoefficient from "./pages/CoefficientTVA";
 import PlanComptable from "./pages/PlanComptable";
-import CriteresLabel from "./pages/CriteresLabel";
+import CriteresLabel from "./pages/Labellisation";
 import PretSubordonne from "./pages/PretSubordonne";
-import HabilitationTaxe from "./pages/HabilitationTaxe";
+import HabilitationTaxe from "./pages/TaxeApprentissage";
 import Entretiens from "./pages/Entretiens";
 import Organigramme from "./pages/Organigramme";
 import EtudeMarche from "./pages/EtudeMarche";
@@ -36,11 +35,11 @@ import GuideTva from "./pages/GuideTva";
 import SuiviPrets from "./pages/SuiviPrets";
 import SuiviSubventions from "./pages/SuiviSubventions";
 import RapportAdapte from "./pages/RapportAdapte";
-import PrixVenteProduits from "./pages/PrixVenteProduits";
+import PrixVenteProduits from "./pages/TableauPrixVenteProduits";
 import TableauCalculCout from "./pages/TableauCalculCout";
 import BudgetCreation from "./pages/BudgetCreation";
-import EcoleDeProduction from "./pages/EcoleDeProduction";
-import ContactEtAide from "./pages/ContactEtAide";
+import EcoleDeProduction from "./pages/ContactEDP";
+import ContactEtAide from "./pages/PageContact";
 import { useState } from "react";
 import { useAuth } from "./hooks/useAuth";
 import AnalyticsTracker from './components/AnalyticsTracker'; // Importe le nouveau composant
@@ -89,7 +88,6 @@ function MainApplicationContent() {
           <Route path="/rapport-adapte" element={<RapportAdapte navigate={navigate} />} />
 
           {/* Suivis */}
-          <Route path="/suivis" element={<Suivis navigate={navigate} />} />
           <Route path="/suivi-subventions" element={<SuiviSubventions navigate={navigate} />} />
           <Route path="/suivi-prets" element={<SuiviPrets navigate={navigate} />} />
           {/* Route retirée : /partenariats */}
