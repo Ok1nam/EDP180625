@@ -480,5 +480,3 @@ export default function SuiviSubvention() {
     </section>
   );
 }
-
-export default SuiviSubventions;
