@@ -13,12 +13,11 @@ import Home from "./pages/Home";
 import Tools from "./pages/Tools";
 import PlanComptable from "./pages/PlanComptable";
 import TvaCoefficient from "./pages/TvaCoefficient";
-import ResultatFiscal from "./pages/ResultatFiscal"; // Ajout de l'import pour ResultatFiscal
-import Questionnaire from "./pages/Questionnaire"; // Ajout de l'import pour Questionnaire
+import ResultatFiscal from "./pages/ResultatFiscal";
+import Questionnaire from "./pages/Questionnaire";
 import StatutsGenerator from "./pages/StatutsGenerator"; // Ajout de l'import pour StatutsGenerator
 import CriteresLabel from "./pages/CriteresLabel"; // Ajout de l'import pour CriteresLabel
 import BudgetCreation from "./pages/BudgetCreation"; // Ajout de l'import pour BudgetCreation
-import SubsidyGenerator from "@/pages/SubsidyGenerator"; // Ajout de l'import pour SubsidyGenerator
 import { useState } from "react";
 import { useAuth } from "./hooks/useAuth";
 import AnalyticsTracker from './components/AnalyticsTracker'; 
@@ -49,12 +48,11 @@ function MainApplicationContent() {
           <Route path="/outils" element={<Tools navigate={navigate} />} />
           <Route path="/plan-comptable" element={<PlanComptable navigate={navigate} />} />
           <Route path="/tva-coefficient" element={<TvaCoefficient navigate={navigate} />} />
-          <Route path="/resultat-fiscal" element={<ResultatFiscal navigate={navigate} />} /> {/* Ajout de la route pour ResultatFiscal */}
-          <Route path="/arbre" element={<Questionnaire navigate={navigate} />} /> {/* Ajout de la route pour Questionnaire */}
-          <Route path="/statuts" element={<StatutsGenerator navigate={navigate} />} /> {/* Ajout de la route pour StatutsGenerator */}
-          <Route path="/criteres-label" element={<CriteresLabel navigate={navigate} />} /> {/* Ajout de la route pour CriteresLabel */}
-          <Route path="/budget-creation" element={<BudgetCreation navigate={navigate} />} /> {/* Ajout de la route pour BudgetCreation */}
-          <Route path="/subventions" element={<SubsidyGenerator navigate={navigate} />} /> {/* Ajout de la route pour SubsidyGenerator */}
+          <Route path="/resultat-fiscal" element={<ResultatFiscal navigate={navigate} />} />
+          <Route path="/arbre" element={<Questionnaire navigate={navigate} />} />
+          <Route path="/statuts" element={<StatutsGenerator navigate={navigate} />} /> {/* Ajout de la route */}
+          <Route path="/criteres-label" element={<CriteresLabel navigate={navigate} />} /> {/* Ajout de la route */}
+          <Route path="/budget-creation" element={<BudgetCreation navigate={navigate} />} /> {/* Ajout de la route */}
         </Routes>
       </main>
       <Footer navigate={navigate} />
