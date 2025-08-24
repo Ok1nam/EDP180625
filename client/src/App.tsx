@@ -9,54 +9,16 @@ import Header from "./components/Header";
 import Navigation from "./components/Navigation";
 import Footer from "./components/Footer";
 import LoginForm from "./components/LoginForm";
-
-// Importez toutes vos pages ici
 import Home from "./pages/Home";
-import Tools from "./pages/Tools";
-import Suivis from "./pages/Suivis";
-import Questionnaire from "./pages/Questionnaire";
-// import Calculators from "./pages/Calculators"; // Commenté: vérifiez si cette page est un index ou si elle est remplacée par TableauCalculCout
-// import BusinessPlan from "./pages/BusinessPlan"; // Commenté: à réintégrer si elle est utilisée
-import PartnershipTracker from "./pages/PartnershipTracker";
-// import PedagogicalCosts from "./pages/PedagogicalCosts"; // Commenté: à réintégrer si elle est utilisée
-// import TrainingPlanner from "./pages/TrainingPlanner"; // Commenté: à réintégrer si elle est utilisée
-import SubsidyGenerator from "@/pages/SubsidyGenerator";
-import StatutsGenerator from "@/pages/StatutsGenerator";
-import UnderDevelopment from "@/pages/UnderDevelopment";
-import Dashboard from "./pages/Dashboard";
-import LocationAnalysis from "./pages/LocationAnalysis";
-// import Guides from "./pages/Guides"; // Commenté: si c'est un index pour les guides, sinon à réintégrer
-import DocumentationPage from "./pages/DocumentationPage";
-import Methodology from "./pages/Methodology";
-// import Annexes from "./pages/Annexes"; // Commenté: si c'est un index pour les annexes, sinon à réintégrer
-import Contact from "./pages/Contact";
-import ResultatFiscal from "./pages/ResultatFiscal";
-import TvaCoefficient from "./pages/TvaCoefficient";
-import PlanComptable from "./pages/PlanComptable";
-import CriteresLabel from "./pages/CriteresLabel";
-import PretSubordonne from "./pages/PretSubordonne";
-import HabilitationTaxe from "./pages/HabilitationTaxe";
-import Entretiens from "./pages/Entretiens";
-import Organigramme from "./pages/Organigramme";
-import EtudeMarche from "./pages/EtudeMarche";
-import GuideTva from "./pages/GuideTva";
-import SuiviPrets from "./pages/SuiviPrets";
-import SuiviSubventions from "./pages/SuiviSubventions";
-import RapportAdapte from "./pages/RapportAdapte";
-import PrixVenteProduits from "./pages/PrixVenteProduits";
-import TableauCalculCout from "./pages/TableauCalculCout";
-import BudgetCreation from "./pages/BudgetCreation";
-import EcoleDeProduction from "./pages/EcoleDeProduction";
-import ContactEtAide from "./pages/ContactEtAide";
+import Tools from "./pages/Tools"; // Ajout de l'import pour la page Tools
 import { useState } from "react";
 import { useAuth } from "./hooks/useAuth";
-import AnalyticsTracker from './components/AnalyticsTracker';
+import AnalyticsTracker from './components/AnalyticsTracker'; 
 
 function MainApplicationContent() {
   const { isAuthenticated, login } = useAuth();
   const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false);
   const navigateRR = useNavigate();
-  // const location = useLocation(); // Gardé ici si vous l'utilisez dans AnalyticsTracker ou ailleurs
 
   const navigate = (path: string) => {
     navigateRR(path);
@@ -76,55 +38,7 @@ function MainApplicationContent() {
         <Routes>
           <Route path="/" element={<Home navigate={navigate} />} />
           <Route path="/accueil" element={<Home navigate={navigate} />} />
-
-          {/* Outils */}
-          <Route path="/outils" element={<Tools navigate={navigate} />} />
-          <Route path="/plan-comptable" element={<PlanComptable navigate={navigate} />} />
-          <Route path="/tva-coefficient" element={<TvaCoefficient navigate={navigate} />} />
-          <Route path="/resultat-fiscal" element={<ResultatFiscal navigate={navigate} />} />
-          <Route path="/arbre" element={<Questionnaire navigate={navigate} />} />
-          <Route path="/statuts" element={<StatutsGenerator navigate={navigate} />} />
-          <Route path="/criteres-label" element={<CriteresLabel navigate={navigate} />} />
-          <Route path="/budget-creation" element={<BudgetCreation navigate={navigate} />} />
-          <Route path="/subventions" element={<SubsidyGenerator navigate={navigate} />} />
-          <Route path="/pret-subordonne" element={<PretSubordonne navigate={navigate} />} />
-          <Route path="/habilitation-taxe" element={<HabilitationTaxe navigate={navigate} />} />
-          <Route path="/calculateurs" element={<TableauCalculCout navigate={navigate} />} /> {/* Assurez-vous que c'est bien TableauCalculCout qui est appelé par "/calculateurs" */}
-          <Route path="/prix-vente" element={<PrixVenteProduits navigate={navigate} />} />
-          <Route path="/rapport-adapte" element={<RapportAdapte navigate={navigate} />} />
-
-          {/* Suivis */}
-          <Route path="/suivis" element={<Suivis navigate={navigate} />} />
-          <Route path="/suivi-subventions" element={<SuiviSubventions navigate={navigate} />} />
-          <Route path="/suivi-prets" element={<SuiviPrets navigate={navigate} />} />
-          <Route path="/partenariats" element={<PartnershipTracker navigate={navigate} />} />
-          <Route path="/tableau-bord" element={<Dashboard navigate={navigate} />} />
-
-          {/* Documentation & Guides */}
-          <Route path="/documentation" element={<DocumentationPage navigate={navigate} />} />
-          <Route path="/methodo" element={<Methodology navigate={navigate} />} />
-          <Route path="/cartographie" element={<LocationAnalysis navigate={navigate} />} />
-          <Route path="/organigramme" element={<Organigramme navigate={navigate} />} />
-          <Route path="/entretiens" element={<Entretiens navigate={navigate} />} />
-          <Route path="/guide-tva" element={<GuideTva navigate={navigate} />} />
-          <Route path="/etude-marche" element={<EtudeMarche navigate={navigate} />} />
-          {/* <Route path="/guides" element={<Guides navigate={navigate} />} /> */} {/* Décommenter si cette route est un index de guides */}
-
-          {/* Contact & Aide */}
-          <Route path="/contact-et-aide" element={<ContactEtAide navigate={navigate} />} />
-          <Route path="/expert-comptable" element={<Contact navigate={navigate} />} />
-          <Route path="/edp" element={<EcoleDeProduction navigate={navigate} />} />
-          <Route path="/faq" element={<UnderDevelopment title="Foire Aux Questions (FAQ)" navigate={navigate} />} />
-          <Route path="/support" element={<UnderDevelopment title="Support Technique" navigate={navigate} />} />
-          <Route path="/contact" element={<Contact navigate={navigate} />} />
-
-          {/* Routes pour les pages qui étaient gérées par currentPage mais qui n'ont pas de lien direct dans le menu. */}
-          {/* <Route path="/business-plan" element={<BusinessPlan navigate={navigate} />} /> */}
-          {/* <Route path="/couts-pedagogiques" element={<PedagogicalCosts navigate={navigate} />} /> */}
-          {/* <Route path="/planification" element={<TrainingPlanner navigate={navigate} />} /> */}
-
-          {/* Route par défaut (404 ou redirige vers l'accueil) */}
-          <Route path="*" element={<Home navigate={navigate} />} />
+          <Route path="/outils" element={<Tools navigate={navigate} />} /> {/* Ajout de la route vers la page Tools */}
         </Routes>
       </main>
       <Footer navigate={navigate} />
