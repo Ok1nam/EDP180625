@@ -18,7 +18,7 @@ import Questionnaire from "./pages/Questionnaire";
 import SubsidyGenerator from "@/pages/SubsidyGenerator";
 import StatutsGenerator from "@/pages/StatutsGenerator";
 import UnderDevelopment from "@/pages/UnderDevelopment";
-import Dashboard from "./pages/Dashboard";
+import Dashboard from "./pages/TableauDeBord";
 import LocationAnalysis from "./pages/LocationAnalysis";
 // Pages retirées : Guides, Methodology, Annexes
 import DocumentationPage from "./pages/DocumentationPage";
