@@ -1,5 +1,5 @@
 import React from 'react';
-import { MessageSquareText, Users, Lightbulb, TrendingUp, ChevronDown, Download } from "lucide-react";
+import { MessageSquareText, Users, Lightbulb, TrendingUp, ChevronDown, Download, Briefcase } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
@@ -51,7 +51,7 @@ const entretiensData = [
     ],
   },
   {
-    title: "Entretien 2 : Avec un Enseignant faisant parti de l'équipe projet",
+    title: "Entretien 2 : Avec un Enseignant faisant partie de l'équipe projet",
     questions: [
       {
         question: "Q1: Qu'est-ce qui vous a motivé à initier un projet au sein de cette école de production ?",
