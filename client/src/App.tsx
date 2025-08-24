@@ -1,6 +1,6 @@
 // client/src/App.tsx
 
-import { BrowserRouter as Router, Routes, Route, useNavigate, useLocation } from "react-router-dom"; // Importe de react-router-dom
+import { BrowserRouter as Router, Routes, Route, useNavigate, useLocation } from "react-router-dom";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { queryClient } from "./lib/queryClient";
 import { Toaster } from "@/components/ui/toaster";
@@ -14,20 +14,14 @@ import Home from "./pages/Home";
 import Tools from "./pages/Tools";
 import Suivis from "./pages/Suivis";
 import Questionnaire from "./pages/Questionnaire";
-import Calculators from "./pages/Calculators";
-import BusinessPlan from "./pages/BusinessPlan";
-import PartnershipTracker from "./pages/PartnershipTracker";
-import PedagogicalCosts from "./pages/PedagogicalCosts";
-import TrainingPlanner from "./pages/TrainingPlanner";
+// Pages retirées : Calculators, BusinessPlan, PartnershipTracker, PedagogicalCosts, TrainingPlanner
 import SubsidyGenerator from "@/pages/SubsidyGenerator";
 import StatutsGenerator from "@/pages/StatutsGenerator";
 import UnderDevelopment from "@/pages/UnderDevelopment";
 import Dashboard from "./pages/Dashboard";
 import LocationAnalysis from "./pages/LocationAnalysis";
-import Guides from "./pages/Guides";
+// Pages retirées : Guides, Methodology, Annexes
 import DocumentationPage from "./pages/DocumentationPage";
-import Methodology from "./pages/Methodology";
-import Annexes from "./pages/Annexes";
 import Contact from "./pages/Contact";
 import ResultatFiscal from "./pages/ResultatFiscal";
 import TvaCoefficient from "./pages/TvaCoefficient";
@@ -98,17 +92,18 @@ function MainApplicationContent() {
           <Route path="/suivis" element={<Suivis navigate={navigate} />} />
           <Route path="/suivi-subventions" element={<SuiviSubventions navigate={navigate} />} />
           <Route path="/suivi-prets" element={<SuiviPrets navigate={navigate} />} />
-          <Route path="/partenariats" element={<PartnershipTracker navigate={navigate} />} />
+          {/* Route retirée : /partenariats */}
           <Route path="/tableau-bord" element={<Dashboard navigate={navigate} />} />
 
           {/* Documentation & Guides */}
           <Route path="/documentation" element={<DocumentationPage navigate={navigate} />} />
-          <Route path="/methodo" element={<Methodology navigate={navigate} />} />
+          {/* Route retirée : /methodo */}
           <Route path="/cartographie" element={<LocationAnalysis navigate={navigate} />} />
           <Route path="/organigramme" element={<Organigramme navigate={navigate} />} />
           <Route path="/entretiens" element={<Entretiens navigate={navigate} />} />
           <Route path="/guide-tva" element={<GuideTva navigate={navigate} />} />
           <Route path="/etude-marche" element={<EtudeMarche navigate={navigate} />} />
+          {/* Route retirée : /guides, /annexes */}
 
           {/* Contact & Aide */}
           <Route path="/contact-et-aide" element={<ContactEtAide navigate={navigate} />} />
@@ -119,9 +114,7 @@ function MainApplicationContent() {
           <Route path="/contact" element={<Contact navigate={navigate} />} />
 
           {/* Routes pour les pages qui étaient gérées par currentPage mais qui n'ont pas de lien direct dans le menu. */}
-          <Route path="/business-plan" element={<BusinessPlan navigate={navigate} />} />
-          <Route path="/couts-pedagogiques" element={<PedagogicalCosts navigate={navigate} />} />
-          <Route path="/planification" element={<TrainingPlanner navigate={navigate} />} />
+          {/* Routes retirées : /business-plan, /couts-pedagogiques, /planification */}
 
           {/* Route par défaut (404 ou redirige vers l'accueil) */}
           <Route path="*" element={<Home navigate={navigate} />} />
