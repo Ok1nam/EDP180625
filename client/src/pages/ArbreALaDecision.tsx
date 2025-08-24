@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { TreePine, Play, ArrowLeft, RotateCcw, Download, Save, Check, X, Briefcase } from "lucide-react";
 
-// NOTE: Les composants Card, CardContent, Button, et Progress sont considérés comme disponibles.
 const Card = ({ children, className = '' }) => <div className={`bg-white rounded-xl shadow-lg border border-gray-200 ${className}`}>{children}</div>;
 const CardContent = ({ children, className = '' }) => <div className={`p-6 ${className}`}>{children}</div>;
 const CardHeader = ({ children, className = '' }) => <div className={`p-6 border-b border-gray-200 ${className}`}>{children}</div>;
@@ -248,7 +247,7 @@ export default function Questionnaire({ navigate }: QuestionnaireProps) {
             Téléchargez la version PowerPoint de cet arbre de décision pour l'utiliser comme support de présentation lors de vos rendez-vous avec votre client.
           </p>
           <a href={pptxFilePath} download="ANNEXE 8 - ARBRE A LA DECISION SUR LES CARACTERISTIQUES DU PORTEUR DE PROJET.pptx">
-            <Button className="bg-[#2E5941] hover:bg-[#3C5F58] text-white">
+            <Button className="bg-[#2E5941] hover:bg-[#3C5F58] text-white flex items-center gap-2 justify-center">
               <Download className="w-4 h-4 mr-2" />
               Télécharger le modèle (.pptx)
             </Button>
@@ -271,7 +270,7 @@ export default function Questionnaire({ navigate }: QuestionnaireProps) {
       </Card>
       
       {!state.isStarted && (
-        <Button onClick={startQuestionnaire} className="px-6 py-3 bg-[#2E5941] text-white rounded-md hover:bg-[#3C5F58] transition-colors text-lg">
+        <Button onClick={startQuestionnaire} className="px-6 py-3 bg-[#2E5941] text-white rounded-md hover:bg-[#3C5F58] transition-colors text-lg flex items-center gap-2 justify-center">
           <Play className="w-4 h-4 mr-2" />
           Lancer l'évaluation
         </Button>
@@ -300,14 +299,14 @@ export default function Questionnaire({ navigate }: QuestionnaireProps) {
             <div className="flex gap-3 mb-4">
               <Button 
                 onClick={() => answerQuestion('OUI')}
-                className="bg-green-600 text-white hover:bg-green-700 transition-colors"
+                className="bg-green-600 text-white hover:bg-green-700 transition-colors flex items-center gap-2 justify-center"
               >
                 <Check className="w-4 h-4 mr-2" />
                 OUI
               </Button>
               <Button 
                 onClick={() => answerQuestion('NON')}
-                className="bg-red-600 text-white hover:bg-red-700 transition-colors"
+                className="bg-red-600 text-white hover:bg-red-700 transition-colors flex items-center gap-2 justify-center"
               >
                 <X className="w-4 h-4 mr-2" />
                 NON
@@ -315,7 +314,7 @@ export default function Questionnaire({ navigate }: QuestionnaireProps) {
               <Button 
                 onClick={goToPrevious}
                 disabled={state.currentIndex === 0}
-                className="bg-gray-400 text-white hover:bg-gray-500 transition-colors"
+                className="bg-gray-400 text-white hover:bg-gray-500 transition-colors flex items-center gap-2 justify-center"
               >
                 <ArrowLeft className="w-4 h-4 mr-2" />
                 Précédent
@@ -355,19 +354,19 @@ export default function Questionnaire({ navigate }: QuestionnaireProps) {
           </Card>
           
           <div className="flex flex-col sm:flex-row sm:flex-wrap items-center justify-center gap-3 md:gap-4 mt-6">
-            <Button onClick={() => navigate('outils')} className="px-6 py-3 bg-gray-400 text-white rounded-md hover:bg-gray-500 transition-colors text-lg flex-1">
+            <Button onClick={() => navigate('outils')} className="px-6 py-3 bg-gray-400 text-white rounded-md hover:bg-gray-500 transition-colors text-lg flex items-center gap-2 justify-center flex-1">
               <ArrowLeft className="w-4 h-4 mr-2" />
               Retour aux outils
             </Button>
-            <Button onClick={resetQuestionnaire} className="px-6 py-3 bg-gray-400 text-white rounded-md hover:bg-gray-500 transition-colors text-lg flex-1">
+            <Button onClick={resetQuestionnaire} className="px-6 py-3 bg-gray-400 text-white rounded-md hover:bg-gray-500 transition-colors text-lg flex items-center gap-2 justify-center flex-1">
               <RotateCcw className="w-4 h-4 mr-2" />
               Recommencer l'évaluation
             </Button>
-            <Button onClick={exportResults} className="px-6 py-3 bg-[#2E5941] text-white rounded-md hover:bg-[#3C5F58] transition-colors text-lg flex-1">
+            <Button onClick={exportResults} className="px-6 py-3 bg-[#2E5941] text-white rounded-md hover:bg-[#3C5F58] transition-colors text-lg flex items-center gap-2 justify-center flex-1">
               <Download className="w-4 h-4 mr-2" />
               Exporter PDF
             </Button>
-            <Button onClick={saveProgress} className="px-6 py-3 bg-yellow-600 text-white rounded-md hover:bg-yellow-700 transition-colors text-lg flex-1">
+            <Button onClick={saveProgress} className="px-6 py-3 bg-yellow-600 text-white rounded-md hover:bg-yellow-700 transition-colors text-lg flex items-center gap-2 justify-center flex-1">
               <Save className="w-4 h-4 mr-2" />
               Sauvegarder
             </Button>
@@ -376,7 +375,7 @@ export default function Questionnaire({ navigate }: QuestionnaireProps) {
           <div className="text-center mt-8">
             <Button
               onClick={() => navigate('accueil')}
-              className="px-6 py-3 bg-[#2E5941] text-white rounded-md hover:bg-[#3C5F58] transition-colors text-lg"
+              className="px-6 py-3 bg-[#2E5941] text-white rounded-md hover:bg-[#3C5F58] transition-colors text-lg flex items-center gap-2 justify-center"
             >
               Retour à l'accueil
             </Button>
