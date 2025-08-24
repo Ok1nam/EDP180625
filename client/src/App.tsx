@@ -25,7 +25,6 @@ import ResultatFiscal from "./pages/ResultatFiscal";
 import TvaCoefficient from "./pages/TvaCoefficient";
 import PlanComptable from "./pages/PlanComptable";
 import CriteresLabel from "./pages/CriteresLabel";
-import PretSubordonne from "./pages/PretSubordonne"; // Ajout de l'import pour PretSubordonne
 import { useState } from "react";
 import { useAuth } from "./hooks/useAuth";
 import AnalyticsTracker from './components/AnalyticsTracker'; 
@@ -72,7 +71,6 @@ function MainApplicationContent() {
           <Route path="/entretiens" element={<Entretiens navigate={navigate} />} />
           <Route path="/guide-tva" element={<GuideTva navigate={navigate} />} />
           <Route path="/etude-marche" element={<EtudeMarche navigate={navigate} />} />
-          <Route path="/pret-subordonne" element={<PretSubordonne navigate={navigate} />} /> {/* Ajout de la route pour PretSubordonne */}
           
           {/* Les autres routes du dernier lot sont commentées pour l'instant */}
           {/*
