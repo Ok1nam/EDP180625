@@ -13,13 +13,20 @@ import Home from "./pages/Home";
 import Tools from "./pages/Tools";
 import Suivis from "./pages/Suivis";
 import Questionnaire from "./pages/Questionnaire";
+import Calculators from "./pages/Calculators";
+import BusinessPlan from "./pages/BusinessPlan";
+import PartnershipTracker from "./pages/PartnershipTracker";
+import PedagogicalCosts from "./pages/PedagogicalCosts";
+import TrainingPlanner from "./pages/TrainingPlanner";
 import SubsidyGenerator from "@/pages/SubsidyGenerator";
 import StatutsGenerator from "@/pages/StatutsGenerator";
 import UnderDevelopment from "@/pages/UnderDevelopment";
 import Dashboard from "./pages/Dashboard";
 import LocationAnalysis from "./pages/LocationAnalysis";
+import Guides from "./pages/Guides";
 import DocumentationPage from "./pages/DocumentationPage";
 import Methodology from "./pages/Methodology";
+import Annexes from "./pages/Annexes";
 import Contact from "./pages/Contact";
 import ResultatFiscal from "./pages/ResultatFiscal";
 import TvaCoefficient from "./pages/TvaCoefficient";
@@ -41,7 +48,7 @@ import EcoleDeProduction from "./pages/EcoleDeProduction";
 import ContactEtAide from "./pages/ContactEtAide";
 import { useState } from "react";
 import { useAuth } from "./hooks/useAuth";
-import AnalyticsTracker from './components/AnalyticsTracker'; 
+import AnalyticsTracker from './components/AnalyticsTracker';
 
 function MainApplicationContent() {
   const { isAuthenticated, login } = useAuth();
@@ -66,6 +73,8 @@ function MainApplicationContent() {
         <Routes>
           <Route path="/" element={<Home navigate={navigate} />} />
           <Route path="/accueil" element={<Home navigate={navigate} />} />
+
+          {/* Outils */}
           <Route path="/outils" element={<Tools navigate={navigate} />} />
           <Route path="/plan-comptable" element={<PlanComptable navigate={navigate} />} />
           <Route path="/tva-coefficient" element={<TvaCoefficient navigate={navigate} />} />
@@ -75,9 +84,20 @@ function MainApplicationContent() {
           <Route path="/criteres-label" element={<CriteresLabel navigate={navigate} />} />
           <Route path="/budget-creation" element={<BudgetCreation navigate={navigate} />} />
           <Route path="/subventions" element={<SubsidyGenerator navigate={navigate} />} />
+          <Route path="/pret-subordonne" element={<PretSubordonne navigate={navigate} />} />
+          <Route path="/habilitation-taxe" element={<HabilitationTaxe navigate={navigate} />} />
+          <Route path="/calculateurs" element={<TableauCalculCout navigate={navigate} />} />
+          <Route path="/prix-vente" element={<PrixVenteProduits navigate={navigate} />} />
+          <Route path="/rapport-adapte" element={<RapportAdapte navigate={navigate} />} />
+
+          {/* Suivis */}
           <Route path="/suivis" element={<Suivis navigate={navigate} />} />
           <Route path="/suivi-subventions" element={<SuiviSubventions navigate={navigate} />} />
           <Route path="/suivi-prets" element={<SuiviPrets navigate={navigate} />} />
+          <Route path="/partenariats" element={<PartnershipTracker navigate={navigate} />} />
+          <Route path="/tableau-bord" element={<Dashboard navigate={navigate} />} />
+
+          {/* Documentation & Guides */}
           <Route path="/documentation" element={<DocumentationPage navigate={navigate} />} />
           <Route path="/methodo" element={<Methodology navigate={navigate} />} />
           <Route path="/cartographie" element={<LocationAnalysis navigate={navigate} />} />
@@ -85,6 +105,27 @@ function MainApplicationContent() {
           <Route path="/entretiens" element={<Entretiens navigate={navigate} />} />
           <Route path="/guide-tva" element={<GuideTva navigate={navigate} />} />
           <Route path="/etude-marche" element={<EtudeMarche navigate={navigate} />} />
+
+          {/* Contact & Aide */}
+          <Route path="/contact-et-aide" element={<ContactEtAide navigate={navigate} />} />
+          <Route path="/expert-comptable" element={<Contact navigate={navigate} />} />
+          <Route path="/edp" element={<EcoleDeProduction navigate={navigate} />} />
+          <Route path="/faq" element={<UnderDevelopment title="Foire Aux Questions (FAQ)" navigate={navigate} />} />
+          <Route path="/support" element={<UnderDevelopment title="Support Technique" navigate={navigate} />} />
+          <Route path="/contact" element={<Contact navigate={navigate} />} />
+
+          {/* Pages sans lien direct dans le menu */}
+          <Route path="/business-plan" element={<BusinessPlan navigate={navigate} />} />
+          <Route path="/couts-pedagogiques" element={<PedagogicalCosts navigate={navigate} />} />
+          <Route path="/planification" element={<TrainingPlanner navigate={navigate} />} />
+
+          {/* Routes de test et d'index qui n'étaient pas dans votre code initial mais qui pourraient être utiles */}
+          <Route path="/calculateurs" element={<Calculators navigate={navigate} />} />
+          <Route path="/guides" element={<Guides navigate={navigate} />} />
+          <Route path="/annexes" element={<Annexes navigate={navigate} />} />
+
+          {/* Route par défaut (404 ou redirige vers l'accueil) */}
+          <Route path="*" element={<Home navigate={navigate} />} />
         </Routes>
       </main>
       <Footer navigate={navigate} />
