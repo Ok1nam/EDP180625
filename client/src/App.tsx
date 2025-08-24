@@ -76,6 +76,7 @@ function MainApplicationContent() {
           <Route path="/budget-creation" element={<BudgetCreation navigate={navigate} />} />
           <Route path="/subventions" element={<SubsidyGenerator navigate={navigate} />} />
           <Route path="/pret-subordonne" element={<PretSubordonne navigate={navigate} />} />
+          <Route path="/habilitation-taxe" element={<HabilitationTaxe navigate={navigate} />} />
           <Route path="/suivis" element={<Suivis navigate={navigate} />} />
           <Route path="/suivi-subventions" element={<SuiviSubventions navigate={navigate} />} />
           <Route path="/suivi-prets" element={<SuiviPrets navigate={navigate} />} />
