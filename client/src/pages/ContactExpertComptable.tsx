@@ -48,8 +48,8 @@ export default function Contact() {
                 <p className="flex items-center gap-2">
                   <Download className="w-4 h-4" />
                   <a 
-                    href="/fichiers/MEMOIRE PARTIE I ET II.docx"
-                    download="MEMOIRE PARTIE I ET II.docx"
+                    href="/fichiers/LG MEMOIRE.pdf"
+                    download="LG MEMOIRE.pdf"
                     className="text-blue-600 hover:text-blue-800 transition-colors font-medium"
                   >
                     Télécharger le T1 du mémoire
@@ -59,8 +59,8 @@ export default function Contact() {
                 <p className="flex items-center gap-2">
                   <Download className="w-4 h-4" />
                   <a 
-                    href="/fichiers/memoire_t2.pdf" // Le chemin a été conservé car non spécifié
-                    download="memoire_laura_gombaud_t2.pdf"
+                    href="/fichiers/memoire_t2.pdf"
+                    download="memoire_t2.pdf"
                     className="text-blue-600 hover:text-blue-800 transition-colors font-medium"
                   >
                     Télécharger le T2 (annexes) du mémoire
