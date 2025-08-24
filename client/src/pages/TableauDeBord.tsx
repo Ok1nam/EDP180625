@@ -21,7 +21,6 @@ const TableauDeBord: React.FC<TableauDeBordProps> = ({ navigate }) => {
         En tant qu'expert-comptable, ce tableau de bord est votre allié pour offrir un suivi stratégique à l'école de production que vous conseillez. Il vous permet de transformer les données brutes en un aperçu clair et synthétique de sa santé financière et de son impact social, facilitant ainsi vos recommandations et la prise de décision de votre client.
       </p>
 
-      {/* Section Objectifs de l’outil */}
       <Card className="mb-6 shadow-md">
         <CardHeader className="bg-gray-50 border-b">
           <CardTitle className="text-xl font-bold text-[#3C5F58] flex items-center gap-2">
@@ -34,10 +33,10 @@ const TableauDeBord: React.FC<TableauDeBordProps> = ({ navigate }) => {
             Ce modèle est conçu pour vous aider à :
           </p>
           <ul className="list-disc pl-5 space-y-2">
-            <li><span className="font-bold">Analyser la performance financière</span> en suivant des indicateurs essentiels comme l’équilibre financier, la rentabilité de la production ou le coût par élève.</li>
-            <li><span className="font-bold">Évaluer l'impact social et extra-financier</span> en intégrant des métriques clés pour les financeurs (taux de décrochage, qualification des élèves) et ainsi valoriser le bilan de l'école.</li>
-            <li><span className="font-bold">Faciliter le reporting</span> auprès des partenaires et financeurs, en leur fournissant une vision complète et transparente de l’activité de l’école de production.</li>
-            <li><span className="font-bold">Anticiper les besoins et les risques</span> de l'école en analysant les tendances et en justifiant vos conseils stratégiques.</li>
+            <li><span className="font-bold">Analyser la performance financière :</span> en suivant des indicateurs essentiels comme l’équilibre financier, la rentabilité de la production ou le coût par élève.</li>
+            <li><span className="font-bold">Évaluer l'impact social et extra-financier :</span> en intégrant des métriques clés pour les financeurs (taux de décrochage, qualification des élèves) et ainsi valoriser le bilan de l'école.</li>
+            <li><span className="font-bold">Faciliter le reporting :</span> auprès des partenaires et financeurs, en leur fournissant une vision complète et transparente de l’activité de l’école de production.</li>
+            <li><span className="font-bold">Anticiper les besoins et les risques :</span> de l'école en analysant les tendances et en justifiant vos conseils stratégiques.</li>
           </ul>
           <p className="italic text-sm text-gray-600 mt-4">
             Cet outil vous permet d'aller au-delà de la comptabilité traditionnelle pour devenir un véritable partenaire stratégique du développement de l'école de production.
@@ -45,7 +44,6 @@ const TableauDeBord: React.FC<TableauDeBordProps> = ({ navigate }) => {
         </CardContent>
       </Card>
 
-      {/* Section Téléchargement */}
       <Card className="mb-8 shadow-lg border-2 border-[#2E5941]">
         <CardHeader>
           <CardTitle className="text-2xl font-bold text-[#2E5941] flex items-center gap-3">
@@ -55,10 +53,10 @@ const TableauDeBord: React.FC<TableauDeBordProps> = ({ navigate }) => {
         <CardContent className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
           <div className="text-base text-gray-800 flex-1">
             <p className="mb-2">
-              Accédez à ce modèle de tableau de bord au format `.xlsm`, un outil prêt à l'emploi pour le suivi et le pilotage de votre client École de Production.
+              Accédez à ce modèle de tableau de bord au format `.xlsm`, un outil prêt à l'emploi pour le suivi et le pilotage de votre client, l'école de production.
             </p>
             <p className="text-sm text-gray-600">
-              <span className="font-bold">Conseil de pro :</span> Adaptez les indicateurs aux spécificités de l'école pour un pilotage optimal, en incluant des variables que vous jugez pertinentes pour leur activité.
+              <span className="font-bold">Conseil de pro :</span> adaptez les indicateurs aux spécificités de l'école pour un pilotage optimal, en incluant des variables que vous jugez pertinentes pour leur activité.
             </p>
           </div>
           <a

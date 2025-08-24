@@ -30,10 +30,10 @@ export default function HabilitationTaxe({ navigate }: HabilitationTaxeProps) {
         <CardContent className="p-6 text-gray-700">
           <p className="mb-4">Ce document pratique vous permet de guider votre client à travers les étapes clés de la procédure dématérialisée. Il :</p>
           <ul className="list-disc pl-5 space-y-2">
-            <li><span className="font-bold">détaille les étapes clés</span> du dépôt de demande sur la plateforme SOLTéA pour vous et votre client,</li>
-            <li><span className="font-bold">précise les éléments attendus</span> (informations, pièces justificatives, formations RNCP...) pour que vous puissiez les préparer ensemble,</li>
-            <li><span className="font-bold">alerte sur les points de vigilance</span> pour éviter les rejets ou retards, renforçant votre rôle de sécurisation,</li>
-            <li><span className="font-bold">rappelle les références réglementaires</span> à connaître pour justifier vos conseils et décisions.</li>
+            <li><span className="font-bold">détaille les étapes clés :</span> du dépôt de demande sur la plateforme SOLTéA pour vous et votre client,</li>
+            <li><span className="font-bold">précise les éléments attendus :</span> (informations, pièces justificatives, formations RNCP...) pour que vous puissiez les préparer ensemble,</li>
+            <li><span className="font-bold">alerte sur les points de vigilance :</span> pour éviter les rejets ou retards, renforçant votre rôle de sécurisation,</li>
+            <li><span className="font-bold">rappelle les références réglementaires :</span> à connaître pour justifier vos conseils et décisions.</li>
           </ul>
         </CardContent>
       </Card>
@@ -48,14 +48,14 @@ export default function HabilitationTaxe({ navigate }: HabilitationTaxeProps) {
         </CardHeader>
         <CardContent className="p-6 text-gray-700">
           <p className="italic text-sm">
-            L’habilitation obtenue via SOLTéA n’est effective qu’après publication officielle des listes par les services de l’état en région (préfectures) ou par arrêté ministériel, généralement entre avril et mai. Assurez-vous que votre client soit bien informé de ces délais.
+            L’habilitation obtenue via SOLTéA n’est effective qu’après publication officielle des listes par les services de l’État en région (préfectures) ou par arrêté ministériel, généralement entre avril et mai. Assurez-vous que votre client soit bien informé de ces délais.
           </p>
         </CardContent>
       </Card>
 
       {/* Section Téléchargement du Guide */}
       <Card className="mb-6 shadow-md">
-        <CardHeader className="bg-gray-50 border-b">
+        <CardHeader>
           <CardTitle className="text-xl font-bold text-[#3C5F58] flex items-center gap-2">
             <Download className="w-5 h-5 text-[#3C5F58]" />
             Télécharger le guide d'habilitation pour votre client
