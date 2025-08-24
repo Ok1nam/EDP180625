@@ -1,5 +1,5 @@
 import React from 'react';
-import { Download, Target, Search, Lightbulb } from "lucide-react"; // Icônes pertinentes
+import { Download, Target, Search, Lightbulb, Briefcase } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
@@ -8,26 +8,25 @@ interface EtudeMarcheProps {
 }
 
 const EtudeMarche: React.FC<EtudeMarcheProps> = ({ navigate }) => {
-  // On ne garde que le chemin vers le fichier Excel
   const etudeMarcheExcelPath = "/fichiers/ANNEXE 11 - ETUDE DE MARCHE DU SECTEUR SELECTIONNE.xlsm";
 
   return (
     <section id="etude-marche" className="max-w-4xl mx-auto px-4 py-8">
       <h1 className="flex items-center gap-3 mb-6 text-3xl font-bold text-gray-800">
-        <Target className="w-8 h-8 text-indigo-600" /> {/* Icône cible pour l'étude de marché */}
-        Accompagner votre client dans son Étude de Marché
+        <Target className="w-8 h-8 text-indigo-600" />
+        Accompagner votre client dans son étude de marché
       </h1>
       
       <p className="mb-8 text-lg text-gray-700 leading-relaxed">
-        Votre rôle en tant qu'expert-comptable est d'accompagner votre client, le porteur de projet d'École de Production, dans la structuration de sa démarche. Une <span className="font-bold">étude de marché solide</span> est indispensable pour la préparation du business plan et la validation du <span className="font-bold">modèle économique</span>. Elle permet de s'assurer que le projet est ancré dans une réalité territoriale et répond à de véritables besoins.
+        Votre rôle en tant qu'expert-comptable est d'accompagner le porteur de projet d'école de production dans la structuration de sa démarche. Une <span className="font-bold">étude de marché solide</span> est indispensable pour la préparation du business plan et la validation du <span className="font-bold">modèle économique</span>. Elle vous permet de vous assurer que le projet est ancré dans une réalité territoriale et répond à de véritables besoins.
       </p>
 
       {/* Section Importance de l'Étude de Marché */}
       <Card className="mb-6 shadow-md">
         <CardHeader className="bg-gray-50 border-b">
           <CardTitle className="text-xl font-bold text-gray-700 flex items-center gap-2">
-            <Lightbulb className="w-5 h-5 text-orange-500" />
-            Pourquoi Guider une Étude de Marché ?
+            <Briefcase className="w-5 h-5 text-gray-500" />
+            Pourquoi guider une étude de marché ?
           </CardTitle>
         </CardHeader>
         <CardContent className="p-6 text-gray-700 space-y-4">
@@ -35,9 +34,9 @@ const EtudeMarche: React.FC<EtudeMarcheProps> = ({ navigate }) => {
             En tant que conseil, vous aidez votre client à :
           </p>
           <ul className="list-disc pl-5 space-y-2">
-            <li><span className="font-bold">Valider la pertinence du projet</span> : Confirmer l'existence d'un besoin avéré sur le marché local avant d'engager des financements.</li>
-            <li><span className="font-bold">Identifier les opportunités et les risques</span> : Détecter des créneaux non exploités et évaluer la concurrence pour un positionnement stratégique.</li>
-            <li><span className="font-bold">Établir des prévisions réalistes</span> : Utiliser des données objectives pour construire le business plan et les prévisionnels financiers.</li>
+            <li><span className="font-bold">Valider la pertinence du projet :</span> confirmer l'existence d'un besoin avéré sur le marché local avant d'engager des financements.</li>
+            <li><span className="font-bold">Identifier les opportunités et les risques :</span> détecter des créneaux non exploités et évaluer la concurrence pour un positionnement stratégique.</li>
+            <li><span className="font-bold">Établir des prévisions réalistes :</span> utiliser des données objectives pour construire le business plan et les prévisionnels financiers.</li>
           </ul>
         </CardContent>
       </Card>
@@ -47,7 +46,7 @@ const EtudeMarche: React.FC<EtudeMarcheProps> = ({ navigate }) => {
         <CardHeader className="bg-gray-50 border-b">
           <CardTitle className="text-xl font-bold text-gray-700 flex items-center gap-2">
             <Search className="w-5 h-5 text-purple-600" />
-            Les Composantes de l'Étude
+            Les composantes de l'étude
           </CardTitle>
         </CardHeader>
         <CardContent className="p-6 text-gray-700 space-y-4">
@@ -55,10 +54,10 @@ const EtudeMarche: React.FC<EtudeMarcheProps> = ({ navigate }) => {
             Vous pouvez guider votre client à structurer son étude autour des axes suivants :
           </p>
           <ul className="list-disc pl-5 space-y-2">
-            <li><span className="font-bold">Analyse de l'offre locale</span> : Recenser les établissements de formation et d'insertion professionnelle pour identifier le paysage éducatif existant.</li>
-            <li><span className="font-bold">Identification des besoins des entreprises</span> : Aider à mener des entretiens pour comprendre les métiers en tension et les attentes en matière de compétences.</li>
-            <li><span className="font-bold">Évaluation des publics cibles</span> : Analyser les besoins des jeunes sans qualification pour définir l'offre pédagogique.</li>
-            <li><span className="font-bold">Cartographie des partenariats</span> : Identifier les acteurs publics et privés susceptibles de soutenir le projet (financements, commandes, mécénat).</li>
+            <li><span className="font-bold">Analyse de l'offre locale :</span> recenser les établissements de formation et d'insertion professionnelle pour identifier le paysage éducatif existant.</li>
+            <li><span className="font-bold">Identification des besoins des entreprises :</span> aider à mener des entretiens pour comprendre les métiers en tension et les attentes en matière de compétences.</li>
+            <li><span className="font-bold">Évaluation des publics cibles :</span> analyser les besoins des jeunes sans qualification pour définir l'offre pédagogique.</li>
+            <li><span className="font-bold">Cartographie des partenariats :</span> identifier les acteurs publics et privés susceptibles de soutenir le projet (financements, commandes, mécénat).</li>
           </ul>
         </CardContent>
       </Card>
@@ -67,7 +66,7 @@ const EtudeMarche: React.FC<EtudeMarcheProps> = ({ navigate }) => {
       <Card className="mb-8 shadow-lg border-2 border-[#3C5F58]">
         <CardHeader>
           <CardTitle className="text-2xl font-bold text-[#3C5F58] flex items-center gap-3">
-            <Download className="w-6 h-6" /> Télécharger le Modèle d'Étude de Marché
+            <Download className="w-6 h-6" /> Télécharger le modèle d'étude de marché
           </CardTitle>
         </CardHeader>
         <CardContent className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">

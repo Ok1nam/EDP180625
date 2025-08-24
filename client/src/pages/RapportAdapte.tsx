@@ -21,7 +21,6 @@ const RapportAdapte: React.FC<RapportAdapteProps> = ({ navigate }) => {
         Ce modèle de rapport est un outil stratégique conçu pour vous, expert-comptable. Il vous permet d'apporter une valeur ajoutée à la présentation de votre client auprès de ses parties prenantes. En fournissant ce rapport personnalisé, vous aidez l'école de production à communiquer de manière professionnelle sur ses activités et son impact, ce qui est fondamental pour entretenir la confiance avec ses partenaires (entreprises, collectivités, financeurs).
       </p>
 
-      {/* Section Objectifs de l’outil pour l’EDP */}
       <Card className="mb-6 shadow-md">
         <CardHeader className="bg-gray-50 border-b">
           <CardTitle className="text-xl font-bold text-[#3C5F58] flex items-center gap-2">
@@ -43,7 +42,6 @@ const RapportAdapte: React.FC<RapportAdapteProps> = ({ navigate }) => {
         </CardContent>
       </Card>
 
-      {/* Section Contenu Recommandé du Rapport */}
       <Card className="mb-6 shadow-md">
         <CardHeader className="bg-gray-50 border-b">
           <CardTitle className="text-xl font-bold text-[#3C5F58] flex items-center gap-2">
@@ -67,7 +65,6 @@ const RapportAdapte: React.FC<RapportAdapteProps> = ({ navigate }) => {
         </CardContent>
       </Card>
 
-      {/* Section Téléchargement du modèle */}
       <Card className="mb-8 shadow-lg border-2 border-[#2E5941]">
         <CardHeader>
           <CardTitle className="text-2xl font-bold text-[#2E5941] flex items-center gap-3">
@@ -95,7 +92,6 @@ const RapportAdapte: React.FC<RapportAdapteProps> = ({ navigate }) => {
         </CardContent>
       </Card>
 
-      {/* Bouton de retour à l'accueil */}
       {navigate && (
         <div className="text-center mt-8">
           <Button

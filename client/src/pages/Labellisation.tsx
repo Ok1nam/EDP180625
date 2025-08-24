@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { CheckCircle, Award, Lightbulb, XCircle, Download } from "lucide-react"; 
+import { CheckCircle, Award, Briefcase, Download, Lightbulb } from "lucide-react"; 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Progress } from "@/components/ui/progress";
@@ -123,11 +123,11 @@ export default function CriteresLabel({ navigate }: CriteresLabelProps) {
     <section id="criteres-label" className="max-w-4xl mx-auto px-4 py-8">
       <h1 className="flex items-center gap-2 mb-6 text-3xl font-bold text-gray-800">
         <Award className="w-8 h-8 text-[#3C5F58]" />
-        Critères d'Obtention du Label "École de Production"
+        Checklist de labellisation pour votre client
       </h1>
       
       <p className="mb-8 text-lg text-gray-700 leading-relaxed">
-        Ce document regroupe et fusionne les 34 critères officiels de la FNEP avec des critères complémentaires et des points de vigilance. Il contient plus de 50 critères, organisés en 8 axes, pour vous aider à vérifier la conformité réglementaire et à suivre les bonnes pratiques nécessaires à l'obtention et au maintien du label officiel "École de Production".
+        En tant qu'expert-comptable, vous êtes un acteur clé dans le processus de labellisation de l'école de production que vous accompagnez. Cette checklist est votre outil de pilotage pour vérifier la conformité de leur projet et les guider vers l'obtention du label de la Fédération Nationale des Écoles de Production (FNEP).
       </p>
 
       {/* Barre de progression */}

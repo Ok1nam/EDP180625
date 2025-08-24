@@ -10,7 +10,7 @@ interface EntretiensProps {
 
 const entretiensData = [
   {
-    title: "Entretien 1 : Avec le directeur d'une école de production",
+    title: "Entretien 1 : avec le directeur d'une école de production",
     questions: [
       {
         question: "Q1: Quels sont les objectifs principaux que vous aviez en tête lors de la création de cette école de production ?",
@@ -51,7 +51,7 @@ const entretiensData = [
     ],
   },
   {
-    title: "Entretien 2 : Avec un Enseignant faisant partie de l'équipe projet",
+    title: "Entretien 2 : avec un enseignant faisant partie de l'équipe projet",
     questions: [
       {
         question: "Q1: Qu'est-ce qui vous a motivé à initier un projet au sein de cette école de production ?",
@@ -92,7 +92,7 @@ const entretiensData = [
     ],
   },
   {
-    title: "Entretien 3 : Avec un porteur de projet",
+    title: "Entretien 3 : avec un porteur de projet",
     questions: [
       {
         question: "Q1: Qu'est-ce qui vous a motivé à initier un projet au sein de cette école de production ?",
@@ -140,11 +140,11 @@ const Entretiens: React.FC<EntretiensProps> = ({ navigate }) => {
     <section id="entretiens-porteurs-projets" className="max-w-4xl mx-auto px-4 py-8">
       <h1 className="flex items-center gap-3 mb-6 text-3xl font-bold text-[#3C5F58]">
         <MessageSquareText className="w-8 h-8 text-[#3C5F58]" />
-        Entretiens avec les Porteurs de Projets
+        Entretiens avec les porteurs de projets
       </h1>
       
       <p className="mb-8 text-lg text-gray-700 leading-relaxed">
-        En tant qu'expert-comptable, les retours d'expérience des porteurs de projets sont cruciaux pour votre compréhension du modèle. Ces entretiens vous fournissent des informations de terrain sur les défis, les besoins et les facteurs de succès. Ils vous permettent d'affiner vos conseils, de mieux anticiper les difficultés financières et de proposer un accompagnement sur mesure à votre client, l'École de Production.
+        En tant qu'expert-comptable, les retours d'expérience des porteurs de projets sont cruciaux pour votre compréhension du modèle. Ces entretiens vous fournissent des informations de terrain sur les défis, les besoins et les facteurs de succès. Ils vous permettent d'affiner vos conseils, de mieux anticiper les difficultés financières et de proposer un accompagnement sur mesure à votre client, l'école de production.
       </p>
 
       {/* Section Accordeon des entretiens */}

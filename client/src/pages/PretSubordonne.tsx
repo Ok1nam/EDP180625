@@ -19,7 +19,6 @@ export default function PretSubordonne({ navigate }: PretSubordonneProps) {
         Le prêt subordonné est un outil de financement hybride qui peut considérablement renforcer la structure financière de votre client. En tant qu'expert-comptable, vous pouvez présenter ce modèle de contrat à l'école de production pour sécuriser ses premières années d’activité. C'est un moyen d'améliorer sa solvabilité perçue, sans alourdir immédiatement la charge de remboursement.
       </p>
 
-      {/* Section Pourquoi recourir à un Prêt Subordonné ? */}
       <Card className="mb-6 shadow-md">
         <CardHeader className="bg-gray-50 border-b">
           <CardTitle className="text-xl font-bold text-[#3C5F58] flex items-center gap-2">
@@ -32,15 +31,14 @@ export default function PretSubordonne({ navigate }: PretSubordonneProps) {
             Ce type de financement présente plusieurs atouts que vous pouvez mettre en avant :
           </p>
           <ul className="list-disc pl-5 space-y-2">
-            <li><span className="font-bold">Renforcer la solidité financière</span> : Bien qu'il s'agisse d'une dette, le prêt subordonné est assimilé à des quasi-fonds propres, ce qui rassure les autres financeurs.</li>
-            <li><span className="font-bold">Faciliter l’accès à d’autres financements</span> : Ce type de prêt peut servir de levier pour obtenir des prêts bancaires complémentaires.</li>
-            <li><span className="font-bold">Alléger la pression sur la trésorerie</span> : Les remboursements peuvent être différés, ce qui laisse du temps à l'école pour atteindre son équilibre économique.</li>
-            <li><span className="font-bold">Encadrer le risque</span> : Les modalités de subordination assurent que ce prêt est remboursé après les autres dettes, ce qui le rend plus flexible pour l’emprunteur.</li>
+            <li><span className="font-bold">Renforcer la solidité financière :</span> bien qu'il s'agisse d'une dette, le prêt subordonné est assimilé à des quasi-fonds propres, ce qui rassure les autres financeurs.</li>
+            <li><span className="font-bold">Faciliter l’accès à d’autres financements :</span> ce type de prêt peut servir de levier pour obtenir des prêts bancaires complémentaires.</li>
+            <li><span className="font-bold">Alléger la pression sur la trésorerie :</span> les remboursements peuvent être différés, ce qui laisse du temps à l'école pour atteindre son équilibre économique.</li>
+            <li><span className="font-bold">Encadrer le risque :</span> les modalités de subordination assurent que ce prêt est remboursé après les autres dettes, ce qui le rend plus flexible pour l’emprunteur.</li>
           </ul>
         </CardContent>
       </Card>
 
-      {/* Section Les éléments clés du modèle de contrat */}
       <Card className="mb-6 shadow-md">
         <CardHeader className="bg-gray-50 border-b">
           <CardTitle className="text-xl font-bold text-[#3C5F58] flex items-center gap-2">
@@ -53,16 +51,15 @@ export default function PretSubordonne({ navigate }: PretSubordonneProps) {
             Le modèle de contrat inclus dans cet outil vous permettra d'analyser en détail :
           </p>
           <ul className="list-disc pl-5 space-y-2">
-            <li><span className="font-bold">la durée et les modalités de remboursement</span> : souvent longues (7 à 10 ans), avec possibilité de différé.</li>
-            <li><span className="font-bold">les conditions financières</span> : taux d’intérêt fixe, calcul et échéancier détaillés.</li>
-            <li><span className="font-bold">les clauses de subordination</span> : remboursement après désintéressement des autres créanciers.</li>
-            <li><span className="font-bold">les obligations de l’emprunteur</span> : utilisation des fonds, respect des conditions FNEP, reporting régulier.</li>
-            <li><span className="font-bold">les références juridiques</span> : code monétaire et financier, code de commerce, plan comptable général.</li>
+            <li><span className="font-bold">la durée et les modalités de remboursement :</span> souvent longues (7 à 10 ans), avec possibilité de différé.</li>
+            <li><span className="font-bold">les conditions financières :</span> taux d’intérêt fixe, calcul et échéancier détaillés.</li>
+            <li><span className="font-bold">les clauses de subordination :</span> remboursement après désintéressement des autres créanciers.</li>
+            <li><span className="font-bold">les obligations de l’emprunteur :</span> utilisation des fonds, respect des conditions FNEP, reporting régulier.</li>
+            <li><span className="font-bold">les références juridiques :</span> code monétaire et financier, code de commerce, plan comptable général.</li>
           </ul>
         </CardContent>
       </Card>
 
-      {/* Téléchargement du document original */}
       <Card className="mb-6 shadow-md">
         <CardHeader className="bg-gray-50 border-b">
           <CardTitle className="text-xl font-bold text-[#3C5F58] flex items-center gap-2">

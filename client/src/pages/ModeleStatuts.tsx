@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { FileText, Download, Building, User, Gavel, FileText as FileWord, Euro, Briefcase, Lightbulb } from "lucide-react";
 
-// NOTE: The components are assumed to be available from a component library like shadcn/ui.
+// NOTE: Les composants sont considérés comme disponibles.
 const Card = ({ children, className = '' }) => <div className={`bg-white rounded-xl shadow-lg border border-gray-200 ${className}`}>{children}</div>;
 const CardContent = ({ children, className = '' }) => <div className={`p-6 ${className}`}>{children}</div>;
 const CardHeader = ({ children, className = '' }) => <div className={`p-6 border-b border-gray-200 ${className}`}>{children}</div>;

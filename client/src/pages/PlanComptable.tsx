@@ -82,9 +82,9 @@ const PlanComptable: React.FC<PlanComptableProps> = ({ navigate }) => {
             Pour tirer le meilleur parti de cet outil, suivez ces quelques recommandations :
           </p>
           <ul className="list-disc pl-5 space-y-2">
-            <li>**Adaptez le plan aux spécificités de votre client**. Chaque école a des activités de production et des besoins de suivi uniques.</li>
-            <li>**Validez les choix comptables avec la direction de l'école**. L'implication du dirigeant est primordiale pour la pertinence et l'adhésion au système.</li>
-            <li>**Considérez ce plan comme un document vivant**. Mettez-le à jour régulièrement pour qu'il suive l'évolution de l'école, l'ajout de nouvelles filières ou de nouvelles subventions.</li>
+            <li><span className="font-bold">Adaptez le plan aux spécificités de votre client</span>. Chaque école a des activités de production et des besoins de suivi uniques.</li>
+            <li><span className="font-bold">Validez les choix comptables avec la direction de l'école</span>. L'implication du dirigeant est primordiale pour la pertinence et l'adhésion au système.</li>
+            <li><span className="font-bold">Considérez ce plan comme un document vivant</span>. Mettez-le à jour régulièrement pour qu'il suive l'évolution de l'école, l'ajout de nouvelles filières ou de nouvelles subventions.</li>
           </ul>
           <div className="text-center mt-8">
             <Button
