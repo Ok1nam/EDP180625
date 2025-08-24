@@ -9,16 +9,13 @@ import Header from "./components/Header";
 import Navigation from "./components/Navigation";
 import Footer from "./components/Footer";
 import LoginForm from "./components/LoginForm";
-// Importez toutes vos pages ici
 import Home from "./pages/Accueil";
 import Tools from "./pages/PageOutils";
 import Questionnaire from "./pages/ArbreALaDecision";
-// Pages retirées : Calculators, BusinessPlan, PartnershipTracker, PedagogicalCosts, TrainingPlanner
 import SubsidyGenerator from "@/pages/DossierTypeSubvention";
 import StatutsGenerator from "@/pages/ModeleStatuts";
 import Dashboard from "./pages/TableauDeBord";
 import LocationAnalysis from "./pages/Cartographie";
-// Pages retirées : Guides, Methodology, Annexes
 import DocumentationPage from "./pages/PageDocumentation";
 import Contact from "./pages/ContactExpertComptable";
 import TvaCoefficient from "./pages/CoefficientTVA";
@@ -69,7 +66,6 @@ function MainApplicationContent() {
           <Route path="/" element={<Home navigate={navigate} />} />
           <Route path="/accueil" element={<Home navigate={navigate} />} />
 
-          {/* Outils */}
           <Route path="/outils" element={<Tools navigate={navigate} />} />
           <Route path="/plan-comptable" element={<PlanComptable navigate={navigate} />} />
           <Route path="/tva-coefficient" element={<TvaCoefficient navigate={navigate} />} />
@@ -83,33 +79,19 @@ function MainApplicationContent() {
           <Route path="/calculateurs" element={<TableauCalculCout navigate={navigate} />} />
           <Route path="/prix-vente" element={<PrixVenteProduits navigate={navigate} />} />
           <Route path="/rapport-adapte" element={<RapportAdapte navigate={navigate} />} />
-
-          {/* Suivis */}
           <Route path="/suivi-subventions" element={<SuiviSubventions navigate={navigate} />} />
           <Route path="/suivi-prets" element={<SuiviPrets navigate={navigate} />} />
-          {/* Route retirée : /partenariats */}
           <Route path="/tableau-bord" element={<Dashboard navigate={navigate} />} />
-
-          {/* Documentation & Guides */}
           <Route path="/documentation" element={<DocumentationPage navigate={navigate} />} />
-          {/* Route retirée : /methodo */}
           <Route path="/cartographie" element={<LocationAnalysis navigate={navigate} />} />
           <Route path="/organigramme" element={<Organigramme navigate={navigate} />} />
           <Route path="/entretiens" element={<Entretiens navigate={navigate} />} />
           <Route path="/guide-tva" element={<GuideTva navigate={navigate} />} />
           <Route path="/etude-marche" element={<EtudeMarche navigate={navigate} />} />
-          {/* Route retirée : /guides, /annexes */}
-
-          {/* Contact & Aide */}
           <Route path="/contact-et-aide" element={<ContactEtAide navigate={navigate} />} />
           <Route path="/expert-comptable" element={<Contact navigate={navigate} />} />
           <Route path="/edp" element={<EcoleDeProduction navigate={navigate} />} />
           <Route path="/contact" element={<Contact navigate={navigate} />} />
-
-          {/* Routes pour les pages qui étaient gérées par currentPage mais qui n'ont pas de lien direct dans le menu. */}
-          {/* Routes retirées : /business-plan, /couts-pedagogiques, /planification */}
-
-          {/* Route par défaut (404 ou redirige vers l'accueil) */}
           <Route path="*" element={<Home navigate={navigate} />} />
         </Routes>
       </main>
