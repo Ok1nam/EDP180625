@@ -110,4 +110,4 @@ const RapportAdapte: React.FC<RapportAdapteProps> = ({ navigate }) => {
   );
 };
 
-export default RapportAdapte;s
+export default RapportAdapte;
