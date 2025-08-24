@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { CheckCircle, Award, Lightbulb, XCircle, Download, Briefcase } from "lucide-react"; 
+import { CheckCircle, Award, Lightbulb, XCircle, Download } from "lucide-react"; 
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Progress } from "@/components/ui/progress";
@@ -25,7 +25,7 @@ const allCriteria: Criterion[] = [
   { id: 'critere-1-5', text: 'Réunions CAdm/COPIL ≥ 3 fois/an avec comptes-rendus.', category: 'Structure et statut juridique' },
   { id: 'critere-1-6', text: 'CAdm/COPIL garant du label et du suivi des actions correctives post-audit.', category: 'Structure et statut juridique' },
   { id: 'critere-1-7', text: 'Nomination de représentants au sein de la FNEP.', category: 'Structure et statut juridique' },
-  { id: 'critere-1-8', text: 'Comptes annuels certifiés, rapports d\'activités et qualitatif remis à la FNEte.', category: 'Structure et statut juridique' },
+  { id: 'critere-1-8', text: 'Comptes annuels certifiés, rapports d\'activités et qualitatif remis à la FNEP.', category: 'Structure et statut juridique' },
   { id: 'critere-1-9', text: 'Comptabilité analytique certifiée, organigramme et traçabilité des opérations (COPIL).', category: 'Structure et statut juridique' },
   { id: 'critere-1-10', text: 'Emplois temps plein pour direction et maîtres-professionnels (sauf démarrage).', category: 'Structure et statut juridique' },
 
@@ -123,18 +123,18 @@ export default function CriteresLabel({ navigate }: CriteresLabelProps) {
     <section id="criteres-label" className="max-w-4xl mx-auto px-4 py-8">
       <h1 className="flex items-center gap-2 mb-6 text-3xl font-bold text-gray-800">
         <Award className="w-8 h-8 text-[#3C5F58]" />
-        Checklist de labellisation pour votre client
+        Critères d'Obtention du Label "École de Production"
       </h1>
       
       <p className="mb-8 text-lg text-gray-700 leading-relaxed">
-        En tant qu'expert-comptable, vous êtes un acteur clé dans le processus de labellisation de l'École de Production que vous accompagnez. Cette checklist est votre outil de pilotage pour vérifier la conformité de leur projet et les guider vers l'obtention du label de la Fédération Nationale des Écoles de Production (FNEP).
+        Ce document regroupe et fusionne les 34 critères officiels de la FNEP avec des critères complémentaires et des points de vigilance. Il contient plus de 50 critères, organisés en 8 axes, pour vous aider à vérifier la conformité réglementaire et à suivre les bonnes pratiques nécessaires à l'obtention et au maintien du label officiel "École de Production".
       </p>
 
       {/* Barre de progression */}
       <Card className="mb-8 p-6 shadow-md">
         <CardTitle className="mb-4 text-xl font-semibold flex items-center gap-2 text-[#3C5F58]">
             <CheckCircle className="w-5 h-5 text-[#3C5F58]" />
-            Avancement du dossier
+            Progression de la labellisation
         </CardTitle>
         <div className="flex items-center gap-4">
           <Progress value={progressValue} className="w-full h-3 bg-[#2E5941]" />
@@ -142,7 +142,7 @@ export default function CriteresLabel({ navigate }: CriteresLabelProps) {
         </div>
         {progressValue === 100 && (
           <p className="mt-4 text-center text-[#2E5941] font-bold text-lg animate-bounce">
-            🎉 Bravo ! Le dossier de votre client semble prêt à être présenté.
+            🎉 Félicitations ! Tous les critères sont cochés. Le dossier est prêt !
           </p>
         )}
       </Card>
@@ -151,16 +151,13 @@ export default function CriteresLabel({ navigate }: CriteresLabelProps) {
       <Card className="mb-8 shadow-lg border-2 border-[#3C5F58]">
         <CardHeader>
           <CardTitle className="text-2xl font-bold text-[#2E5941] flex items-center gap-3">
-            <Download className="w-6 h-6" /> Télécharger la checklist pour votre client
+            <Download className="w-6 h-6" /> Télécharger la Checklist des Critères
           </CardTitle>
         </CardHeader>
         <CardContent className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
           <div className="text-base text-gray-800 flex-1">
             <p className="mb-2">
-              Téléchargez la version Word (.docx) de cette liste de vérification pour un suivi hors ligne ou pour la partager facilement avec votre client et son équipe.
-            </p>
-            <p className="text-sm text-gray-600">
-                Vous pourrez y ajouter vos notes et observations pour chaque critère, facilitant ainsi la préparation du dossier de labellisation.
+              Téléchargez la version Word (.docx) de cette liste de vérification pour un suivi hors ligne ou pour la partager facilement avec votre équipe.
             </p>
           </div>
           <a
@@ -180,7 +177,7 @@ export default function CriteresLabel({ navigate }: CriteresLabelProps) {
         <Card key={category} className="mb-6 shadow-sm">
           <CardHeader className="bg-gray-50 border-b">
             <CardTitle className="text-xl font-bold text-[#3C5F58] flex items-center gap-2">
-              <Briefcase className="w-5 h-5 text-gray-500" />
+              <Lightbulb className="w-5 h-5 text-orange-500" />
               {category}
             </CardTitle>
           </CardHeader>
@@ -207,20 +204,25 @@ export default function CriteresLabel({ navigate }: CriteresLabelProps) {
         <CardContent className="p-6">
           <h3 className="text-xl font-semibold mb-3 flex items-center gap-2 text-[#3C5F58]">
             <Lightbulb className="w-5 h-5 text-blue-600" />
-            Votre rôle et conseils pour la labellisation
+            Conseils pour la labellisation
           </h3>
           <div className="text-base text-gray-700 space-y-3">
             <p>
-              L'obtention du label "École de Production" est un gage de qualité pour votre client, lui ouvrant la voie à des financements spécifiques et à une meilleure visibilité auprès des entreprises. Votre expertise est indispensable pour l'aider à structurer son projet.
+              L'obtention du label "École de Production" est un gage de qualité et de reconnaissance, ouvrant la voie à des financements spécifiques et à une meilleure visibilité.
             </p>
             <p>
-              <span className="font-bold">Documentation :</span> Accompagnez l'école dans la constitution des preuves documentaires nécessaires pour chaque critère coché. Les bilans financiers, les statuts et les comptes-rendus de CA sont essentiels.
+              <span className="font-bold">Documentation :</span> Assurez-vous de pouvoir fournir toutes les preuves documentaires nécessaires pour chaque critère coché (bilans financiers, procès-verbaux de CA, programmes pédagogiques, etc.).
             </p>
             <p>
-              <span className="font-bold">Conseil stratégique :</span> En plus de la conformité, votre analyse critique du modèle économique et de l'organisation aide votre client à anticiper l'audit de labellisation. Utilisez cette checklist comme base pour vos recommandations.
+              <span className="font-bold">Accompagnement :</span> N'hésitez pas à vous faire accompagner par des experts ou le réseau national des Écoles de Production pour préparer votre dossier de labellisation. Le <span
+                  className="text-blue-600 hover:underline cursor-pointer font-medium"
+                  onClick={() => navigate && navigate('expert-comptable')}
+              >
+                  rôle de l'expert-comptable
+              </span> est crucial pour les aspects financiers et organisationnels.
             </p>
             <p>
-              <span className="font-bold">Collaboration :</span> Facilitez la coordination entre l'équipe de l'école et la FNEP, en vous assurant que tous les aspects, notamment financiers et administratifs, sont en ordre.
+              <span className="font-bold">Audit :</span> Le processus de labellisation implique généralement un audit approfondi de votre structure et de vos pratiques. Une bonne préparation est clé.
             </p>
           </div>
         </CardContent>
