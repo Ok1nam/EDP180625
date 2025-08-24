@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { FileText, Download, Euro, Building, Users, Briefcase, CalendarDays, Percent, ClipboardList, Clock, UserRound, PlusCircle, Trash2, Edit, CheckSquare, XSquare, FileSpreadsheet } from "lucide-react";
+import { FileText, Download, Euro, Building, Users, Target, CalendarDays, Percent, ClipboardList, Clock, UserRound, PlusCircle, Trash2, Edit, CheckSquare, XSquare, FileSpreadsheet } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -63,6 +63,7 @@ const statusOptions = [
 
 export default function SuiviSubvention() {
   const { toast } = useToast();
+  // J'ai remplacé le hook useLocalStorage par une logique intégrée pour éviter l'erreur de compilation
   const [applications, setApplications] = useState<SubsidyApplication[]>(() => {
     try {
       const item = window.localStorage.getItem('subsidy_applications');
@@ -75,6 +76,7 @@ export default function SuiviSubvention() {
   const [showForm, setShowForm] = useState(false);
   const [editingId, setEditingId] = useState<string | null>(null);
 
+  // État du formulaire avec tous les champs
   const [formData, setFormData] = useState<Partial<SubsidyApplication>>({
     id: '',
     grantName: '',
@@ -100,6 +102,7 @@ export default function SuiviSubvention() {
 
   const [selectedFundingBody, setSelectedFundingBody] = useState<string>('');
 
+  // Synchronise les données avec le localStorage à chaque changement
   useEffect(() => {
     try {
       window.localStorage.setItem('subsidy_applications', JSON.stringify(applications));
@@ -108,10 +111,12 @@ export default function SuiviSubvention() {
     }
   }, [applications]);
 
+  // Calculs dynamiques pour le taux de réalisation et le montant restant
   const totalReceivedAmount = (formData.advanceReceivedAmount || 0) + (formData.balanceReceivedAmount || 0);
   const completionRate = formData.amountObtained && formData.amountObtained > 0 ? (totalReceivedAmount / formData.amountObtained) * 100 : 0;
   const remainingAmountToReceive = (formData.amountObtained || 0) - totalReceivedAmount;
 
+  // Gestion des changements d'input
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { id, value } = e.target;
     setFormData(prev => ({ ...prev, [id]: value }));
@@ -155,6 +160,7 @@ export default function SuiviSubvention() {
   };
 
   const saveApplication = () => {
+    // Vérification des champs obligatoires
     if (!formData.grantName || !formData.fundingBody || !formData.amountSolicited || !formData.currentStatus) {
       toast({
         title: "Erreur",
@@ -224,11 +230,11 @@ export default function SuiviSubvention() {
     <section id="suivi-subvention" className="max-w-4xl mx-auto px-4 py-8">
       <h1 className="flex items-center gap-3 mb-6 text-3xl font-bold text-gray-800">
         <Euro className="w-8 h-8 text-[#3C5F58]" />
-        Suivi des dossiers de subventions pour votre client
+        Suivi des Dossiers de Subventions
       </h1>
 
       <p className="mb-8 text-lg text-gray-700 leading-relaxed">
-        Cet outil a été conçu pour vous, expert-comptable, afin de gérer de manière centralisée les dossiers de subventions de l'école de production que vous accompagnez. Il vous permet de suivre l'état de chaque demande, les montants sollicités et reçus, et les échéances importantes pour assurer la <span className="font-bold">pérennité du modèle économique</span> de votre client.
+        Cet outil permet de gérer de manière centralisée les dossiers de subventions pour un projet d'École de Production. Il est conçu pour suivre l'état de chaque demande, les montants sollicités et reçus, et les échéances importantes afin d'assurer la <span className="font-bold">pérennité du modèle économique</span>.
       </p>
 
       {!showForm ? (
@@ -256,7 +262,7 @@ export default function SuiviSubvention() {
         <Card className="mb-8 shadow-md p-6">
           <CardHeader className="bg-gray-50 border-b -mx-6 -mt-6 mb-6 px-6 py-4">
             <CardTitle className="text-xl font-bold text-[#3C5F58] flex items-center gap-2">
-              <Briefcase className="w-5 h-5 text-gray-500" />
+              <FileText className="w-5 h-5 text-orange-500" />
               {editingId ? 'Modifier un dossier' : 'Créer un nouveau dossier'}
             </CardTitle>
           </CardHeader>
