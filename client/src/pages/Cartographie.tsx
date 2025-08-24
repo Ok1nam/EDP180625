@@ -1,5 +1,5 @@
 import React from 'react';
-import { Download, Globe } from "lucide-react"; // Ajout de l'icône Globe
+import { Download, Globe, Briefcase } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 
@@ -17,7 +17,7 @@ const LocationAnalysis: React.FC<LocationAnalysisProps> = ({ navigate }) => {
       </h1>
       
       <p className="mb-8 text-lg text-gray-700 leading-relaxed">
-        Pour déterminer la zone d'implantation d'une future école de production, l'une des premières étapes consiste à consulter la cartographie nationale du réseau. Cette ressource permet de visualiser les écoles existantes et les projets en cours de développement, offrant ainsi une vue d'ensemble du maillage territorial.
+        En tant qu'expert-comptable, valider le choix d'implantation d'une future école de production est une étape cruciale de votre mission. Cette cartographie nationale est un outil essentiel pour vous permettre de visualiser les écoles existantes et les projets en cours, afin d'évaluer l'opportunité d'une nouvelle implantation dans une zone donnée.
       </p>
 
       {/* Section Lien vers la carte */}
@@ -33,7 +33,7 @@ const LocationAnalysis: React.FC<LocationAnalysisProps> = ({ navigate }) => {
               Cliquez sur le bouton ci-dessous pour accéder directement à la carte interactive du réseau des écoles de production en France.
             </p>
             <p className="text-sm text-gray-600">
-              <span className="font-bold">Conseil :</span> Cette ressource est essentielle pour valider le choix d'implantation et pour les études de marché initiales.
+              <span className="font-bold">Conseil :</span> utilisez cette ressource pour étayer l'étude de marché de votre client et justifier le choix de sa zone d'implantation.
             </p>
           </div>
           <a 
@@ -49,7 +49,6 @@ const LocationAnalysis: React.FC<LocationAnalysisProps> = ({ navigate }) => {
         </CardContent>
       </Card>
 
-      {/* Bouton de retour à l'accueil */}
       {navigate && (
         <div className="text-center mt-8">
           <Button
