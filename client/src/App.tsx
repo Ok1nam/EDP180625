@@ -10,7 +10,8 @@ import Navigation from "./components/Navigation";
 import Footer from "./components/Footer";
 import LoginForm from "./components/LoginForm";
 import Home from "./pages/Home";
-import Tools from "./pages/Tools"; // Ajout de l'import pour la page Tools
+import Tools from "./pages/Tools";
+import PlanComptable from "./pages/PlanComptable"; // Ajout de l'import pour la page PlanComptable
 import { useState } from "react";
 import { useAuth } from "./hooks/useAuth";
 import AnalyticsTracker from './components/AnalyticsTracker'; 
@@ -38,7 +39,8 @@ function MainApplicationContent() {
         <Routes>
           <Route path="/" element={<Home navigate={navigate} />} />
           <Route path="/accueil" element={<Home navigate={navigate} />} />
-          <Route path="/outils" element={<Tools navigate={navigate} />} /> {/* Ajout de la route vers la page Tools */}
+          <Route path="/outils" element={<Tools navigate={navigate} />} />
+          <Route path="/plan-comptable" element={<PlanComptable navigate={navigate} />} /> {/* Ajout de la route vers PlanComptable */}
         </Routes>
       </main>
       <Footer navigate={navigate} />
