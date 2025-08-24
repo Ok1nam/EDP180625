@@ -73,7 +73,6 @@ function MainApplicationContent() {
           <Route path="/outils" element={<Tools navigate={navigate} />} />
           <Route path="/plan-comptable" element={<PlanComptable navigate={navigate} />} />
           <Route path="/tva-coefficient" element={<TvaCoefficient navigate={navigate} />} />
-          <Route path="/resultat-fiscal" element={<ResultatFiscal navigate={navigate} />} />
           <Route path="/arbre" element={<Questionnaire navigate={navigate} />} />
           <Route path="/statuts" element={<StatutsGenerator navigate={navigate} />} />
           <Route path="/criteres-label" element={<CriteresLabel navigate={navigate} />} />
