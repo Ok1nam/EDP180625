@@ -14,7 +14,7 @@ const TableauDeBord: React.FC<TableauDeBordProps> = ({ navigate }) => {
     <section id="tableau-de-bord" className="max-w-4xl mx-auto px-4 py-8">
       <h1 className="flex items-center gap-3 mb-6 text-3xl font-bold text-[#3C5F58]">
         <BarChart2 className="w-8 h-8 text-[#3C5F58]" />
-        Tableau de bord pour le pilotage de votre client
+        Tableau de bord financier et extra-financier
       </h1>
       
       <p className="mb-8 text-lg text-gray-700 leading-relaxed">
