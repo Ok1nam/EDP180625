@@ -22,10 +22,10 @@ export default function Contact() {
               <p className="flex items-center gap-2">
                 <Mail className="w-4 h-4" />
                 <a 
-                  href="mailto:laura.gombaud@gmail.com" 
+                  href="mailto:gombaudlaura@gmail.com" 
                   className="text-blue-600 hover:text-blue-800 transition-colors"
                 >
-                  laura.gombaud@gmail.com
+                  gombaudlaura@gmail.com
                 </a>
               </p>
             </div>
