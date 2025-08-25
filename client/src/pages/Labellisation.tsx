@@ -123,11 +123,11 @@ export default function CriteresLabel({ navigate }: CriteresLabelProps) {
     <section id="criteres-label" className="max-w-4xl mx-auto px-4 py-8">
       <h1 className="flex items-center gap-2 mb-6 text-3xl font-bold text-gray-800">
         <Award className="w-8 h-8 text-[#3C5F58]" />
-        Checklist de labellisation pour votre client
+        Liste de vérification pour la labellisation de votre client
       </h1>
       
       <p className="mb-8 text-lg text-gray-700 leading-relaxed">
-        En tant qu'expert-comptable, vous êtes un acteur clé dans le processus de labellisation de l'école de production que vous accompagnez. Cette checklist est votre outil de pilotage pour vérifier la conformité de leur projet et les guider vers l'obtention du label de la Fédération Nationale des Écoles de Production (FNEP).
+        En tant qu'expert-comptable, vous êtes un acteur clé dans le processus de labellisation de l'école de production que vous accompagnez. Cette liste de vérification est votre outil de pilotage pour vérifier la conformité de leur projet et les guider vers l'obtention du label de la Fédération Nationale des Écoles de Production (FNEP).
       </p>
 
       {/* Barre de progression */}
@@ -151,7 +151,7 @@ export default function CriteresLabel({ navigate }: CriteresLabelProps) {
       <Card className="mb-8 shadow-lg border-2 border-[#3C5F58]">
         <CardHeader>
           <CardTitle className="text-2xl font-bold text-[#2E5941] flex items-center gap-3">
-            <Download className="w-6 h-6" /> Télécharger la Checklist des Critères
+            <Download className="w-6 h-6" /> Télécharger la liste de vérification des critères
           </CardTitle>
         </CardHeader>
         <CardContent className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
@@ -166,7 +166,7 @@ export default function CriteresLabel({ navigate }: CriteresLabelProps) {
             className="flex-shrink-0"
           >
             <Button className="flex items-center gap-2 py-3 px-6 text-lg bg-[#2E5941] text-white rounded-md hover:bg-[#3C5F58] transition-colors">
-              <Download className="w-5 h-5" /> Télécharger la checklist
+              <Download className="w-5 h-5" /> Télécharger la liste
             </Button>
           </a>
         </CardContent>
