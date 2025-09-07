@@ -101,7 +101,7 @@ const SubsidyGenerator: React.FC = () => {
           </div>
           <a
             href={subventionFilePath}
-            download="ANNEXE_13_DOSSIER_TYPE_DE_DEMANDE_DE_SUBVENTION.docx"
+            download="ANNEXE 13 - DOSSIER TYPE DE DEMANDE DE SUBVENTION.docx"
             className="flex-shrink-0"
           >
             <Button className="flex items-center gap-2 py-3 px-6 text-lg bg-[#2E5941] text-white rounded-md hover:bg-[#3C5F58] transition-colors">
