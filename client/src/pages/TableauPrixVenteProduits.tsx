@@ -23,8 +23,8 @@ const PrixVenteProduits: React.FC<PrixVenteProduitsProps> = ({ navigate }) => {
       <p className="mb-8 text-lg text-gray-700 leading-relaxed">
         Cet outil est essentiel pour vous, expert-comptable, afin d’aider votre client, l'école de production, à déterminer avec précision le coût de revient complet d’un produit et à fixer un prix de vente compétitif. Il se base sur le coût horaire d'un élève, détaillé dans l'outil précédent, le <span
           className="text-[#3C5F58] hover:underline cursor-pointer font-bold"
-          // ✅ Corrigé ici : retour à la version avec des tirets
-          onClick={() => navigate && navigate('tableau-calcul-cout')}
+          // ✅ Corrigé ici : utilisation du bon chemin de route défini dans App.tsx
+          onClick={() => navigate && navigate('calculateurs')}
         >tableau de calcul des coûts</span>.
       </p>
 
