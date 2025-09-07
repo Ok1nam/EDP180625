@@ -230,7 +230,7 @@ export default function SuiviSubvention() {
     <section id="suivi-subvention" className="max-w-4xl mx-auto px-4 py-8">
       <h1 className="flex items-center gap-3 mb-6 text-3xl font-bold text-gray-800">
         <Euro className="w-8 h-8 text-[#3C5F58]" />
-        Suivi des Dossiers de Subventions
+        Suivi des dossiers de subventions
       </h1>
 
       <p className="mb-8 text-lg text-gray-700 leading-relaxed">
