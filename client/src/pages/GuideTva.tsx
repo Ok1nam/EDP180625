@@ -84,9 +84,6 @@ const GuideTva: React.FC<GuideTvaProps> = ({ navigate }) => {
             <p className="mb-2">
               Obtenez le guide détaillé pour maîtriser l'application de la TVA au sein d'une école de production que vous accompagnez.
             </p>
-            <p className="text-sm text-gray-600">
-              <span className="font-bold">Note :</span> ce document est un outil d'aide. La validation des pratiques par un expert est recommandée pour garantir la conformité fiscale.
-            </p>
           </div>
           <a
             href={guideTvaFilePath}
