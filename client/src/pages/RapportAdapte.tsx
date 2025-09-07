@@ -54,13 +54,13 @@ const RapportAdapte: React.FC<RapportAdapteProps> = ({ navigate }) => {
             Ce modèle de rapport est structuré autour des sections suivantes, essentielles pour une communication complète :
           </p>
           <ul className="list-disc pl-5 space-y-2">
-            <li><span className="font-bold">synthèse exécutive :</span> un résumé des faits marquants et des réalisations clés.</li>
-            <li><span className="font-bold">activités pédagogiques :</span> nombre d'élèves, programmes suivis, succès aux examens, projets spécifiques.</li>
-            <li><span className="font-bold">activités de production :</span> types de commandes réalisées, chiffre d'affaires généré, compétences développées en atelier.</li>
-            <li><span className="font-bold">impact social et local :</span> taux d'insertion professionnelle, partenariats locaux, bénéfices pour le territoire.</li>
-            <li><span className="font-bold">gouvernance et organisation :</span> composition de l'équipe, de l’organigramme.</li>
-            <li><span className="font-bold">informations financières :</span> utilisation des fonds, budget prévisionnel vs. réalisé, perspectives.</li>
-            <li><span className="font-bold">perspectives :</span> projets futurs, objectifs pour l'année à venir.</li>
+            <li><span className="font-bold">Synthèse exécutive :</span> un résumé des faits marquants et des réalisations clés.</li>
+            <li><span className="font-bold">Activités pédagogiques :</span> nombre d'élèves, programmes suivis, succès aux examens, projets spécifiques.</li>
+            <li><span className="font-bold">Activités de production :</span> types de commandes réalisées, chiffre d'affaires généré, compétences développées en atelier.</li>
+            <li><span className="font-bold">Impact social et local :</span> taux d'insertion professionnelle, partenariats locaux, bénéfices pour le territoire.</li>
+            <li><span className="font-bold">Gouvernance et organisation :</span> composition de l'équipe, de l’organigramme.</li>
+            <li><span className="font-bold">Informations financières :</span> utilisation des fonds, budget prévisionnel vs. réalisé, perspectives.</li>
+            <li><span className="font-bold">Perspectives :</span> projets futurs, objectifs pour l'année à venir.</li>
           </ul>
         </CardContent>
       </Card>
@@ -77,7 +77,7 @@ const RapportAdapte: React.FC<RapportAdapteProps> = ({ navigate }) => {
               Ce support au format PowerPoint est prêt à être personnalisé avec les données de l'école de production de votre client. Il constitue une base de travail efficace pour gagner un temps précieux et optimiser la communication avec les partenaires.
             </p>
             <p className="text-sm text-gray-600">
-              <span className="font-bold">conseil :</span> adaptez le niveau de détail et le langage aux attentes spécifiques de chaque partenaire pour un maximum d'impact.
+              <span className="font-bold">Conseil :</span> adaptez le niveau de détail et le langage aux attentes spécifiques de chaque partenaire pour un maximum d'impact.
             </p>
           </div>
           <a
