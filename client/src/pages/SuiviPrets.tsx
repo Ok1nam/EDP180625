@@ -281,7 +281,7 @@ export default function SuiviPrets() {
       {/* TITRE CORRIGÉ POUR LE MOBILE */}
       <h1 className="flex flex-col sm:flex-row items-center text-center sm:text-left gap-3 mb-6 text-2xl sm:text-3xl font-bold text-[#3C5F58]">
         <Banknote className="w-8 h-8 text-[#3C5F58]" />
-        Suivi des <span className="text-[#2E5941]">prêts</span>.
+        Suivi des <span className="text-[#2E5941]">prêts.</span>
       </h1>
       
       <p className="mb-8 text-lg text-gray-700 leading-relaxed">
