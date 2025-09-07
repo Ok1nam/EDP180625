@@ -8,8 +8,8 @@ interface OrganigrammeProps {
 }
 
 const Organigramme: React.FC<OrganigrammeProps> = ({ navigate }) => {
-  // Chemin d'accès mis à jour vers le fichier PDF
-  const organigrammePdfPath = "/Users/Linda/Desktop/Mémoire Lolo/EDP180625/client/public/fichiers/ANNEXE 2 - EXEMPLE D'ORGANIGRAMME D'UNE ECOLE DE PRODUCTION.pdf";
+  // ✅ CHEMIN CORRECT : Relatif au dossier "public"
+  const organigrammePdfPath = "/fichiers/ANNEXE 2 - EXEMPLE D'ORGANIGRAMME D'UNE ECOLE DE PRODUCTION.pdf";
 
   return (
     <section id="organigramme-type" className="max-w-4xl mx-auto px-4 py-8">
@@ -22,7 +22,8 @@ const Organigramme: React.FC<OrganigrammeProps> = ({ navigate }) => {
         En tant qu'expert-comptable, vous savez qu'une structure organisationnelle claire est essentielle pour la bonne gestion d'un projet. Cet exemple d'organigramme est un outil pratique pour aider votre client, l'école de production, à clarifier les rôles et les responsabilités au sein de son équipe. Une organisation bien définie est un gage de crédibilité pour les financeurs et les partenaires.
       </p>
 
-      {/* Section Pourquoi un Organigramme ? */}
+      {/* ... (Les autres sections restent identiques) ... */}
+      
       <Card className="mb-6 shadow-md">
         <CardHeader className="bg-gray-50 border-b">
           <CardTitle className="text-xl font-bold text-[#3C5F58] flex items-center gap-2">
@@ -44,7 +45,6 @@ const Organigramme: React.FC<OrganigrammeProps> = ({ navigate }) => {
         </CardContent>
       </Card>
 
-      {/* Section Composantes Clés */}
       <Card className="mb-6 shadow-md">
         <CardHeader className="bg-gray-50 border-b">
           <CardTitle className="text-xl font-bold text-[#3C5F58] flex items-center gap-2">
@@ -67,11 +67,9 @@ const Organigramme: React.FC<OrganigrammeProps> = ({ navigate }) => {
           </ul>
         </CardContent>
       </Card>
-      
-      {/* Note: La balise <img> ne peut pas afficher un PDF directement. 
-          Pour visualiser un PDF, il faudrait utiliser une balise <object> ou <iframe>,
-          ou une bibliothèque comme react-pdf. Le code ci-dessous conserve la structure
-          originale mais le chemin pointe désormais vers un PDF. */}
+
+
+      {/* ✅ SECTION CORRIGÉE pour afficher le PDF */}
       <Card className="mb-8 shadow-lg border-2 border-[#2E5941]">
         <CardHeader>
           <CardTitle className="text-2xl font-bold text-[#2E5941] flex items-center gap-3">
@@ -79,16 +77,15 @@ const Organigramme: React.FC<OrganigrammeProps> = ({ navigate }) => {
           </CardTitle>
         </CardHeader>
         <CardContent className="p-6 flex justify-center">
-          {/* Cette balise ne rendra pas le PDF. Voir la note ci-dessus. */}
-          <img 
-            src={organigrammePdfPath} // Ce chemin est maintenant un PDF
-            alt="Exemple d'organigramme d'une école de production" 
-            className="w-full h-auto rounded-lg shadow-md"
+          <iframe 
+            src={organigrammePdfPath}
+            title="Exemple d'organigramme d'une école de production"
+            className="w-full h-[600px] rounded-lg shadow-md" // Ajustez la hauteur (h) si besoin
           />
         </CardContent>
       </Card>
 
-      {/* Section de téléchargement mise à jour pour le PDF */}
+      {/* Section de téléchargement (déjà correcte avec le bon chemin) */}
       <Card className="mb-8 shadow-lg border-2 border-[#3C5F58]">
         <CardHeader>
           <CardTitle className="text-2xl font-bold text-[#2E5941] flex items-center gap-3">
@@ -103,7 +100,7 @@ const Organigramme: React.FC<OrganigrammeProps> = ({ navigate }) => {
           </div>
           <a
             href={organigrammePdfPath}
-            download="ANNEXE 2 - EXEMPLE D'ORGANIGRAMME D'UNE ECOLE DE PRODUCTION.pdf" // Nom du fichier mis à jour
+            download="ANNEXE 2 - EXEMPLE D'ORGANIGRAMME D'UNE ECOLE DE PRODUCTION.pdf"
             className="flex-shrink-0"
           >
             <Button className="flex items-center gap-2 py-3 px-6 text-lg bg-[#2E5941] text-white rounded-md hover:bg-[#3C5F58] transition-colors">
