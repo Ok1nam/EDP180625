@@ -8,7 +8,8 @@ interface TvaCoefficientProps {
 }
 
 const TvaCoefficient: React.FC<TvaCoefficientProps> = ({ navigate }) => {
-  const excelFilePath = "/fichiers/ANNEXE 6 ET 7 - Trame calcul coefficient déduction et résultat fiscal 080825.xlsm"; 
+  // ✅ Chemin et nom du fichier mis à jour ici
+  const excelFilePath = "/fichiers/ANNEXE 6-7 - TRAME D'AIDE AU CALCUL DE LA TVA, DE LA TS ET DU RESULTAT FISCAL.xlsm"; 
 
   return (
     <section id="tva-coefficient" className="max-w-4xl mx-auto px-4 py-8">
@@ -63,7 +64,8 @@ const TvaCoefficient: React.FC<TvaCoefficientProps> = ({ navigate }) => {
           </div>
           <a
             href={excelFilePath}
-            download="ANNEXE 6 ET 7 - Trame calcul coefficient déduction et résultat fiscal 080825.xlsm"
+            // ✅ Nom du fichier pour le téléchargement mis à jour ici
+            download="ANNEXE 6-7 - TRAME D'AIDE AU CALCUL DE LA TVA, DE LA TS ET DU RESULTAT FISCAL.xlsm"
             className="flex-shrink-0"
           >
             <Button className="bg-[#2E5941] hover:bg-[#3C5F58] text-white flex items-center gap-2 py-3 px-6 text-lg">
