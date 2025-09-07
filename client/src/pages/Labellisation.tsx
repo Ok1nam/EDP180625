@@ -117,7 +117,9 @@ export default function CriteresLabel({ navigate }: CriteresLabelProps) {
 
   const totalCriteria = allCriteria.length;
   const completedCriteriaCount = Object.values(checkedCriteria).filter(Boolean).length;
-  const checklistPath = "/fichiers/ANNEXE 10 - LISTE DE VERIFICATION DES CRITERES A REMPLIR POUR OBTENIR LE LABEL.docx";
+  
+  // ✅ Chemin d'accès et nom du fichier mis à jour
+  const checklistPath = "/fichiers/ANNEXE 10 - LISTE DE VERIFICATION DES CRITERES A REMPLIR POUR OBTENIR LE LABEL.pdf";
 
   return (
     <section id="criteres-label" className="max-w-4xl mx-auto px-4 py-8">
@@ -156,13 +158,15 @@ export default function CriteresLabel({ navigate }: CriteresLabelProps) {
         </CardHeader>
         <CardContent className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6">
           <div className="text-base text-gray-800 flex-1">
+            {/* ✅ Texte mis à jour pour mentionner "PDF" */}
             <p className="mb-2">
-              Téléchargez la version Word (.docx) de cette liste de vérification pour un suivi hors ligne ou pour la partager facilement avec votre équipe.
+              Téléchargez la version PDF de cette liste de vérification pour un suivi hors ligne ou pour la partager facilement avec votre équipe.
             </p>
           </div>
           <a
             href={checklistPath}
-            download="ANNEXE 10 - LISTE DE VERIFICATION DES CRITERES A REMPLIR POUR OBTENIR LE LABEL.docx"
+            // ✅ Nom du fichier mis à jour pour le téléchargement
+            download="ANNEXE 10 - LISTE DE VERIFICATION DES CRITERES A REMPLIR POUR OBTENIR LE LABEL.pdf"
             className="flex-shrink-0"
           >
             <Button className="flex items-center gap-2 py-3 px-6 text-lg bg-[#2E5941] text-white rounded-md hover:bg-[#3C5F58] transition-colors">
