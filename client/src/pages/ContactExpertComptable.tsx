@@ -52,7 +52,7 @@ export default function Contact() {
                     download="LG MEMOIRE.pdf"
                     className="text-blue-600 hover:text-blue-800 transition-colors font-medium"
                   >
-                    Télécharger le T1 du mémoire
+                    Télécharger le mémoire
                   </a>
                 </p>
               </div>
