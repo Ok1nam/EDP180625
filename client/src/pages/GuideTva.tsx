@@ -8,7 +8,8 @@ interface GuideTvaProps {
 }
 
 const GuideTva: React.FC<GuideTvaProps> = ({ navigate }) => {
-  const guideTvaFilePath = "/fichiers/ANNEXE 5 - GUIDE D APPLICATION DE LA TVA.pdf";
+  // ✅ Corrigé ici : ajout de l'apostrophe dans le nom du fichier
+  const guideTvaFilePath = "/fichiers/ANNEXE 5 - GUIDE D'APPLICATION DE LA TVA.pdf";
 
   return (
     <section id="guide-tva" className="max-w-4xl mx-auto px-4 py-8">
