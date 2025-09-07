@@ -15,10 +15,10 @@ interface DocumentationPageProps {
 }
 
 const documentationItems = [
-    { id: "cartographie", label: "cartographie des écoles de production en France", icon: MapPin, description: "Explorez la carte interactive du réseau pour valider le choix d'implantation de votre client." },
-    { id: "organigramme", label: "exemple d'organigramme", icon: Building, description: "Un modèle pour aider votre client à structurer son équipe et clarifier les rôles." },
-    { id: "entretiens", label: "entretiens avec des porteurs de projet", icon: MessageCircle, description: "Consultez les retours d'expériences de porteurs de projet pour affiner vos conseils." },
-    { id: "guide-tva", label: "guide d'application de la TVA", icon: Scale, description: "Comprenez les spécificités de l'application de la TVA pour la structure de votre client." }
+    { id: "cartographie", label: "Cartographie des écoles de production en France", icon: MapPin, description: "Explorez la carte interactive du réseau pour valider le choix d'implantation de votre client." },
+    { id: "organigramme", label: "Exemple d'organigramme", icon: Building, description: "Un modèle pour aider votre client à structurer son équipe et clarifier les rôles." },
+    { id: "entretiens", label: "Entretiens avec des porteurs de projet", icon: MessageCircle, description: "Consultez les retours d'expériences de porteurs de projet pour affiner vos conseils." },
+    { id: "guide-tva", label: "Guide d'application de la TVA", icon: Scale, description: "Comprenez les spécificités de l'application de la TVA pour la structure de votre client." }
 ];
 
 const DocumentationPage: React.FC<DocumentationPageProps> = ({ navigate }) => {
