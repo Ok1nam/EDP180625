@@ -8,7 +8,7 @@ const CardHeader = ({ children, className = '' }) => <div className={`p-6 border
 const CardTitle = ({ children, className = '' }) => <h2 className={`text-xl font-semibold ${className}`}>{children}</h2>;
 const Input = ({ id, type = "text", value, onChange, placeholder, className = '' }) => <input id={id} type={type} value={value} onChange={onChange} placeholder={placeholder} className={`w-full px-3 py-2 border rounded-md focus:ring-[#3C5F58] focus:border-[#3C5F58] ${className}`} />;
 const Label = ({ children, htmlFor, className = '' }) => <label htmlFor={htmlFor} className={`block font-medium text-gray-700 ${className}`}>{children}</label>;
-const Button = ({ children, onClick, disabled = false, className = '' }) => <button onClick={onClick} disabled={disabled} className={`px-4 py-2 rounded-md transition-colors duration-200 ${className}`}>{children}</button>;
+const Button = ({ children, onClick, disabled = false, className = '' }) => <button onClick={onClick} disabled={disabled} className={`px-4 py-2 rounded-md transition-colors duration-200 font-semibold ${className}`}>{children}</button>;
 
 const useToast = () => ({ toast: (options) => console.log('Toast:', options) });
 
@@ -59,21 +59,22 @@ const StatutsGenerator: React.FC<StatutsGeneratorProps> = ({ navigate }) => {
   };
 
   const generateStatuts = () => {
-    const siegeSocialComplet = `${formData.adressePostale || '[adresse postale]'}, ${formData.codePostal || '[code postal]'} ${formData.ville || '[ville]'}`;
+    const siegeSocialComplet = `${formData.adressePostale || '[Adresse postale]'}, ${formData.codePostal || '[Code postal]'} ${formData.ville || '[Ville]'}`;
     const dateDuJour = new Date().toLocaleDateString('fr-FR');
     
     const exerciceSocialText = `L'exercice social commence le 1er septembre et se termine le 31 août de chaque année.
-Par exception, le premier exercice social, débutant à la date de déclaration en préfecture, prendra fin le ${formData.cloturePremierExerciceDate || '[date de clôture du premier exercice]'}. Il aura donc une durée ${formData.dureePremierExercice || '[supérieure ou inférieure]'} à 12 mois.`;
+Par exception, le premier exercice social, débutant à la date de déclaration en préfecture, prendra fin le ${formData.cloturePremierExerciceDate || '[Date de clôture du premier exercice]'}. Il aura donc une durée ${formData.dureePremierExercice || '[supérieure ou inférieure]'} à 12 mois.`;
 
+    // Le contenu du modèle de statuts reste le même
     const statutsTemplate = `
 STATUTS DE L'ASSOCIATION
-${formData.associationName || "[nom de l'association]"}
+${formData.associationName || "[Nom de l'association]"}
 
 TITRE I-OBJET ET COMPOSITION
 
 Article 1 - Dénomination
 Il est fondé, entre les adhérents aux présents statuts, une association régie par la loi du 1er juillet 1901 et le décret du 16 août 1901, ayant pour titre :
-${formData.associationName || "[nom de l'association]"}
+${formData.associationName || "[Nom de l'association]"}
 
 Article 2 - Objet
 L'association a pour objet de:
@@ -172,10 +173,10 @@ Un règlement intérieur peut être établi par le CA, soumis à l'approbation d
 Article 20- Dissolution
 En cas de dissolution, prononcée par une AG extraordinaire, un ou plusieurs liquidateurs sont nommés. L'actif net est dévolu à un organisme poursuivant un but non lucratif, désigné par l'AG extraordinaire.
 
-Fait à ${formData.ville || '[ville signature statuts]'}, le ${dateDuJour || '[date signature statuts]'}
+Fait à ${formData.ville || '[Ville de signature]'}, le ${dateDuJour || '[Date de signature]'}
 
 Le Président(e):                          Le Secrétaire(e):
-${formData.presidentName || '[nom prénom président(e)]'}                    ${formData.secretaireName || '[nom prénom secrétaire(e)]'}
+${formData.presidentName || '[Nom et prénom du/de la Président(e)]'}                    ${formData.secretaireName || '[Nom et prénom du/de la Secrétaire]'}
 
 Signature :                           Signature :
 `;
@@ -183,7 +184,7 @@ Signature :                           Signature :
   };
 
   const downloadStatuts = () => {
-    if (!formData.associationName || !formData.presidentName || !formData.secretaireName || !formData.adressePostale || !formData.codePostal || !formData.ville) {
+    if (!isFormValid) {
       toast({
         title: "Informations manquantes",
         description: "Veuillez remplir tous les champs obligatoires (nom de l'association, dirigeants et adresse complète).",
@@ -247,12 +248,12 @@ Signature :                           Signature :
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-[#3C5F58]">
               <Building className="w-5 h-5" />
-              informations clés de l'association
+              Informations clés de l'association
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             <div>
-              <Label htmlFor="association-name"><span className="font-bold">nom de l'association *</span></Label>
+              <Label htmlFor="association-name"><span className="font-bold">Nom de l'association *</span></Label>
               <Input
                 id="association-name"
                 value={formData.associationName}
@@ -263,7 +264,7 @@ Signature :                           Signature :
             </div>
             
             <div>
-              <Label htmlFor="adresse-postale"><span className="font-bold">adresse postale *</span></Label>
+              <Label htmlFor="adresse-postale"><span className="font-bold">Adresse postale *</span></Label>
               <Input
                 id="adresse-postale"
                 value={formData.adressePostale}
@@ -273,7 +274,7 @@ Signature :                           Signature :
               />
             </div>
             <div>
-              <Label htmlFor="code-postal"><span className="font-bold">code postal *</span></Label>
+              <Label htmlFor="code-postal"><span className="font-bold">Code postal *</span></Label>
               <Input
                 id="code-postal"
                 value={formData.codePostal}
@@ -283,7 +284,7 @@ Signature :                           Signature :
               />
             </div>
             <div>
-              <Label htmlFor="ville"><span className="font-bold">ville *</span></Label>
+              <Label htmlFor="ville"><span className="font-bold">Ville *</span></Label>
               <Input
                 id="ville"
                 value={formData.ville}
@@ -294,7 +295,7 @@ Signature :                           Signature :
             </div>
             
             <div className="bg-blue-50 border-l-4 border-blue-500 text-blue-800 p-3 shadow-sm">
-              <p className="font-semibold mb-1">objet social (pré-rempli) :</p>
+              <p className="font-semibold mb-1">Objet social (pré-rempli) :</p>
               <p className="text-sm">
                 L'objet social, essentiel pour une école de production, est déjà formulé pour affirmer un but éducatif et inclure l'activité lucrative accessoire. Il pourra être affiné si nécessaire.
               </p>
@@ -306,12 +307,12 @@ Signature :                           Signature :
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-[#3C5F58]">
               <User className="w-5 h-5" />
-              informations sur les dirigeants
+              Informations sur les dirigeants
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             <div>
-              <Label htmlFor="president"><span className="font-bold">nom et prénom du président(e) *</span></Label>
+              <Label htmlFor="president"><span className="font-bold">Nom et prénom du Président(e) *</span></Label>
               <Input
                 id="president"
                 value={formData.presidentName}
@@ -322,7 +323,7 @@ Signature :                           Signature :
             </div>
 
             <div>
-              <Label htmlFor="secretaire"><span className="font-bold">nom et prénom du secrétaire(e) *</span></Label>
+              <Label htmlFor="secretaire"><span className="font-bold">Nom et prénom du Secrétaire(e) *</span></Label>
               <Input
                 id="secretaire"
                 value={formData.secretaireName}
@@ -338,12 +339,12 @@ Signature :                           Signature :
           <CardHeader>
             <CardTitle className="flex items-center gap-2 text-[#3C5F58]">
               <Euro className="w-5 h-5" />
-              informations financières & exercice social
+              Informations financières & exercice social
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             <div>
-              <Label htmlFor="cloture-exercice"><span className="font-bold">date de clôture d'exercice</span></Label>
+              <Label htmlFor="cloture-exercice"><span className="font-bold">Date de clôture d'exercice</span></Label>
               <Input
                 id="cloture-exercice"
                 type="text"
@@ -353,11 +354,11 @@ Signature :                           Signature :
                 className="mt-1"
               />
               <p className="text-sm text-gray-500 mt-1">
-                La date de clôture par défaut est le 31 août, recommandée pour les écoles de production. Si une autre date est souhaitée, l'inscrire ici.
+                La date de clôture par défaut est le 31 août, recommandée pour les écoles de production. Si une autre date est souhaitée, veuillez l'inscrire ici.
               </p>
             </div>
             <div>
-              <Label htmlFor="cloture-premier-exercice"><span className="font-bold">date de clôture du premier exercice</span></Label>
+              <Label htmlFor="cloture-premier-exercice"><span className="font-bold">Date de clôture du premier exercice</span></Label>
               <Input
                 id="cloture-premier-exercice"
                 type="text"
@@ -367,11 +368,11 @@ Signature :                           Signature :
                 className="mt-1"
               />
               <p className="text-sm text-gray-500 mt-1">
-                Le premier exercice peut avoir une durée différente de 12 mois. Indiquer ici sa date de clôture.
+                Le premier exercice peut avoir une durée différente de 12 mois. Indiquez ici sa date de clôture.
               </p>
             </div>
             <div>
-              <Label><span className="font-bold">durée du premier exercice</span></Label>
+              <Label><span className="font-bold">Durée du premier exercice</span></Label>
               <div className="flex items-center space-x-4 mt-2">
                 <div className="flex items-center">
                   <input
@@ -382,7 +383,7 @@ Signature :                           Signature :
                     onChange={() => handleRadioChange('supérieur')}
                     className="h-4 w-4 text-[#3C5F58] focus:ring-[#3C5F58]"
                   />
-                  <label htmlFor="duree-superieur" className="ml-2 text-sm text-gray-700">supérieure à 12 mois</label>
+                  <label htmlFor="duree-superieur" className="ml-2 text-sm text-gray-700">Supérieure à 12 mois</label>
                 </div>
                 <div className="flex items-center">
                   <input
@@ -393,7 +394,7 @@ Signature :                           Signature :
                     onChange={() => handleRadioChange('inférieur')}
                     className="h-4 w-4 text-[#3C5F58] focus:ring-[#3C5F58]"
                   />
-                  <label htmlFor="duree-inferieur" className="ml-2 text-sm text-gray-700">inférieure à 12 mois</label>
+                  <label htmlFor="duree-inferieur" className="ml-2 text-sm text-gray-700">Inférieure à 12 mois</label>
                 </div>
               </div>
             </div>
@@ -401,10 +402,10 @@ Signature :                           Signature :
         </Card>
       </div>
 
-      <div className="pt-4 space-y-3 mt-6">
+      <div className="mt-8 flex flex-wrap justify-center items-center gap-4">
         <Button 
           onClick={() => setShowPreview(!showPreview)}
-          className="w-full bg-gray-400 text-white rounded-md hover:bg-gray-500 transition-colors py-3 px-6 text-lg"
+          className="bg-white text-[#3C5F58] border border-[#3C5F58] hover:bg-[#f7fafc] py-2 px-5"
           disabled={!isFormValid}
         >
           {showPreview ? 'Masquer l\'aperçu' : 'Aperçu des statuts'}
@@ -412,38 +413,34 @@ Signature :                           Signature :
         
         <Button 
           onClick={downloadStatuts}
-          className="w-full bg-[#2E5941] text-white rounded-md hover:bg-[#3C5F58] transition-colors py-3 px-6 text-lg"
+          className="bg-[#2E5941] text-white hover:bg-[#3C5F58] py-2 px-5 flex items-center gap-2"
           disabled={!isFormValid}
         >
-          <Download className="w-4 h-4 mr-2" />
-          télécharger les statuts (.txt)
+          <Download className="w-4 h-4" />
+          Télécharger les statuts (.txt)
         </Button>
 
         <a
           href={docxFilePath}
           download="ANNEXE 9 - MODELE DE STATUTS.docx"
-          className="block"
+          className="inline-flex items-center justify-center gap-2 bg-white text-[#3C5F58] border border-[#3C5F58] hover:bg-[#f7fafc] font-semibold py-2 px-5 rounded-md transition-colors duration-200"
         >
-          <Button 
-            className="w-full bg-gray-400 text-white rounded-md hover:bg-gray-500 transition-colors py-3 px-6 text-lg flex items-center gap-2"
-          >
-            <FileWord className="w-4 h-4" />
-            télécharger le modèle à remplir (.docx)
-          </Button>
+          <FileWord className="w-4 h-4" />
+          Télécharger le modèle (.docx)
         </a>
         
         <Button 
           onClick={resetForm}
-          className="w-full bg-gray-400 text-white rounded-md hover:bg-gray-500 transition-colors py-3 px-6 text-lg"
+          className="bg-white text-red-600 border border-red-600 hover:bg-red-50 py-2 px-5"
         >
-          réinitialiser le formulaire
+          Réinitialiser le formulaire
         </Button>
       </div>
 
       {!isFormValid && (
         <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-3 mt-4">
           <p className="text-sm text-yellow-800">
-            <span className="font-bold">champs obligatoires :</span> veuillez renseigner le nom de l'association, les noms des dirigeants et l'adresse complète.
+            <span className="font-bold">Champs obligatoires :</span> Veuillez renseigner le nom de l'association, les noms des dirigeants et l'adresse complète.
           </p>
         </div>
       )}
@@ -451,7 +448,7 @@ Signature :                           Signature :
       {showPreview && isFormValid && (
         <Card className="mt-6">
           <CardHeader>
-            <CardTitle>aperçu des statuts générés</CardTitle>
+            <CardTitle>Aperçu des statuts générés</CardTitle>
           </CardHeader>
           <CardContent>
             <div className="bg-gray-50 p-4 rounded-lg max-h-[60vh] overflow-y-auto border border-gray-200">
@@ -470,20 +467,20 @@ Signature :                           Signature :
         <CardContent className="p-6">
           <h3 className="text-xl font-semibold mb-4 text-[#3C5F58] flex items-center gap-2">
               <Lightbulb className="w-6 h-6 mr-2 text-[#3C5F58]" />
-              points de vigilance pour la création de l'association de votre client
+              Points de vigilance pour la création de l'association
           </h3>
           <div className="text-base text-gray-700 space-y-3">
             <p>
-              <span className="font-bold">objet social :</span> l'objet social est le cœur du projet associatif. La formule pré-remplie est adaptée aux écoles de production. Il est essentiel que l'objet statutaire affirme un but éducatif et une gestion désintéressée pour faciliter l'obtention de la reconnaissance d'intérêt général. Si le projet du client a des spécificités uniques, l'objet social devra être affiné.
+              <span className="font-bold">Objet social :</span> L'objet social est le cœur du projet associatif. La formule pré-remplie est adaptée aux écoles de production. Il est essentiel que l'objet statutaire affirme un but éducatif et une gestion désintéressée pour faciliter l'obtention de la reconnaissance d'intérêt général. Si le projet du client a des spécificités uniques, l'objet social devra être affiné.
             </p>
             <p>
-              <span className="font-bold">ressources :</span> le modèle intègre les produits des activités économiques des élèves (vente, sous-traitance) comme une ressource de l'association. Cela est crucial pour le statut d'école de production.
+              <span className="font-bold">Ressources :</span> Le modèle intègre les produits des activités économiques des élèves (vente, sous-traitance) comme une ressource de l'association. Cela est crucial pour le statut d'école de production.
             </p>
             <p>
-              <span className="font-bold">déclaration :</span> une fois les statuts signés par les membres fondateurs, l'association doit être déclarée en préfecture ou sous-préfecture, ou en ligne. Votre rôle est d'accompagner votre client dans cette démarche administrative.
+              <span className="font-bold">Déclaration :</span> Une fois les statuts signés par les membres fondateurs, l'association doit être déclarée en préfecture ou sous-préfecture, ou en ligne. Votre rôle est d'accompagner votre client dans cette démarche administrative.
             </p>
             <p>
-              <span className="font-bold">règlement intérieur :</span> il est fortement recommandé d'établir un règlement intérieur pour préciser les modalités de fonctionnement interne non prévues par les statuts.
+              <span className="font-bold">Règlement intérieur :</span> Il est fortement recommandé d'établir un règlement intérieur pour préciser les modalités de fonctionnement interne non prévues par les statuts.
             </p>
             <p className="text-sm italic text-gray-600 mt-4">
               Ce générateur fournit une trame adaptable selon le contexte local. Pour une conformité totale et adaptée à la situation spécifique du projet, notamment pour les aspects fiscaux et comptables complexes, il est vivement conseillé de consulter un expert.
@@ -497,7 +494,7 @@ Signature :                           Signature :
             onClick={() => navigate('accueil')}
             className="px-6 py-3 bg-[#2E5941] text-white rounded-md hover:bg-[#3C5F58] transition-colors text-lg"
         >
-            retour à l'accueil
+            Retour à l'accueil
         </Button>
       </div>
     </section>
