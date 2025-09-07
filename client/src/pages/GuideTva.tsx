@@ -89,7 +89,7 @@ const GuideTva: React.FC<GuideTvaProps> = ({ navigate }) => {
           </div>
           <a
             href={guideTvaFilePath}
-            download="ANNEXE 5 - GUIDE D APPLICATION DE LA TVA.pdf"
+            download="ANNEXE 5 - GUIDE D'APPLICATION DE LA TVA.pdf"
             className="flex-shrink-0"
           >
             <Button className="bg-[#2E5941] hover:bg-[#3C5F58] text-white flex items-center gap-2 py-3 px-6 text-lg">
