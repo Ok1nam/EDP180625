@@ -1,103 +1,64 @@
 // client/src/App.tsx
 
-import React, { useState } from "react";
 import { BrowserRouter as Router, Routes, Route, useNavigate, useLocation } from "react-router-dom";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-
-// Initialisation de React Query Client
-const queryClient = new QueryClient();
-
-// --- Composants de remplacement (placeholders) ---
-// Ces composants remplacent les fichiers externes qui n'ont pas pu être trouvés.
-
-const Header = ({ isBurgerMenuOpen, setIsBurgerMenuOpen }) => (
-  <header className="bg-gray-800 text-white p-4 text-center">
-    <h1>Header</h1>
-    <button onClick={() => setIsBurgerMenuOpen(!isBurgerMenuOpen)} className="md:hidden">Menu</button>
-  </header>
-);
-
-const Navigation = ({ navigate, isBurgerMenuOpen }) => (
-  <nav className={`bg-gray-700 text-white p-4 ${isBurgerMenuOpen ? 'block' : 'hidden'} md:block`}>
-    <ul className="flex flex-col md:flex-row justify-center gap-4">
-      <li><button onClick={() => navigate('/accueil')} className="hover:underline">Accueil</button></li>
-      <li><button onClick={() => navigate('/outils')} className="hover:underline">Outils</button></li>
-      <li><button onClick={() => navigate('/documentation')} className="hover:underline">Documentation</button></li>
-      <li><button onClick={() => navigate('/contact-et-aide')} className="hover:underline">Contact</button></li>
-    </ul>
-  </nav>
-);
-
-const Footer = ({ navigate }) => (
-  <footer className="bg-gray-800 text-white p-4 text-center mt-auto">
-    <p>Footer</p>
-  </footer>
-);
-
-const AnalyticsTracker = () => {
-  // Ce composant peut rester vide pour la correction des erreurs d'importation.
-  return null;
-};
-
-// --- Pages de remplacement (placeholders) ---
-const createPlaceholderPage = (name) => ({ navigate }) => (
-    <div className="p-4 border rounded-lg bg-gray-50">
-        <h2 className="text-2xl font-bold mb-2">{name}</h2>
-        <p>Contenu de la page "{name}".</p>
-        <button onClick={() => navigate('/accueil')} className="mt-4 px-4 py-2 bg-blue-500 text-white rounded">Retour à l'accueil</button>
-    </div>
-);
-
-const Home = createPlaceholderPage("Accueil");
-const Tools = createPlaceholderPage("Page Outils");
-const Questionnaire = createPlaceholderPage("Arbre à la Décision");
-const SubsidyGenerator = createPlaceholderPage("Dossier Type Subvention");
-const StatutsGenerator = createPlaceholderPage("Modèle Statuts");
-const Dashboard = createPlaceholderPage("Tableau de Bord");
-const LocationAnalysis = createPlaceholderPage("Cartographie");
-const DocumentationPage = createPlaceholderPage("Page Documentation");
-const Contact = createPlaceholderPage("Contact Expert Comptable");
-const TvaCoefficient = createPlaceholderPage("Coefficient TVA");
-const PlanComptable = createPlaceholderPage("Plan Comptable");
-const CriteresLabel = createPlaceholderPage("Labellisation");
-const PretSubordonne = createPlaceholderPage("Prêt Subordonné");
-const HabilitationTaxe = createPlaceholderPage("Taxe Apprentissage");
-const Entretiens = createPlaceholderPage("Entretiens");
-const Organigramme = createPlaceholderPage("Organigramme");
-const EtudeMarche = createPlaceholderPage("Étude de Marché");
-const GuideTva = createPlaceholderPage("Guide TVA");
-const SuiviPrets = createPlaceholderPage("Suivi des Prêts");
-const SuiviSubventions = createPlaceholderPage("Suivi des Subventions");
-const RapportAdapte = createPlaceholderPage("Rapport Adapté");
-const PrixVenteProduits = createPlaceholderPage("Tableau Prix de Vente des Produits");
-const TableauCalculCout = createPlaceholderPage("Tableau Calcul de Coût");
-const BudgetCreation = createPlaceholderPage("Budget de Création");
-const EcoleDeProduction = createPlaceholderPage("Contact EDP");
-const ContactEtAide = createPlaceholderPage("Page Contact et Aide");
-
-// --- Composants de l'interface utilisateur (remplacés par des fragments) ---
-const Toaster = () => <div id="toaster-placeholder" />;
-const TooltipProvider = ({ children }) => <>{children}</>;
-
+import { QueryClientProvider } from "@tanstack/react-query";
+import { queryClient } from "./lib/queryClient";
+import { Toaster } from "@/components/ui/toaster";
+import { TooltipProvider } from "@/components/ui/tooltip";
+import Header from "./components/Header";
+import Navigation from "./components/Navigation";
+import Footer from "./components/Footer";
+import Home from "./pages/Accueil";
+import Tools from "./pages/PageOutils";
+import Questionnaire from "./pages/ArbreALaDecision";
+import SubsidyGenerator from "@/pages/DossierTypeSubvention";
+import StatutsGenerator from "@/pages/ModeleStatuts";
+import Dashboard from "./pages/TableauDeBord";
+import LocationAnalysis from "./pages/Cartographie";
+import DocumentationPage from "./pages/PageDocumentation";
+import Contact from "./pages/ContactExpertComptable";
+import TvaCoefficient from "./pages/CoefficientTVA";
+import PlanComptable from "./pages/PlanComptable";
+import CriteresLabel from "./pages/Labellisation";
+import PretSubordonne from "./pages/PretSubordonne";
+import HabilitationTaxe from "./pages/TaxeApprentissage";
+import Entretiens from "./pages/Entretiens";
+import Organigramme from "./pages/Organigramme";
+import EtudeMarche from "./pages/EtudeMarche";
+import GuideTva from "./pages/GuideTva";
+import SuiviPrets from "./pages/SuiviPrets";
+import SuiviSubventions from "./pages/SuiviSubventions";
+import RapportAdapte from "./pages/RapportAdapte";
+import PrixVenteProduits from "./pages/TableauPrixVenteProduits";
+import TableauCalculCout from "./pages/TableauCalculCout";
+import BudgetCreation from "./pages/BudgetCreation";
+import EcoleDeProduction from "./pages/ContactEDP";
+import ContactEtAide from "./pages/PageContact";
+import { useState } from "react";
+import AnalyticsTracker from './components/AnalyticsTracker'; // Importe le nouveau composant
 
 function MainApplicationContent() {
   const [isBurgerMenuOpen, setIsBurgerMenuOpen] = useState(false);
-  const navigateRR = useNavigate();
+  const navigateRR = useNavigate(); // Hook de React Router DOM pour la navigation
 
-  const navigate = (path) => {
-    navigateRR(path);
+  // La fonction navigate utilisera navigateRR de react-router-dom
+  const navigate = (path: string) => {
+    navigateRR(path); // Change l'URL et déclenche le rendu de la route correspondante
     window.scrollTo({ top: 0, behavior: 'smooth' });
-    setIsBurgerMenuOpen(false);
+    setIsBurgerMenuOpen(false); // S'assure que le menu burger se ferme à la navigation
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-gray-100">
+    <div className="min-h-screen flex flex-col">
       <Header isBurgerMenuOpen={isBurgerMenuOpen} setIsBurgerMenuOpen={setIsBurgerMenuOpen} />
       <Navigation navigate={navigate} isBurgerMenuOpen={isBurgerMenuOpen} setIsBurgerMenuOpen={setIsBurgerMenuOpen} />
-      <main className="flex-1 px-4 sm:px-8 py-8 max-w-6xl mx-auto w-full">
+      <main className="flex-1 px-8 py-8 max-w-6xl mx-auto w-full">
+        {/* Utilisation de Routes et Route pour le routage avec React Router DOM */}
         <Routes>
+          {/* Route par défaut pour la page d'accueil */}
           <Route path="/" element={<Home navigate={navigate} />} />
           <Route path="/accueil" element={<Home navigate={navigate} />} />
+
           <Route path="/outils" element={<Tools navigate={navigate} />} />
           <Route path="/plan-comptable" element={<PlanComptable navigate={navigate} />} />
           <Route path="/tva-coefficient" element={<TvaCoefficient navigate={navigate} />} />
@@ -137,8 +98,8 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <Toaster />
-        <Router>
-          <AnalyticsTracker />
+        <Router> {/* Encadre l'application entière avec BrowserRouter */}
+          <AnalyticsTracker /> {/* Place AnalyticsTracker ici pour qu'il puisse accéder à useLocation */}
           <MainApplicationContent />
         </Router>
       </TooltipProvider>
@@ -147,4 +108,5 @@ function App() {
 }
 
 export default App;
+
 
