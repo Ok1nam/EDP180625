@@ -37,19 +37,19 @@ export default function Contact() {
                 <p className="flex items-center gap-2">
                   <Download className="w-4 h-4" />
                   <a 
-                    href="/fichiers/GOMBAUD Laura notice.pdf"
-                    download="GOMBAUD Laura notice.pdf"
+                    href="/fichiers/GOMBAUD Laura notice du 24-04-2024.pdf"
+                    download="GOMBAUD Laura notice du 24-04-2024.pdf"
                     className="text-blue-600 hover:text-blue-800 transition-colors font-medium"
                   >
                     Télécharger la notice d'agrément
                   </a>
                 </p>
-                {/* Lien pour télécharger le T1 du mémoire */}
+                {/* Lien pour télécharger le mémoire */}
                 <p className="flex items-center gap-2">
                   <Download className="w-4 h-4" />
                   <a 
-                    href="/fichiers/LG MEMOIRE.pdf"
-                    download="LG MEMOIRE.pdf"
+                    href="/fichiers/GOMBAUDLaura - Mémoire - novembre2025.pdf"
+                    download="GOMBAUDLaura - Mémoire - novembre2025.pdf"
                     className="text-blue-600 hover:text-blue-800 transition-colors font-medium"
                   >
                     Télécharger le mémoire
