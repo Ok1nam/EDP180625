@@ -56,7 +56,7 @@ const TableauDeBord: React.FC<TableauDeBordProps> = ({ navigate }) => {
               Accédez à ce modèle de tableau de bord au format `.xlsm`, un outil prêt à l'emploi pour le suivi et le pilotage de votre client, l'école de production.
             </p>
             <p className="text-sm text-gray-600">
-              <span className="font-bold">Conseil de pro :</span> adaptez les indicateurs aux spécificités de l'école pour un pilotage optimal, en incluant des variables que vous jugez pertinentes pour leur activité.
+              <span className="font-bold">Conseil :</span> adaptez les indicateurs aux spécificités de l'école pour un pilotage optimal, en incluant des variables que vous jugez pertinentes pour leur activité.
             </p>
           </div>
           <a
