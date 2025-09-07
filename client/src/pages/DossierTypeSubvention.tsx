@@ -73,12 +73,12 @@ const SubsidyGenerator: React.FC = () => {
         <CardContent className="p-6 text-gray-700 space-y-4">
           <p>Le dossier type est structuré en 6 parties claires pour couvrir tous les aspects de la demande :</p>
           <ul className="list-decimal pl-5 space-y-2 font-medium">
-            <li>informations générales sur la structure</li>
-            <li>présentation de l’école de production</li>
-            <li>le projet spécifique objet de la demande de subvention</li>
-            <li>budget prévisionnel du projet</li>
-            <li>moyens humains et matériels de l’école</li>
-            <li>pièces justificatives à joindre</li>
+            <li>Informations générales sur la structure</li>
+            <li>Présentation de l’école de production</li>
+            <li>Le projet spécifique objet de la demande de subvention</li>
+            <li>Budget prévisionnel du projet</li>
+            <li>Moyens humains et matériels de l’école</li>
+            <li>Pièces justificatives à joindre</li>
           </ul>
         </CardContent>
       </Card>
