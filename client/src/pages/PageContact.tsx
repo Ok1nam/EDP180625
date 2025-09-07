@@ -17,7 +17,7 @@ interface ContactEtAideProps {
 const optionsAide = [
   { 
     id: "expert-comptable", 
-    label: "Contacter l'auteur du mémoire", 
+    label: "Contacter l'auteure du mémoire", 
     icon: User, 
     description: "Envoyez un message direct à Laura Gombaud pour obtenir un conseil ou une précision." 
   },
@@ -38,7 +38,7 @@ const ContactEtAide: React.FC<ContactEtAideProps> = ({ navigate }) => {
       </h1>
       
       <p className="mb-8 text-lg text-gray-700 leading-relaxed">
-        Vous avez des questions spécifiques sur le projet d'école de production ou besoin d'informations pour accompagner votre client ? Retrouvez ici les ressources clés et les contacts pour vous aider.
+        Vous avez des questions spécifiques sur le projet d'école de production ou besoin d'informations pour accompagner votre client ? Retrouvez ici les contacts pour vous aider.
       </p>
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
