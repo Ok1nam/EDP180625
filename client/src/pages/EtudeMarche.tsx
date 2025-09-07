@@ -78,7 +78,7 @@ const EtudeMarche: React.FC<EtudeMarcheProps> = ({ navigate }) => {
           </div>
           <a
             href={etudeMarcheExcelPath}
-            download="ANNEXE_11_ETUDE_DE_MARCHE_DU_SECTEUR_SELECTIONNE.xlsm"
+            download="ANNEXE 11 - ETUDE DE MARCHE DU SECTEUR SELECTIONNE.xlsm"
             className="flex-shrink-0"
           >
             <Button className="flex items-center gap-2 py-3 px-6 text-lg bg-[#2E5941] text-white rounded-md hover:bg-[#3C5F58] transition-colors">
