@@ -16,7 +16,7 @@ export default function Contact() {
         <CardContent className="p-6">
           <div className="grid md:grid-cols-2 gap-8">
             <div>
-              <h3 className="text-lg font-semibold mb-4">Auteur du mémoire</h3>
+              <h3 className="text-lg font-semibold mb-4">Auteure du mémoire</h3>
               <p className="font-medium text-lg">Laura Gombaud</p>
               <p className="text-gray-600 mb-4">Expert-comptable mémorialiste</p>
               <p className="flex items-center gap-2">
@@ -53,17 +53,6 @@ export default function Contact() {
                     className="text-blue-600 hover:text-blue-800 transition-colors font-medium"
                   >
                     Télécharger le T1 du mémoire
-                  </a>
-                </p>
-                {/* Lien pour télécharger le T2 (annexes) du mémoire */}
-                <p className="flex items-center gap-2">
-                  <Download className="w-4 h-4" />
-                  <a 
-                    href="/fichiers/memoire_t2.pdf"
-                    download="memoire_t2.pdf"
-                    className="text-blue-600 hover:text-blue-800 transition-colors font-medium"
-                  >
-                    Télécharger le T2 (annexes) du mémoire
                   </a>
                 </p>
               </div>
